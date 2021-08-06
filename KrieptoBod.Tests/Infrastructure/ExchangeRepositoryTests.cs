@@ -1,8 +1,8 @@
-using System;
 using KrieptoBod.Infrastructure.Exchange;
 using KrieptoBod.Model;
 using Moq;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

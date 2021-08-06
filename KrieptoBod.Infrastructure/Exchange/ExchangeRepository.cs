@@ -1,9 +1,8 @@
-﻿using KrieptoBod.Model;
+﻿using KrieptoBod.Application;
+using KrieptoBod.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using KrieptoBod.Application;
 
 namespace KrieptoBod.Infrastructure.Exchange
 {
