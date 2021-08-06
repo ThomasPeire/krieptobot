@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ApplicationIcon />
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KrieptoBod.Application\KrieptoBod.Application.csproj" />
+    <ProjectReference Include="..\KrieptoBod.Model\KrieptoBod.Model.csproj" />
+  </ItemGroup>
+
+</Project>
