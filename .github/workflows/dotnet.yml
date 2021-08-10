@@ -24,12 +24,8 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
     
-  codecov:
-
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@master
-    - uses: codecov/codecov-action@v2
+    - name: codecov
+      uses: codecov/codecov-action@v2
       with:
         flags: unittests # optional
         name: codecov-umbrella # optional
