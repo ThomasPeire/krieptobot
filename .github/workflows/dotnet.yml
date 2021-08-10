@@ -23,3 +23,15 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    
+  codecov:
+
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: codecov/codecov-action@v2
+      with:
+        flags: unittests # optional
+        name: codecov-umbrella # optional
+        fail_ci_if_error: true # optional (default = false)
+        verbose: true # optional (default = false)
