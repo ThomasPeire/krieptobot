@@ -23,6 +23,39 @@ namespace KrieptoBod.Tests.Infrastructure
             _exchangeService
                 .Setup(service => service.GetCandlesAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DateTime>(), It.IsAny<DateTime>()))
                 .Returns(Task.FromResult(new List<Candle>().AsEnumerable()));
+
+            _exchangeService
+                .Setup(service => service.GetMarketsAsync())
+                .Returns(Task.FromResult(new List<Market>().AsEnumerable()));
+
+            _exchangeService
+                .Setup(service => service.GetMarketAsync(It.IsAny<string>()))
+                .Returns(Task.FromResult(new Market()));
+
+            _exchangeService
+                .Setup(service => service.GetAssetsAsync())
+                .Returns(Task.FromResult(new List<Asset>().AsEnumerable()));
+
+            _exchangeService
+                .Setup(service => service.GetAssetAsync(It.IsAny<string>()))
+                .Returns(Task.FromResult(new Asset()));
+
+            _exchangeService
+                .Setup(service => service.GetTradesAsync(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DateTime>(), It.IsAny<DateTime>(), It.IsAny<Guid>(), It.IsAny<Guid>()))
+                .Returns(Task.FromResult(new List<Trade>().AsEnumerable()));
+
+            _exchangeService
+                .Setup(service => service.GetOrderAsync(It.IsAny<string>(), It.IsAny<Guid>()))
+                .Returns(Task.FromResult(new Order()));
+
+            _exchangeService
+                .Setup(service => service.GetOrdersAsync(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DateTime>(), It.IsAny<DateTime>(), It.IsAny<Guid>(), It.IsAny<Guid>()))
+                .Returns(Task.FromResult(new List<Order>().AsEnumerable()));
+
+            _exchangeService
+                .Setup(service => service.GetOpenOrderAsync(It.IsAny<string>()))
+                .Returns(Task.FromResult(new Order()));
+
         }
 
         [Test]
@@ -36,13 +69,61 @@ namespace KrieptoBod.Tests.Infrastructure
         }
 
         [Test]
-        public async Task GetCandles_ShouldReturn_Balance()
+        public async Task GetCandles_ShouldReturn_Candles()
         {
             var exchangeRepository = new ExchangeRepository(_exchangeService.Object);
 
             var result = await exchangeRepository.GetCandlesAsync("", "", 0, DateTime.Now, DateTime.Now);
 
             Assert.That(result, Is.Not.Null);
+        }
+
+        [Test]
+        public void GetMarkets_ShouldThrow_NotImplementedException()
+        {
+            Assert.That(async () => await new ExchangeRepository(_exchangeService.Object).GetMarketsAsync(), Throws.Exception);
+        }
+
+        [Test]
+        public void GetMarket_ShouldThrow_NotImplementedException()
+        {
+            Assert.That(async () => await new ExchangeRepository(_exchangeService.Object).GetMarketAsync(""), Throws.Exception);
+        }
+
+        [Test]
+        public void GetAssets_ShouldThrow_NotImplementedException()
+        {
+            Assert.That(async() => await new ExchangeRepository(_exchangeService.Object).GetAssetsAsync(), Throws.Exception);
+        }
+
+        [Test]
+        public void GetAsset_ShouldThrow_NotImplementedException()
+        {
+            Assert.That(async () => await new ExchangeRepository(_exchangeService.Object).GetAssetAsync(""), Throws.Exception);
+        }
+
+        [Test]
+        public void GetTrades_ShouldThrow_NotImplementedException()
+        {
+            Assert.That(async () => await new ExchangeRepository(_exchangeService.Object).GetTradesAsync(""), Throws.Exception);
+        }
+
+        [Test]
+        public void GetOrders_ShouldThrow_NotImplementedException()
+        {
+            Assert.That(async () => await new ExchangeRepository(_exchangeService.Object).GetOrdersAsync(""), Throws.Exception);
+        }
+
+        [Test]
+        public void GetOrder_ShouldThrow_NotImplementedException()
+        {
+            Assert.That(async () => await new ExchangeRepository(_exchangeService.Object).GetOrderAsync("", new Guid()), Throws.Exception);
+        }
+
+        [Test]
+        public void GetOpenOrder_ShouldThrow_NotImplementedException()
+        {
+            Assert.That(async () => await new ExchangeRepository(_exchangeService.Object).GetOpenOrderAsync(""), Throws.Exception);
         }
     }
 }
