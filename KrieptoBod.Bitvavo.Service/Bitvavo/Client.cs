@@ -10,20 +10,16 @@ namespace KrieptoBod.Exchange.Bitvavo
 {
     internal class Client<T> : IClient<T>
     {
-        private readonly string _apiKey;
-        private readonly string _apiSecret;
-        private readonly string _baseUrl;
+        private readonly BitvavoConfig _bitvavoConfig;
 
-        public Client(string apiKey, string apiSecret, string baseUrl)
+        public Client(BitvavoConfig bitvavoConfig)
         {
-            _apiKey = apiKey;
-            _apiSecret = apiSecret;
-            _baseUrl = baseUrl;
+            _bitvavoConfig = bitvavoConfig;
         }
 
         private HttpClient AddHeaders(HttpClient client, string timeStamp, string accessWindow, string signature)
         {
-            client.DefaultRequestHeaders.Add("Bitvavo-Access-Key", this._apiKey);
+            client.DefaultRequestHeaders.Add("Bitvavo-Access-Key", this._bitvavoConfig.ApiKey);
             client.DefaultRequestHeaders.Add("Bitvavo-Access-Timestamp", timeStamp);
             client.DefaultRequestHeaders.Add("Bitvavo-Access-Window", accessWindow);
             client.DefaultRequestHeaders.Add("Bitvavo-Access-Signature", signature);
@@ -37,7 +33,7 @@ namespace KrieptoBod.Exchange.Bitvavo
             var encoding = new UTF8Encoding();
 
             var textBytes = encoding.GetBytes(toHash);
-            var keyBytes = encoding.GetBytes(this._apiSecret);
+            var keyBytes = encoding.GetBytes(this._bitvavoConfig.ApiSecret);
 
             byte[] hashBytes;
 
@@ -59,7 +55,7 @@ namespace KrieptoBod.Exchange.Bitvavo
 
             using var client = new HttpClient
             {
-                BaseAddress = new Uri(_baseUrl)
+                BaseAddress = new Uri(_bitvavoConfig.BaseUrl)
             };
 
             AddHeaders(client, timeStamp, accessWindow, signature);

@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KrieptoBod.Application", "K
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KrieptoBod.Infrastructure", "KrieptoBod.Infrastructure\KrieptoBod.Infrastructure.csproj", "{20E0C777-CAFD-4BE1-B928-C31F4DA26FB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KrieptoBod.Tests", "KrieptoBod.Tests\KrieptoBod.Tests.csproj", "{932FC164-3F3B-414C-8609-E87D6AE530E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KrieptoBod.Tests", "KrieptoBod.Tests\KrieptoBod.Tests.csproj", "{932FC164-3F3B-414C-8609-E87D6AE530E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

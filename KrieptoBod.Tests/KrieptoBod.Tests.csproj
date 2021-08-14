@@ -18,10 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Exchange\Bitvavo\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\KrieptoBod.Bitvavo.Service\KrieptoBod.Exchange.csproj" />
     <ProjectReference Include="..\KrieptoBod.Infrastructure\KrieptoBod.Infrastructure.csproj" />
   </ItemGroup>
 
