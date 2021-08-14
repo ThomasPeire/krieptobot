@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace KrieptoBod.Tests.Infrastructure
 {
-    public class Tests
+    public class ExchangeRepositoryTests
     {
         private readonly Mock<IExchangeService> _exchangeService = new Mock<IExchangeService>();
 

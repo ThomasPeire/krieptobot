@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace KrieptoBod.Application.Recommendators
 {
-
     //take weighted average of recommendations (eg. one recommendation can be more important than others)
     public class RecommendationCalculator: IRecommendationCalculator
     {
@@ -13,9 +13,9 @@ namespace KrieptoBod.Application.Recommendators
             _recommendators = recommendators;
         }
         
-        public RecommendatorScore CalculateRecommendation(string market)
+        public async Task<RecommendatorScore> CalculateRecommendation(string market)
         {
-            var recommendationScores = _recommendators.Select(recommendator => recommendator.GetRecommendation(market).Result).ToList();
+            var recommendationScores = await Task.WhenAll(_recommendators.Select(async recommendator => await recommendator.GetRecommendation(market))) ;
             /* Example:
              * SELL -60
              * BUY 52

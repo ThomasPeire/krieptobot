@@ -107,9 +107,13 @@ namespace KrieptoBod.Application
 
         private async Task<Dictionary<string, RecommendatorScore>> GetRecommendations()
         {
-            return (await GetCoinsToEvaluate()).ToDictionary(coin => coin,
-                coin => _recommendationCalculator.CalculateRecommendation(coin));
+            var coinsToEvaluate = await GetCoinsToEvaluate();
+
+            var coinRecommendations = await Task.WhenAll(coinsToEvaluate.Select(async coin => (coin, recommendation: await _recommendationCalculator.CalculateRecommendation(coin))));
+
+            return coinRecommendations.ToDictionary(x => x.coin, x => x.recommendation);
         }
+
 
         private async Task<IEnumerable<string>> GetCoinsToEvaluate()
         {

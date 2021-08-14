@@ -1,7 +1,9 @@
-﻿namespace KrieptoBod.Application.Recommendators
+﻿using System.Threading.Tasks;
+
+namespace KrieptoBod.Application.Recommendators
 {
     public interface IRecommendationCalculator
     {
-        RecommendatorScore CalculateRecommendation(string market);
+        Task<RecommendatorScore> CalculateRecommendation(string market);
     }
 }
