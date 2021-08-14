@@ -20,7 +20,7 @@ namespace KrieptoBod.Application
 
         public async Task Run()
         {
-             var candles = await _repository.GetCandlesAsync("CHZ-EUR");
+            var candles = await _repository.GetCandlesAsync("CHZ-EUR");
 
             var recommendations = await GetRecommendations();
 

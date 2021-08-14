@@ -5,7 +5,6 @@ namespace KrieptoBod.Tests.Application.Recommendators
 {
     public class RecommendatorScoreTests
     {
-        
         [Test]
         public void RecommendationScore_ShouldDoMath_Correct()
         {

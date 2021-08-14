@@ -8,6 +8,7 @@ namespace KrieptoBod.Application.Recommendators
 
         protected override Task<RecommendatorScore> CalculateRecommendation(string market)
         {
+            //To be implemented
             return Task.FromResult(new RecommendatorScore() { Score = .0F });
         }
     }
