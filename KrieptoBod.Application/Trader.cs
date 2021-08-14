@@ -70,13 +70,17 @@ namespace KrieptoBod.Application
         private void BuyCoins(Dictionary<string, float> coinsToBuyWithBudget)
         {
             foreach (var (coin, budget) in coinsToBuyWithBudget)
+            {
                 Buy(coin, budget);
+            }
         }
 
         private void SellCoins(IDictionary<string, RecommendatorScore> coinsToSell)
         {
             foreach (var (coin, _) in coinsToSell)
+            {
                 Sell(coin);
+            }
         }
 
         private static IDictionary<string, RecommendatorScore> DetermineCoinsToBuy(Dictionary<string, RecommendatorScore> recommendations)
