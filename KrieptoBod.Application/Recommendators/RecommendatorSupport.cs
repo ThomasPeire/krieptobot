@@ -10,9 +10,5 @@ namespace KrieptoBod.Application.Recommendators
         {
             return Task.FromResult(new RecommendatorScore() { Score = .0F });
         }
-
-        public RecommendatorSupport() : base()
-        {
-        }
     }
 }
