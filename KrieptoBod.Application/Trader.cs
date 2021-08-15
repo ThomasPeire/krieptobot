@@ -28,6 +28,7 @@ namespace KrieptoBod.Application
             var balance = await _repository.GetBalanceAsync();
             
 
+            
             var recommendations = await GetRecommendations();
 
             var coinsToSell = DetermineCoinsToSell(recommendations);

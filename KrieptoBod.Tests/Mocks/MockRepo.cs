@@ -13,7 +13,7 @@ namespace KrieptoBod.Tests.Mocks
 
         public void InitData()
         {
-            _candles = 
+
         }
 
         public Task<IEnumerable<Balance>> GetBalanceAsync()
