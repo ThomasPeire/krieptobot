@@ -1,129 +1,103 @@
 using KrieptoBod.Infrastructure.Exchange;
-using KrieptoBod.Model;
-using Moq;
+using KrieptoBod.Tests.Mocks.Bitvavo;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using FluentAssertions;
+using Snapshooter.NUnit;
 
 namespace KrieptoBod.Tests.Infrastructure
 {
     public class ExchangeRepositoryTests
     {
-        private readonly Mock<IExchangeService> _exchangeService = new Mock<IExchangeService>();
+        private readonly MockService _mockService = new MockService();
+        private ExchangeRepository _exchangeRepository;
 
         [SetUp]
         public void Setup()
         {
-            //Todo use mock data
-            _exchangeService
-                .Setup(service => service.GetBalanceAsync())
-                .Returns(Task.FromResult(new List<Balance>().AsEnumerable()));
-            _exchangeService
-                .Setup(service => service.GetCandlesAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DateTime>(), It.IsAny<DateTime>()))
-                .Returns(Task.FromResult(new List<Candle>().AsEnumerable()));
-
-            _exchangeService
-                .Setup(service => service.GetMarketsAsync())
-                .Returns(Task.FromResult(new List<Market>().AsEnumerable()));
-
-            _exchangeService
-                .Setup(service => service.GetMarketAsync(It.IsAny<string>()))
-                .Returns(Task.FromResult(new Market()));
-
-            _exchangeService
-                .Setup(service => service.GetAssetsAsync())
-                .Returns(Task.FromResult(new List<Asset>().AsEnumerable()));
-
-            _exchangeService
-                .Setup(service => service.GetAssetAsync(It.IsAny<string>()))
-                .Returns(Task.FromResult(new Asset()));
-
-            _exchangeService
-                .Setup(service => service.GetTradesAsync(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DateTime>(), It.IsAny<DateTime>(), It.IsAny<Guid>(), It.IsAny<Guid>()))
-                .Returns(Task.FromResult(new List<Trade>().AsEnumerable()));
-
-            _exchangeService
-                .Setup(service => service.GetOrderAsync(It.IsAny<string>(), It.IsAny<Guid>()))
-                .Returns(Task.FromResult(new Order()));
-
-            _exchangeService
-                .Setup(service => service.GetOrdersAsync(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DateTime>(), It.IsAny<DateTime>(), It.IsAny<Guid>(), It.IsAny<Guid>()))
-                .Returns(Task.FromResult(new List<Order>().AsEnumerable()));
-
-            _exchangeService
-                .Setup(service => service.GetOpenOrderAsync(It.IsAny<string>()))
-                .Returns(Task.FromResult(new Order()));
-
+            _mockService.InitData();
+            _exchangeRepository = new ExchangeRepository(_mockService);
         }
 
         [Test]
         public async Task GetBalance_ShouldReturn_Balance()
         {
-            var exchangeRepository = new ExchangeRepository(_exchangeService.Object);
+            var result = await _exchangeRepository.GetBalanceAsync();
 
-            var result = await exchangeRepository.GetBalanceAsync();
+            result.Should().MatchSnapshot();
+        }
 
-            Assert.That(result, Is.Not.Null);
+        //[Test]
+        //public async Task GetCandles_ShouldReturn_Candles()
+        //{
+        //    var result = await _exchangeRepository.GetCandlesAsync("");
+
+        //    result.Should().MatchSnapshot();
+        //}
+
+        [Test]
+        public async Task GetMarkets_ShouldReturn_Markets()
+        {
+            var result = await _exchangeRepository.GetMarketsAsync();
+
+            result.Should().MatchSnapshot();
         }
 
         [Test]
-        public async Task GetCandles_ShouldReturn_Candles()
+        public async Task GetMarket_ShouldReturn_Market()
         {
-            var exchangeRepository = new ExchangeRepository(_exchangeService.Object);
+            var result = await _exchangeRepository.GetMarketAsync("BTC-EUR");
 
-            var result = await exchangeRepository.GetCandlesAsync("", "", 0, DateTime.Now, DateTime.Now);
-
-            Assert.That(result, Is.Not.Null);
+            result.Should().MatchSnapshot();
         }
 
         [Test]
-        public void GetMarkets_ShouldThrow_NotImplementedException()
+        public async Task GetAssets_ShouldReturn_Assets()
         {
-            Assert.That(async () => await new ExchangeRepository(_exchangeService.Object).GetMarketsAsync(), Throws.Exception);
+            var result = await _exchangeRepository.GetAssetsAsync();
+
+            result.Should().MatchSnapshot();
         }
 
         [Test]
-        public void GetMarket_ShouldThrow_NotImplementedException()
+        public async Task GetAsset_ShouldReturn_Asset()
         {
-            Assert.That(async () => await new ExchangeRepository(_exchangeService.Object).GetMarketAsync(""), Throws.Exception);
+            var result = await _exchangeRepository.GetAssetAsync("BTC");
+
+            result.Should().MatchSnapshot();
         }
 
         [Test]
-        public void GetAssets_ShouldThrow_NotImplementedException()
+        public async Task GetTrades_ShouldReturn_Trades()
         {
-            Assert.That(async() => await new ExchangeRepository(_exchangeService.Object).GetAssetsAsync(), Throws.Exception);
+            var result = await _exchangeRepository.GetTradesAsync("BTC-EUR");
+
+            result.Should().MatchSnapshot();
         }
 
         [Test]
-        public void GetAsset_ShouldThrow_NotImplementedException()
+        public async Task GetOrders_ShouldReturn_Orders()
         {
-            Assert.That(async () => await new ExchangeRepository(_exchangeService.Object).GetAssetAsync(""), Throws.Exception);
+            var result = await _exchangeRepository.GetOrdersAsync("BTC-EUR");
+
+            result.Should().MatchSnapshot();
         }
 
         [Test]
-        public void GetTrades_ShouldThrow_NotImplementedException()
+        public async Task GetOrder_ShouldReturn_Order()
         {
-            Assert.That(async () => await new ExchangeRepository(_exchangeService.Object).GetTradesAsync(""), Throws.Exception);
+            var result = await _exchangeRepository.GetOrderAsync("BTC-EUR", new Guid("4a7bd126-2d21-4918-96dc-0c8f51760a0b"));
+
+            result.Should().MatchSnapshot();
         }
 
         [Test]
-        public void GetOrders_ShouldThrow_NotImplementedException()
+        public async Task GetOpenOrder_ShouldReturn_OpenOrder()
         {
-            Assert.That(async () => await new ExchangeRepository(_exchangeService.Object).GetOrdersAsync(""), Throws.Exception);
-        }
+            var result = await _exchangeRepository.GetOpenOrderAsync("BTC-EUR");
 
-        [Test]
-        public void GetOrder_ShouldThrow_NotImplementedException()
-        {
-            Assert.That(async () => await new ExchangeRepository(_exchangeService.Object).GetOrderAsync("", new Guid()), Throws.Exception);
-        }
-
-        [Test]
-        public void GetOpenOrder_ShouldThrow_NotImplementedException()
-        {
-            Assert.That(async () => await new ExchangeRepository(_exchangeService.Object).GetOpenOrderAsync(""), Throws.Exception);
+            result.Should().MatchSnapshot();
         }
     }
 }

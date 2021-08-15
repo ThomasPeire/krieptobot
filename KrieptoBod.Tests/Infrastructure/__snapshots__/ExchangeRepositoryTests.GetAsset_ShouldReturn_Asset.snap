@@ -1,0 +1,15 @@
+﻿{
+  "Symbol": "BTC",
+  "Name": "Bitcoin",
+  "Decimals": 8,
+  "DepositFee": 0.0,
+  "DepositConfirmations": 3,
+  "DepositStatus": "OK",
+  "WithdrawalFee": 8.0,
+  "WithdrawalMinAmount": 1.0,
+  "WithdrawalStatus": "OK",
+  "Networks": [
+    "Mainnet"
+  ],
+  "Message": ""
+}

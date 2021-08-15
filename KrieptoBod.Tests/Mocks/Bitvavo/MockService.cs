@@ -26,11 +26,11 @@ namespace KrieptoBod.Tests.Mocks.Bitvavo
             var candlesJson = System.IO.File.ReadAllText(@"./Mocks/Bitvavo/Data/candles_btc-eur.json");
             var marketsJson = System.IO.File.ReadAllText(@"./Mocks/Bitvavo/Data/markets.json");
             var ordersJson = System.IO.File.ReadAllText(@"./Mocks/Bitvavo/Data/orders_btc-eur.json");
-            var tradesJson = System.IO.File.ReadAllText(@"./Mocks/Bitvavo//trades_btc-eur.json");
+            var tradesJson = System.IO.File.ReadAllText(@"./Mocks/Bitvavo/Data/trades_btc-eur.json");
 
             _assets = JsonConvert.DeserializeObject<IEnumerable<AssetDto>>(assetsJson).ConvertToKrieptoBodModel();
             _balances = JsonConvert.DeserializeObject<IEnumerable<BalanceDto>>(balancesJson).ConvertToKrieptoBodModel();
-            _candles = JsonConvert.DeserializeObject<IEnumerable<CandleDto>>(candlesJson).ConvertToKrieptoBodModel();
+            //_candles = JsonConvert.DeserializeObject<IEnumerable<CandleDto>>(candlesJson).ConvertToKrieptoBodModel();
             _markets = JsonConvert.DeserializeObject<IEnumerable<MarketDto>>(marketsJson).ConvertToKrieptoBodModel();
             _orders = JsonConvert.DeserializeObject<IEnumerable<OrderDto>>(ordersJson).ConvertToKrieptoBodModel();
             _trades = JsonConvert.DeserializeObject<IEnumerable<TradeDto>>(tradesJson).ConvertToKrieptoBodModel();

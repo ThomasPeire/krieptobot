@@ -1,0 +1,17 @@
+﻿{
+  "MarketName": "BTC-EUR",
+  "Status": "trading",
+  "Base": "BTC",
+  "Quote": "EUR",
+  "PricePrecision": 5,
+  "MinOrderInQuoteAsset": 5.0,
+  "MinOrderInBaseAsset": 1.0,
+  "OrderTypes": [
+    "market",
+    "limit",
+    "stopLoss",
+    "stopLossLimit",
+    "takeProfit",
+    "takeProfitLimit"
+  ]
+}

@@ -1,0 +1,72 @@
+﻿[
+  {
+    "Symbol": "EUR",
+    "Available": 0.0,
+    "InOrder": 1103.0
+  },
+  {
+    "Symbol": "ADA",
+    "Available": 0.0,
+    "InOrder": 0.0
+  },
+  {
+    "Symbol": "ARK",
+    "Available": 0.0,
+    "InOrder": 0.0
+  },
+  {
+    "Symbol": "BAT",
+    "Available": 0.0,
+    "InOrder": 0.0
+  },
+  {
+    "Symbol": "BTC",
+    "Available": 24.0,
+    "InOrder": 0.0
+  },
+  {
+    "Symbol": "CHZ",
+    "Available": 0.0,
+    "InOrder": 0.0
+  },
+  {
+    "Symbol": "CMT",
+    "Available": 0.0,
+    "InOrder": 0.0
+  },
+  {
+    "Symbol": "ETH",
+    "Available": 1959154.0,
+    "InOrder": 0.0
+  },
+  {
+    "Symbol": "GAS",
+    "Available": 0.0,
+    "InOrder": 0.0
+  },
+  {
+    "Symbol": "HOT",
+    "Available": 0.0,
+    "InOrder": 0.0
+  },
+  {
+    "Symbol": "LTC",
+    "Available": 11392.0,
+    "InOrder": 0.0
+  },
+  {
+    "Symbol": "NPXS",
+    "Available": 0.0,
+    "InOrder": 0.0
+  },
+  {
+    "Symbol": "TRX",
+    "Available": 0.0,
+    "InOrder": 0.0
+  },
+  {
+    "Symbol": "XEM",
+    "Available": 0.0,
+    "InOrder": 0.0
+  }
+]
