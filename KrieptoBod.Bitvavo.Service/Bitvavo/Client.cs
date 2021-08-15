@@ -17,15 +17,13 @@ namespace KrieptoBod.Exchange.Bitvavo
             _bitvavoConfig = bitvavoConfig;
         }
 
-        private HttpClient AddHeaders(HttpClient client, string timeStamp, string accessWindow, string signature)
+        private void AddHeaders(HttpClient client, string timeStamp, string accessWindow, string signature)
         {
             client.DefaultRequestHeaders.Add("Bitvavo-Access-Key", this._bitvavoConfig.ApiKey);
             client.DefaultRequestHeaders.Add("Bitvavo-Access-Timestamp", timeStamp);
             client.DefaultRequestHeaders.Add("Bitvavo-Access-Window", accessWindow);
             client.DefaultRequestHeaders.Add("Bitvavo-Access-Signature", signature);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            return client;
         }
 
         private string GenerateHeaderSignature(string toHash)

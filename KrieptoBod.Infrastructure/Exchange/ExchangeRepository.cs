@@ -26,46 +26,46 @@ namespace KrieptoBod.Infrastructure.Exchange
             return await _service.GetCandlesAsync(market, interval, limit, start, end);
         }
 
-        public Task<IEnumerable<Market>> GetMarketsAsync()
+        public async Task<IEnumerable<Market>> GetMarketsAsync()
         {
-            throw new NotImplementedException();
+            return await _service.GetMarketsAsync();
         }
 
-        public Task<Market> GetMarketAsync(string market)
+        public async Task<Market> GetMarketAsync(string market)
         {
-            throw new NotImplementedException();
+            return await _service.GetMarketAsync(market);
         }
 
-        public Task<IEnumerable<Asset>> GetAssetsAsync()
+        public async Task<IEnumerable<Asset>> GetAssetsAsync()
         {
-            throw new NotImplementedException();
+            return await _service.GetAssetsAsync();
         }
 
-        public Task<Asset> GetAssetAsync(string symbol)
+        public async Task<Asset> GetAssetAsync(string symbol)
         {
-            throw new NotImplementedException();
+            return await _service.GetAssetAsync(symbol);
         }
 
-        public Task<IEnumerable<Trade>> GetTradesAsync(string market, int limit = 500, DateTime? start = null, DateTime? end = null,
+        public async Task<IEnumerable<Trade>> GetTradesAsync(string market, int limit = 500, DateTime? start = null, DateTime? end = null,
             Guid? tradeIdFrom = null, Guid? tradeIdTo = null)
         {
-            throw new NotImplementedException();
+            return await _service.GetTradesAsync(market, limit, start, end, tradeIdFrom, tradeIdTo);
         }
 
-        public Task<Order> GetOrderAsync(string market, Guid orderId)
+        public async Task<Order> GetOrderAsync(string market, Guid orderId)
         {
-            throw new NotImplementedException();
+            return await _service.GetOrderAsync(market, orderId);
         }
 
-        public Task<IEnumerable<Order>> GetOrdersAsync(string market, int limit = 500, DateTime? start = null, DateTime? end = null,
+        public async Task<IEnumerable<Order>> GetOrdersAsync(string market, int limit = 500, DateTime? start = null, DateTime? end = null,
             Guid? orderIdFrom = null, Guid? orderIdTo = null)
         {
-            throw new NotImplementedException();
+            return await _service.GetOrdersAsync(market, limit, start, end, orderIdFrom, orderIdTo);
         }
 
-        public Task<Order> GetOpenOrderAsync(string market = "")
+        public async Task<Order> GetOpenOrderAsync(string market = "")
         {
-            throw new NotImplementedException();
+            return await _service.GetOpenOrderAsync(market);
         }
     }
 }

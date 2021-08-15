@@ -20,7 +20,13 @@ namespace KrieptoBod.Application
 
         public async Task Run()
         {
-            var candles = await _repository.GetCandlesAsync("CHZ-EUR");
+            //var candles = await _repository.GetCandlesAsync("BTC-EUR", "5m", 1000, new DateTime(2021, 01, 01, 00, 00, 00));
+            var markets = await _repository.GetMarketsAsync();
+            var assets = await _repository.GetAssetsAsync();
+            var orders = await _repository.GetOrdersAsync("BTC-EUR", 1000, new DateTime(2021, 01, 01, 00, 00, 00));
+            var trades = await _repository.GetTradesAsync("BTC-EUR", 1000, new DateTime(2021, 01, 01, 00, 00, 00));
+            var balance = await _repository.GetBalanceAsync();
+            
 
             var recommendations = await GetRecommendations();
 
