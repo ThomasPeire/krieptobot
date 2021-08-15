@@ -42,6 +42,8 @@ namespace KrieptoBod.Tests.Application
             var trader = new Trader(_repository.Object, _recommendationCalculator.Object);
 
             await trader.Run(); 
+
+            Assert.True(true);// todo:proper test
         }
 
     }
