@@ -5,6 +5,7 @@ using KrieptoBod.Model;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 
 namespace KrieptoBod.Exchange.Bitvavo
@@ -56,7 +57,7 @@ namespace KrieptoBod.Exchange.Bitvavo
                 queryString.Add("end", ((DateTimeOffset)end).ToUnixTimeSeconds().ToString());
 
             var dtoEnumerable = await new Client<IEnumerable<CandleDto>>(_bitvavoConfig).GetAsync($"/v2/{market}/candles{queryString.ToUriComponent()}");
-
+            
             return dtoEnumerable.ConvertToKrieptoBodModel();
         }
 

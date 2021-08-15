@@ -1,0 +1,17 @@
+﻿{
+  "MarketName": "AAVE-EUR",
+  "Status": "trading",
+  "Base": "AAVE",
+  "Quote": "EUR",
+  "PricePrecision": 5,
+  "MinOrderInQuoteAsset": 5.0,
+  "MinOrderInBaseAsset": 8.0,
+  "OrderTypes": [
+    "market",
+    "limit",
+    "stopLoss",
+    "stopLossLimit",
+    "takeProfit",
+    "takeProfitLimit"
+  ]
+}
