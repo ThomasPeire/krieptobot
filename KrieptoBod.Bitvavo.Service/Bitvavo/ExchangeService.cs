@@ -5,18 +5,19 @@ using KrieptoBod.Model;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
-using System.Net.Sockets;
+using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace KrieptoBod.Exchange.Bitvavo
 {
     public class ExchangeService : IExchangeService
     {
-        private readonly BitvavoConfig _bitvavoConfig;
+        private readonly IClient _client;
 
-        public ExchangeService(BitvavoConfig bitvavoConfig)
+        public ExchangeService(IClient client)
         {
-            _bitvavoConfig = bitvavoConfig;
+            _client = client;
         }
 
         public async Task<Asset> GetAssetAsync(string symbol)
@@ -25,21 +26,21 @@ namespace KrieptoBod.Exchange.Bitvavo
                 new QueryString()
                     .Add("symbol", symbol);
 
-            var assetDto = await new Client<AssetDto>(_bitvavoConfig).GetAsync($"/v2/assets{queryString.ToUriComponent()}");
+            var assetDto = await Deserialize<AssetDto>(await _client.GetAsync($"/v2/assets{queryString.ToUriComponent()}"));
 
             return assetDto.ConvertToKrieptoBodModel();
         }
 
         public async Task<IEnumerable<Asset>> GetAssetsAsync()
         {
-            var dtoEnumerable = await new Client<IEnumerable<AssetDto>>(_bitvavoConfig).GetAsync($"/v2/assets");
+            var dtoEnumerable = await Deserialize<IEnumerable<AssetDto>>(await _client.GetAsync($"/v2/assets"));
 
             return dtoEnumerable.ConvertToKrieptoBodModel();
         }
 
         public async Task<IEnumerable<Balance>> GetBalanceAsync()
         {
-            var dtoEnumerable = await new Client<IEnumerable<BalanceDto>>(_bitvavoConfig).GetAsync("/v2/balance");
+            var dtoEnumerable = await Deserialize<IEnumerable<BalanceDto>>(await _client.GetAsync("/v2/balance"));
 
             return dtoEnumerable.ConvertToKrieptoBodModel();
         }
@@ -56,8 +57,8 @@ namespace KrieptoBod.Exchange.Bitvavo
             if (end != null)
                 queryString.Add("end", ((DateTimeOffset)end).ToUnixTimeSeconds().ToString());
 
-            var dtoEnumerable = await new Client<IEnumerable<CandleDto>>(_bitvavoConfig).GetAsync($"/v2/{market}/candles{queryString.ToUriComponent()}");
-            
+            var dtoEnumerable = await Deserialize<IEnumerable<CandleDto>>(await _client.GetAsync($"/v2/{market}/candles{queryString.ToUriComponent()}"));
+
             return dtoEnumerable.ConvertToKrieptoBodModel();
         }
 
@@ -67,14 +68,14 @@ namespace KrieptoBod.Exchange.Bitvavo
                 new QueryString()
                     .Add("market", market);
 
-            var dto = await new Client<MarketDto>(_bitvavoConfig).GetAsync($"/v2/markets{queryString.ToUriComponent()}");
+            var dto = await Deserialize<MarketDto>(await _client.GetAsync($"/v2/markets{queryString.ToUriComponent()}"));
 
             return dto.ConvertToKrieptoBodModel();
         }
 
         public async Task<IEnumerable<Market>> GetMarketsAsync()
         {
-            var dtoEnumerable = await new Client<IEnumerable<MarketDto>>(_bitvavoConfig).GetAsync($"/v2/markets");
+            var dtoEnumerable = await Deserialize<IEnumerable<MarketDto>>(await _client.GetAsync($"/v2/markets"));
 
             return dtoEnumerable.ConvertToKrieptoBodModel();
         }
@@ -97,7 +98,7 @@ namespace KrieptoBod.Exchange.Bitvavo
             if (tradeIdTo != null)
                 queryString.Add("tradeIdFrom", tradeIdTo.ToString());
 
-            var dtoEnumerable = await new Client<IEnumerable<TradeDto>>(_bitvavoConfig).GetAsync($"/v2/{market}/trades{queryString.ToUriComponent()}");
+            var dtoEnumerable = await Deserialize<IEnumerable<TradeDto>>(await _client.GetAsync($"/v2/{market}/trades{queryString.ToUriComponent()}"));
 
             return dtoEnumerable.ConvertToKrieptoBodModel();
         }
@@ -121,7 +122,7 @@ namespace KrieptoBod.Exchange.Bitvavo
             if (orderIdTo != null)
                 queryString.Add("orderIdTo", orderIdTo.ToString());
 
-            var dtoEnumerable = await new Client<IEnumerable<OrderDto>>(_bitvavoConfig).GetAsync($"/v2/orders{queryString.ToUriComponent()}");
+            var dtoEnumerable = await Deserialize<IEnumerable<OrderDto>>(await _client.GetAsync($"/v2/orders{queryString.ToUriComponent()}"));
 
             return dtoEnumerable.ConvertToKrieptoBodModel();
         }
@@ -133,7 +134,7 @@ namespace KrieptoBod.Exchange.Bitvavo
                     .Add("market", market)
                     .Add("orderId", orderId.ToString());
 
-            var dto = await new Client<OrderDto>(_bitvavoConfig).GetAsync($"/v2/order{queryString.ToUriComponent()}");
+            var dto = await Deserialize<OrderDto>(await _client.GetAsync($"/v2/order{queryString.ToUriComponent()}"));
 
             return dto.ConvertToKrieptoBodModel();
         }
@@ -145,9 +146,18 @@ namespace KrieptoBod.Exchange.Bitvavo
             if (!string.IsNullOrWhiteSpace(market))
                 queryString.Add("market", market);
 
-            var dto = await new Client<OrderDto>(_bitvavoConfig).GetAsync($"/v2/ordersOpen{queryString.ToUriComponent()}");
+            var dto = await Deserialize<OrderDto>(await _client.GetAsync($"/v2/ordersOpen{queryString.ToUriComponent()}"));
 
             return dto.ConvertToKrieptoBodModel();
+        }
+
+        public async Task<T> Deserialize<T>(HttpContent content)
+        {
+            return await JsonSerializer.DeserializeAsync<T>(await content.ReadAsStreamAsync(),
+                    new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
         }
     }
 }

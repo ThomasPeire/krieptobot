@@ -59,7 +59,7 @@ namespace KrieptoBod.Exchange.Bitvavo.Helpers
                 Status = dto.Status,
                 Base = dto.Base,
                 Quote = dto.Quote,
-                PricePrecision = int.Parse(dto.PricePrecision),
+                PricePrecision = int.Parse(dto.PricePrecision ?? "0", CultureInfo.InvariantCulture),
                 MinOrderInQuoteAsset = decimal.Parse(dto.MinOrderInQuoteAsset ?? "0", CultureInfo.InvariantCulture),
                 MinOrderInBaseAsset = decimal.Parse(dto.MinOrderInBaseAsset ?? "0", CultureInfo.InvariantCulture),
                 OrderTypes = dto.OrderTypes,
