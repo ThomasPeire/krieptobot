@@ -53,17 +53,26 @@ namespace KrieptoBod.Exchange.Bitvavo.Helpers
 
         public static Market ConvertToKrieptoBodModel(this MarketDto dto)
         {
-            return new Market()
+            try
             {
-                MarketName = dto.MarketName,
-                Status = dto.Status,
-                Base = dto.Base,
-                Quote = dto.Quote,
-                PricePrecision = int.Parse(dto.PricePrecision),
-                MinOrderInQuoteAsset = decimal.Parse(dto.MinOrderInQuoteAsset ?? "0", CultureInfo.InvariantCulture),
-                MinOrderInBaseAsset = decimal.Parse(dto.MinOrderInBaseAsset ?? "0", CultureInfo.InvariantCulture),
-                OrderTypes = dto.OrderTypes,
-            };
+
+                return new Market()
+                {
+                    MarketName = dto.MarketName,
+                    Status = dto.Status,
+                    Base = dto.Base,
+                    Quote = dto.Quote,
+                    PricePrecision = int.Parse(dto.PricePrecision ?? "0", CultureInfo.InvariantCulture),
+                    MinOrderInQuoteAsset = decimal.Parse(dto.MinOrderInQuoteAsset ?? "0", CultureInfo.InvariantCulture),
+                    MinOrderInBaseAsset = decimal.Parse(dto.MinOrderInBaseAsset ?? "0", CultureInfo.InvariantCulture),
+                    OrderTypes = dto.OrderTypes,
+                };
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         public static Order ConvertToKrieptoBodModel(this OrderDto dto)

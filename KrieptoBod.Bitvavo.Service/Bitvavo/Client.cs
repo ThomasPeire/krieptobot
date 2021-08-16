@@ -3,12 +3,11 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace KrieptoBod.Exchange.Bitvavo
 {
-    internal class Client<T> : IClient<T>
+    public class Client : IClient
     {
         private readonly BitvavoConfig _bitvavoConfig;
 
@@ -41,7 +40,7 @@ namespace KrieptoBod.Exchange.Bitvavo
             return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
         }
 
-        public async Task<T> GetAsync(string url)
+        public async Task<HttpContent> GetAsync(string url)
         {
             var timeStamp = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
             const string accessWindow = "20000";
@@ -62,14 +61,8 @@ namespace KrieptoBod.Exchange.Bitvavo
 
             response.EnsureSuccessStatusCode();
 
-            await using var responseStream = await response.Content.ReadAsStreamAsync();
-            var responseBody = await response.Content.ReadAsStringAsync();
+            return response.Content;
 
-            return await JsonSerializer.DeserializeAsync<T>(responseStream,
-                new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                });
         }
     }
 }

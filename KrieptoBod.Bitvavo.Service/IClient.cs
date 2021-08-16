@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace KrieptoBod.Exchange
 {
-    internal interface IClient<T>
+    public interface IClient
     {
-        Task<T> GetAsync(string url);
+        Task<HttpContent> GetAsync(string url);
     }
 }

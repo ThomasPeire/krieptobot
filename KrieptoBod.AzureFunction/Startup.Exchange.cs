@@ -16,6 +16,7 @@ namespace KrieptoBod.AzureFunction
             services.AddSingleton(bitvavoApiConfig);
 
             services.AddScoped<IExchangeService, ExchangeService>();
+            services.AddScoped<Exchange.IClient, Exchange.Bitvavo.Client>();
 
             return services;
         }
