@@ -19,14 +19,14 @@ namespace KrieptoBod.Exchange.Bitvavo
         {
             _client = client;
         }
-        
+
         public async Task<Asset> GetAssetAsync(string symbol)
         {
             var queryString =
                 new QueryString()
                     .Add("symbol", symbol);
-            
-            var assetDto = await Deserialize<AssetDto>(await _client.GetAsync($"/v2/assets{queryString.ToUriComponent()}")) ;
+
+            var assetDto = await Deserialize<AssetDto>(await _client.GetAsync($"/v2/assets{queryString.ToUriComponent()}"));
 
             return assetDto.ConvertToKrieptoBodModel();
         }
@@ -58,7 +58,7 @@ namespace KrieptoBod.Exchange.Bitvavo
                 queryString.Add("end", ((DateTimeOffset)end).ToUnixTimeSeconds().ToString());
 
             var dtoEnumerable = await Deserialize<IEnumerable<CandleDto>>(await _client.GetAsync($"/v2/{market}/candles{queryString.ToUriComponent()}"));
-            
+
             return dtoEnumerable.ConvertToKrieptoBodModel();
         }
 
@@ -150,23 +150,14 @@ namespace KrieptoBod.Exchange.Bitvavo
 
             return dto.ConvertToKrieptoBodModel();
         }
-        
+
         public async Task<T> Deserialize<T>(HttpContent content)
         {
-            var test = content.ReadAsStringAsync();
-            try
-            {
-                return await JsonSerializer.DeserializeAsync<T>(await content.ReadAsStreamAsync(),
-                        new JsonSerializerOptions
-                        {
-                            PropertyNameCaseInsensitive = true
-                        });
-            }
-            catch (Exception e)
-            {
-
-                throw;
-            }
+            return await JsonSerializer.DeserializeAsync<T>(await content.ReadAsStreamAsync(),
+                    new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
         }
     }
 }
