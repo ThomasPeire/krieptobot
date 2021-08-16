@@ -13,9 +13,9 @@ namespace KrieptoBod.Exchange.Bitvavo
 {
     public class ExchangeService : IExchangeService
     {
-        private readonly IClient _client;
+        private readonly BitvavoClient _client;
 
-        public ExchangeService(IClient client)
+        public ExchangeService(BitvavoClient client)
         {
             _client = client;
         }

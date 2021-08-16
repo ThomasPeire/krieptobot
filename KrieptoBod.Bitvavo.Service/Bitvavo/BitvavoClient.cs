@@ -7,22 +7,25 @@ using System.Threading.Tasks;
 
 namespace KrieptoBod.Exchange.Bitvavo
 {
-    public class Client : IClient
+    public class BitvavoClient
     {
+        public HttpClient Client;
         private readonly BitvavoConfig _bitvavoConfig;
 
-        public Client(BitvavoConfig bitvavoConfig)
+        public BitvavoClient(HttpClient client, BitvavoConfig bitvavoConfig)
         {
+            client.BaseAddress = new Uri(bitvavoConfig.BaseUrl);
+            Client = client;
             _bitvavoConfig = bitvavoConfig;
         }
 
-        private void AddHeaders(HttpClient client, string timeStamp, string accessWindow, string signature)
+        private void AddHeaders(string timeStamp, string accessWindow, string signature)
         {
-            client.DefaultRequestHeaders.Add("Bitvavo-Access-Key", this._bitvavoConfig.ApiKey);
-            client.DefaultRequestHeaders.Add("Bitvavo-Access-Timestamp", timeStamp);
-            client.DefaultRequestHeaders.Add("Bitvavo-Access-Window", accessWindow);
-            client.DefaultRequestHeaders.Add("Bitvavo-Access-Signature", signature);
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            Client.DefaultRequestHeaders.Add("Bitvavo-Access-Key", this._bitvavoConfig.ApiKey);
+            Client.DefaultRequestHeaders.Add("Bitvavo-Access-Timestamp", timeStamp);
+            Client.DefaultRequestHeaders.Add("Bitvavo-Access-Window", accessWindow);
+            Client.DefaultRequestHeaders.Add("Bitvavo-Access-Signature", signature);
+            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         private string GenerateHeaderSignature(string toHash)
@@ -30,7 +33,7 @@ namespace KrieptoBod.Exchange.Bitvavo
             var encoding = new UTF8Encoding();
 
             var textBytes = encoding.GetBytes(toHash);
-            var keyBytes = encoding.GetBytes(this._bitvavoConfig.ApiSecret);
+            var keyBytes = encoding.GetBytes(_bitvavoConfig.ApiSecret);
 
             byte[] hashBytes;
 
@@ -50,14 +53,9 @@ namespace KrieptoBod.Exchange.Bitvavo
             var toHash = timeStamp + httpMethod + url + body;
             var signature = GenerateHeaderSignature(toHash);
 
-            using var client = new HttpClient
-            {
-                BaseAddress = new Uri(_bitvavoConfig.BaseUrl)
-            };
+            AddHeaders(timeStamp, accessWindow, signature);
 
-            AddHeaders(client, timeStamp, accessWindow, signature);
-
-            var response = await client.GetAsync(url);
+            var response = await Client.GetAsync(url);
 
             response.EnsureSuccessStatusCode();
 
