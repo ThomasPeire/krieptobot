@@ -2,6 +2,7 @@
 using KrieptoBod.Model;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace KrieptoBod.Exchange.Bitvavo.Helpers
@@ -15,11 +16,11 @@ namespace KrieptoBod.Exchange.Bitvavo.Helpers
                 Symbol = dto.Symbol,
                 Name = dto.Name,
                 Decimals = dto.Decimals,
-                DepositFee = decimal.Parse(dto.DepositFee ?? "0"),
+                DepositFee = decimal.Parse(dto.DepositFee ?? "0", CultureInfo.InvariantCulture),
                 DepositConfirmations = dto.DepositConfirmations,
                 DepositStatus = dto.DepositStatus,
-                WithdrawalFee = decimal.Parse(dto.WithdrawalFee ?? "0"),
-                WithdrawalMinAmount = decimal.Parse(dto.WithdrawalMinAmount ?? "0"),
+                WithdrawalFee = decimal.Parse(dto.WithdrawalFee ?? "0", CultureInfo.InvariantCulture),
+                WithdrawalMinAmount = decimal.Parse(dto.WithdrawalMinAmount ?? "0", CultureInfo.InvariantCulture),
                 WithdrawalStatus = dto.WithdrawalStatus,
                 Networks = dto.Networks,
                 Message = dto.Message,
@@ -31,8 +32,8 @@ namespace KrieptoBod.Exchange.Bitvavo.Helpers
             return new Balance()
             {
                 Symbol = dto.Symbol,
-                Available = decimal.Parse(dto.Available ?? "0"),
-                InOrder = decimal.Parse(dto.InOrder ?? "0"),
+                Available = decimal.Parse(dto.Available ?? "0", CultureInfo.InvariantCulture),
+                InOrder = decimal.Parse(dto.InOrder ?? "0", CultureInfo.InvariantCulture),
             };
         }
 
@@ -59,8 +60,8 @@ namespace KrieptoBod.Exchange.Bitvavo.Helpers
                 Base = dto.Base,
                 Quote = dto.Quote,
                 PricePrecision = int.Parse(dto.PricePrecision),
-                MinOrderInQuoteAsset = decimal.Parse(dto.MinOrderInQuoteAsset ?? "0"),
-                MinOrderInBaseAsset = decimal.Parse(dto.MinOrderInBaseAsset ?? "0"),
+                MinOrderInQuoteAsset = decimal.Parse(dto.MinOrderInQuoteAsset ?? "0", CultureInfo.InvariantCulture),
+                MinOrderInBaseAsset = decimal.Parse(dto.MinOrderInBaseAsset ?? "0", CultureInfo.InvariantCulture),
                 OrderTypes = dto.OrderTypes,
             };
         }
@@ -76,20 +77,20 @@ namespace KrieptoBod.Exchange.Bitvavo.Helpers
                 Status = dto.Status,
                 Side = dto.Side,
                 OrderType = dto.OrderType,
-                Amount = decimal.Parse(dto.Amount ?? "0"),
-                AmountRemaining = decimal.Parse(dto.AmountRemaining ?? "0"),
-                Price = decimal.Parse(dto.Price ?? "0"),
-                AmountQuote = decimal.Parse(dto.AmountQuote ?? "0"),
-                AmountQuoteRemaining = decimal.Parse(dto.AmountQuoteRemaining ?? "0"),
-                OnHold = decimal.Parse(dto.OnHold ?? "0"),
+                Amount = decimal.Parse(dto.Amount ?? "0", CultureInfo.InvariantCulture),
+                AmountRemaining = decimal.Parse(dto.AmountRemaining ?? "0", CultureInfo.InvariantCulture),
+                Price = decimal.Parse(dto.Price ?? "0", CultureInfo.InvariantCulture),
+                AmountQuote = decimal.Parse(dto.AmountQuote ?? "0", CultureInfo.InvariantCulture),
+                AmountQuoteRemaining = decimal.Parse(dto.AmountQuoteRemaining ?? "0", CultureInfo.InvariantCulture),
+                OnHold = decimal.Parse(dto.OnHold ?? "0", CultureInfo.InvariantCulture),
                 OnHoldCurrency = dto.OnHoldCurrency,
-                TriggerPrice = decimal.Parse(dto.TriggerPrice ?? "0"),
-                TriggerAmount = decimal.Parse(dto.TriggerAmount ?? "0"),
+                TriggerPrice = decimal.Parse(dto.TriggerPrice ?? "0", CultureInfo.InvariantCulture),
+                TriggerAmount = decimal.Parse(dto.TriggerAmount ?? "0", CultureInfo.InvariantCulture),
                 TriggerType = dto.TriggerType,
                 TriggerReference = dto.TriggerReference,
-                FilledAmount = decimal.Parse(dto.FilledAmount ?? "0"),
-                FilledAmountQuote = decimal.Parse(dto.FilledAmountQuote ?? "0"),
-                FeePaid = decimal.Parse(dto.FeePaid ?? "0"),
+                FilledAmount = decimal.Parse(dto.FilledAmount ?? "0", CultureInfo.InvariantCulture),
+                FilledAmountQuote = decimal.Parse(dto.FilledAmountQuote ?? "0", CultureInfo.InvariantCulture),
+                FeePaid = decimal.Parse(dto.FeePaid ?? "0", CultureInfo.InvariantCulture),
                 FeeCurrency = dto.FeeCurrency,
                 Fills = dto.Fills.ConvertToKrieptoBodModel(),
                 SelfTradePrevention = dto.SelfTradePrevention,
@@ -106,10 +107,10 @@ namespace KrieptoBod.Exchange.Bitvavo.Helpers
             {
                 Id = dto.Id,
                 Timestamp = new DateTime(dto.Timestamp),
-                Amount = decimal.Parse(dto.Amount ?? "0"),
-                Price = decimal.Parse(dto.Price ?? "0"),
+                Amount = decimal.Parse(dto.Amount ?? "0", CultureInfo.InvariantCulture),
+                Price = decimal.Parse(dto.Price ?? "0", CultureInfo.InvariantCulture),
                 Taker = dto.Taker,
-                Fee = decimal.Parse(dto.Fee ?? "0"),
+                Fee = decimal.Parse(dto.Fee ?? "0", CultureInfo.InvariantCulture),
                 FeeCurrency = dto.FeeCurrency,
                 Settled = dto.Settled,
             };
@@ -121,8 +122,8 @@ namespace KrieptoBod.Exchange.Bitvavo.Helpers
             {
                 Timestamp = new DateTime(dto.Timestamp),
                 Id = dto.Id,
-                Amount = decimal.Parse(dto.Amount ?? "0"),
-                Price = decimal.Parse(dto.Price ?? "0"),
+                Amount = decimal.Parse(dto.Amount ?? "0", CultureInfo.InvariantCulture),
+                Price = decimal.Parse(dto.Price ?? "0", CultureInfo.InvariantCulture),
                 Side = dto.Side,
             };
         }

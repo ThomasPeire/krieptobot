@@ -5,7 +5,7 @@
   "Quote": "EUR",
   "PricePrecision": 5,
   "MinOrderInQuoteAsset": 5.0,
-  "MinOrderInBaseAsset": 1.0,
+  "MinOrderInBaseAsset": 0.0001,
   "OrderTypes": [
     "market",
     "limit",

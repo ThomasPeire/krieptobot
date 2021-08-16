@@ -2,7 +2,7 @@
   {
     "Symbol": "EUR",
     "Available": 0.0,
-    "InOrder": 1103.0
+    "InOrder": 11.03
   },
   {
     "Symbol": "ADA",
@@ -21,7 +21,7 @@
   },
   {
     "Symbol": "BTC",
-    "Available": 24.0,
+    "Available": 0.00000024,
     "InOrder": 0.0
   },
   {
@@ -36,7 +36,7 @@
   },
   {
     "Symbol": "ETH",
-    "Available": 1959154.0,
+    "Available": 0.01959154,
     "InOrder": 0.0
   },
   {
@@ -51,7 +51,7 @@
   },
   {
     "Symbol": "LTC",
-    "Available": 11392.0,
+    "Available": 0.00011392,
     "InOrder": 0.0
   },
   {

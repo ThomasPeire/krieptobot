@@ -54,4 +54,8 @@
     <ProjectReference Include="..\KrieptoBod.Infrastructure\KrieptoBod.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Infrastructure\__snapshots__\" />
+  </ItemGroup>
+
 </Project>
