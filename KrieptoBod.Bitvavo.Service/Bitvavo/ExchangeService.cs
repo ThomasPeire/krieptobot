@@ -5,6 +5,7 @@ using KrieptoBod.Model;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -57,7 +58,19 @@ namespace KrieptoBod.Exchange.Bitvavo
             if (end != null)
                 queryString.Add("end", ((DateTimeOffset)end).ToUnixTimeSeconds().ToString());
 
-            var dtoEnumerable = await Deserialize<IEnumerable<CandleDto>>(await _client.GetAsync($"/v2/{market}/candles{queryString.ToUriComponent()}"));
+            var response = await _client.GetAsync($"/v2/{market}/candles{queryString.ToUriComponent()}");
+            var responseContent = await response.ReadAsStringAsync();
+            var deserializedCandles = Newtonsoft.Json.JsonConvert.DeserializeObject(responseContent) as Newtonsoft.Json.Linq.JArray;
+            var dtoEnumerable = deserializedCandles.Select(x =>
+                new CandleDto()
+                {
+                    TimeStamp = DateTime.UnixEpoch.AddMilliseconds(x.Value<long>(0)),
+                    Open = x.Value<decimal>(1),
+                    High = x.Value<decimal>(2),
+                    Low = x.Value<decimal>(3),
+                    Close = x.Value<decimal>(4),
+                    Volume = x.Value<decimal>(5),
+                });
 
             return dtoEnumerable.ConvertToKrieptoBodModel();
         }

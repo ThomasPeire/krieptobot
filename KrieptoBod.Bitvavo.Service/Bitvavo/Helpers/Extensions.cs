@@ -41,13 +41,12 @@ namespace KrieptoBod.Exchange.Bitvavo.Helpers
         {
             return new Candle()
             {
-                //TODO: correct mapping
-                TimeStamp = DateTime.Now,
-                //High = decimal.Parse(dto.something),
-                //Low = decimal.Parse(dto.something),
-                //Open = decimal.Parse(dto.something),
-                //Close = decimal.Parse(dto.something),
-                //Volume = decimal.Parse(dto.something),
+                TimeStamp = dto.TimeStamp,
+                High = dto.High,
+                Low = dto.Low,
+                Open = dto.Open,
+                Close = dto.Close,
+                Volume = dto.Volume,
             };
         }
 
