@@ -28,7 +28,7 @@ namespace KrieptoBod.Application.Recommendators
              * ==> positive score ==> ACTION = BUY with score 47
              */
 
-            return new RecommendatorScore() { Score = recommendationScores.Sum(x => x.Score) };
+            return new RecommendatorScore { Score = recommendationScores.Sum(x => x.Score) };
         }
     }
 }

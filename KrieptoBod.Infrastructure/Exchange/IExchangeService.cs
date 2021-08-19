@@ -17,6 +17,7 @@ namespace KrieptoBod.Infrastructure.Exchange
         Task<IEnumerable<Trade>> GetTradesAsync(string market, int limit = 500, DateTime? start = null, DateTime? end = null, Guid? tradeIdFrom = null, Guid? tradeIdTo = null);
         Task<Order> GetOrderAsync(string market, Guid orderId);
         Task<IEnumerable<Order>> GetOrdersAsync(string market, int limit = 500, DateTime? start = null, DateTime? end = null, Guid? orderIdFrom = null, Guid? orderIdTo = null);
-        Task<Order> GetOpenOrderAsync(string market = "");
+        Task<Order> GetOpenOrderAsync();
+        Task<Order> GetOpenOrderAsync(string market);
     }
 }
