@@ -28,13 +28,13 @@ namespace KrieptoBod.Tests.Infrastructure
             result.Should().MatchSnapshot();
         }
 
-        //[Test]
-        //public async Task GetCandles_ShouldReturn_Candles()
-        //{
-        //    var result = await _exchangeRepository.GetCandlesAsync("");
+        [Test]
+        public async Task GetCandles_ShouldReturn_Candles()
+        {
+            var result = await _exchangeRepository.GetCandlesAsync("BTC-EUR");
 
-        //    result.Should().MatchSnapshot();
-        //}
+            result.Should().MatchSnapshot();
+        }
 
         [Test]
         public async Task GetMarkets_ShouldReturn_Markets()
