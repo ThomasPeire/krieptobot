@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,7 +29,7 @@ namespace KrieptoBod.Application.Recommendators
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"exception calculating RSI 14: " + ex.Message);
+                Debug.WriteLine($"exception calculating RSI 14: " + ex.Message);
             }
 
             var i = 0;
@@ -37,12 +38,12 @@ namespace KrieptoBod.Application.Recommendators
             {
                 if (i >= outBegIdx)
                 {
-                    Console.WriteLine($"{candle.TimeStamp} - RSI: { outArray[outCount] } Close: {candle.Close}");
+                    Debug.WriteLine($"{candle.TimeStamp} - RSI: { outArray[outCount] } Close: {candle.Close}");
                     outCount++;
                 }
                 else
                 {
-                    Console.WriteLine($"{candle.TimeStamp} - no data");
+                    Debug.WriteLine($"{candle.TimeStamp} - no data");
                 }
 
                 i++;
