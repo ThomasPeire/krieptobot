@@ -35,7 +35,7 @@ namespace KrieptoBod.Tests.Mocks.Bitvavo
             _trades = JsonConvert.DeserializeObject<IEnumerable<TradeDto>>(tradesJson).ConvertToKrieptoBodModel();
             var deserializedCandles = JsonConvert.DeserializeObject(candlesJson) as Newtonsoft.Json.Linq.JArray;
             _candles = deserializedCandles?.Select(x =>
-                new CandleDto()
+                new CandleDto
                 {
                     TimeStamp = DateTime.UnixEpoch.AddMilliseconds(x.Value<long>(0)),
                     Open = x.Value<decimal>(1),

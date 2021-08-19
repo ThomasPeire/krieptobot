@@ -54,7 +54,7 @@ namespace KrieptoBod.Tests.Exchange.Bitvavo.Helpers
             var candlesJson = System.IO.File.ReadAllText(@"./Mocks/Bitvavo/Data/candles_btc-eur.json");
             var deserializedCandles = JsonConvert.DeserializeObject(candlesJson) as JArray;
             _candles = deserializedCandles.Select(x =>
-                new CandleDto()
+                new CandleDto
                 {
                     TimeStamp = DateTime.UnixEpoch.AddMilliseconds(x.Value<long>(0)),
                     Open = x.Value<decimal>(1),
