@@ -27,7 +27,7 @@ namespace KrieptoBod.Exchange.Bitvavo
                 new QueryString()
                     .Add("symbol", symbol);
 
-            var assetDto = await Deserialize<AssetDto>(await _client.GetAsync($"/v2/assets{queryString.ToUriComponent()}").ConfigureAwait(false));
+            var assetDto = await Deserialize<AssetDto>(await _client.GetAsync($"/v2/assets{queryString.ToUriComponent()}")).ConfigureAwait(false);
 
             return assetDto.ConvertToKrieptoBodModel();
         }
@@ -186,7 +186,7 @@ namespace KrieptoBod.Exchange.Bitvavo
                 queryString.Add("market", market);
             }
 
-            var dto = await Deserialize<OrderDto>(await _client.GetAsync($"/v2/ordersOpen{queryString.ToUriComponent()}"));
+            var dto = await Deserialize<OrderDto>(await _client.GetAsync($"/v2/ordersOpen{queryString.ToUriComponent()}")).ConfigureAwait(false);
 
             return dto.ConvertToKrieptoBodModel();
         }
