@@ -9,23 +9,27 @@ namespace KrieptoBod.Exchange.Bitvavo
 {
     public class BitvavoClient
     {
-        public HttpClient Client;
+        private readonly HttpClient _client;
         private readonly BitvavoConfig _bitvavoConfig;
 
         public BitvavoClient(HttpClient client, BitvavoConfig bitvavoConfig)
         {
             client.BaseAddress = new Uri(bitvavoConfig.BaseUrl);
-            Client = client;
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Add("Bitvavo-Access-Key", bitvavoConfig.ApiKey);
+            client.DefaultRequestHeaders.Add("Bitvavo-Access-Window", "20000");
+
+            _client = client;
             _bitvavoConfig = bitvavoConfig;
         }
 
-        private void AddHeaders(string timeStamp, string accessWindow, string signature)
+        private void AddHeaders(string timeStamp, string signature)
         {
-            Client.DefaultRequestHeaders.Add("Bitvavo-Access-Key", this._bitvavoConfig.ApiKey);
-            Client.DefaultRequestHeaders.Add("Bitvavo-Access-Timestamp", timeStamp);
-            Client.DefaultRequestHeaders.Add("Bitvavo-Access-Window", accessWindow);
-            Client.DefaultRequestHeaders.Add("Bitvavo-Access-Signature", signature);
-            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            _client.DefaultRequestHeaders.Remove("Bitvavo-Access-Timestamp");
+            _client.DefaultRequestHeaders.Remove("Bitvavo-Access-Signature");
+
+            _client.DefaultRequestHeaders.Add("Bitvavo-Access-Timestamp", timeStamp);
+            _client.DefaultRequestHeaders.Add("Bitvavo-Access-Signature", signature);
         }
 
         private string GenerateHeaderSignature(string toHash)
@@ -46,16 +50,15 @@ namespace KrieptoBod.Exchange.Bitvavo
         public async Task<HttpContent> GetAsync(string url)
         {
             var timeStamp = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
-            const string accessWindow = "20000";
             const string httpMethod = "GET";
             const string body = "";
 
             var toHash = timeStamp + httpMethod + url + body;
             var signature = GenerateHeaderSignature(toHash);
 
-            AddHeaders(timeStamp, accessWindow, signature);
+            AddHeaders(timeStamp, signature);
 
-            var response = await Client.GetAsync(url);
+            var response = await _client.GetAsync(url);
 
             response.EnsureSuccessStatusCode();
 
