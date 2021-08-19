@@ -66,7 +66,7 @@ namespace KrieptoBod.Exchange.Bitvavo
             var responseContent = await response.ReadAsStringAsync();
             var deserializedCandles = Newtonsoft.Json.JsonConvert.DeserializeObject(responseContent) as Newtonsoft.Json.Linq.JArray;
             var dtoEnumerable = deserializedCandles?.Select(x =>
-                new CandleDto()
+                new CandleDto
                 {
                     TimeStamp = DateTime.UnixEpoch.AddMilliseconds(x.Value<long>(0)),
                     Open = x.Value<decimal>(1),
