@@ -10,7 +10,7 @@ namespace KrieptoBod.Application.Recommendators
 
         public async Task<RecommendatorScore> GetRecommendation(string market)
         {
-            return await CalculateRecommendation(market).ConfigureAwait(false) * Weight;
+            return await CalculateRecommendation(market) * Weight;
         }
     }
 }
