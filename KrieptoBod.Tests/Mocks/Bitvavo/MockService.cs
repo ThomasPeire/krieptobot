@@ -48,7 +48,7 @@ namespace KrieptoBod.Tests.Mocks.Bitvavo
 
         public async Task<IEnumerable<Balance>> GetBalanceAsync()
         {
-            return await Task.FromResult(_balances);
+            return await Task.FromResult(_balances).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<Candle>> GetCandlesAsync(string market, string interval = "5m", int limit = 1000, DateTime? start = null,
@@ -59,27 +59,27 @@ namespace KrieptoBod.Tests.Mocks.Bitvavo
                     .Where(x =>
                         x.TimeStamp >= start &&
                         x.TimeStamp < end)
-                    .Take(limit));
+                    .Take(limit)).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<Market>> GetMarketsAsync()
         {
-            return await Task.FromResult(_markets);
+            return await Task.FromResult(_markets).ConfigureAwait(false);
         }
 
         public async Task<Market> GetMarketAsync(string market)
         {
-            return await Task.FromResult(_markets.First(x => x.MarketName == market));
+            return await Task.FromResult(_markets.First(x => x.MarketName == market)).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<Asset>> GetAssetsAsync()
         {
-            return await Task.FromResult(_assets);
+            return await Task.FromResult(_assets).ConfigureAwait(false);
         }
 
         public async Task<Asset> GetAssetAsync(string symbol)
         {
-            return await Task.FromResult(_assets.First(x => x.Symbol == symbol));
+            return await Task.FromResult(_assets.First(x => x.Symbol == symbol)).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<Trade>> GetTradesAsync(string market, int limit = 500, DateTime? start = null, DateTime? end = null,
@@ -92,7 +92,7 @@ namespace KrieptoBod.Tests.Mocks.Bitvavo
                         x.Timestamp < end &&
                         string.CompareOrdinal(x.Id, tradeIdFrom.ToString()) >= 0 &&
                         string.CompareOrdinal(x.Id, tradeIdFrom.ToString()) < 0)
-                    .Take(limit));
+                    .Take(limit)).ConfigureAwait(false);
         }
 
         public async Task<Order> GetOrderAsync(string market, Guid orderId)
@@ -100,7 +100,7 @@ namespace KrieptoBod.Tests.Mocks.Bitvavo
             return await Task.FromResult(
                 _orders.First(x =>
                     x.Market == market &&
-                    x.OrderId == orderId.ToString()));
+                    x.OrderId == orderId.ToString())).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<Order>> GetOrdersAsync(string market, int limit = 500, DateTime? start = null, DateTime? end = null,
@@ -114,17 +114,17 @@ namespace KrieptoBod.Tests.Mocks.Bitvavo
                         x.Created < end &&
                         string.CompareOrdinal(x.OrderId, orderIdFrom.ToString()) >= 0 &&
                         string.CompareOrdinal(x.OrderId, orderIdTo.ToString()) < 0)
-                    .Take(limit));
+                    .Take(limit)).ConfigureAwait(false);
         }
 
         public async Task<Order> GetOpenOrderAsync()
         {
-            return await GetOpenOrderAsync("");
+            return await GetOpenOrderAsync("").ConfigureAwait(false);
         }
 
         public async Task<Order> GetOpenOrderAsync(string market)
         {
-            return await Task.FromResult(_orders.First(x => x.Market == market));
+            return await Task.FromResult(_orders.First(x => x.Market == market)).ConfigureAwait(false);
         }
     }
 }

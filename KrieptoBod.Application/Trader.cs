@@ -21,7 +21,7 @@ namespace KrieptoBod.Application
 
         public async Task Run()
         {
-            var recommendations = await GetRecommendations();
+            var recommendations = await GetRecommendations().ConfigureAwait(false);
 
             var coinsToSell = DetermineCoinsToSell(recommendations);
             var coinsToBuy = DetermineCoinsToBuy(recommendations);
@@ -106,7 +106,7 @@ namespace KrieptoBod.Application
 
         private async Task<Dictionary<string, RecommendatorScore>> GetRecommendations()
         {
-            var coinsToEvaluate = await GetCoinsToEvaluate();
+            var coinsToEvaluate = await GetCoinsToEvaluate().ConfigureAwait(false);
 
             var coinRecommendations = await Task.WhenAll(coinsToEvaluate.Select(async coin => (coin, recommendation: await _recommendationCalculator.CalculateRecommendation(coin))));
 
