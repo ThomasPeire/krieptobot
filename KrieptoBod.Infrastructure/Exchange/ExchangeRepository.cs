@@ -17,59 +17,59 @@ namespace KrieptoBod.Infrastructure.Exchange
 
         public async Task<IEnumerable<Balance>> GetBalanceAsync()
         {
-            return await _service.GetBalanceAsync();
+            return await _service.GetBalanceAsync().ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<Candle>> GetCandlesAsync(string market, string interval = "5m", int limit = 1000, DateTime? start = null,
             DateTime? end = null)
         {
-            return await _service.GetCandlesAsync(market, interval, limit, start, end);
+            return await _service.GetCandlesAsync(market, interval, limit, start, end).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<Market>> GetMarketsAsync()
         {
-            return await _service.GetMarketsAsync();
+            return await _service.GetMarketsAsync().ConfigureAwait(false);
         }
 
         public async Task<Market> GetMarketAsync(string market)
         {
-            return await _service.GetMarketAsync(market);
+            return await _service.GetMarketAsync(market).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<Asset>> GetAssetsAsync()
         {
-            return await _service.GetAssetsAsync();
+            return await _service.GetAssetsAsync().ConfigureAwait(false);
         }
 
         public async Task<Asset> GetAssetAsync(string symbol)
         {
-            return await _service.GetAssetAsync(symbol);
+            return await _service.GetAssetAsync(symbol).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<Trade>> GetTradesAsync(string market, int limit = 500, DateTime? start = null, DateTime? end = null,
             Guid? tradeIdFrom = null, Guid? tradeIdTo = null)
         {
-            return await _service.GetTradesAsync(market, limit, start, end, tradeIdFrom, tradeIdTo);
+            return await _service.GetTradesAsync(market, limit, start, end, tradeIdFrom, tradeIdTo).ConfigureAwait(false);
         }
 
         public async Task<Order> GetOrderAsync(string market, Guid orderId)
         {
-            return await _service.GetOrderAsync(market, orderId);
+            return await _service.GetOrderAsync(market, orderId).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<Order>> GetOrdersAsync(string market, int limit = 500, DateTime? start = null, DateTime? end = null,
             Guid? orderIdFrom = null, Guid? orderIdTo = null)
         {
-            return await _service.GetOrdersAsync(market, limit, start, end, orderIdFrom, orderIdTo);
+            return await _service.GetOrdersAsync(market, limit, start, end, orderIdFrom, orderIdTo).ConfigureAwait(false);
         }
 
         public async Task<Order> GetOpenOrderAsync()
         {
-            return await GetOpenOrderAsync("");
+            return await GetOpenOrderAsync("").ConfigureAwait(false);
         }
         public async Task<Order> GetOpenOrderAsync(string market)
         {
-            return await _service.GetOpenOrderAsync(market);
+            return await _service.GetOpenOrderAsync(market).ConfigureAwait(false);
         }
     }
 }
