@@ -136,16 +136,24 @@ namespace KrieptoBod.Exchange.Bitvavo
                     .Add("limit", limit.ToString());
 
             if (start != null)
+            {
                 queryString.Add("start", ((DateTimeOffset)start).ToUnixTimeSeconds().ToString());
-
+            }
+            
             if (end != null)
+            {
                 queryString.Add("end", ((DateTimeOffset)end).ToUnixTimeSeconds().ToString());
-
+            }
+            
             if (orderIdFrom != null)
+            {
                 queryString.Add("orderIdFrom", orderIdFrom.ToString());
-
+            }
+            
             if (orderIdTo != null)
+            {
                 queryString.Add("orderIdTo", orderIdTo.ToString());
+            }
 
             var dtoEnumerable = await Deserialize<IEnumerable<OrderDto>>(await _client.GetAsync($"/v2/orders{queryString.ToUriComponent()}"));
 
@@ -168,13 +176,15 @@ namespace KrieptoBod.Exchange.Bitvavo
         {
             return await GetOpenOrderAsync("");
         }
-        
+
         public async Task<Order> GetOpenOrderAsync(string market)
         {
             var queryString = new QueryString();
 
             if (!string.IsNullOrWhiteSpace(market))
+            {
                 queryString.Add("market", market);
+            }
 
             var dto = await Deserialize<OrderDto>(await _client.GetAsync($"/v2/ordersOpen{queryString.ToUriComponent()}"));
 

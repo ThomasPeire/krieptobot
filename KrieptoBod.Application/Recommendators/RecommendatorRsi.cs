@@ -50,7 +50,7 @@ namespace KrieptoBod.Application.Recommendators
             }
 
 
-            return new RecommendatorScore() {Score = .0F};
+            return new RecommendatorScore {Score = .0F};
         }
     }
 }

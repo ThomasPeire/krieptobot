@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Cryptography;
@@ -44,7 +45,7 @@ namespace KrieptoBod.Exchange.Bitvavo
             using (var hash = new HMACSHA256(keyBytes))
                 hashBytes = hash.ComputeHash(textBytes);
 
-            return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+            return BitConverter.ToString(hashBytes).Replace("-", "").ToLower(CultureInfo.InvariantCulture);
         }
 
         public async Task<HttpContent> GetAsync(string url)
