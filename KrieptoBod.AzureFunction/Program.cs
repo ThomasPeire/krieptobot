@@ -10,7 +10,7 @@ namespace KrieptoBod.AzureFunction
 {
     public class Program
     {
-        public static void Main()
+        public static async Task Main()
         {
             var host = new HostBuilder()
                 .ConfigureAppConfiguration((context, builder) =>
@@ -31,7 +31,7 @@ namespace KrieptoBod.AzureFunction
                 .ConfigureFunctionsWorkerDefaults()
                 .Build();
 
-            host.Run();
+            await host.RunAsync();
         }
     }
 }

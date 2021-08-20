@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using KrieptoBod.Application;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
@@ -17,12 +18,11 @@ namespace KrieptoBod.AzureFunction
             _trader = trader;
         }
 
-        [Function("TradeFunction")]
-        public async Task Run([TimerTrigger(ScheduleExpression)] TimerInfo myTimer)
+        [Function(nameof(TradeFunction))]
+        public async Task Run([TimerTrigger(ScheduleExpression, RunOnStartup = true, UseMonitor = true)] TimerInfo myTimer)
         {
             await _trader.Run();
-        }
 
-        
+        }
     }
 }
