@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Snapshooter.NUnit;
 using KrieptoBod.Infrastructure.Bitvavo;
+using KrieptoBod.Infrastructure.Bitvavo.Services;
 
 namespace KrieptoBod.Tests.Infrastructure
 {

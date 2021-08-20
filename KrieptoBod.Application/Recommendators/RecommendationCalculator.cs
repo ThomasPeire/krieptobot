@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 
 namespace KrieptoBod.Application.Recommendators
 {
-    //take weighted average of recommendations (eg. one recommendation can be more important than others)
     public class RecommendationCalculator: IRecommendationCalculator
     {
         private readonly IEnumerable<IRecommendator> _recommendators;
@@ -24,8 +23,8 @@ namespace KrieptoBod.Application.Recommendators
              * BUY 80
              *
              * OUTCOME
-             * Sum SELL scores - SUM BUY SCORES: (-60 + -10 + -15 = -85) + (52 + 80 = 132) = 47
-             * ==> positive score ==> ACTION = BUY with score 47
+             * Sum SELL scores + SUM BUY SCORES: (-60 + -10 + -15 = -85) + (52 + 80 = 132) = 47
+             * ==> positive score ==>  score 47 ==> buy
              */
 
             return new RecommendatorScore { Score = recommendationScores.Sum(x => x.Score) };
