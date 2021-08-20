@@ -63,7 +63,11 @@ namespace KrieptoBod.Infrastructure.Exchange
             return await _service.GetOrdersAsync(market, limit, start, end, orderIdFrom, orderIdTo);
         }
 
-        public async Task<Order> GetOpenOrderAsync(string market = "")
+        public async Task<Order> GetOpenOrderAsync()
+        {
+            return await GetOpenOrderAsync("");
+        }
+        public async Task<Order> GetOpenOrderAsync(string market)
         {
             return await _service.GetOpenOrderAsync(market);
         }

@@ -30,10 +30,20 @@ namespace KrieptoBod.Tests.Mocks.Bitvavo
 
             _assets = JsonConvert.DeserializeObject<IEnumerable<AssetDto>>(assetsJson).ConvertToKrieptoBodModel();
             _balances = JsonConvert.DeserializeObject<IEnumerable<BalanceDto>>(balancesJson).ConvertToKrieptoBodModel();
-            //_candles = JsonConvert.DeserializeObject<IEnumerable<CandleDto>>(candlesJson).ConvertToKrieptoBodModel();
             _markets = JsonConvert.DeserializeObject<IEnumerable<MarketDto>>(marketsJson).ConvertToKrieptoBodModel();
             _orders = JsonConvert.DeserializeObject<IEnumerable<OrderDto>>(ordersJson).ConvertToKrieptoBodModel();
             _trades = JsonConvert.DeserializeObject<IEnumerable<TradeDto>>(tradesJson).ConvertToKrieptoBodModel();
+            var deserializedCandles = JsonConvert.DeserializeObject(candlesJson) as Newtonsoft.Json.Linq.JArray;
+            _candles = deserializedCandles?.Select(x =>
+                new CandleDto
+                {
+                    TimeStamp = DateTime.UnixEpoch.AddMilliseconds(x.Value<long>(0)),
+                    Open = x.Value<decimal>(1),
+                    High = x.Value<decimal>(2),
+                    Low = x.Value<decimal>(3),
+                    Close = x.Value<decimal>(4),
+                    Volume = x.Value<decimal>(5),
+                }).ConvertToKrieptoBodModel();
         }
 
         public async Task<IEnumerable<Balance>> GetBalanceAsync()
@@ -107,7 +117,12 @@ namespace KrieptoBod.Tests.Mocks.Bitvavo
                     .Take(limit));
         }
 
-        public async Task<Order> GetOpenOrderAsync(string market = "")
+        public async Task<Order> GetOpenOrderAsync()
+        {
+            return await GetOpenOrderAsync("");
+        }
+
+        public async Task<Order> GetOpenOrderAsync(string market)
         {
             return await Task.FromResult(_orders.First(x => x.Market == market));
         }

@@ -18,17 +18,17 @@ namespace KrieptoBod.Tests.Application.Recommendators
             _recommendatorSell150 = new Mock<IRecommendator>();
             _recommendatorSell150
                 .Setup(x => x.GetRecommendation(It.IsAny<string>()))
-                .Returns(Task.FromResult(new RecommendatorScore() { Score = -150F }));
+                .Returns(Task.FromResult(new RecommendatorScore { Score = -150F }));
 
             _recommendatorSell70 = new Mock<IRecommendator>();
             _recommendatorSell70
                 .Setup(x => x.GetRecommendation(It.IsAny<string>()))
-                .Returns(Task.FromResult(new RecommendatorScore() { Score = -70F }));
+                .Returns(Task.FromResult(new RecommendatorScore { Score = -70F }));
 
             _recommendatorBuy100 = new Mock<IRecommendator>();
             _recommendatorBuy100
                 .Setup(x => x.GetRecommendation(It.IsAny<string>()))
-                .Returns(Task.FromResult(new RecommendatorScore() { Score = 100F }));
+                .Returns(Task.FromResult(new RecommendatorScore { Score = 100F }));
 
         }
 
