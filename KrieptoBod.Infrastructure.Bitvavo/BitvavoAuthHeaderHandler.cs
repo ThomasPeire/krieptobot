@@ -22,7 +22,7 @@ namespace KrieptoBod.Infrastructure.Bitvavo
 
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            var url = request.RequestUri.AbsolutePath;
+            var url = request.RequestUri.AbsolutePath + request.RequestUri.Query;
             var timeStamp = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
             const string httpMethod = "GET";
             const string body = "";
