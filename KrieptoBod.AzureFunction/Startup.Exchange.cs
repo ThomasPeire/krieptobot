@@ -4,10 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Refit;
 using System;
-using System.Globalization;
 using System.Net.Http.Headers;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace KrieptoBod.AzureFunction
 {
@@ -21,25 +18,7 @@ namespace KrieptoBod.AzureFunction
             services.AddSingleton(bitvavoApiConfig);
 
             services.AddScoped<IExchangeService, ExchangeService>();
-            //services.AddHttpClient<BitvavoClient>();
-
-            services.AddRefitClient<IBitvavoApi>()
-                .ConfigureHttpClient(x =>
-                {
-                    var timeStamp = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
-                    const string httpMethod = "GET";
-                    const string body = "";
-
-                    var toHash = timeStamp + httpMethod + bitvavoApiConfig.BaseUrl + body;
-                    var signature = GenerateHeaderSignature(toHash, bitvavoApiConfig.ApiSecret);
-
-                    x.BaseAddress = new Uri(bitvavoApiConfig.BaseUrl);
-                    x.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    x.DefaultRequestHeaders.Add("Bitvavo-Access-Key", bitvavoApiConfig.ApiKey);
-                    x.DefaultRequestHeaders.Add("Bitvavo-Access-Window", "20000");
-                    x.DefaultRequestHeaders.Add("Bitvavo-Access-Timestamp", timeStamp);
-                    x.DefaultRequestHeaders.Add("Bitvavo-Access-Signature", signature);
-                });
+            services.AddHttpClient<BitvavoClient>();
 
             var settings = new RefitSettings(new NewtonsoftJsonContentSerializer());
             services.AddTransient<BitvavoAuthHeaderHandler>();
@@ -52,21 +31,6 @@ namespace KrieptoBod.AzureFunction
                 .AddHttpMessageHandler<BitvavoAuthHeaderHandler>();
 
             return services;
-        }
-
-        private static string GenerateHeaderSignature(string toHash, string apiSecret)
-        {
-            var encoding = new UTF8Encoding();
-
-            var textBytes = encoding.GetBytes(toHash);
-            var keyBytes = encoding.GetBytes(apiSecret);
-
-            byte[] hashBytes;
-
-            using (var hash = new HMACSHA256(keyBytes))
-                hashBytes = hash.ComputeHash(textBytes);
-
-            return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
         }
     }
 }
