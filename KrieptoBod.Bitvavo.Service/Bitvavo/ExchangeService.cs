@@ -15,10 +15,12 @@ namespace KrieptoBod.Exchange.Bitvavo
     public class ExchangeService : IExchangeService
     {
         private readonly BitvavoClient _client;
+        private readonly IBitvavoApi _bitvavoApi;
 
-        public ExchangeService(BitvavoClient client)
+        public ExchangeService(BitvavoClient client, IBitvavoApi bitvavoApi)
         {
             _client = client;
+            _bitvavoApi = bitvavoApi;
         }
 
         public async Task<Asset> GetAssetAsync(string symbol)
@@ -41,6 +43,7 @@ namespace KrieptoBod.Exchange.Bitvavo
 
         public async Task<IEnumerable<Balance>> GetBalanceAsync()
         {
+            var test = await _bitvavoApi.GetBalanceAsync();
             var dtoEnumerable = await Deserialize<IEnumerable<BalanceDto>>(await _client.GetAsync("/v2/balance"));
 
             return dtoEnumerable.ConvertToKrieptoBodModel();

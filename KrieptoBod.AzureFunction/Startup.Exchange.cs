@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Refit;
 using System;
+using System.Globalization;
 using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
@@ -39,6 +40,16 @@ namespace KrieptoBod.AzureFunction
                     x.DefaultRequestHeaders.Add("Bitvavo-Access-Timestamp", timeStamp);
                     x.DefaultRequestHeaders.Add("Bitvavo-Access-Signature", signature);
                 });
+
+            var settings = new RefitSettings(new NewtonsoftJsonContentSerializer());
+            services.AddTransient<BitvavoAuthHeaderHandler>();
+            services.AddRefitClient<IBitvavoApi>(settings)
+                .ConfigureHttpClient(x =>
+                {
+                    x.BaseAddress = new Uri(bitvavoApiConfig.BaseUrl);
+                    x.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                })
+                .AddHttpMessageHandler<BitvavoAuthHeaderHandler>();
 
             return services;
         }

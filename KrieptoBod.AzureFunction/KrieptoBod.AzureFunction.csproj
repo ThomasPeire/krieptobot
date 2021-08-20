@@ -28,6 +28,7 @@
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.13" />
     <PackageReference Include="Refit" Version="6.0.94" />
     <PackageReference Include="Refit.HttpClientFactory" Version="6.0.94" />
+    <PackageReference Include="Refit.Newtonsoft.Json" Version="6.0.94" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KrieptoBod.Application\KrieptoBod.Application.csproj" />
