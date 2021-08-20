@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KrieptoBod.AzureFunction", "KrieptoBod.AzureFunction\KrieptoBod.AzureFunction.csproj", "{C2D66250-618B-4159-B660-9066A8E261A4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KrieptoBod.Exchange", "KrieptoBod.Bitvavo.Service\KrieptoBod.Exchange.csproj", "{D4B1AE2F-B140-4378-9AF7-D992243D6038}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KrieptoBod.Infrastructure.Bitvavo", "KrieptoBod.Bitvavo.Service\KrieptoBod.Infrastructure.Bitvavo.csproj", "{D4B1AE2F-B140-4378-9AF7-D992243D6038}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KrieptoBod.Model", "KrieptoBod.Model\KrieptoBod.Model.csproj", "{E0CBAA45-A540-4201-95AC-38A5B7FD9ABF}"
 EndProject

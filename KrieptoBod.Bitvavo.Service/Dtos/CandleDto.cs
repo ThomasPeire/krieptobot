@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KrieptoBod.Exchange.Bitvavo.Model
+namespace KrieptoBod.Infrastructure.Bitvavo.Dtos
 {
     public class CandleDto
     {

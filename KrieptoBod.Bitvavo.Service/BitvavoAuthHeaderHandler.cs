@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace KrieptoBod.Exchange.Bitvavo
+namespace KrieptoBod.Infrastructure.Bitvavo
 {
     public class BitvavoAuthHeaderHandler : DelegatingHandler
     {

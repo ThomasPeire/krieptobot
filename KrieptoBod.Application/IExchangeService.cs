@@ -3,13 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace KrieptoBod.Infrastructure.Exchange
+namespace KrieptoBod.Application
 {
     public interface IExchangeService
     {
         Task<IEnumerable<Balance>> GetBalanceAsync();
-        Task<IEnumerable<Candle>> GetCandlesAsync(string market, string interval = "5m", int limit = 1000,
-            DateTime? start = null, DateTime? end = null);
+        Task<IEnumerable<Candle>> GetCandlesAsync(string market, string interval = "5m", int limit = 1000, DateTime? start = null, DateTime? end = null);
         Task<IEnumerable<Market>> GetMarketsAsync();
         Task<Market> GetMarketAsync(string market);
         Task<IEnumerable<Asset>> GetAssetsAsync();

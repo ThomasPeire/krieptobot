@@ -1,4 +1,4 @@
-﻿using KrieptoBod.Exchange.Bitvavo.Model;
+﻿using KrieptoBod.Infrastructure.Bitvavo.Dtos;
 using Refit;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KrieptoBod.Exchange.Bitvavo
+namespace KrieptoBod.Infrastructure.Bitvavo
 {
     public interface IBitvavoApi
     {
@@ -26,7 +26,7 @@ namespace KrieptoBod.Exchange.Bitvavo
         Task<MarketDto> GetMarketAsync(string market);
 
         [Get("/v2/markets")]
-        Task<MarketDto> GetMarketsAsync();
+        Task<IEnumerable<MarketDto>> GetMarketsAsync();
 
         [Get("/v2/{market}/trades")]
         Task<IEnumerable<TradeDto>> GetTradesAsync(string market, int limit = 500, DateTime? start = null, DateTime? end = null, Guid? tradeIdFrom = null, Guid? tradeIdTo = null);

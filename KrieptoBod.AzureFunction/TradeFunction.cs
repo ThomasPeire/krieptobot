@@ -1,5 +1,4 @@
 using KrieptoBod.Application;
-using KrieptoBod.Exchange.Bitvavo;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;

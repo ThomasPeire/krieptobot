@@ -1,13 +1,13 @@
-﻿using KrieptoBod.Exchange.Bitvavo.Model;
+﻿using KrieptoBod.Infrastructure.Bitvavo.Dtos;
 using KrieptoBod.Model;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace KrieptoBod.Exchange.Bitvavo.Helpers
+namespace KrieptoBod.Infrastructure.Bitvavo.Extensions
 {
-    public static class Extensions
+    public static class Mappings
     {
         public static Asset ConvertToKrieptoBodModel(this AssetDto dto)
         {

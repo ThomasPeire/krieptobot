@@ -49,12 +49,12 @@
     <PackageReference Include="Moq" Version="4.16.1" />
     <PackageReference Include="NUnit" Version="3.13.2" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.0.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
     <PackageReference Include="Snapshooter.NUnit" Version="0.6.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KrieptoBod.Bitvavo.Service\KrieptoBod.Exchange.csproj" />
+    <ProjectReference Include="..\KrieptoBod.Bitvavo.Service\KrieptoBod.Infrastructure.Bitvavo.csproj" />
     <ProjectReference Include="..\KrieptoBod.Infrastructure\KrieptoBod.Infrastructure.csproj" />
   </ItemGroup>
 
