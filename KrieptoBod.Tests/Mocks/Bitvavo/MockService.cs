@@ -63,7 +63,7 @@ namespace KrieptoBod.Tests.Mocks.Bitvavo
                 _candles
                     .Where(x =>
                         (x.TimeStamp >= start || start == null) &&
-                        x.TimeStamp < end || end == null)
+                        (x.TimeStamp < end || end == null))
                     .Take(limit));
         }
 
