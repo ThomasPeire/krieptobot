@@ -26,12 +26,8 @@ namespace KrieptoBod.Exchange.Bitvavo
             var queryString =
                 new QueryString()
                     .Add("symbol", symbol);
-
-<<<<<<< Updated upstream
-            var assetDto = await Deserialize<AssetDto>(await _client.GetAsync($"/v2/assets{queryString.ToUriComponent()}")).ConfigureAwait(false);
-=======
+            
             var assetDto = await Deserialize<AssetDto>(await _client.GetAsync($"/v2/assets{queryString.ToUriComponent()}"));
->>>>>>> Stashed changes
 
             return assetDto.ConvertToKrieptoBodModel();
         }
