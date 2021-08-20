@@ -1,13 +1,11 @@
-﻿using KrieptoBod.Application;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using KrieptoBod.Application;
 using KrieptoBod.Infrastructure.Bitvavo.Extensions;
 using KrieptoBod.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace KrieptoBod.Infrastructure.Bitvavo
+namespace KrieptoBod.Infrastructure.Bitvavo.Services
 {
     public class BitvavoService : IExchangeService
     {

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using KrieptoBod.Infrastructure.Bitvavo.Services;
 
 namespace KrieptoBod.Infrastructure.Bitvavo.Extensions.Microsoft.DependencyInjection
 {
