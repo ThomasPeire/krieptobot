@@ -9,16 +9,16 @@ namespace KrieptoBod.Application.Recommendators
     {
         public override float Weight => 0.7F;
 
-        private readonly IRepository _repository;
+        private readonly IExchangeService _exchangeService;
 
-        public RecommendatorRsi(IRepository repository)
+        public RecommendatorRsi(IExchangeService exchangeService)
         {
-            _repository = repository;
+            _exchangeService = exchangeService;
         }
 
         protected override async Task<RecommendatorScore> CalculateRecommendation(string market)
         {
-            var candles = await _repository.GetCandlesAsync(market);
+            var candles = await _exchangeService.GetCandlesAsync(market);
             var closesArray = candles.Select(candle => (double)candle.Close).ToArray();
             
             var outArray = new double[closesArray.Count()];
