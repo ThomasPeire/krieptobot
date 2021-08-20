@@ -54,7 +54,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KrieptoBod.Bitvavo.Service\KrieptoBod.Infrastructure.Bitvavo.csproj" />
+    <ProjectReference Include="..\KrieptoBod.Infrastructure.Bitvavo\KrieptoBod.Infrastructure.Bitvavo.csproj" />
     <ProjectReference Include="..\KrieptoBod.Infrastructure\KrieptoBod.Infrastructure.csproj" />
   </ItemGroup>
 
