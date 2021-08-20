@@ -10,12 +10,12 @@ namespace KrieptoBod.Application
     public class Trader : ITrader
     {
 
-        private readonly IRepository _repository;
+        private readonly IExchangeService _exchangeService;
         private readonly IRecommendationCalculator _recommendationCalculator;
 
-        public Trader(IRepository repository, IRecommendationCalculator recommendationCalculator)
+        public Trader(IExchangeService exchangeService, IRecommendationCalculator recommendationCalculator)
         {
-            _repository = repository;
+            _exchangeService = exchangeService;
             _recommendationCalculator = recommendationCalculator;
         }
 
@@ -116,7 +116,7 @@ namespace KrieptoBod.Application
 
         private async Task<IEnumerable<string>> GetCoinsToEvaluate()
         {
-            var balances = await _repository.GetBalanceAsync();
+            var balances = await _exchangeService.GetBalanceAsync();
 
             var coinsToWatch = new List<string> { "CHZ", "BTC", "ADA" };//todo app settings
 

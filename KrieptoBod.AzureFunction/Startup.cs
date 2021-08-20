@@ -15,7 +15,7 @@ namespace KrieptoBod.AzureFunction
         {
             var config = new ConfigurationBuilder()
                 .SetBasePath(Environment.CurrentDirectory)
-                .AddJsonFile("appsettings.json", true)
+                .AddJsonFile("appsettings.json", true, true)
                 .AddUserSecrets(Assembly.GetExecutingAssembly(), true)
                 .AddEnvironmentVariables()
                 .Build();

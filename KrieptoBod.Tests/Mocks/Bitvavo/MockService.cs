@@ -1,7 +1,6 @@
 ﻿using KrieptoBod.Application;
 using KrieptoBod.Infrastructure.Bitvavo.Dtos;
 using KrieptoBod.Infrastructure.Bitvavo.Extensions;
-using KrieptoBod.Infrastructure.Exchange;
 using KrieptoBod.Model;
 using Newtonsoft.Json;
 using System;
