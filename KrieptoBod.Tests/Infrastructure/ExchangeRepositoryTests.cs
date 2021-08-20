@@ -31,7 +31,7 @@ namespace KrieptoBod.Tests.Infrastructure
         [Test]
         public async Task GetCandles_ShouldReturn_Candles()
         {
-            var result = await _exchangeRepository.GetCandlesAsync("");
+            var result = await _exchangeRepository.GetCandlesAsync("BTC-EUR");
 
             result.Should().MatchSnapshot();
         }

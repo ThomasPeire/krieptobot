@@ -33,8 +33,13 @@ namespace KrieptoBod.Tests.Mocks.Bitvavo
             _markets = JsonConvert.DeserializeObject<IEnumerable<MarketDto>>(marketsJson).ConvertToKrieptoBodModel();
             _orders = JsonConvert.DeserializeObject<IEnumerable<OrderDto>>(ordersJson).ConvertToKrieptoBodModel();
             _trades = JsonConvert.DeserializeObject<IEnumerable<TradeDto>>(tradesJson).ConvertToKrieptoBodModel();
+            _candles = DeserializeCandles(candlesJson).ConvertToKrieptoBodModel();
+        }
+
+        private IEnumerable<CandleDto> DeserializeCandles(string candlesJson)
+        {
             var deserializedCandles = JsonConvert.DeserializeObject(candlesJson) as Newtonsoft.Json.Linq.JArray;
-            _candles = deserializedCandles?.Select(x =>
+            return deserializedCandles?.Select(x =>
                 new CandleDto
                 {
                     TimeStamp = DateTime.UnixEpoch.AddMilliseconds(x.Value<long>(0)),
@@ -43,7 +48,7 @@ namespace KrieptoBod.Tests.Mocks.Bitvavo
                     Low = x.Value<decimal>(3),
                     Close = x.Value<decimal>(4),
                     Volume = x.Value<decimal>(5),
-                }).ConvertToKrieptoBodModel();
+                });
         }
 
         public async Task<IEnumerable<Balance>> GetBalanceAsync()
@@ -57,8 +62,8 @@ namespace KrieptoBod.Tests.Mocks.Bitvavo
             return await Task.FromResult(
                 _candles
                     .Where(x =>
-                        x.TimeStamp >= start &&
-                        x.TimeStamp < end)
+                        (x.TimeStamp >= start || start == null) &&
+                        (x.TimeStamp < end || end == null))
                     .Take(limit));
         }
 
@@ -88,8 +93,8 @@ namespace KrieptoBod.Tests.Mocks.Bitvavo
             return await Task.FromResult(
                 _trades
                     .Where(x =>
-                        x.Timestamp >= start &&
-                        x.Timestamp < end &&
+                        (x.Timestamp >= start || start == null) &&
+                        (x.Timestamp < end || end == null) &&
                         string.CompareOrdinal(x.Id, tradeIdFrom.ToString()) >= 0 &&
                         string.CompareOrdinal(x.Id, tradeIdFrom.ToString()) < 0)
                     .Take(limit));
@@ -110,8 +115,8 @@ namespace KrieptoBod.Tests.Mocks.Bitvavo
                 _orders
                     .Where(x =>
                         x.Market == market &&
-                        x.Created >= start &&
-                        x.Created < end &&
+                        (x.Created >= start || start == null) &&
+                        (x.Created < end || end == null) &&
                         string.CompareOrdinal(x.OrderId, orderIdFrom.ToString()) >= 0 &&
                         string.CompareOrdinal(x.OrderId, orderIdTo.ToString()) < 0)
                     .Take(limit));
