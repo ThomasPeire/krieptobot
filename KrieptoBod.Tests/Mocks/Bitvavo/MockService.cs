@@ -40,7 +40,7 @@ namespace KrieptoBod.Tests.Mocks.Bitvavo
         {
             var deserializedCandles = JsonConvert.DeserializeObject(candlesJson) as Newtonsoft.Json.Linq.JArray;
             return deserializedCandles?.Select(x =>
-                new CandleDto()
+                new CandleDto
                 {
                     TimeStamp = DateTime.UnixEpoch.AddMilliseconds(x.Value<long>(0)),
                     Open = x.Value<decimal>(1),
@@ -122,7 +122,12 @@ namespace KrieptoBod.Tests.Mocks.Bitvavo
                     .Take(limit));
         }
 
-        public async Task<Order> GetOpenOrderAsync(string market = "")
+        public async Task<Order> GetOpenOrderAsync()
+        {
+            return await GetOpenOrderAsync("");
+        }
+
+        public async Task<Order> GetOpenOrderAsync(string market)
         {
             return await Task.FromResult(_orders.First(x => x.Market == market));
         }

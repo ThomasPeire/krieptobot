@@ -11,7 +11,7 @@ namespace KrieptoBod.Exchange.Bitvavo.Helpers
     {
         public static Asset ConvertToKrieptoBodModel(this AssetDto dto)
         {
-            return new Asset()
+            return new Asset
             {
                 Symbol = dto.Symbol,
                 Name = dto.Name,
@@ -29,7 +29,7 @@ namespace KrieptoBod.Exchange.Bitvavo.Helpers
 
         public static Balance ConvertToKrieptoBodModel(this BalanceDto dto)
         {
-            return new Balance()
+            return new Balance
             {
                 Symbol = dto.Symbol,
                 Available = decimal.Parse(dto.Available ?? "0", CultureInfo.InvariantCulture),
@@ -39,7 +39,7 @@ namespace KrieptoBod.Exchange.Bitvavo.Helpers
 
         public static Candle ConvertToKrieptoBodModel(this CandleDto dto)
         {
-            return new Candle()
+            return new Candle
             {
                 TimeStamp = dto.TimeStamp,
                 High = dto.High,
@@ -52,7 +52,7 @@ namespace KrieptoBod.Exchange.Bitvavo.Helpers
 
         public static Market ConvertToKrieptoBodModel(this MarketDto dto)
         {
-            return new Market()
+            return new Market
             {
                 MarketName = dto.MarketName,
                 Status = dto.Status,
@@ -67,7 +67,7 @@ namespace KrieptoBod.Exchange.Bitvavo.Helpers
 
         public static Order ConvertToKrieptoBodModel(this OrderDto dto)
         {
-            return new Order()
+            return new Order
             {
                 OrderId = dto.OrderId,
                 Market = dto.Market,
@@ -102,7 +102,7 @@ namespace KrieptoBod.Exchange.Bitvavo.Helpers
 
         public static Fill ConvertToKrieptoBodModel(this FillDto dto)
         {
-            return new Fill()
+            return new Fill
             {
                 Id = dto.Id,
                 Timestamp = new DateTime(dto.Timestamp),
@@ -117,7 +117,7 @@ namespace KrieptoBod.Exchange.Bitvavo.Helpers
 
         public static Trade ConvertToKrieptoBodModel(this TradeDto dto)
         {
-            return new Trade()
+            return new Trade
             {
                 Timestamp = new DateTime(dto.Timestamp),
                 Id = dto.Id,
