@@ -15,13 +15,12 @@ namespace KrieptoBod.AzureFunction
 
         public static IServiceCollection AddBitvavoService(this IServiceCollection services, IConfiguration config)
         {
-            var bitvavoApiConfig = new BitvavoConfig();
-            config.GetSection("Secrets:BitvavoConfig").Bind(bitvavoApiConfig);
+            var bitvavoApiConfig = config.GetSection("Secrets:BitvavoConfig").Get<BitvavoConfig>();
 
             services.AddSingleton(bitvavoApiConfig);
 
             services.AddScoped<IExchangeService, ExchangeService>();
-            services.AddHttpClient<BitvavoClient>();
+            //services.AddHttpClient<BitvavoClient>();
 
             services.AddRefitClient<IBitvavoApi>()
                 .ConfigureHttpClient(x =>
