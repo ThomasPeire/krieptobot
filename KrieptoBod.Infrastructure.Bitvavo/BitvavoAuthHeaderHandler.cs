@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -14,9 +15,9 @@ namespace KrieptoBod.Infrastructure.Bitvavo
     {
         private readonly BitvavoConfig _bitvavoConfig;
 
-        public BitvavoAuthHeaderHandler(BitvavoConfig bitvavoConfig)
+        public BitvavoAuthHeaderHandler(IOptions<BitvavoConfig> bitvavoConfigOptions)
         {
-            _bitvavoConfig = bitvavoConfig;
+            _bitvavoConfig = bitvavoConfigOptions.Value;
         }
 
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)

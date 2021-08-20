@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using KrieptoBod.Application;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Refit;
@@ -19,6 +20,7 @@ namespace KrieptoBod.Infrastructure.Bitvavo.Extensions.Microsoft.DependencyInjec
 
             services.AddTransient<BitvavoAuthHeaderHandler>();
 
+            services.AddScoped<IExchangeService, BitvavoService>();
             services.AddRefitClient<IBitvavoApi>(new RefitSettings(new NewtonsoftJsonContentSerializer()))
                 .ConfigureHttpClient((serviceProvider, configureClient) =>
                 {
