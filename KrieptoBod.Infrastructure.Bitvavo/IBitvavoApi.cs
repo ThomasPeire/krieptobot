@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace KrieptoBod.Infrastructure.Bitvavo
 {
@@ -20,8 +22,8 @@ namespace KrieptoBod.Infrastructure.Bitvavo
         Task<IEnumerable<BalanceDto>> GetBalanceAsync();
 
         [Get("/v2/{market}/candles")]
-        Task<IEnumerable<CandleDto>> GetCandlesAsync(string market, string interval = "5m", int limit = 1000, DateTime? start = null, DateTime? end = null);
-
+        Task<IEnumerable<JArray>> GetCandlesAsync(string market, string interval = "5m", int limit = 1000, DateTime? start = null, DateTime? end = null);
+        
         [Get("/v2/markets")]
         Task<MarketDto> GetMarketAsync(string market);
 

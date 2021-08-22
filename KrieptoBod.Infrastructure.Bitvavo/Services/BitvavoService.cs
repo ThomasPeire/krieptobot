@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using KrieptoBod.Application;
+using KrieptoBod.Infrastructure.Bitvavo.Dtos;
 using KrieptoBod.Infrastructure.Bitvavo.Extensions;
 using KrieptoBod.Model;
+using Newtonsoft.Json;
 
 namespace KrieptoBod.Infrastructure.Bitvavo.Services
 {
@@ -39,9 +42,18 @@ namespace KrieptoBod.Infrastructure.Bitvavo.Services
 
         public async Task<IEnumerable<Candle>> GetCandlesAsync(string market, string interval = "5m", int limit = 1000, DateTime? start = null, DateTime? end = null)
         {
-            var dtos = await _bitvavoApi.GetCandlesAsync(market, interval, limit, start, end);
-
-            return dtos.ConvertToKrieptoBodModel();
+            var candleJArrayList = await _bitvavoApi.GetCandlesAsync(market, interval, limit, start, end);
+            
+            return candleJArrayList?.Select(x =>
+                new CandleDto
+                {
+                    TimeStamp = DateTime.UnixEpoch.AddMilliseconds(x.Value<long>(0)),
+                    Open = x.Value<decimal>(1),
+                    High = x.Value<decimal>(2),
+                    Low = x.Value<decimal>(3),
+                    Close = x.Value<decimal>(4),
+                    Volume = x.Value<decimal>(5),
+                }).ConvertToKrieptoBodModel();
         }
 
         public async Task<Market> GetMarketAsync(string market)
