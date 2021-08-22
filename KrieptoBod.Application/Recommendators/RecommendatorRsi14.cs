@@ -1,15 +1,14 @@
-﻿using System;
+﻿using KrieptoBod.Model;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using KrieptoBod.Model;
 
 namespace KrieptoBod.Application.Recommendators
 {
     public class RecommendatorRsi14 : RecommendatorBase
     {
-        public override float Weight => 0.7F;
+        public override float Weight => 1F;
 
         private readonly IExchangeService _exchangeService;
 
@@ -27,8 +26,22 @@ namespace KrieptoBod.Application.Recommendators
             var avgUpsAndAvgDowns = CalculateSimpleRSI(upsAndDownMoves);
 
             var rsiValues = CalculateRSI(avgUpsAndAvgDowns);
-            
-            return new RecommendatorScore { Score = .0F };
+
+            var currentRsiValue = rsiValues.OrderBy(x => x.Key).Last();
+
+            return EvaluateRsiValue(currentRsiValue.Value);
+        }
+
+        private RecommendatorScore EvaluateRsiValue(decimal rsiValue)
+        {
+            var rsiRecommendation = rsiValue switch
+            {
+                >= 70 => new RecommendatorScore() { Score = (float)(rsiValue - 70) },
+                <= 30 => new RecommendatorScore() { Score = (float)(rsiValue - 30) },
+                _ => new RecommendatorScore() { Score = 0F }
+            };
+
+            return rsiRecommendation / 30;
         }
 
         private Dictionary<DateTime, decimal> CalculateRSI(Dictionary<DateTime, (decimal avgsUp, decimal avgsDown)> avgUpsAndAvgDowns)
@@ -39,9 +52,6 @@ namespace KrieptoBod.Application.Recommendators
 
         private Dictionary<DateTime, (decimal avgsUp, decimal avgsDown)> CalculateSimpleRSI(Dictionary<DateTime, (decimal ups, decimal downs)> upsAndDownMoves)
         {
-            var avgDowns = new List<decimal>();
-            var avgUps = new List<decimal>();
-
             var movingAverages = new Dictionary<DateTime, (decimal, decimal)>();
             var upsAndDownMovesArray = upsAndDownMoves.OrderBy(x => x.Key).ToArray();
 
