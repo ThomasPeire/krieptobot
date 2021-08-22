@@ -20,7 +20,7 @@ namespace KrieptoBod.Tests.Application.Recommendators
         [Test]
         public async Task RecommendationRsi_ShouldReturn_ScoreOfZeroForNow()
         {
-            var recommendator = new RecommendatorRsi(_exchangeServiceMock.Object);
+            var recommendator = new RecommendatorRsi14(_exchangeServiceMock.Object);
 
             var result = await recommendator.GetRecommendation("btc-eur");
 

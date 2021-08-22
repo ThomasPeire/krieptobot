@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace KrieptoBod.Tests.Mocks.Bitvavo
 {
@@ -15,7 +16,7 @@ namespace KrieptoBod.Tests.Mocks.Bitvavo
     {
         private IEnumerable<AssetDto> _assets;
         private IEnumerable<BalanceDto> _balances;
-        private IEnumerable<CandleDto> _candles;
+        private IEnumerable<JArray> _candles;
         private IEnumerable<MarketDto> _markets;
         private IEnumerable<OrderDto> _orders;
         private IEnumerable<TradeDto> _trades;
@@ -31,20 +32,10 @@ namespace KrieptoBod.Tests.Mocks.Bitvavo
 
             _assets = JsonConvert.DeserializeObject<IEnumerable<AssetDto>>(assetsJson);
             _balances = JsonConvert.DeserializeObject<IEnumerable<BalanceDto>>(balancesJson);
+            _candles = JsonConvert.DeserializeObject<IEnumerable<JArray>>(candlesJson);
             _markets = JsonConvert.DeserializeObject<IEnumerable<MarketDto>>(marketsJson);
             _orders = JsonConvert.DeserializeObject<IEnumerable<OrderDto>>(ordersJson);
             _trades = JsonConvert.DeserializeObject<IEnumerable<TradeDto>>(tradesJson);
-            var deserializedCandles = JsonConvert.DeserializeObject(candlesJson) as Newtonsoft.Json.Linq.JArray;
-            _candles = deserializedCandles?.Select(x =>
-                new CandleDto
-                {
-                    TimeStamp = DateTime.UnixEpoch.AddMilliseconds(x.Value<long>(0)),
-                    Open = x.Value<decimal>(1),
-                    High = x.Value<decimal>(2),
-                    Low = x.Value<decimal>(3),
-                    Close = x.Value<decimal>(4),
-                    Volume = x.Value<decimal>(5),
-                });
         }
 
         public async Task<IEnumerable<BalanceDto>> GetBalanceAsync()
@@ -52,15 +43,10 @@ namespace KrieptoBod.Tests.Mocks.Bitvavo
             return await Task.FromResult(_balances);
         }
 
-        public async Task<IEnumerable<CandleDto>> GetCandlesAsync(string market, string interval = "5m", int limit = 1000, DateTime? start = null,
+        public async Task<IEnumerable<JArray>> GetCandlesAsync(string market, string interval = "5m", int limit = 1000, DateTime? start = null,
             DateTime? end = null)
         {
-            return await Task.FromResult(
-                _candles
-                    .Where(x =>
-                        x.TimeStamp >= start &&
-                        x.TimeStamp < end)
-                    .Take(limit));
+            return _candles;
         }
 
         public async Task<IEnumerable<MarketDto>> GetMarketsAsync()

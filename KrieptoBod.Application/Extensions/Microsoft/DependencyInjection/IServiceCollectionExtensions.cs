@@ -16,7 +16,7 @@ namespace KrieptoBod.Application.Extensions.Microsoft.DependencyInjection
         {
             services.AddScoped<ITrader, Trader>();
 
-            services.AddScoped<IRecommendator, RecommendatorRsi>();
+            services.AddScoped<IRecommendator, RecommendatorRsi14>();
             services.AddScoped<IRecommendator, RecommendatorSupport>();
 
             services.AddScoped<IRecommendationCalculator, RecommendationCalculator>();
