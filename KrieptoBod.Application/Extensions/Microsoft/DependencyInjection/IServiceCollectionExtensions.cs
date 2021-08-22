@@ -1,13 +1,18 @@
 ﻿using KrieptoBod.Application;
 using KrieptoBod.Application.Recommendators;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace KrieptoBod.ConsoleLauncher
+namespace KrieptoBod.Application.Extensions.Microsoft.DependencyInjection
 {
-    public static class ApplicationServiceCollectionExtension
+    public static class IServiceCollectionExtensions
     {
-        public static IServiceCollection AddApplicationStartup(this IServiceCollection services, IConfiguration config)
+        public static void AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<ITrader, Trader>();
 
@@ -15,8 +20,6 @@ namespace KrieptoBod.ConsoleLauncher
             services.AddScoped<IRecommendator, RecommendatorSupport>();
 
             services.AddScoped<IRecommendationCalculator, RecommendationCalculator>();
-
-            return services;
         }
     }
 }

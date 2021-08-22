@@ -1,4 +1,5 @@
-﻿using KrieptoBod.Infrastructure.Bitvavo.Extensions.Microsoft.DependencyInjection;
+﻿using KrieptoBod.Application.Extensions.Microsoft.DependencyInjection;
+using KrieptoBod.Infrastructure.Bitvavo.Extensions.Microsoft.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,8 +16,7 @@ namespace KrieptoBod.ConsoleLauncher
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddApplicationStartup(Configuration);
-
+            services.AddApplicationServices();
             services.AddBitvavoService(Configuration);
         }
     }

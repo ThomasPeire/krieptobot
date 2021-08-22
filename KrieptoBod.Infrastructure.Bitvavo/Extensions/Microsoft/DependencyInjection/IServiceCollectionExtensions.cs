@@ -15,7 +15,7 @@ namespace KrieptoBod.Infrastructure.Bitvavo.Extensions.Microsoft.DependencyInjec
 {
     public static class IServiceCollectionExtensions
     {
-        public static IServiceCollection AddBitvavoService(this IServiceCollection services, IConfiguration configuration)
+        public static void AddBitvavoService(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<BitvavoConfig>(configuration.GetSection("Secrets:BitvavoConfig"));
 
@@ -32,8 +32,6 @@ namespace KrieptoBod.Infrastructure.Bitvavo.Extensions.Microsoft.DependencyInjec
                     configureClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 })
                 .AddHttpMessageHandler<BitvavoAuthHeaderHandler>();
-
-            return services;
         }
     }
 }
