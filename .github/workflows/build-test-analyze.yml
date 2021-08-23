@@ -10,16 +10,13 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet-version: [ '3.1.x', '5.0.x' ]
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup ${{ matrix.dotnet-version }}
+    - name: Setup .NET 5
       uses: actions/setup-dotnet@v1.7.2
       with:
-        dotnet-version: ${{ matrix.dotnet-version }}
+        dotnet-version: 5.0.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
