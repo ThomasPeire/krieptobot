@@ -2,7 +2,6 @@ name: Build, Test, Analyze
 
 on:
   push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -27,24 +26,5 @@ jobs:
     - name: codecov
       uses: codecov/codecov-action@v2
       with:
-        flags: unittests # optional
-        name: codecov-umbrella # optional
         fail_ci_if_error: true # optional (default = false)
         verbose: true # optional (default = false)
-        
-    - name: Run Codacy Analysis CLI
-      uses: codacy/codacy-analysis-cli-action@master
-      with:
-          output: results.sarif
-          format: sarif
-          # Adjust severity of non-security issues
-          gh-code-scanning-compat: true
-          # Force 0 exit code to allow SARIF file generation
-          # This will handover control about PR rejection to the GitHub side
-          max-allowed-issues: 0
-      
-      # Upload the SARIF file generated in the previous step
-    - name: Upload SARIF results file
-      uses: github/codeql-action/upload-sarif@main
-      with:
-          sarif_file: results.sarif

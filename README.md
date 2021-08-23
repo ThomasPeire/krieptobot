@@ -2,4 +2,4 @@
 
 Bot to automate crypto trading
 
-[![codecov](https://codecov.io/gh/ThomasPeire/krieptobot/branch/main/graph/badge.svg?token=1ZHWTJ0K83)](https://codecov.io/gh/ThomasPeire/krieptobot) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/2bd564798c054f9ab7781e2e6c315cba)](https://www.codacy.com/gh/ThomasPeire/krieptobot/dashboard?utm_source=github.com&utm_medium=referral&utm_content=ThomasPeire/krieptobot&utm_campaign=Badge_Grade)
+[![codecov](https://codecov.io/gh/ThomasPeire/krieptobot/branch/main/graph/badge.svg?token=1ZHWTJ0K83)](https://codecov.io/gh/ThomasPeire/krieptobot) [![CodeFactor](https://www.codefactor.io/repository/github/thomaspeire/krieptobot/badge)](https://www.codefactor.io/repository/github/thomaspeire/krieptobot)
