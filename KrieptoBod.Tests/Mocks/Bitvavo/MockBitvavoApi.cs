@@ -46,7 +46,7 @@ namespace KrieptoBod.Tests.Mocks.Bitvavo
         public async Task<IEnumerable<JArray>> GetCandlesAsync(string market, string interval = "5m", int limit = 1000, DateTime? start = null,
             DateTime? end = null)
         {
-            return _candles;
+            return await Task.FromResult(_candles) ;
         }
 
         public async Task<IEnumerable<MarketDto>> GetMarketsAsync()
