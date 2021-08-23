@@ -2,6 +2,7 @@ name: Build, Test, Analyze
 
 on:
   push:
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
