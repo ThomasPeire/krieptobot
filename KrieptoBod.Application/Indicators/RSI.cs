@@ -5,15 +5,8 @@ using System.Linq;
 
 namespace KrieptoBod.Application.Indicators
 {
-    class Rsi
+    static class Rsi
     {
-        private readonly IExchangeService _exchangeService;
-
-        public Rsi(IExchangeService exchangeService)
-        {
-            _exchangeService = exchangeService;
-        }
-
         public static Dictionary<DateTime, decimal> Calculate(IEnumerable<Candle> candles, int avgPeriod)
         {
             var upsAndDownMoves = CalculateUpAndDownMoves(candles);
