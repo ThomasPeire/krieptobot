@@ -27,7 +27,7 @@ namespace KrieptoBod.Application.Indicators
 
         private static Dictionary<DateTime, (decimal avgsUp, decimal avgsDown)> CalculateSimpleRSI(Dictionary<DateTime, (decimal ups, decimal downs)> upsAndDownMoves, int avgPeriod)
         {
-            var movingAverages = new Dictionary<DateTime, (decimal, decimal)>();
+            var movingAverages = new Dictionary<DateTime, (decimal avgUps, decimal avgDowns)>();
             var upsAndDownMovesArray = upsAndDownMoves.OrderBy(x => x.Key).ToArray();
 
             // start with i=avgPeriod since we need the previous avgPeriod values to calculate
@@ -46,7 +46,7 @@ namespace KrieptoBod.Application.Indicators
 
         private static Dictionary<DateTime, (decimal ups, decimal downs)> CalculateUpAndDownMoves(IEnumerable<Candle> candles)
         {
-            var upsAndDowns = new Dictionary<DateTime, (decimal, decimal)>();
+            var upsAndDowns = new Dictionary<DateTime, (decimal ups, decimal downs)>();
 
             var candleArray = candles.OrderBy(candle => candle.TimeStamp).ToArray();
 
