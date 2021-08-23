@@ -1,4 +1,4 @@
-﻿namespace KrieptoBod.Exchange.Bitvavo
+﻿namespace KrieptoBod.Infrastructure.Bitvavo
 {
     public class BitvavoConfig
     {

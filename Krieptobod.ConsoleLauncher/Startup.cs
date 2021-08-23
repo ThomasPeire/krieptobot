@@ -2,10 +2,8 @@
 using KrieptoBod.Infrastructure.Bitvavo.Extensions.Microsoft.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Reflection;
 
-namespace KrieptoBod.AzureFunction
+namespace KrieptoBod.ConsoleLauncher
 {
     public class Startup
     {

@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KrieptoBod.AzureFunction", "KrieptoBod.AzureFunction\KrieptoBod.AzureFunction.csproj", "{C2D66250-618B-4159-B660-9066A8E261A4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KrieptoBod.Exchange", "KrieptoBod.Bitvavo.Service\KrieptoBod.Exchange.csproj", "{D4B1AE2F-B140-4378-9AF7-D992243D6038}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KrieptoBod.Infrastructure.Bitvavo", "KrieptoBod.Infrastructure.Bitvavo\KrieptoBod.Infrastructure.Bitvavo.csproj", "{D4B1AE2F-B140-4378-9AF7-D992243D6038}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KrieptoBod.Model", "KrieptoBod.Model\KrieptoBod.Model.csproj", "{E0CBAA45-A540-4201-95AC-38A5B7FD9ABF}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KrieptoBod.Infrastructure", "KrieptoBod.Infrastructure\KrieptoBod.Infrastructure.csproj", "{20E0C777-CAFD-4BE1-B928-C31F4DA26FB1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KrieptoBod.Tests", "KrieptoBod.Tests\KrieptoBod.Tests.csproj", "{932FC164-3F3B-414C-8609-E87D6AE530E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KrieptoBod.ConsoleLauncher", "Krieptobod.ConsoleLauncher\KrieptoBod.ConsoleLauncher.csproj", "{9A20F355-C392-453F-8DC9-5BAFE3674DA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{932FC164-3F3B-414C-8609-E87D6AE530E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{932FC164-3F3B-414C-8609-E87D6AE530E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{932FC164-3F3B-414C-8609-E87D6AE530E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A20F355-C392-453F-8DC9-5BAFE3674DA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A20F355-C392-453F-8DC9-5BAFE3674DA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A20F355-C392-453F-8DC9-5BAFE3674DA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A20F355-C392-453F-8DC9-5BAFE3674DA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

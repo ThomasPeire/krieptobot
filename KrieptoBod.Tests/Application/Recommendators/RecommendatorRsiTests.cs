@@ -9,18 +9,19 @@ namespace KrieptoBod.Tests.Application.Recommendators
 {
     public class RecommendatorRsiTests
     {
-        private Mock<IRepository> _repositoryMock;
+        private Mock<IExchangeService> _exchangeServiceMock;
 
         [SetUp]
         public void Setup()
         {
-            _repositoryMock = new Mock<IRepository>();
+            _exchangeServiceMock = new Mock<IExchangeService>();
         }
 
         [Test]
+        [Ignore("RSI recommendator is wip")]
         public async Task RecommendationRsi_ShouldReturn_ScoreOfZeroForNow()
         {
-            var recommendator = new RecommendatorRsi(_repositoryMock.Object);
+            var recommendator = new RecommendatorRsi14(_exchangeServiceMock.Object);
 
             var result = await recommendator.GetRecommendation("btc-eur");
 

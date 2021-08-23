@@ -12,7 +12,7 @@ namespace KrieptoBod.Tests.Application
     public class TraderTests
     {
         private Mock<IRecommendationCalculator> _recommendationCalculator;
-        private Mock<IRepository> _repository;
+        private Mock<IExchangeService> _exchangeServiceMock;
 
         [SetUp]
         public void Setup()
@@ -22,8 +22,8 @@ namespace KrieptoBod.Tests.Application
                 .Setup(x => x.CalculateRecommendation(It.IsAny<string>()))
                 .Returns(Task.FromResult(new RecommendatorScore { Score = -150F }));
 
-            _repository = new Mock<IRepository>();
-            _repository
+            _exchangeServiceMock = new Mock<IExchangeService>();
+            _exchangeServiceMock
                 .Setup(x => x.GetCandlesAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DateTime>(), It.IsAny<DateTime>()))
                 .Returns(Task.FromResult<IEnumerable<Candle>>(
                     new List<Candle>
@@ -39,7 +39,7 @@ namespace KrieptoBod.Tests.Application
         [Test]
         public async Task Trader_Should_Trade()
         {
-            var trader = new Trader(_repository.Object, _recommendationCalculator.Object);
+            var trader = new Trader(_exchangeServiceMock.Object, _recommendationCalculator.Object);
 
             await trader.Run(); 
 

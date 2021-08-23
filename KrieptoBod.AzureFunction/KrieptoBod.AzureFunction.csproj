@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <AzureFunctionsVersion>v3</AzureFunctionsVersion>
+    <OutputType>Exe</OutputType>
     <UserSecretsId>ece5d799-c787-4d4a-ba37-35a409af4142</UserSecretsId>
     <AssemblyName>KrieptoBod.AzureFunction</AssemblyName>
   </PropertyGroup>
@@ -20,16 +21,19 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="log4net" Version="2.0.12" />
-    <PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.17" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.17" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.18" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.17" />
-    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.13" />
+    <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.4.0" />
+    <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Timer" Version="4.1.0" />
+    <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
+    <PackageReference Include="Refit" Version="6.0.94" />
+    <PackageReference Include="Refit.Newtonsoft.Json" Version="6.0.94" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KrieptoBod.Application\KrieptoBod.Application.csproj" />
-    <ProjectReference Include="..\KrieptoBod.Bitvavo.Service\KrieptoBod.Exchange.csproj" />
+    <ProjectReference Include="..\KrieptoBod.Infrastructure.Bitvavo\KrieptoBod.Infrastructure.Bitvavo.csproj" />
     <ProjectReference Include="..\KrieptoBod.Infrastructure\KrieptoBod.Infrastructure.csproj" />
   </ItemGroup>
   <ItemGroup>

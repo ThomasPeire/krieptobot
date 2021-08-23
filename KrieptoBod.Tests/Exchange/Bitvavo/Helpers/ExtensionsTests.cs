@@ -1,6 +1,6 @@
 using FluentAssertions;
-using KrieptoBod.Exchange.Bitvavo.Helpers;
-using KrieptoBod.Exchange.Bitvavo.Model;
+using KrieptoBod.Infrastructure.Bitvavo.Dtos;
+using KrieptoBod.Infrastructure.Bitvavo.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;

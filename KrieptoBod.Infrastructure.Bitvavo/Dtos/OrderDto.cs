@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace KrieptoBod.Exchange.Bitvavo.Model
+namespace KrieptoBod.Infrastructure.Bitvavo.Dtos
 {
     public class OrderDto
     {
