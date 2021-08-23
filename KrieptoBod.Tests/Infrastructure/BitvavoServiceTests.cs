@@ -32,7 +32,7 @@ namespace KrieptoBod.Tests.Infrastructure
         [Test]
         public async Task GetCandles_ShouldReturn_Candles()
         {
-            var result = await _exchangeRepository.GetCandlesAsync("BTC-EUR");
+            var result = await _bitvavoService.GetCandlesAsync("BTC-EUR");
 
             result.Should().MatchSnapshot();
         }
