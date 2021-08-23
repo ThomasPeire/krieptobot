@@ -2,6 +2,7 @@ name: Build, Test, Analyze
 
 on:
   push:
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -9,19 +10,22 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet-version: [ '3.1.x', '5.0.x' ]
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+    - uses: actions/checkout@v2
+    - name: Setup ${{ matrix.dotnet-version }}
+      uses: actions/setup-dotnet@v1.7.2
       with:
-        dotnet-version: 3.1.x
+        dotnet-version: ${{ matrix.dotnet-version }}
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore /p:ContinuousIntegrationBuild=true
     - name: Test
-      run: dotnet test --no-build --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+      run: dotnet test --no-build --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
     
     - name: codecov
       uses: codecov/codecov-action@v2
