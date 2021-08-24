@@ -21,7 +21,7 @@ namespace KrieptoBod.Application.Indicators
         private Dictionary<DateTime, decimal> CalculateRsi(Dictionary<DateTime, (decimal upAverage, decimal downAverage)> upAndDownAverages)
         {
             return new(upAndDownAverages
-                .Select(x => 
+                .Select(x =>
                     new KeyValuePair<DateTime, decimal>(x.Key, GetRSI(x.Value.upAverage, x.Value.downAverage))));
         }
 
@@ -35,10 +35,10 @@ namespace KrieptoBod.Application.Indicators
             var movingAverages = new Dictionary<DateTime, (decimal avgerageUp, decimal averageDown)>();
             var upAndDownMovesArray = upAndDownMoves.OrderBy(x => x.Key).ToArray();
 
-            // start with i=movingAveragePeriod since we need the previous movingAveragePeriod values to calculate
-            for (var i = movingAveragePeriod; i < upAndDownMovesArray.Length; i++)
+            // start with i=movingAveragePeriod-1 since we need the previous movingAveragePeriod values to calculate
+            for (var i = movingAveragePeriod-1; i < upAndDownMovesArray.Length; i++)
             {
-                var previousValues = GetPreviousUpAndDownValues(upAndDownMovesArray, movingAveragePeriod, i).ToList();
+                var previousValues = GetValuesForAveragePeriod(upAndDownMovesArray, i - movingAveragePeriod, movingAveragePeriod).ToList();
 
                 var upAverage = previousValues.Average(x => x.up);
                 var downAverage = previousValues.Average(x => x.down);
@@ -49,9 +49,9 @@ namespace KrieptoBod.Application.Indicators
             return movingAverages;
         }
 
-        private IEnumerable<(decimal up, decimal down)> GetPreviousUpAndDownValues(IEnumerable<KeyValuePair<DateTime, (decimal ups, decimal downs)>> upAndDownMovesArray, int movingAveragePeriod, int recordsToSkip)
+        private IEnumerable<(decimal up, decimal down)> GetValuesForAveragePeriod(IEnumerable<KeyValuePair<DateTime, (decimal ups, decimal downs)>> upAndDownMovesArray, int startIndex, int movingAveragePeriod)
         {
-            return upAndDownMovesArray.Skip(recordsToSkip).Take(-movingAveragePeriod).Select(x => x.Value);
+            return upAndDownMovesArray.Skip(startIndex+1).Take(movingAveragePeriod).Select(x => x.Value);
         }
 
         private Dictionary<DateTime, (decimal up, decimal down)> CalculateUpAndDownMoves(IEnumerable<Candle> candles)
