@@ -7,45 +7,56 @@ namespace KrieptoBod.Application.Indicators
 {
     public class Rsi : IRsi
     {
-        public Dictionary<DateTime, decimal> Calculate(IEnumerable<Candle> candles, int avgPeriod)
+        public Dictionary<DateTime, decimal> Calculate(IEnumerable<Candle> candles, int averagePeriod)
         {
             var upsAndDownMoves = CalculateUpAndDownMoves(candles);
 
-            var avgUpsAndAvgDowns = CalculateSimpleRSI(upsAndDownMoves, avgPeriod);
+            var upAndDownAverages = CalculateMovingAverage(upsAndDownMoves, averagePeriod);
 
-            var rsiValues = CalculateRSI(avgUpsAndAvgDowns);
+            var rsiValues = CalculateRsi(upAndDownAverages);
 
             return rsiValues;
         }
 
-        private static Dictionary<DateTime, decimal> CalculateRSI(Dictionary<DateTime, (decimal avgsUp, decimal avgsDown)> avgUpsAndAvgDowns)
+        private Dictionary<DateTime, decimal> CalculateRsi(Dictionary<DateTime, (decimal upAverage, decimal downAverage)> upAndDownAverages)
         {
-            return new(avgUpsAndAvgDowns.Select(x =>
-                new KeyValuePair<DateTime, decimal>(x.Key, 100 - (100 / (1 + (x.Value.avgsUp / x.Value.avgsDown))))));
+            return new(upAndDownAverages
+                .Select(x => 
+                    new KeyValuePair<DateTime, decimal>(x.Key, GetRSI(x.Value.upAverage, x.Value.downAverage))));
         }
 
-        private static Dictionary<DateTime, (decimal avgsUp, decimal avgsDown)> CalculateSimpleRSI(Dictionary<DateTime, (decimal ups, decimal downs)> upsAndDownMoves, int avgPeriod)
+        private decimal GetRSI(decimal averageUp, decimal averageDown)
         {
-            var movingAverages = new Dictionary<DateTime, (decimal avgUps, decimal avgDowns)>();
-            var upsAndDownMovesArray = upsAndDownMoves.OrderBy(x => x.Key).ToArray();
+            return 100 - (100 / (1 + (averageUp / averageDown)));
+        }
 
-            // start with i=avgPeriod since we need the previous avgPeriod values to calculate
-            for (var i = avgPeriod; i < upsAndDownMovesArray.Length; i++)
+        private Dictionary<DateTime, (decimal upAverage, decimal downAverage)> CalculateMovingAverage(Dictionary<DateTime, (decimal ups, decimal downs)> upAndDownMoves, int movingAveragePeriod)
+        {
+            var movingAverages = new Dictionary<DateTime, (decimal avgerageUp, decimal averageDown)>();
+            var upAndDownMovesArray = upAndDownMoves.OrderBy(x => x.Key).ToArray();
+
+            // start with i=movingAveragePeriod since we need the previous movingAveragePeriod values to calculate
+            for (var i = movingAveragePeriod; i < upAndDownMovesArray.Length; i++)
             {
-                var previousValues = upsAndDownMovesArray.Skip(i).Take(-avgPeriod).Select(x => x.Value).ToList();
+                var previousValues = GetPreviousUpAndDownValues(upAndDownMovesArray, movingAveragePeriod, i).ToList();
 
-                var avgUp = previousValues.Average(x => x.ups);
-                var avgDown = previousValues.Average(x => x.downs);
+                var upAverage = previousValues.Average(x => x.up);
+                var downAverage = previousValues.Average(x => x.down);
 
-                movingAverages.Add(upsAndDownMovesArray[i].Key, (avgUp, avgDown));
+                movingAverages.Add(upAndDownMovesArray[i].Key, (upAverage, downAverage));
             }
 
             return movingAverages;
         }
 
-        private static Dictionary<DateTime, (decimal ups, decimal downs)> CalculateUpAndDownMoves(IEnumerable<Candle> candles)
+        private IEnumerable<(decimal up, decimal down)> GetPreviousUpAndDownValues(IEnumerable<KeyValuePair<DateTime, (decimal ups, decimal downs)>> upAndDownMovesArray, int movingAveragePeriod, int recordsToSkip)
         {
-            var upsAndDowns = new Dictionary<DateTime, (decimal ups, decimal downs)>();
+            return upAndDownMovesArray.Skip(recordsToSkip).Take(-movingAveragePeriod).Select(x => x.Value);
+        }
+
+        private Dictionary<DateTime, (decimal up, decimal down)> CalculateUpAndDownMoves(IEnumerable<Candle> candles)
+        {
+            var upsAndDowns = new Dictionary<DateTime, (decimal up, decimal down)>();
 
             var candleArray = candles.OrderBy(candle => candle.TimeStamp).ToArray();
 
