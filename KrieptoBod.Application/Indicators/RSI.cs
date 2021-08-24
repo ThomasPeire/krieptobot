@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace KrieptoBod.Application.Indicators
 {
-    static class Rsi
+    public class Rsi : IRsi
     {
-        public static Dictionary<DateTime, decimal> Calculate(IEnumerable<Candle> candles, int avgPeriod)
+        public Dictionary<DateTime, decimal> Calculate(IEnumerable<Candle> candles, int avgPeriod)
         {
             var upsAndDownMoves = CalculateUpAndDownMoves(candles);
 
@@ -16,7 +16,6 @@ namespace KrieptoBod.Application.Indicators
             var rsiValues = CalculateRSI(avgUpsAndAvgDowns);
 
             return rsiValues;
-
         }
 
         private static Dictionary<DateTime, decimal> CalculateRSI(Dictionary<DateTime, (decimal avgsUp, decimal avgsDown)> avgUpsAndAvgDowns)

@@ -1,12 +1,5 @@
-﻿using KrieptoBod.Application;
-using KrieptoBod.Application.Recommendators;
+﻿using KrieptoBod.Application.Recommendators;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KrieptoBod.Application.Extensions.Microsoft.DependencyInjection
 {
@@ -20,6 +13,8 @@ namespace KrieptoBod.Application.Extensions.Microsoft.DependencyInjection
             services.AddScoped<IRecommendator, RecommendatorSupport>();
 
             services.AddScoped<IRecommendationCalculator, RecommendationCalculator>();
+
+            services.AddScoped<Indicators.IRsi, Indicators.Rsi>();
         }
     }
 }
