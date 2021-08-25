@@ -30,14 +30,9 @@ namespace KrieptoBod.Application.Recommendators
 
         private RecommendatorScore EvaluateRsiValue(decimal rsiValue)
         {
-            var rsiRecommendation = rsiValue switch
-            {
-                >= 70 => new RecommendatorScore() { Score = (float)(rsiValue - 70) },
-                <= 30 => new RecommendatorScore() { Score = (float)(rsiValue - 30) },
-                _ => new RecommendatorScore() { Score = 0F }
-            };
+            var rsiRecommendation = new RecommendatorScore() {Score = (float) (50 - rsiValue)};
 
-            return rsiRecommendation / 30;
+            return rsiRecommendation / 50;
         }
 
         

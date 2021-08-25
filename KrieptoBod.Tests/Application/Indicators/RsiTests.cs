@@ -42,15 +42,18 @@ namespace KrieptoBod.Tests.Application.Indicators
         public void Rsi_Should_CalculateRsi()
         {
             var datetimeFrom = new DateTime(2021, 08, 13);
-            Debug.WriteLine(_candles.OrderBy(x => x.TimeStamp).Last().TimeStamp);
-            Debug.WriteLine(_candles.OrderBy(x => x.TimeStamp).First().TimeStamp);
-            var candlesFromFebruary = _candles.Where(x => x.TimeStamp >= datetimeFrom && x.TimeStamp <= datetimeFrom.AddDays(1));
 
-            var rsiValues = new Rsi().Calculate(candlesFromFebruary, 14);
+            var candlesToWorkWith = _candles.Where(x => x.TimeStamp >= datetimeFrom && x.TimeStamp <= datetimeFrom.AddDays(1)).OrderBy(x => x.TimeStamp);
+            foreach (var candle in candlesToWorkWith)
+            {
+                Debug.WriteLine(candle.Close.ToString() +",");
+            }
+
+            var rsiValues = new Rsi().Calculate(candlesToWorkWith, 14);
 
             foreach (var keyValuePair in rsiValues)
             {
-               Debug.WriteLine(keyValuePair.Key.ToString() +" "+ keyValuePair.Value); 
+                Debug.WriteLine(keyValuePair.Key.ToString() +" "+ keyValuePair.Value);
             }
         }
     }
