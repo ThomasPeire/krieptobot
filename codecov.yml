@@ -17,7 +17,7 @@ parsers:
 comment:
   layout: "reach,diff,flags,files,footer"
   behavior: new
-  require_changes: no
+  require_changes: false
   
 github_checks:
   annotations: true
