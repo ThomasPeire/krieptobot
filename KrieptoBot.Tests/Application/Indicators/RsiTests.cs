@@ -4,11 +4,13 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using FluentAssertions;
 using KrieptoBot.Application.Indicators;
 using KrieptoBot.Infrastructure.Bitvavo.Dtos;
 using KrieptoBot.Infrastructure.Bitvavo.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Snapshooter.NUnit;
 
 namespace KrieptoBot.Tests.Application.Indicators
 {
@@ -44,17 +46,10 @@ namespace KrieptoBot.Tests.Application.Indicators
             var datetimeFrom = new DateTime(2021, 08, 13);
 
             var candlesToWorkWith = _candles.Where(x => x.TimeStamp >= datetimeFrom && x.TimeStamp <= datetimeFrom.AddDays(1)).OrderBy(x => x.TimeStamp);
-            foreach (var candle in candlesToWorkWith)
-            {
-                Debug.WriteLine(candle.Close.ToString() +",");
-            }
-
+            
             var rsiValues = new Rsi().Calculate(candlesToWorkWith, 14);
-
-            foreach (var keyValuePair in rsiValues)
-            {
-                Debug.WriteLine(keyValuePair.Key.ToString() +" "+ keyValuePair.Value);
-            }
+            
+            rsiValues.Should().MatchSnapshot();
         }
     }
 }
