@@ -34,7 +34,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
         }
 
         [Test]
-        public async Task RecommendationRsi_ShouldReturn_PositiveScoreWhenRSIAbove70()
+        public async Task RecommendationRsi_ShouldReturn_NegativeScoreWhenRSIAbove50()
         {
             var rsiResults =
                 new Dictionary<DateTime, decimal>
@@ -50,11 +50,11 @@ namespace KrieptoBot.Tests.Application.Recommendators
 
             var result = await recommendator.GetRecommendation(It.IsAny<string>());
             
-            Assert.That(result.Score, Is.EqualTo((80F - 70) / 30));
+            Assert.That(result.Score, Is.LessThan(0));
         }
 
         [Test]
-        public async Task RecommendationRsi_ShouldReturn_NegativeScoreWhenRSIUnder30()
+        public async Task RecommendationRsi_ShouldReturn_PositiveScoreWhenRSIUnder50()
         {
             var rsiResults =
                 new Dictionary<DateTime, decimal>
@@ -70,16 +70,50 @@ namespace KrieptoBot.Tests.Application.Recommendators
 
             var result = await recommendator.GetRecommendation(It.IsAny<string>());
 
-            Assert.That(result.Score, Is.EqualTo((15F - 30) / 30));
+            Assert.That(result.Score, Is.GreaterThan(0));
         }
 
         [Test]
-        public async Task RecommendationRsi_ShouldReturn_ZeroScoreWhenRSIBetween30And70()
+        public async Task RecommendationRsi_ShouldReturn_HigherRecommendationForLowerRSI()
+        {
+            var rsiResults1 =
+                new Dictionary<DateTime, decimal>
+                {
+                    {DateTime.Today, 15},
+                };
+
+            _rsiIndicator
+                .Setup(x => x.Calculate(It.IsAny<IEnumerable<Candle>>(), It.IsAny<int>()))
+                .Returns(rsiResults1);
+
+            var recommendator = new RecommendatorRsi14(_exchangeServiceMock.Object, _rsiIndicator.Object);
+
+            var result1 = await recommendator.GetRecommendation(It.IsAny<string>());
+
+
+            var rsiResults2 =
+                new Dictionary<DateTime, decimal>
+                {
+                    {DateTime.Today, 80},
+                };
+
+            _rsiIndicator
+                .Setup(x => x.Calculate(It.IsAny<IEnumerable<Candle>>(), It.IsAny<int>()))
+                .Returns(rsiResults2);
+
+            var result2 = await recommendator.GetRecommendation(It.IsAny<string>());
+
+
+            Assert.That(result1.Score, Is.GreaterThan(result2.Score));
+        }
+
+        [Test]
+        public async Task RecommendationRsi_ShouldReturn_ZeroScoreWhenRSIIs50()
         {
             var rsiResults =
                 new Dictionary<DateTime, decimal>
                 {
-                    {DateTime.Today, 49},
+                    {DateTime.Today, 50},
                 };
 
             _rsiIndicator
@@ -116,7 +150,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
 
             var result = await recommendator.GetRecommendation(It.IsAny<string>());
 
-            Assert.That(result.Score, Is.EqualTo(((float)todaysRsiValue - 30) / 30));
+            Assert.That(result.Score, Is.EqualTo(((float)50 - todaysRsiValue) / 100 *2));
         }
 
     }
