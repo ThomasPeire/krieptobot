@@ -30,13 +30,11 @@ namespace KrieptoBot.Application.Recommendators
 
         private RecommendatorScore EvaluateRsiValue(decimal rsiValue)
         {
-            //rsiValue = rsiValue <= 50 ? rsiValue : rsiValue * -1;
+            var rsiRecommendation = new RecommendatorScore() { Score = (float)((50 - rsiValue) / 100) * 2 };
 
-            var rsiRecommendation = new RecommendatorScore() {Score = (float)((50 - rsiValue) /100)*2};
-            
             return rsiRecommendation;
         }
 
-        
+
     }
 }
