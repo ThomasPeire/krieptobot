@@ -30,29 +30,35 @@ namespace KrieptoBot.Application.Indicators
             return 100 - (100 / (1 + (averageUp / averageDown)));
         }
 
-        private Dictionary<DateTime, (decimal upAverage, decimal downAverage)> CalculateMovingAverage(Dictionary<DateTime, (decimal ups, decimal downs)> upAndDownMoves, int movingAveragePeriod)
+        private Dictionary<DateTime, (decimal upAverage, decimal downAverage)> CalculateMovingAverage(Dictionary<DateTime, (decimal up, decimal down)> upAndDownMoves, int movingAveragePeriod)
         {
             var movingAverages = new Dictionary<DateTime, (decimal avgerageUp, decimal averageDown)>();
             var upAndDownMovesArray = upAndDownMoves.OrderBy(x => x.Key).ToArray();
 
-            // start with i=movingAveragePeriod-1 since we need the previous movingAveragePeriod values to calculate
-            for (var i = movingAveragePeriod-1; i < upAndDownMovesArray.Length; i++)
+            var previousValues = GetStartingValues(upAndDownMovesArray, movingAveragePeriod).ToList();
+
+            var previousAverageUp = previousValues.Average(x => x.up);
+            var previousAverageDown = previousValues.Average(x => x.down);
+
+            for (var i = movingAveragePeriod ; i < upAndDownMovesArray.Length; i++)
             {
-                var previousValues = GetValuesForAveragePeriod(upAndDownMovesArray, i - movingAveragePeriod, movingAveragePeriod).ToList();
+                var averageUp = (previousAverageUp * (movingAveragePeriod - 1) + upAndDownMovesArray[i].Value.up) / movingAveragePeriod;
+                var averageDown = (previousAverageDown * (movingAveragePeriod - 1) + upAndDownMovesArray[i].Value.down) / movingAveragePeriod;
 
-                var upAverage = previousValues.Average(x => x.up);
-                var downAverage = previousValues.Average(x => x.down);
+                movingAverages.Add(upAndDownMovesArray[i].Key, (averageUp, averageDown));
 
-                movingAverages.Add(upAndDownMovesArray[i].Key, (upAverage, downAverage));
+                previousAverageUp = averageUp;
+                previousAverageDown = averageDown;
             }
 
             return movingAverages;
         }
-
-        private IEnumerable<(decimal up, decimal down)> GetValuesForAveragePeriod(IEnumerable<KeyValuePair<DateTime, (decimal ups, decimal downs)>> upAndDownMovesArray, int startIndex, int movingAveragePeriod)
+        
+        private IEnumerable<(decimal up, decimal down)> GetStartingValues(IEnumerable<KeyValuePair<DateTime, (decimal ups, decimal downs)>> upAndDownMovesArray, int movingAveragePeriod)
         {
-            return upAndDownMovesArray.Skip(startIndex+1).Take(movingAveragePeriod).Select(x => x.Value);
+            return upAndDownMovesArray.Take(movingAveragePeriod).Select(x => x.Value);
         }
+
 
         private Dictionary<DateTime, (decimal up, decimal down)> CalculateUpAndDownMoves(IEnumerable<Candle> candles)
         {
