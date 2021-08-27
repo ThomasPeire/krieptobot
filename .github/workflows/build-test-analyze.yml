@@ -61,6 +61,9 @@ jobs:
       run: dotnet test --no-build --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
   
     - name: End Sonar scan
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: dotnet sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }}
 
     - name: codecov
