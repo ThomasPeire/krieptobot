@@ -32,12 +32,12 @@ namespace KrieptoBot.DataCollector
                     
                     while (currentStartDateTime <= toDateTime)
                     {
-                        currentStartDateTime =
-                            currentStartDateTime.AddMinutes(numberOfCandlesInOneCall * intervalInMinutes);
-
                         var time = currentStartDateTime;
                         tasks.Add(Task.Run(() => _exchangeService.GetCandlesAsync(market, interval, numberOfCandlesInOneCall,
                             time, toDateTime)));
+
+                        currentStartDateTime =
+                            currentStartDateTime.AddMinutes(numberOfCandlesInOneCall * intervalInMinutes);
                     }
 
                     var t = await Task.WhenAll(tasks);
