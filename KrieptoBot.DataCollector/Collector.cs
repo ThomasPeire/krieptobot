@@ -2,6 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using KrieptoBot.Application;
 using KrieptoBot.Model;
@@ -23,32 +26,38 @@ namespace KrieptoBot.DataCollector
             {
                 foreach (var interval in intervals)
                 {
+                    var marketLocal = market;
+                    var intervalLocal = interval;
                     var tasks = new List<Task<IEnumerable<Candle>>>();
 
-                    var intervalInMinutes = GetIntervalInMinutes(interval);
+                    var intervalInMinutes = GetIntervalInMinutes(intervalLocal);
 
                     var currentStartDateTime = fromDateTime;
                     const int numberOfCandlesInOneCall = 1000;
                     
                     while (currentStartDateTime <= toDateTime)
                     {
-                        var time = currentStartDateTime;
-                        tasks.Add(Task.Run(() => _exchangeService.GetCandlesAsync(market, interval, numberOfCandlesInOneCall,
-                            time, toDateTime)));
+                        var startTime = currentStartDateTime;
+                        var endTime = new DateTime(Math.Max(currentStartDateTime.AddMinutes(intervalInMinutes * numberOfCandlesInOneCall).Ticks, toDateTime.Ticks));
+                        Debug.WriteLine(startTime);
+                        Debug.WriteLine(endTime);
+                        tasks.Add(_exchangeService.GetCandlesAsync(marketLocal, intervalLocal, numberOfCandlesInOneCall,
+                            startTime, endTime));
 
                         currentStartDateTime =
                             currentStartDateTime.AddMinutes(numberOfCandlesInOneCall * intervalInMinutes);
                     }
 
-                    var t = await Task.WhenAll(tasks);
+                    await Task.WhenAll(tasks);
 
-                    var result = new List<Candle>();
+                    var candles = new List<Candle>();
                     foreach (var task in tasks)
                     {
-                        result.AddRange(task.Result);
+                        candles.AddRange(await task);
                     }
 
-                    Debug.WriteLine(result.Count);
+                    var json = JsonSerializer.Serialize(candles.OrderBy(x =>x.TimeStamp));
+                    await File.WriteAllTextAsync($@"D:\{marketLocal}-{intervalLocal}.json", json);
                 }
             }
 
