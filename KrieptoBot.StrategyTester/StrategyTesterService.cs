@@ -16,7 +16,25 @@ namespace KrieptoBot.StrategyTester
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            Debug.WriteLine($"starting the service");
+            /*
+             voorbeeld
+                interval = 5m
+                periode = 1/1/2020 - 31/12/2021
+                balance = 1000 euro
+
+                foreach 5m(=currentTime) in periode
+                    => trader.run() => 
+                        -make sure it uses currentTime 
+                        -should talk to historic data fake "api"
+                        
+                
+                return profit/loss
+                return overview of trades, recommendations, ...
+                
+                => make this repeatable for a matrix of configurations
+             
+             */
+
 
         }
 
