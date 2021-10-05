@@ -2,20 +2,19 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace KrieptoBot.DataCollector
 {
-    class Program
+    internal class Program
     {
-        static Task Main(string[] args)
+        private static async Task Main(string[] args)
         {
-            using var host = CreateHostBuilder(args).Build();
-
-            return host.RunAsync();
+            await CreateHostBuilder(args).Build().RunAsync();
         }
 
-        static IHostBuilder CreateHostBuilder(string[] args) =>
+        private static IHostBuilder CreateHostBuilder(string[] args) =>
             new HostBuilder().ConfigureAppConfiguration((context, builder) =>
                 {
                     builder.SetBasePath(AppContext.BaseDirectory)

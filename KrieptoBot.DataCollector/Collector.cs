@@ -26,22 +26,20 @@ namespace KrieptoBot.DataCollector
             {
                 foreach (var interval in intervals)
                 {
-                    var marketLocal = market;
-                    var intervalLocal = interval;
                     var tasks = new List<Task<IEnumerable<Candle>>>();
 
-                    var intervalInMinutes = GetIntervalInMinutes(intervalLocal);
+                    var intervalInMinutes = GetIntervalInMinutes(interval);
 
                     var currentStartDateTime = fromDateTime;
                     const int numberOfCandlesInOneCall = 1000;
-                    
+
                     while (currentStartDateTime <= toDateTime)
                     {
                         var startTime = currentStartDateTime;
-                        var endTime = new DateTime(Math.Max(currentStartDateTime.AddMinutes(intervalInMinutes * numberOfCandlesInOneCall).Ticks, toDateTime.Ticks));
+                        var endTime = new DateTime(Math.Min(currentStartDateTime.AddMinutes(intervalInMinutes * numberOfCandlesInOneCall).Ticks, toDateTime.Ticks));
                         Debug.WriteLine(startTime);
                         Debug.WriteLine(endTime);
-                        tasks.Add(_exchangeService.GetCandlesAsync(marketLocal, intervalLocal, numberOfCandlesInOneCall,
+                        tasks.Add(_exchangeService.GetCandlesAsync(market, interval, numberOfCandlesInOneCall,
                             startTime, endTime));
 
                         currentStartDateTime =
@@ -56,8 +54,8 @@ namespace KrieptoBot.DataCollector
                         candles.AddRange(await task);
                     }
 
-                    var json = JsonSerializer.Serialize(candles.OrderBy(x =>x.TimeStamp));
-                    await File.WriteAllTextAsync($@"D:\{marketLocal}-{intervalLocal}.json", json);
+                    var json = JsonSerializer.Serialize(candles.OrderBy(x => x.TimeStamp));
+                    await File.WriteAllTextAsync($@"D:\{market}-{interval}.json", json);
                 }
             }
 
