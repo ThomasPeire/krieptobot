@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using KrieptoBot.Application;
 using KrieptoBot.Infrastructure.Bitvavo.Dtos;
 using KrieptoBot.Infrastructure.Bitvavo.Extensions;
+using KrieptoBot.Infrastructure.Bitvavo.Extensions.Helper;
 using KrieptoBot.Model;
 using Newtonsoft.Json;
 
@@ -42,7 +43,7 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
 
         public async Task<IEnumerable<Candle>> GetCandlesAsync(string market, string interval = "5m", int limit = 1000, DateTime? start = null, DateTime? end = null)
         {
-            var candleJArrayList = await _bitvavoApi.GetCandlesAsync(market, interval, limit, ((DateTimeOffset)start).ToUnixTimeMilliseconds(), ((DateTimeOffset)end).ToUnixTimeMilliseconds());
+            var candleJArrayList = await _bitvavoApi.GetCandlesAsync(market, interval, limit, start.ToUnixTimeMilliseconds(), end.ToUnixTimeMilliseconds());
             
             return candleJArrayList?.Select(x =>
                 new CandleDto
@@ -93,14 +94,14 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
 
         public async Task<IEnumerable<Order>> GetOrdersAsync(string market, int limit = 500, DateTime? start = null, DateTime? end = null, Guid? orderIdFrom = null, Guid? orderIdTo = null)
         {
-            var dtos = await _bitvavoApi.GetOrdersAsync(market, limit, ((DateTimeOffset)start).ToUnixTimeMilliseconds(), ((DateTimeOffset)end).ToUnixTimeMilliseconds(), orderIdFrom, orderIdTo);
+            var dtos = await _bitvavoApi.GetOrdersAsync(market, limit, start.ToUnixTimeMilliseconds(), end.ToUnixTimeMilliseconds(), orderIdFrom, orderIdTo);
 
             return dtos.ConvertToKrieptoBotModel();
         }
 
         public async Task<IEnumerable<Trade>> GetTradesAsync(string market, int limit = 500, DateTime? start = null, DateTime? end = null, Guid? tradeIdFrom = null, Guid? tradeIdTo = null)
         {
-            var dtos = await _bitvavoApi.GetTradesAsync(market, limit, ((DateTimeOffset)start).ToUnixTimeMilliseconds(), ((DateTimeOffset)end).ToUnixTimeMilliseconds(), tradeIdFrom, tradeIdTo);
+            var dtos = await _bitvavoApi.GetTradesAsync(market, limit, start.ToUnixTimeMilliseconds(), end.ToUnixTimeMilliseconds(), tradeIdFrom, tradeIdTo);
 
             return dtos.ConvertToKrieptoBotModel();
         }
