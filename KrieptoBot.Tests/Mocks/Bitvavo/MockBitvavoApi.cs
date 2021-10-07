@@ -43,8 +43,8 @@ namespace KrieptoBot.Tests.Mocks.Bitvavo
             return await Task.FromResult(_balances);
         }
 
-        public async Task<IEnumerable<JArray>> GetCandlesAsync(string market, string interval = "5m", int limit = 1000, DateTime? start = null,
-            DateTime? end = null)
+        public async Task<IEnumerable<JArray>> GetCandlesAsync(string market, string interval = "5m", int limit = 1000, long? start = null,
+            long? end = null)
         {
             return await Task.FromResult(_candles) ;
         }
@@ -69,14 +69,14 @@ namespace KrieptoBot.Tests.Mocks.Bitvavo
             return await Task.FromResult(_assets.First(x => x.Symbol == symbol));
         }
 
-        public async Task<IEnumerable<TradeDto>> GetTradesAsync(string market, int limit = 500, DateTime? start = null, DateTime? end = null,
+        public async Task<IEnumerable<TradeDto>> GetTradesAsync(string market, int limit = 500, long? start = null, long? end = null,
             Guid? tradeIdFrom = null, Guid? tradeIdTo = null)
         {
             return await Task.FromResult(
                 _trades
                     .Where(x =>
-                        DateTime.UnixEpoch.AddMilliseconds(x.Timestamp) >= start &&
-                        DateTime.UnixEpoch.AddMilliseconds(x.Timestamp) < end &&
+                        x.Timestamp >= start &&
+                        x.Timestamp < end &&
                         string.CompareOrdinal(x.Id, tradeIdFrom.ToString()) >= 0 &&
                         string.CompareOrdinal(x.Id, tradeIdFrom.ToString()) < 0)
                     .Take(limit));
@@ -90,15 +90,15 @@ namespace KrieptoBot.Tests.Mocks.Bitvavo
                     x.OrderId == orderId.ToString()));
         }
 
-        public async Task<IEnumerable<OrderDto>> GetOrdersAsync(string market, int limit = 500, DateTime? start = null, DateTime? end = null,
+        public async Task<IEnumerable<OrderDto>> GetOrdersAsync(string market, int limit = 500, long? start = null, long? end = null,
             Guid? orderIdFrom = null, Guid? orderIdTo = null)
         {
             return await Task.FromResult(
                 _orders
                     .Where(x =>
                         x.Market == market &&
-                        DateTime.UnixEpoch.AddMilliseconds(x.Created) >= start &&
-                        DateTime.UnixEpoch.AddMilliseconds(x.Created) < end &&
+                        x.Created >= start &&
+                        x.Created < end &&
                         string.CompareOrdinal(x.OrderId, orderIdFrom.ToString()) >= 0 &&
                         string.CompareOrdinal(x.OrderId, orderIdTo.ToString()) < 0)
                     .Take(limit));
