@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using KrieptoBot.Application;
@@ -81,6 +82,13 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
         public async Task<Order> GetOpenOrderAsync(string market)
         {
             var dto = await _bitvavoApi.GetOpenOrderAsync(market);
+
+            return dto.ConvertToKrieptoBotModel();
+        }
+
+        public async Task<Order> PostOrderAsync(string market, string side, string orderType, double amount, double price)
+        {
+            var dto = await _bitvavoApi.PostOrderAsync(market, side, orderType, amount.ToString(CultureInfo.InvariantCulture), price.ToString(CultureInfo.InvariantCulture));
 
             return dto.ConvertToKrieptoBotModel();
         }

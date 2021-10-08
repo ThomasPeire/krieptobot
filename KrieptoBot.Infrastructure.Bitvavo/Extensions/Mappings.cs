@@ -91,7 +91,7 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Extensions
                 FilledAmountQuote = decimal.Parse(dto.FilledAmountQuote ?? "0", CultureInfo.InvariantCulture),
                 FeePaid = decimal.Parse(dto.FeePaid ?? "0", CultureInfo.InvariantCulture),
                 FeeCurrency = dto.FeeCurrency,
-                Fills = dto.Fills.ConvertToKrieptoBotModel(),
+                Fills = dto.Fills?.ConvertToKrieptoBotModel(),
                 SelfTradePrevention = dto.SelfTradePrevention,
                 Visible = dto.Visible,
                 TimeInForce = dto.TimeInForce,

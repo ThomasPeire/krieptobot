@@ -18,5 +18,6 @@ namespace KrieptoBot.Application
         Task<IEnumerable<Order>> GetOrdersAsync(string market, int limit = 500, DateTime? start = null, DateTime? end = null, Guid? orderIdFrom = null, Guid? orderIdTo = null);
         Task<Order> GetOpenOrderAsync();
         Task<Order> GetOpenOrderAsync(string market);
+        Task<Order> PostOrderAsync(string market, string side, string orderType, double amount, double price);
     }
 }

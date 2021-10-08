@@ -7,6 +7,7 @@ namespace KrieptoBot.Application.Recommendators
     public class RecommendationCalculator: IRecommendationCalculator
     {
         private readonly IEnumerable<IRecommendator> _recommendators;
+
         public RecommendationCalculator(IEnumerable<IRecommendator> recommendators)
         {
             _recommendators = recommendators;

@@ -13,6 +13,7 @@ namespace KrieptoBot.Tests.Application
     {
         private Mock<IRecommendationCalculator> _recommendationCalculator;
         private Mock<IExchangeService> _exchangeServiceMock;
+        private TradingContext _tradingContext;
 
         [SetUp]
         public void Setup()
@@ -32,14 +33,22 @@ namespace KrieptoBot.Tests.Application
                         new Candle { Close = 10, High = 400, Low = 10, Open = 20, TimeStamp = new DateTime(2021, 01, 01, 01, 01, 00), Volume = 200 },
                         new Candle { Close = 1000, High = 1000, Low = 10, Open = 10, TimeStamp = new DateTime(2021, 01, 01, 02, 01, 00), Volume = 200 }
             }));
-
+            _tradingContext = new TradingContext()
+                .SetBuyMargin(30)
+                .SetSellMargin(-30)
+                .SetMarketsToWatch(
+                    new List<string>
+                    {
+                        "BTC-EUR"
+                    })
+                .SetInterval("5m");
 
         }
 
         [Test]
         public async Task Trader_Should_Trade()
         {
-            var trader = new Trader(_exchangeServiceMock.Object, _recommendationCalculator.Object);
+            var trader = new Trader(_exchangeServiceMock.Object, _recommendationCalculator.Object, _tradingContext);
 
             await trader.Run(); 
 

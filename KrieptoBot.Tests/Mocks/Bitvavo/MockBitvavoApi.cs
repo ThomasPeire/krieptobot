@@ -18,7 +18,7 @@ namespace KrieptoBot.Tests.Mocks.Bitvavo
         private IEnumerable<BalanceDto> _balances;
         private IEnumerable<JArray> _candles;
         private IEnumerable<MarketDto> _markets;
-        private IEnumerable<OrderDto> _orders;
+        private ICollection<OrderDto> _orders;
         private IEnumerable<TradeDto> _trades;
 
         public void InitData()
@@ -34,7 +34,7 @@ namespace KrieptoBot.Tests.Mocks.Bitvavo
             _balances = JsonConvert.DeserializeObject<IEnumerable<BalanceDto>>(balancesJson);
             _candles = JsonConvert.DeserializeObject<IEnumerable<JArray>>(candlesJson);
             _markets = JsonConvert.DeserializeObject<IEnumerable<MarketDto>>(marketsJson);
-            _orders = JsonConvert.DeserializeObject<IEnumerable<OrderDto>>(ordersJson);
+            _orders = JsonConvert.DeserializeObject<ICollection<OrderDto>>(ordersJson);
             _trades = JsonConvert.DeserializeObject<IEnumerable<TradeDto>>(tradesJson);
         }
 
@@ -46,7 +46,7 @@ namespace KrieptoBot.Tests.Mocks.Bitvavo
         public async Task<IEnumerable<JArray>> GetCandlesAsync(string market, string interval = "5m", int limit = 1000, long? start = null,
             long? end = null)
         {
-            return await Task.FromResult(_candles) ;
+            return await Task.FromResult(_candles);
         }
 
         public async Task<IEnumerable<MarketDto>> GetMarketsAsync()
@@ -112,6 +112,24 @@ namespace KrieptoBot.Tests.Mocks.Bitvavo
         public async Task<OrderDto> GetOpenOrderAsync(string market)
         {
             return await Task.FromResult(_orders.First(x => x.Market == market));
+        }
+
+        public async Task<OrderDto> PostOrderAsync(string market, string side, string orderType, string amount, string price)
+        {
+            var orderDto =
+                new OrderDto()
+                {
+                    OrderId = Guid.NewGuid().ToString(),
+                    Market = market,
+                    Side = side,
+                    OrderType = orderType,
+                    Amount = amount,
+                    Price = price
+                };
+
+            _orders.Add(orderDto);
+
+            return await Task.FromResult(orderDto);
         }
     }
 }

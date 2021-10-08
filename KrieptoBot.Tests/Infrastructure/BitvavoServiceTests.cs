@@ -100,5 +100,19 @@ namespace KrieptoBot.Tests.Infrastructure
 
             result.Should().MatchSnapshot();
         }
+
+        [Test]
+        public async Task PostOrder_ShouldReturn_AddOrder()
+        {
+            var order = await _bitvavoService.PostOrderAsync("BTC-EUR", "Buy", "Limit", 9000.00, 0.0001);
+
+            var result = await _bitvavoService.GetOrderAsync(order.Market, new Guid(order.OrderId));
+
+            Assert.That(order.Market, Is.EqualTo(result.Market));
+            Assert.That(order.Side, Is.EqualTo(result.Side));
+            Assert.That(order.OrderType, Is.EqualTo(result.OrderType));
+            Assert.That(order.Amount, Is.EqualTo(result.Amount));
+            Assert.That(order.Price, Is.EqualTo(result.Price));
+        }
     }
 }
