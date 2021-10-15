@@ -9,6 +9,7 @@ using KrieptoBot.Application;
 using KrieptoBot.Application.Indicators;
 using KrieptoBot.Model;
 using Moq;
+using NUnit.Framework.Internal.Commands;
 
 namespace KrieptoBot.Tests.Application.Recommendators
 {
@@ -16,6 +17,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
     {
         private Mock<IExchangeService> _exchangeServiceMock;
         private Mock<IRsi> _rsiIndicator;
+        private TradingContext _tradingContext;
 
         [SetUp]
         public void Setup()
@@ -31,6 +33,16 @@ namespace KrieptoBot.Tests.Application.Recommendators
                     {DateTime.Today.AddDays(-3), 50},
                     {DateTime.Today.AddDays(-4), 40},
                 };
+
+            _tradingContext = new TradingContext()
+                .SetBuyMargin(30)
+                .SetSellMargin(-30)
+                .SetMarketsToWatch(
+                    new List<string>
+                    {
+                        "BTC-EUR"
+                    })
+                .SetInterval("5m");
         }
 
         [Test]
@@ -46,7 +58,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
                 .Setup(x => x.Calculate(It.IsAny<IEnumerable<Candle>>(), It.IsAny<int>()))
                 .Returns(rsiResults);
 
-            var recommendator = new RecommendatorRsi14(_exchangeServiceMock.Object, _rsiIndicator.Object);
+            var recommendator = new RecommendatorRsi14(_exchangeServiceMock.Object, _rsiIndicator.Object, _tradingContext);
 
             var result = await recommendator.GetRecommendation(It.IsAny<string>());
             
@@ -66,7 +78,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
                 .Setup(x => x.Calculate(It.IsAny<IEnumerable<Candle>>(), It.IsAny<int>()))
                 .Returns(rsiResults);
 
-            var recommendator = new RecommendatorRsi14(_exchangeServiceMock.Object, _rsiIndicator.Object);
+            var recommendator = new RecommendatorRsi14(_exchangeServiceMock.Object, _rsiIndicator.Object, _tradingContext);
 
             var result = await recommendator.GetRecommendation(It.IsAny<string>());
 
@@ -86,7 +98,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
                 .Setup(x => x.Calculate(It.IsAny<IEnumerable<Candle>>(), It.IsAny<int>()))
                 .Returns(rsiResults1);
 
-            var recommendator = new RecommendatorRsi14(_exchangeServiceMock.Object, _rsiIndicator.Object);
+            var recommendator = new RecommendatorRsi14(_exchangeServiceMock.Object, _rsiIndicator.Object, _tradingContext);
 
             var result1 = await recommendator.GetRecommendation(It.IsAny<string>());
 
@@ -120,7 +132,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
                 .Setup(x => x.Calculate(It.IsAny<IEnumerable<Candle>>(), It.IsAny<int>()))
                 .Returns(rsiResults);
 
-            var recommendator = new RecommendatorRsi14(_exchangeServiceMock.Object, _rsiIndicator.Object);
+            var recommendator = new RecommendatorRsi14(_exchangeServiceMock.Object, _rsiIndicator.Object, _tradingContext);
 
             var result = await recommendator.GetRecommendation(It.IsAny<string>());
 
@@ -146,7 +158,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
                 .Setup(x => x.Calculate(It.IsAny<IEnumerable<Candle>>(), It.IsAny<int>()))
                 .Returns(rsiResults);
 
-            var recommendator = new RecommendatorRsi14(_exchangeServiceMock.Object, _rsiIndicator.Object);
+            var recommendator = new RecommendatorRsi14(_exchangeServiceMock.Object, _rsiIndicator.Object, _tradingContext);
 
             var result = await recommendator.GetRecommendation(It.IsAny<string>());
 

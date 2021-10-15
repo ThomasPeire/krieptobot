@@ -12,11 +12,13 @@ namespace KrieptoBot.Application
 
         private readonly IExchangeService _exchangeService;
         private readonly IRecommendationCalculator _recommendationCalculator;
+        private readonly ITradingContext _tradingContext;
 
-        public Trader(IExchangeService exchangeService, IRecommendationCalculator recommendationCalculator)
+        public Trader(IExchangeService exchangeService, IRecommendationCalculator recommendationCalculator, ITradingContext tradingContext)
         {
             _exchangeService = exchangeService;
             _recommendationCalculator = recommendationCalculator;
+            _tradingContext = tradingContext;
         }
 
         public async Task Run()
@@ -78,27 +80,26 @@ namespace KrieptoBot.Application
         {
             foreach (var (market, _) in marketsToSell)
             {
+                // go to service => place order
                 Debug.WriteLine($"Selling on {market} ");
             }
         }
 
-        private static IDictionary<string, RecommendatorScore> DetermineMarketsToBuy(Dictionary<string, RecommendatorScore> recommendations)
+        private IDictionary<string, RecommendatorScore> DetermineMarketsToBuy(Dictionary<string, RecommendatorScore> recommendations)
         {
-            const int buyMargin = 30; // todo app setting
             var marketsToBuy =
                 recommendations
-                    .Where(x => x.Value.Score >= buyMargin)
+                    .Where(x => x.Value.Score >= _tradingContext.BuyMargin)
                     .ToDictionary(x => x.Key, x => x.Value);
 
             return marketsToBuy;
         }
 
-        private static IDictionary<string, RecommendatorScore> DetermineMarketsToSell(Dictionary<string, RecommendatorScore> recommendations)
+        private IDictionary<string, RecommendatorScore> DetermineMarketsToSell(Dictionary<string, RecommendatorScore> recommendations)
         {
-            const int sellMargin = 30; // todo app setting
             var marketsToSell =
                 recommendations
-                    .Where(x => x.Value.Score <= sellMargin)
+                    .Where(x => x.Value.Score <= _tradingContext.SellMargin)
                     .ToDictionary(x => x.Key, x => x.Value);
 
             return marketsToSell;
@@ -116,7 +117,7 @@ namespace KrieptoBot.Application
 
         private IEnumerable<string> GetMarketsToEvaluate()
         {
-            var marketsToWatch = new List<string> { "CHZ-EUR", "BTC-EUR", "ADA-EUR" };//todo app settings
+            var marketsToWatch = _tradingContext.MarketsToWatch;
             
             return marketsToWatch;
         }

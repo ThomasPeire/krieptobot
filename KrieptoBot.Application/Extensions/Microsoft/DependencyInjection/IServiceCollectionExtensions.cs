@@ -1,5 +1,6 @@
 ﻿using KrieptoBot.Application.Recommendators;
 using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
 
 namespace KrieptoBot.Application.Extensions.Microsoft.DependencyInjection
 {
@@ -15,6 +16,13 @@ namespace KrieptoBot.Application.Extensions.Microsoft.DependencyInjection
             services.AddScoped<IRecommendationCalculator, RecommendationCalculator>();
 
             services.AddScoped<Indicators.IRsi, Indicators.Rsi>();
+            
+            services.AddSingleton<ITradingContext>(x => 
+                new TradingContext()
+                    .SetMarketsToWatch(new List<string> { "CHZ-EUR", "BTC-EUR", "ADA-EUR" })
+                    .SetInterval("5m")
+                    .SetBuyMargin(30)
+                    .SetSellMargin(-30));
         }
     }
 }
