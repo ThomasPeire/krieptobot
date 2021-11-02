@@ -10,14 +10,16 @@ namespace KrieptoBot.Application.Extensions.Microsoft.DependencyInjection
         {
             services.AddScoped<ITrader, Trader>();
 
-            services.AddScoped<IRecommendator, RecommendatorRsi14>();
+            services.AddScoped<IRecommendator, RecommendatorRsi14PeriodInterval>();
+            services.AddScoped<IRecommendator, RecommendatorRsi14Period4H>();
+
             services.AddScoped<IRecommendator, RecommendatorSupport>();
 
             services.AddScoped<IRecommendationCalculator, RecommendationCalculator>();
 
             services.AddScoped<Indicators.IRsi, Indicators.Rsi>();
-            
-            services.AddSingleton<ITradingContext>(x => 
+
+            services.AddSingleton<ITradingContext>(x =>
                 new TradingContext()
                     .SetMarketsToWatch(new List<string> { "CHZ-EUR", "BTC-EUR", "ADA-EUR" })
                     .SetInterval("5m")
