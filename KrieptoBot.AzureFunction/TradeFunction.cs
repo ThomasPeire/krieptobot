@@ -1,8 +1,6 @@
-using System.Diagnostics;
-using KrieptoBot.Application;
-using Microsoft.Azure.Functions.Worker;
-using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
+using KrieptoBot.Application;
+using Microsoft.Azure.WebJobs;
 
 namespace KrieptoBot.AzureFunction
 {
@@ -18,11 +16,10 @@ namespace KrieptoBot.AzureFunction
             _trader = trader;
         }
 
-        [Function(nameof(TradeFunction))]
+        [FunctionName(nameof(TradeFunction))]
         public async Task Run([TimerTrigger(ScheduleExpression, RunOnStartup = true, UseMonitor = true)] TimerInfo myTimer)
         {
             await _trader.Run();
-
         }
     }
 }

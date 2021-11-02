@@ -1,23 +1,24 @@
-﻿using KrieptoBot.Application;
+﻿using System;
+using System.Net.Http.Headers;
+using KrieptoBot.Application;
+using KrieptoBot.Infrastructure.Bitvavo.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Refit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using KrieptoBot.Infrastructure.Bitvavo.Services;
 
 namespace KrieptoBot.Infrastructure.Bitvavo.Extensions.Microsoft.DependencyInjection
 {
     public static class IServiceCollectionExtensions
     {
-        public static void AddBitvavoService(this IServiceCollection services, IConfiguration configuration)
+        public static void AddBitvavoService(this IServiceCollection services)
         {
-            services.Configure<BitvavoConfig>(configuration.GetSection("Secrets:BitvavoConfig"));
+
+            services.AddOptions<BitvavoConfig>()
+                .Configure<IConfiguration>((settings, configuration) =>
+                {
+                    configuration.GetSection("Secrets:BitvavoConfig").Bind(settings);
+                });
 
             services.AddTransient<BitvavoAuthHeaderHandler>();
 
@@ -26,9 +27,13 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Extensions.Microsoft.DependencyInjec
                 .ConfigureHttpClient((serviceProvider, configureClient) =>
                 {
                     var bitvavoConfigOptions = serviceProvider.GetService<IOptions<BitvavoConfig>>();
-                    var bitvavoConfig = bitvavoConfigOptions.Value;
+                    if (bitvavoConfigOptions != null)
+                    {
+                        var bitvavoConfig = bitvavoConfigOptions.Value;
 
-                    configureClient.BaseAddress = new Uri(bitvavoConfig.BaseUrl);
+                        configureClient.BaseAddress = new Uri(bitvavoConfig.BaseUrl);
+                    }
+
                     configureClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 })
                 .AddHttpMessageHandler<BitvavoAuthHeaderHandler>();

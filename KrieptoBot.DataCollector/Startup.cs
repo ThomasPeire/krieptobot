@@ -6,17 +6,10 @@ namespace KrieptoBot.DataCollector
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
-
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<ICollector, Collector>();
-            services.AddBitvavoService(Configuration);
+            services.AddBitvavoService();
         }
     }
 }

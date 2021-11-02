@@ -1,9 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
+using Serilog;
 
 namespace KrieptoBot.DataCollector
 {
@@ -11,7 +11,20 @@ namespace KrieptoBot.DataCollector
     {
         private static async Task Main(string[] args)
         {
-            await CreateHostBuilder(args).Build().RunAsync();
+            try
+            {
+                var hostBuilder = CreateHostBuilder(args).Build();
+                Log.Information("Starting up");
+                await hostBuilder.RunAsync();
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Application start-up failed");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
         }
 
         private static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -24,13 +37,16 @@ namespace KrieptoBot.DataCollector
                         .AddUserSecrets<Program>()
                         .AddEnvironmentVariables();
                 })
-                .ConfigureServices((hostContext, services) =>
+                .ConfigureServices((context, services) =>
                 {
-                    var startup = new Startup(hostContext.Configuration);
+                    Log.Logger = new LoggerConfiguration()
+                        .ReadFrom.Configuration(context.Configuration)
+                        .Enrich.FromLogContext()
+                        .CreateLogger();
 
-                    startup.ConfigureServices(services);
+                    new Startup().ConfigureServices(services);
 
                     services.AddHostedService<CollectorService>();
-                });
+                }).UseSerilog();
     }
 }

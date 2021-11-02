@@ -1,37 +1,52 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace KrieptoBot.ConsoleLauncher
 {
-    class Program
+    internal class Program
     {
-        static Task Main(string[] args)
+        private static async Task Main(string[] args)
         {
-            using var host = CreateHostBuilder(args).Build();
-
-            return host.RunAsync();
+            try
+            {
+                var hostBuilder = CreateHostBuilder(args).Build();
+                Log.Information("Starting up");
+                await hostBuilder.RunAsync();
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Application start-up failed");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
         }
 
-        static IHostBuilder CreateHostBuilder(string[] args) =>
+        private static IHostBuilder CreateHostBuilder(string[] args) =>
             new HostBuilder().ConfigureAppConfiguration((context, builder) =>
             {
                 builder.SetBasePath(AppContext.BaseDirectory)
-                    .SetBasePath(Environment.CurrentDirectory)
-                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                    .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                    .AddJsonFile("appsettings.json", false, true)
+                    .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", true)
                     .AddUserSecrets<Program>()
                     .AddEnvironmentVariables();
             })
             .ConfigureServices((hostContext, services) =>
             {
-                var startup = new Startup(hostContext.Configuration);
+                Log.Logger = new LoggerConfiguration()
+                    .ReadFrom.Configuration(hostContext.Configuration)
+                    .Enrich.FromLogContext()
+                    .CreateLogger();
 
-                startup.ConfigureServices(services);
+                new Startup()
+                    .ConfigureServices(services);
 
                 services.AddHostedService<TradeService>();
-            });
+            }).UseSerilog();
     }
 }
