@@ -2,10 +2,11 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <UserSecretsId>7d4ac361-7f6d-424e-9aef-57e92d9b44b3</UserSecretsId>
     <ApplicationIcon />
     <StartupObject />
+    <LangVersion>10</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

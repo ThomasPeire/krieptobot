@@ -7,17 +7,18 @@ namespace KrieptoBot.ConsoleLauncher
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
+        private readonly IConfiguration _configuration;
 
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOptions();
             services.AddApplicationServices();
-            services.AddBitvavoService(Configuration);
+            services.AddBitvavoService(_configuration);
         }
     }
 }

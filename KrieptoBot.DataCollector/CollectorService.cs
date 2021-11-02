@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using KrieptoBot.Application;
 using Microsoft.Extensions.Hosting;
 
 namespace KrieptoBot.DataCollector

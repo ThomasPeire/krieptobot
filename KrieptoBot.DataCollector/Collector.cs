@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -20,7 +19,7 @@ namespace KrieptoBot.DataCollector
             _exchangeService = exchangeService;
         }
 
-        public async Task CollectCandles(ICollection<string> markets, ICollection<string> intervals, DateTime fromDateTime, DateTime toDateTime)
+        public async Task CollectCandles(IEnumerable<string> markets, ICollection<string> intervals, DateTime fromDateTime, DateTime toDateTime)
         {
             foreach (var market in markets)
             {
