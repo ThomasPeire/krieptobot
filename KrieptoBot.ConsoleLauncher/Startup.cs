@@ -5,9 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace KrieptoBot.ConsoleLauncher
 {
-    public class Startup
+    public static class Startup
     {
-        public void ConfigureServices(IServiceCollection services)
+        public static void ConfigureServices(IServiceCollection services)
         {
             services.AddOptions();
             services.AddApplicationServices();

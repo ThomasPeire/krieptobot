@@ -6,6 +6,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace KrieptoBot.Tests.Application
 {
@@ -48,9 +49,10 @@ namespace KrieptoBot.Tests.Application
         [Test]
         public async Task Trader_Should_Trade()
         {
-            var trader = new Trader(_exchangeServiceMock.Object, _recommendationCalculator.Object, _tradingContext);
+            var logger = new Mock<ILogger<Trader>>();
+            var trader = new Trader(_exchangeServiceMock.Object, _recommendationCalculator.Object, _tradingContext, logger.Object);
 
-            await trader.Run(); 
+            await trader.Run();
 
             Assert.True(true);// todo:proper test
         }
