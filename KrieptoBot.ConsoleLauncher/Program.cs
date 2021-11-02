@@ -43,7 +43,7 @@ namespace KrieptoBot.ConsoleLauncher
                     .Enrich.FromLogContext()
                     .CreateLogger();
 
-                new Startup(hostContext.Configuration)
+                new Startup()
                     .ConfigureServices(services);
 
                 services.AddHostedService<TradeService>();

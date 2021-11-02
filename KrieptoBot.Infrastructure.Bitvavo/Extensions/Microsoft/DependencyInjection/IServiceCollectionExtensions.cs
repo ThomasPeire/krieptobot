@@ -11,9 +11,14 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Extensions.Microsoft.DependencyInjec
 {
     public static class IServiceCollectionExtensions
     {
-        public static void AddBitvavoService(this IServiceCollection services, IConfiguration configuration)
+        public static void AddBitvavoService(this IServiceCollection services)
         {
-            services.Configure<BitvavoConfig>(configuration.GetSection("Secrets:BitvavoConfig"));
+
+            services.AddOptions<BitvavoConfig>()
+                .Configure<IConfiguration>((settings, configuration) =>
+                {
+                    configuration.GetSection("Secrets:BitvavoConfig").Bind(settings);
+                });
 
             services.AddTransient<BitvavoAuthHeaderHandler>();
 

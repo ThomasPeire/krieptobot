@@ -3,8 +3,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <AzureFunctionsVersion>v4</AzureFunctionsVersion>
     <UserSecretsId>ece5d799-c787-4d4a-ba37-35a409af4142</UserSecretsId>
-    <AssemblyName>KrieptoBot.AzureFunction</AssemblyName>
-    <LangVersion>10</LangVersion>
+    <LangVersion>8</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <ProjectCapability Include="DynamicDependentFile" />
@@ -21,16 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="log4net" Version="2.0.12" />
-    <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.5.2" />
-    <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Timer" Version="4.1.0" />
-    <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.3.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
-    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.13" />
-    <PackageReference Include="Refit" Version="6.0.94" />
-    <PackageReference Include="Refit.Newtonsoft.Json" Version="6.0.94" />
+    <PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.20" />
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.0.0-preview2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0-rc.2.21480.5" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KrieptoBot.Application\KrieptoBot.Application.csproj" />
@@ -45,5 +38,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Azure.WebJobs, Version=3.0.28.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>C:\Program Files\Microsoft\Azure Functions Core Tools\Microsoft.Azure.WebJobs.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

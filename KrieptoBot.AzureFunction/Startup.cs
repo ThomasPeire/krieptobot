@@ -1,25 +1,34 @@
-﻿using KrieptoBot.Application.Extensions.Microsoft.DependencyInjection;
+﻿using System;
+using System.IO;
+using KrieptoBot.Application.Extensions.Microsoft.DependencyInjection;
+using KrieptoBot.AzureFunction;
 using KrieptoBot.Infrastructure.Bitvavo.Extensions.Microsoft.DependencyInjection;
+using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Reflection;
 
+[assembly: FunctionsStartup(typeof(Startup))]
 namespace KrieptoBot.AzureFunction
 {
-    public class Startup
+    public class Startup: FunctionsStartup
     {
-        public IConfiguration Configuration { get; }
-
-        public Startup(IConfiguration configuration)
+        public override void ConfigureAppConfiguration(IFunctionsConfigurationBuilder builder)
         {
-            Configuration = configuration;
+            var context = builder.GetContext();
+
+            builder.ConfigurationBuilder
+                .SetBasePath(Environment.CurrentDirectory)
+                .AddJsonFile(Path.Combine(context.ApplicationRootPath, "appsettings.json"), optional: true, reloadOnChange: false)
+                .AddJsonFile(Path.Combine(context.ApplicationRootPath, $"appsettings.{context.EnvironmentName}.json"), optional: true, reloadOnChange: false)
+                .AddUserSecrets<Startup>()
+                .AddEnvironmentVariables();
         }
 
-        public void ConfigureServices(IServiceCollection services)
+        public override void Configure(IFunctionsHostBuilder builder)
         {
-            services.AddApplicationServices();
-            services.AddBitvavoService(Configuration);
+            builder.Services.AddOptions();
+            builder.Services.AddApplicationServices();
+            builder.Services.AddBitvavoService();
         }
     }
 }
