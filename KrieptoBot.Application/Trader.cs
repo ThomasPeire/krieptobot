@@ -1,10 +1,8 @@
-﻿using KrieptoBot.Application.Recommendators;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using KrieptoBot.Model;
+using KrieptoBot.Application.Recommendators;
 using Microsoft.Extensions.Logging;
 
 namespace KrieptoBot.Application
@@ -48,22 +46,6 @@ namespace KrieptoBot.Application
             IDictionary<string, RecommendatorScore> marketsToBuy,
             Dictionary<string, RecommendatorScore> recommendations)
         {
-            var availableBudgetToInvest = await GetAvailableBudgetToInvest();
-
-            /*
-             * example
-             * budgetToInvest = 999
-             * btc => score 50
-             * ada => score 40
-             * chz => score 90
-             * ltc => score 500
-             * => sum of scores = 50+40+90+500 = 680
-             * ==> budgets for coins
-             * btc => 50 * 999/680 => math.floor 73.4
-             * ada => 40 * 999/680 => math.floor 58.7
-             * chz => 90 * 999/680 => math.floor 132.2
-             * ltc => 500 * 999/680 => math.floor 734.5
-             */
             var totalRecommendationScore = marketsToBuy.Sum(x => x.Value.Score);
 
             var dictionary = new Dictionary<string, float>();
@@ -81,18 +63,21 @@ namespace KrieptoBot.Application
 
         private async Task<float> GetAvailableBudgetToInvest()
         {
+            var balance = await GetAvailableBalanceForAsset("EUR");
+
+            _logger.LogInformation("Available budget: {Budget}", balance);
+
+            return balance;
+        }
+
+        private async Task<float> GetAvailableBalanceForAsset(string asset)
+        {
             var balances = await _exchangeService.GetBalanceAsync();
 
-            var availableBuyBalance = balances.FirstOrDefault(x => x.Symbol.Equals("EUR"));
+            var availableBalance = balances.FirstOrDefault(x => x.Symbol.Equals(asset));
 
-            if (availableBuyBalance != null)
-            {
-                _logger.LogInformation("Available budget: {Budget}",
-                    availableBuyBalance.Available - availableBuyBalance.InOrder);
-            }
-
-            return availableBuyBalance != null
-                ? (float)(availableBuyBalance.Available - availableBuyBalance.InOrder)
+            return availableBalance != null
+                ? (float)(availableBalance.Available - availableBalance.InOrder)
                 : 0f;
         }
 
@@ -154,7 +139,6 @@ namespace KrieptoBot.Application
 
             return marketRecommendations.ToDictionary(x => x.market, x => x.recommendation);
         }
-
 
         private IEnumerable<string> GetMarketsToEvaluate()
         {
