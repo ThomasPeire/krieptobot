@@ -7,7 +7,7 @@ namespace KrieptoBot.Application
     {
         string Interval { get; }
         IEnumerable<string> MarketsToWatch { get; }
-        DateTime CurrentTime { get; }
+        DateTime CurrentTime { get; set; }
         int BuyMargin { get; }
         int SellMargin { get; }
 

@@ -7,6 +7,8 @@
     <ApplicationIcon />
     <StartupObject />
     <LangVersion>10</LangVersion>
+    <Company>KrieptoBot</Company>
+    <Product>KrieptoBot</Product>
   </PropertyGroup>
 
   <ItemGroup>

@@ -21,6 +21,8 @@ namespace KrieptoBot.Tests.Application
         [SetUp]
         public void Setup()
         {
+            _buyManagerMock = new Mock<IBuyManager>();
+            _sellManagerMock = new Mock<ISellManager>();
             _recommendationCalculator = new Mock<IRecommendationCalculator>();
             _recommendationCalculator
                 .Setup(x => x.CalculateRecommendation(It.IsAny<string>()))
