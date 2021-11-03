@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using KrieptoBot.Application;
 using Microsoft.Toolkit.Uwp.Notifications;
 
@@ -9,7 +10,7 @@ namespace KrieptoBot.ConsoleLauncher
         public async Task SendNotification(string message)
         {
             new ToastContentBuilder()
-                .AddHeader("6289", "Recommendations!!", "")
+                .AddHeader($"{DateTime.UtcNow:g}", "Recommendations!", "")
                 .AddText(message)
                 .Show();
         }
