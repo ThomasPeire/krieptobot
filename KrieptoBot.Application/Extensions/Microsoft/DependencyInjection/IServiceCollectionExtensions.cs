@@ -9,6 +9,8 @@ namespace KrieptoBot.Application.Extensions.Microsoft.DependencyInjection
         public static void AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<ITrader, Trader>();
+            services.AddScoped<ISellManager, SellManager>();
+            services.AddScoped<IBuyManager, BuyManager>();
 
             services.AddScoped<IRecommendator, RecommendatorRsi14PeriodInterval>();
             services.AddScoped<IRecommendator, RecommendatorRsi14Period4H>();
