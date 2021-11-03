@@ -21,7 +21,7 @@ namespace KrieptoBot.Application.Extensions.Microsoft.DependencyInjection
 
             services.AddSingleton<ITradingContext>(x =>
                 new TradingContext()
-                    .SetMarketsToWatch(new List<string> { "CHZ-EUR", "BTC-EUR", "ADA-EUR" })
+                    .SetMarketsToWatch(new List<string> { "CHZ-EUR", "BTC-EUR", "ADA-EUR", "HOT-EUR", "1INCH-EUR", "ETH-EUR", "DOGE-EUR" }) // todo: appsettings
                     .SetInterval("5m")
                     .SetBuyMargin(30)
                     .SetSellMargin(-30));

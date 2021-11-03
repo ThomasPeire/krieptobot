@@ -15,7 +15,8 @@ namespace KrieptoBot.Application.Recommendators
         private readonly int _periodToAverage;
 
         protected RecommendatorRsiBase(IExchangeService exchangeService, IRsi rsiIndicator,
-            ITradingContext tradingContext, ILogger<RecommendatorRsiBase> logger, string tradingContextInterval, int periodToAverage)
+            ITradingContext tradingContext, ILogger<RecommendatorRsiBase> logger, string tradingContextInterval,
+            int periodToAverage)
         {
             _exchangeService = exchangeService;
             _rsiIndicator = rsiIndicator;
@@ -27,25 +28,28 @@ namespace KrieptoBot.Application.Recommendators
 
         protected override async Task<RecommendatorScore> CalculateRecommendation(string market)
         {
-            var candles = await _exchangeService.GetCandlesAsync(market, _tradingContextInterval, _periodToAverage + 2,
+            var candles = await _exchangeService.GetCandlesAsync(market, _tradingContextInterval, _periodToAverage * 3,
                 end: _tradingContext.CurrentTime);
 
             var rsiValues = _rsiIndicator.Calculate(candles, _periodToAverage);
 
             var currentRsiValue = rsiValues.OrderBy(x => x.Key).Last();
 
-            _logger.LogInformation("{Recommendator}: RSI{PeriodToAverage} for market {Market} is {RsiValue}", this.GetType().Name, _periodToAverage, market, currentRsiValue);
+            _logger.LogInformation("Market {Market}: RSI{PeriodToAverage} on interval {Interval} is {RsiValue}",
+                market, _periodToAverage, _tradingContextInterval, currentRsiValue.Value);
 
             var recommendatorScore = EvaluateRsiValue(currentRsiValue.Value);
 
-            _logger.LogInformation("{Recommendator}: Score {Score} for market {Market}", this.GetType().Name, recommendatorScore.Score, market);
+            _logger.LogInformation(
+                "Market {Market}: RSI{PeriodToAverage} on interval {Interval} gives recommendation score of {Score}",
+                market, _periodToAverage, _tradingContextInterval, recommendatorScore.Score);
 
             return recommendatorScore;
         }
 
         private RecommendatorScore EvaluateRsiValue(decimal rsiValue)
         {
-            var rsiRecommendation = new RecommendatorScore() { Score = (float)((50 - rsiValue) / 100) * 2 };
+            var rsiRecommendation = new RecommendatorScore() { Score = (float)(100 - rsiValue * 2) };
 
             return rsiRecommendation;
         }
