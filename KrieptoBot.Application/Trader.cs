@@ -13,14 +13,19 @@ namespace KrieptoBot.Application
     {
         private readonly IExchangeService _exchangeService;
         private readonly IRecommendationCalculator _recommendationCalculator;
+        private readonly ISellManager _sellManager;
+        private readonly IBuyManager _buyManager;
         private readonly ITradingContext _tradingContext;
         private readonly ILogger<Trader> _logger;
 
-        public Trader(IExchangeService exchangeService, IRecommendationCalculator recommendationCalculator,
-            ITradingContext tradingContext, ILogger<Trader> logger)
+        public Trader(ILogger<Trader> logger, ITradingContext tradingContext, IExchangeService exchangeService,
+            IRecommendationCalculator recommendationCalculator, ISellManager sellManager, IBuyManager buyManager
+        )
         {
             _exchangeService = exchangeService;
             _recommendationCalculator = recommendationCalculator;
+            _sellManager = sellManager;
+            _buyManager = buyManager;
             _tradingContext = tradingContext;
             _logger = logger;
         }
@@ -32,11 +37,11 @@ namespace KrieptoBot.Application
             var marketsToSell = DetermineMarketsToSell(recommendations);
             var marketsToBuy = DetermineMarketsToBuy(recommendations);
 
-            Sell(marketsToSell);
+            await Sell(marketsToSell);
 
             var marketsToBuyWithBudget = await GetMarketsToBuyWithBudget(marketsToBuy, recommendations);
 
-            Buy(marketsToBuyWithBudget);
+            await Buy(marketsToBuyWithBudget);
         }
 
         private async Task<Dictionary<string, float>> GetMarketsToBuyWithBudget(
@@ -91,20 +96,19 @@ namespace KrieptoBot.Application
                 : 0f;
         }
 
-        private void Buy(Dictionary<string, float> marketsToBuyWithBudget)
+        private async Task Buy(Dictionary<string, float> marketsToBuyWithBudget)
         {
             foreach (var (market, budget) in marketsToBuyWithBudget)
             {
-                _logger.LogDebug("Buying on {Market} with budget {Budget}", market, budget);
+                await _buyManager.Buy(market, budget);
             }
         }
 
-        private void Sell(IDictionary<string, RecommendatorScore> marketsToSell)
+        private async Task Sell(IDictionary<string, RecommendatorScore> marketsToSell)
         {
             foreach (var (market, _) in marketsToSell)
             {
-                // go to service => place order
-                _logger.LogDebug("Selling on {Market}", market);
+                await _sellManager.Sell(market);
             }
         }
 

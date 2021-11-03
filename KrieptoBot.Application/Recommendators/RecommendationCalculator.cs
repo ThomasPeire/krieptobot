@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace KrieptoBot.Application.Recommendators
 {
-    public class RecommendationCalculator: IRecommendationCalculator
+    public class RecommendationCalculator : IRecommendationCalculator
     {
         private readonly IEnumerable<IRecommendator> _recommendators;
 
@@ -12,10 +12,12 @@ namespace KrieptoBot.Application.Recommendators
         {
             _recommendators = recommendators;
         }
-        
+
         public async Task<RecommendatorScore> CalculateRecommendation(string market)
         {
-            var recommendationScores = await Task.WhenAll(_recommendators.Select(async recommendator => await recommendator.GetRecommendation(market))) ;
+            var recommendationScores =
+                await Task.WhenAll(_recommendators.Select(async recommendator =>
+                    await recommendator.GetRecommendation(market)));
             /* Example:
              * SELL -60
              * BUY 52
@@ -28,7 +30,8 @@ namespace KrieptoBot.Application.Recommendators
              * ==> positive score ==>  score 47 ==> buy
              */
 
-            return new RecommendatorScore { Score = recommendationScores.Sum(x => x.Score) };
+            return new RecommendatorScore
+                { Score = recommendationScores.Sum(x => x.Score) / recommendationScores.Length };
         }
     }
 }
