@@ -131,5 +131,10 @@ namespace KrieptoBot.Tests.Mocks.Bitvavo
 
             return await Task.FromResult(orderDto);
         }
+
+        public Task<TickerPriceDto> GetTickerPrice(string market)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

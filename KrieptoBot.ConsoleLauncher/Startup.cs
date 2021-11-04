@@ -1,17 +1,19 @@
-﻿using KrieptoBot.Application.Extensions.Microsoft.DependencyInjection;
+﻿using KrieptoBot.Application;
+using KrieptoBot.Application.Extensions.Microsoft.DependencyInjection;
 using KrieptoBot.Infrastructure.Bitvavo.Extensions.Microsoft.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace KrieptoBot.ConsoleLauncher
 {
-    public class Startup
+    public static class Startup
     {
-        public void ConfigureServices(IServiceCollection services)
+        public static void ConfigureServices(IServiceCollection services)
         {
             services.AddOptions();
             services.AddApplicationServices();
             services.AddBitvavoService();
+            services.AddScoped<INotificationManager, NotificationManager>();
         }
     }
 }

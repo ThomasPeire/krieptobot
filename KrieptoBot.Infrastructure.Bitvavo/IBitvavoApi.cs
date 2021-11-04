@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KrieptoBot.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -23,7 +24,7 @@ namespace KrieptoBot.Infrastructure.Bitvavo
 
         [Get("/v2/{market}/candles")]
         Task<IEnumerable<JArray>> GetCandlesAsync(string market, string interval = "5m", int limit = 1000, long? start = null, long? end = null);
-        
+
         [Get("/v2/markets")]
         Task<MarketDto> GetMarketAsync(string market);
 
@@ -44,5 +45,9 @@ namespace KrieptoBot.Infrastructure.Bitvavo
 
         [Post("/v2/order")]
         Task<OrderDto> PostOrderAsync(string market, string side, string orderType, string amount, string price);
+
+        [Get("/v2/ticker/price")]
+        Task<TickerPriceDto> GetTickerPrice(string market);
+
     }
 }

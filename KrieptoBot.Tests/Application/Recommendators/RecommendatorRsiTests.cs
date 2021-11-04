@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using KrieptoBot.Application;
 using KrieptoBot.Application.Indicators;
 using KrieptoBot.Model;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework.Internal.Commands;
 
@@ -17,6 +18,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
     {
         private Mock<IExchangeService> _exchangeServiceMock;
         private Mock<IRsi> _rsiIndicator;
+        private Mock<ILogger<RecommendatorRsi14PeriodInterval>> _logger;
         private TradingContext _tradingContext;
 
         [SetUp]
@@ -24,14 +26,16 @@ namespace KrieptoBot.Tests.Application.Recommendators
         {
             _exchangeServiceMock = new Mock<IExchangeService>();
             _rsiIndicator = new Mock<IRsi>();
+            _logger = new Mock<ILogger<RecommendatorRsi14PeriodInterval>>();
+
             var rsiResults =
                 new Dictionary<DateTime, decimal>
                 {
-                    {DateTime.Today, 80},
-                    {DateTime.Today.AddDays(-1), 70},
-                    {DateTime.Today.AddDays(-2), 60},
-                    {DateTime.Today.AddDays(-3), 50},
-                    {DateTime.Today.AddDays(-4), 40},
+                    { DateTime.Today, 80 },
+                    { DateTime.Today.AddDays(-1), 70 },
+                    { DateTime.Today.AddDays(-2), 60 },
+                    { DateTime.Today.AddDays(-3), 50 },
+                    { DateTime.Today.AddDays(-4), 40 },
                 };
 
             _tradingContext = new TradingContext()
@@ -51,17 +55,18 @@ namespace KrieptoBot.Tests.Application.Recommendators
             var rsiResults =
                 new Dictionary<DateTime, decimal>
                 {
-                    {DateTime.Today, 80},
+                    { DateTime.Today, 80 },
                 };
 
             _rsiIndicator
                 .Setup(x => x.Calculate(It.IsAny<IEnumerable<Candle>>(), It.IsAny<int>()))
                 .Returns(rsiResults);
 
-            var recommendator = new RecommendatorRsi14(_exchangeServiceMock.Object, _rsiIndicator.Object, _tradingContext);
+            var recommendator = new RecommendatorRsi14PeriodInterval(_exchangeServiceMock.Object, _rsiIndicator.Object,
+                _tradingContext, _logger.Object);
 
             var result = await recommendator.GetRecommendation(It.IsAny<string>());
-            
+
             Assert.That(result.Score, Is.LessThan(0));
         }
 
@@ -71,14 +76,15 @@ namespace KrieptoBot.Tests.Application.Recommendators
             var rsiResults =
                 new Dictionary<DateTime, decimal>
                 {
-                    {DateTime.Today, 15},
+                    { DateTime.Today, 15 },
                 };
 
             _rsiIndicator
                 .Setup(x => x.Calculate(It.IsAny<IEnumerable<Candle>>(), It.IsAny<int>()))
                 .Returns(rsiResults);
 
-            var recommendator = new RecommendatorRsi14(_exchangeServiceMock.Object, _rsiIndicator.Object, _tradingContext);
+            var recommendator = new RecommendatorRsi14PeriodInterval(_exchangeServiceMock.Object, _rsiIndicator.Object,
+                _tradingContext, _logger.Object);
 
             var result = await recommendator.GetRecommendation(It.IsAny<string>());
 
@@ -91,22 +97,22 @@ namespace KrieptoBot.Tests.Application.Recommendators
             var rsiResults1 =
                 new Dictionary<DateTime, decimal>
                 {
-                    {DateTime.Today, 15},
+                    { DateTime.Today, 15 },
                 };
 
             _rsiIndicator
                 .Setup(x => x.Calculate(It.IsAny<IEnumerable<Candle>>(), It.IsAny<int>()))
                 .Returns(rsiResults1);
 
-            var recommendator = new RecommendatorRsi14(_exchangeServiceMock.Object, _rsiIndicator.Object, _tradingContext);
+            var recommendator = new RecommendatorRsi14PeriodInterval(_exchangeServiceMock.Object, _rsiIndicator.Object,
+                _tradingContext, _logger.Object);
 
             var result1 = await recommendator.GetRecommendation(It.IsAny<string>());
-
 
             var rsiResults2 =
                 new Dictionary<DateTime, decimal>
                 {
-                    {DateTime.Today, 80},
+                    { DateTime.Today, 80 },
                 };
 
             _rsiIndicator
@@ -125,14 +131,16 @@ namespace KrieptoBot.Tests.Application.Recommendators
             var rsiResults =
                 new Dictionary<DateTime, decimal>
                 {
-                    {DateTime.Today, 50},
+                    { DateTime.Today, 50 },
                 };
 
             _rsiIndicator
                 .Setup(x => x.Calculate(It.IsAny<IEnumerable<Candle>>(), It.IsAny<int>()))
                 .Returns(rsiResults);
 
-            var recommendator = new RecommendatorRsi14(_exchangeServiceMock.Object, _rsiIndicator.Object, _tradingContext);
+            var recommendator =
+                new RecommendatorRsi14PeriodInterval(_exchangeServiceMock.Object, _rsiIndicator.Object, _tradingContext,
+                    _logger.Object);
 
             var result = await recommendator.GetRecommendation(It.IsAny<string>());
 
@@ -146,24 +154,24 @@ namespace KrieptoBot.Tests.Application.Recommendators
             var rsiResults =
                 new Dictionary<DateTime, decimal>
                 {
-                    {DateTime.Today.AddDays(-2), 98},
-                    {DateTime.Today.AddDays(-5), 32},
-                    {DateTime.Today.AddDays(-3), 13},
-                    {DateTime.Today, todaysRsiValue},
-                    {DateTime.Today.AddDays(-1), 98},
-                    {DateTime.Today.AddDays(-4), 84},
+                    { DateTime.Today.AddDays(-2), 98 },
+                    { DateTime.Today.AddDays(-5), 32 },
+                    { DateTime.Today.AddDays(-3), 13 },
+                    { DateTime.Today, todaysRsiValue },
+                    { DateTime.Today.AddDays(-1), 98 },
+                    { DateTime.Today.AddDays(-4), 84 },
                 };
 
             _rsiIndicator
                 .Setup(x => x.Calculate(It.IsAny<IEnumerable<Candle>>(), It.IsAny<int>()))
                 .Returns(rsiResults);
 
-            var recommendator = new RecommendatorRsi14(_exchangeServiceMock.Object, _rsiIndicator.Object, _tradingContext);
+            var recommendator = new RecommendatorRsi14PeriodInterval(_exchangeServiceMock.Object, _rsiIndicator.Object,
+                _tradingContext, _logger.Object);
 
             var result = await recommendator.GetRecommendation(It.IsAny<string>());
 
-            Assert.That(result.Score, Is.EqualTo(((float)50 - todaysRsiValue) / 100 *2));
+            Assert.That(result.Score, Is.EqualTo(((float)100 - todaysRsiValue * 2)));
         }
-
     }
 }
