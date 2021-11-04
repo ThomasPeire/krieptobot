@@ -28,7 +28,10 @@ namespace KrieptoBot.Application
 
             var balances = await _exchangeService.GetBalanceAsync();
             var baseAssetBalance = balances.FirstOrDefault(x => x.Symbol == baseAsset);
-            var availableBaseAssetBalance = baseAssetBalance.Available - baseAssetBalance.InOrder;
+            var availableBaseAssetBalance = 0m;
+
+            if (baseAssetBalance != null)
+                availableBaseAssetBalance = baseAssetBalance.Available - baseAssetBalance.InOrder;
 
             //todo: take fees into account
             _logger.LogInformation("Selling on {Market}. Price: € {Price}; Amount: {Amount}; € {Euro}", market,
