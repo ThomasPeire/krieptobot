@@ -39,7 +39,7 @@ namespace KrieptoBot.Application
 
         public TradingContext SetIsSimulation(bool isSimulation)
         {
-            isSimulation = isSimulation;
+            IsSimulation = isSimulation;
             return this;
         }
     }
