@@ -33,7 +33,7 @@ namespace KrieptoBot.ConsoleLauncher
 
         private async void StartTrader(object sender, ElapsedEventArgs e)
         {
-            if (DateTime.UtcNow.Minute % GetIntervalInMinutes(_tradingContext.Interval) != 1)
+            if (DateTime.UtcNow.Minute % GetIntervalInMinutes(_tradingContext.Interval) != 0)
                 return;
             _logger.LogDebug("Starting trading service");
             _tradingContext.CurrentTime = DateTime.UtcNow;
