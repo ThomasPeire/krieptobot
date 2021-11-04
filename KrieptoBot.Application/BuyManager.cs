@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using KrieptoBot.Model;
 using Microsoft.Extensions.Logging;
 
 namespace KrieptoBot.Application
@@ -10,7 +11,8 @@ namespace KrieptoBot.Application
         private readonly INotificationManager _notificationManager;
         private readonly IExchangeService _exchangeService;
 
-        public BuyManager(ILogger<BuyManager> logger, ITradingContext tradingContext, INotificationManager notificationManager,
+        public BuyManager(ILogger<BuyManager> logger, ITradingContext tradingContext,
+            INotificationManager notificationManager,
             IExchangeService exchangeService)
         {
             _logger = logger;
@@ -19,19 +21,22 @@ namespace KrieptoBot.Application
             _exchangeService = exchangeService;
         }
 
-        public async Task Buy(string market, float budget)
+        public async Task Buy(Market market, decimal budget)
         {
-            var tickerPrice = await _exchangeService.GetTickerPrice(market);
-            var amount = (decimal)budget / tickerPrice.Price;
+            var tickerPrice = await _exchangeService.GetTickerPrice(market.MarketName);
+            var amount = budget / tickerPrice.Price;
 
             //todo: take fees into account
-            _logger.LogInformation("Buying on {Market} with € {Budget}. Price: € {Price}; Amount: {Amount}", market,
+            _logger.LogInformation("Buying on {Market} with € {Budget}. Price: € {Price}; Amount: {Amount}",
+                market.MarketName,
                 budget, tickerPrice.Price, amount);
-            await _notificationManager.SendNotification($"Buying on {market} with € {budget}", $"Price: € {tickerPrice.Price}; Amount: {amount}");
+            await _notificationManager.SendNotification($"Buying on {market.MarketName} with € {budget}",
+                $"Price: € {tickerPrice.Price}; Amount: {amount}");
 
-            if(!_tradingContext.IsSimulation)
+            if (!_tradingContext.IsSimulation)
             {
-                await _exchangeService.PostBuyOrderAsync(market, "limit", (double)amount, (double)tickerPrice.Price);
+                await _exchangeService.PostBuyOrderAsync(market.MarketName, "limit", amount,
+                    tickerPrice.Price);
             }
         }
     }

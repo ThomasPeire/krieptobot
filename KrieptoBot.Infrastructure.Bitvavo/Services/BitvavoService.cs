@@ -86,14 +86,14 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
             return dto.ConvertToKrieptoBotModel();
         }
 
-        public async Task<Order> PostSellOrderAsync(string market, string orderType, double amount, double price)
+        public async Task<Order> PostSellOrderAsync(string market, string orderType, decimal amount, decimal price)
         {
             var dto = await _bitvavoApi.PostOrderAsync(market, "sell", orderType, amount.ToString(CultureInfo.InvariantCulture), price.ToString(CultureInfo.InvariantCulture));
 
             return dto.ConvertToKrieptoBotModel();
         }
 
-        public async Task<Order> PostBuyOrderAsync(string market, string orderType, double amount, double price)
+        public async Task<Order> PostBuyOrderAsync(string market, string orderType, decimal amount, decimal price)
         {
             var dto = await _bitvavoApi.PostOrderAsync(market, "buy", orderType, amount.ToString(CultureInfo.InvariantCulture), price.ToString(CultureInfo.InvariantCulture));
 

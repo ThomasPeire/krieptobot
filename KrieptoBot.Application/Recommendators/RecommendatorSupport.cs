@@ -1,16 +1,17 @@
 ﻿using System.Threading.Tasks;
+using KrieptoBot.Model;
 
 namespace KrieptoBot.Application.Recommendators
 {
     public class RecommendatorSupport : RecommendatorBase
     {
-        protected override float BuyRecommendationWeight => 0.1F;
-        protected override float SellRecommendationWeight => 0.1F;
+        protected override decimal BuyRecommendationWeight => 0.1m;
+        protected override decimal SellRecommendationWeight => 0.1m;
 
-        protected override Task<RecommendatorScore> CalculateRecommendation(string market)
+        protected override Task<RecommendatorScore> CalculateRecommendation(Market market)
         {
             //To be implemented
-            return Task.FromResult(new RecommendatorScore { Score = .0F });
+            return Task.FromResult(new RecommendatorScore { Score = .0m });
         }
     }
 }

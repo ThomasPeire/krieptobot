@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using KrieptoBot.Model;
 using Microsoft.Extensions.Logging;
 
 namespace KrieptoBot.Application.Recommendators
@@ -17,7 +18,7 @@ namespace KrieptoBot.Application.Recommendators
             _recommendators = recommendators;
         }
 
-        public async Task<RecommendatorScore> CalculateRecommendation(string market)
+        public async Task<RecommendatorScore> CalculateRecommendation(Market market)
         {
             var recommendationScores =
                 await Task.WhenAll(_recommendators.Select(async recommendator =>
@@ -25,7 +26,7 @@ namespace KrieptoBot.Application.Recommendators
 
             var averageScore = recommendationScores.Average(x=> x.Score);
 
-            _logger.LogInformation("Market {Market}: Final score: {Score}", market, averageScore);
+            _logger.LogInformation("Market {Market}: Final score: {Score}", market.MarketName, averageScore);
 
             return new RecommendatorScore { Score = averageScore };
         }

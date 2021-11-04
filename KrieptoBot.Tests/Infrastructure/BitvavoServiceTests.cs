@@ -1,11 +1,10 @@
-using KrieptoBot.Tests.Mocks.Bitvavo;
-using NUnit.Framework;
 using System;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Snapshooter.NUnit;
-using KrieptoBot.Infrastructure.Bitvavo;
 using KrieptoBot.Infrastructure.Bitvavo.Services;
+using KrieptoBot.Tests.Mocks.Bitvavo;
+using NUnit.Framework;
+using Snapshooter.NUnit;
 
 namespace KrieptoBot.Tests.Infrastructure
 {
@@ -88,7 +87,8 @@ namespace KrieptoBot.Tests.Infrastructure
         [Test]
         public async Task GetOrder_ShouldReturn_Order()
         {
-            var result = await _bitvavoService.GetOrderAsync("BTC-EUR", new Guid("4a7bd126-2d21-4918-96dc-0c8f51760a0b"));
+            var result =
+                await _bitvavoService.GetOrderAsync("BTC-EUR", new Guid("4a7bd126-2d21-4918-96dc-0c8f51760a0b"));
 
             result.Should().MatchSnapshot();
         }
@@ -104,7 +104,7 @@ namespace KrieptoBot.Tests.Infrastructure
         [Test]
         public async Task PostOrder_ShouldReturn_AddOrder()
         {
-            var order = await _bitvavoService.PostBuyOrderAsync("BTC-EUR", "Limit", 9000.00, 0.0001);
+            var order = await _bitvavoService.PostBuyOrderAsync("BTC-EUR", "Limit", 9000.00m, 0.0001m);
 
             var result = await _bitvavoService.GetOrderAsync(order.Market, new Guid(order.OrderId));
 
