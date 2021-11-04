@@ -5,6 +5,8 @@
     <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
     <UserSecretsId>d2c8acaa-c84c-4067-ab91-110ecbe73431</UserSecretsId>
     <LangVersion>10</LangVersion>
+    <AssemblyName>KrieptoBot</AssemblyName>
+    <ApplicationIcon>Assets\Icon\64x64.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +18,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </Content>
+    <Content Include="Assets\Icon\64x64.ico" />
   </ItemGroup>
 
   <ItemGroup>
