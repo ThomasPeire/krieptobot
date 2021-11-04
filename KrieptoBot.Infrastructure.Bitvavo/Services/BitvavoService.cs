@@ -45,7 +45,7 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
         public async Task<IEnumerable<Candle>> GetCandlesAsync(string market, string interval = "5m", int limit = 1000, DateTime? start = null, DateTime? end = null)
         {
             var candleJArrayList = await _bitvavoApi.GetCandlesAsync(market, interval, limit, start.ToUnixTimeMilliseconds(), end.ToUnixTimeMilliseconds());
-            
+
             return candleJArrayList?.Select(x =>
                 new CandleDto
                 {
@@ -86,9 +86,23 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
             return dto.ConvertToKrieptoBotModel();
         }
 
-        public async Task<Order> PostOrderAsync(string market, string side, string orderType, double amount, double price)
+        public async Task<Order> PostSellOrderAsync(string market, string orderType, double amount, double price)
         {
-            var dto = await _bitvavoApi.PostOrderAsync(market, side, orderType, amount.ToString(CultureInfo.InvariantCulture), price.ToString(CultureInfo.InvariantCulture));
+            var dto = await _bitvavoApi.PostOrderAsync(market, "sell", orderType, amount.ToString(CultureInfo.InvariantCulture), price.ToString(CultureInfo.InvariantCulture));
+
+            return dto.ConvertToKrieptoBotModel();
+        }
+
+        public async Task<Order> PostBuyOrderAsync(string market, string orderType, double amount, double price)
+        {
+            var dto = await _bitvavoApi.PostOrderAsync(market, "buy", orderType, amount.ToString(CultureInfo.InvariantCulture), price.ToString(CultureInfo.InvariantCulture));
+
+            return dto.ConvertToKrieptoBotModel();
+        }
+
+        public async Task<TickerPrice> GetTickerPrice(string market)
+        {
+            var dto = await _bitvavoApi.GetTickerPrice(market);
 
             return dto.ConvertToKrieptoBotModel();
         }

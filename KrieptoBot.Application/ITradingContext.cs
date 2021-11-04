@@ -10,6 +10,6 @@ namespace KrieptoBot.Application
         DateTime CurrentTime { get; set; }
         int BuyMargin { get; }
         int SellMargin { get; }
-
+        bool IsSimulation { get; }
     }
 }

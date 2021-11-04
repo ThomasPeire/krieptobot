@@ -127,6 +127,15 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Extensions
             };
         }
 
+        public static TickerPrice ConvertToKrieptoBotModel(this TickerPriceDto dto)
+        {
+            return new TickerPrice
+            {
+                Market = dto.Market,
+                Price = decimal.Parse(dto.Price ?? "0", CultureInfo.InvariantCulture),
+            };
+        }
+
         public static IEnumerable<Asset> ConvertToKrieptoBotModel(this IEnumerable<AssetDto> dtoList)
         {
             return dtoList.Select(dto => dto.ConvertToKrieptoBotModel());

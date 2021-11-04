@@ -14,5 +14,24 @@ namespace KrieptoBot.ConsoleLauncher
                 .AddText(message)
                 .Show();
         }
+
+        public async Task SendNotification(string message, string subMessage)
+        {
+            new ToastContentBuilder()
+                .AddHeader($"{DateTime.UtcNow:g}", "Recommendations!", "")
+                .AddText(message)
+                .AddText(subMessage)
+                .Show();
+        }
+
+        public async Task SendNotification(string message, string subMessage, string subSubMessage)
+        {
+            new ToastContentBuilder()
+                .AddHeader($"{DateTime.UtcNow:g}", "Recommendations!", "")
+                .AddText(message)
+                .AddText(subMessage)
+                .AddText(subSubMessage)
+                .Show();
+        }
     }
 }
