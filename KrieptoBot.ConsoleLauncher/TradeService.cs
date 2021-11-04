@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using KrieptoBot.Application;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -24,18 +25,19 @@ namespace KrieptoBot.ConsoleLauncher
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            while (true)
-            {
-                var timeNow = DateTime.UtcNow;
+            var timer = new Timer(TimeSpan.FromMinutes(1).TotalMilliseconds);
+            timer.AutoReset = true;
+            timer.Elapsed += StartTrader;
+            timer.Start();
+        }
 
-                //every first minute after trading context interval
-                if (timeNow.Minute % GetIntervalInMinutes(_tradingContext.Interval) != 1 ||
-                    timeNow.Second != 0) continue;
-
-                _logger.LogDebug("Starting trading service");
-                _tradingContext.CurrentTime = timeNow;
-                await _trader.Run();
-            }
+        private async void StartTrader(object sender, ElapsedEventArgs e)
+        {
+            if (DateTime.UtcNow.Minute % GetIntervalInMinutes(_tradingContext.Interval) != 1)
+                return;
+            _logger.LogDebug("Starting trading service");
+            _tradingContext.CurrentTime = DateTime.UtcNow;
+            await _trader.Run();
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
