@@ -104,7 +104,7 @@ namespace KrieptoBot.Tests.Infrastructure
         [Test]
         public async Task PostOrder_ShouldReturn_AddOrder()
         {
-            var order = await _bitvavoService.PostOrderAsync("BTC-EUR", "Buy", "Limit", 9000.00, 0.0001);
+            var order = await _bitvavoService.PostBuyOrderAsync("BTC-EUR", "Limit", 9000.00, 0.0001);
 
             var result = await _bitvavoService.GetOrderAsync(order.Market, new Guid(order.OrderId));
 
