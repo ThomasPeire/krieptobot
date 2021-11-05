@@ -25,6 +25,8 @@ namespace KrieptoBot.ConsoleLauncher
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
+            await RunTrader();
+
             var timer = new Timer(TimeSpan.FromMinutes(1).TotalMilliseconds);
             timer.AutoReset = true;
             timer.Elapsed += StartTrader;
@@ -35,6 +37,11 @@ namespace KrieptoBot.ConsoleLauncher
         {
             if (DateTime.UtcNow.Minute % GetIntervalInMinutes(_tradingContext.Interval) != 0)
                 return;
+            await RunTrader();
+        }
+
+        private async Task RunTrader()
+        {
             _logger.LogDebug("Starting trading service");
             _tradingContext.CurrentTime = DateTime.UtcNow;
             await _trader.Run();

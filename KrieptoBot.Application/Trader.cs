@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using KrieptoBot.Application.Recommendators;
+using KrieptoBot.Model;
 using Microsoft.Extensions.Logging;
 
 namespace KrieptoBot.Application
@@ -37,31 +38,30 @@ namespace KrieptoBot.Application
 
             await Sell(marketsToSell);
 
-            var marketsToBuyWithBudget = await GetMarketsToBuyWithBudget(marketsToBuy, recommendations);
+            var marketsToBuyWithBudget = await GetMarketsToBuyWithBudget(marketsToBuy);
 
             await Buy(marketsToBuyWithBudget);
         }
 
-        private async Task<Dictionary<string, float>> GetMarketsToBuyWithBudget(
-            IDictionary<string, RecommendatorScore> marketsToBuy,
-            Dictionary<string, RecommendatorScore> recommendations)
+        private async Task<Dictionary<Market, decimal>> GetMarketsToBuyWithBudget(
+            IDictionary<Market, RecommendatorScore> marketsToBuy)
         {
             var totalRecommendationScore = marketsToBuy.Sum(x => x.Value.Score);
 
-            var dictionary = new Dictionary<string, float>();
+            var dictionary = new Dictionary<Market, decimal>();
 
-            foreach (var (market, recommendation) in recommendations.Where(x => marketsToBuy.ContainsKey(x.Key)))
+            foreach (var (market, recommendation) in marketsToBuy)
             {
                 dictionary.Add(
                     market,
-                    (float)Math.Floor(recommendation.Score * await GetAvailableBudgetToInvest() /
+                    Math.Floor(recommendation.Score * await GetAvailableBudgetToInvest() /
                                       totalRecommendationScore));
             }
 
             return dictionary;
         }
 
-        private async Task<float> GetAvailableBudgetToInvest()
+        private async Task<decimal> GetAvailableBudgetToInvest()
         {
             var balance = await GetAvailableBalanceForAsset("EUR");
 
@@ -70,18 +70,18 @@ namespace KrieptoBot.Application
             return balance;
         }
 
-        private async Task<float> GetAvailableBalanceForAsset(string asset)
+        private async Task<decimal> GetAvailableBalanceForAsset(string asset)
         {
             var balances = await _exchangeService.GetBalanceAsync();
 
             var availableBalance = balances.FirstOrDefault(x => x.Symbol.Equals(asset));
 
             return availableBalance != null
-                ? (float)(availableBalance.Available - availableBalance.InOrder)
-                : 0f;
+                ? (availableBalance.Available - availableBalance.InOrder)
+                : 0;
         }
 
-        private async Task Buy(Dictionary<string, float> marketsToBuyWithBudget)
+        private async Task Buy(Dictionary<Market, decimal> marketsToBuyWithBudget)
         {
             foreach (var (market, budget) in marketsToBuyWithBudget)
             {
@@ -89,7 +89,7 @@ namespace KrieptoBot.Application
             }
         }
 
-        private async Task Sell(IDictionary<string, RecommendatorScore> marketsToSell)
+        private async Task Sell(IDictionary<Market, RecommendatorScore> marketsToSell)
         {
             foreach (var (market, _) in marketsToSell)
             {
@@ -97,8 +97,8 @@ namespace KrieptoBot.Application
             }
         }
 
-        private IDictionary<string, RecommendatorScore> DetermineMarketsToBuy(
-            Dictionary<string, RecommendatorScore> recommendations)
+        private IDictionary<Market, RecommendatorScore> DetermineMarketsToBuy(
+            Dictionary<Market, RecommendatorScore> recommendations)
         {
             var marketsToBuy =
                 recommendations
@@ -107,14 +107,14 @@ namespace KrieptoBot.Application
 
             foreach (var (market, score) in marketsToBuy)
             {
-                _logger.LogInformation("Buy recommendation for {Market}, with a score of {Score}", market, score.Score);
+                _logger.LogInformation("Buy recommendation for {Market}, with a score of {Score}", market.MarketName, score.Score);
             }
 
             return marketsToBuy;
         }
 
-        private IDictionary<string, RecommendatorScore> DetermineMarketsToSell(
-            Dictionary<string, RecommendatorScore> recommendations)
+        private IDictionary<Market, RecommendatorScore> DetermineMarketsToSell(
+            Dictionary<Market, RecommendatorScore> recommendations)
         {
             var marketsToSell =
                 recommendations
@@ -123,32 +123,37 @@ namespace KrieptoBot.Application
 
             foreach (var (market, score) in marketsToSell)
             {
-                _logger.LogInformation("Sell recommendation for {Market}, with a score of {Score}", market,
+                _logger.LogInformation("Sell recommendation for {Market}, with a score of {Score}", market.MarketName,
                     score.Score);
             }
 
             return marketsToSell;
         }
 
-        private async Task<Dictionary<string, RecommendatorScore>> GetRecommendations()
+        private async Task<Dictionary<Market, RecommendatorScore>> GetRecommendations()
         {
-            var marketsToEvaluate = GetMarketsToEvaluate();
+            var marketsToEvaluate = await GetMarketsToEvaluate();
 
-            var marketRecommendations = await Task.WhenAll(marketsToEvaluate.Select(async market =>
+            var marketRecommendations = await Task.WhenAll(marketsToEvaluate. Select(async market =>
                 (market, recommendation: await _recommendationCalculator.CalculateRecommendation(market))));
 
             return marketRecommendations.ToDictionary(x => x.market, x => x.recommendation);
         }
 
-        private IEnumerable<string> GetMarketsToEvaluate()
+        private async Task<IEnumerable<Market>> GetMarketsToEvaluate()
         {
-            var marketsToWatch = _tradingContext.MarketsToWatch.ToList();
+            var marketsToWatch = new List<Market>();
+
+            foreach (var market in _tradingContext.MarketsToWatch)
+            {
+                marketsToWatch.Add(await _exchangeService.GetMarketAsync(market));
+            }
 
             _logger.LogInformation("Markets to evaluate:");
 
             foreach (var market in marketsToWatch)
             {
-                _logger.LogInformation("{Market}", market);
+                _logger.LogInformation("{Market}", market.MarketName);
             }
 
             return marketsToWatch;

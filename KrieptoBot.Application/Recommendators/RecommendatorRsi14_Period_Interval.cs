@@ -5,8 +5,8 @@ namespace KrieptoBot.Application.Recommendators
 {
     public class RecommendatorRsi14PeriodInterval : RecommendatorRsiBase
     {
-        protected override float SellRecommendationWeight => 1F;
-        protected override float BuyRecommendationWeight => 1F;
+        protected override decimal SellRecommendationWeight => 1;
+        protected override decimal BuyRecommendationWeight => 1;
 
         public RecommendatorRsi14PeriodInterval(IExchangeService exchangeService, IRsi rsiIndicator,
             ITradingContext tradingContext, ILogger<RecommendatorRsi14PeriodInterval> logger) : base(exchangeService,
