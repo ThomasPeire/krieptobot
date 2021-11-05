@@ -29,7 +29,7 @@ namespace KrieptoBot.Application.Recommendators
 
         protected override async Task<RecommendatorScore> CalculateRecommendation(Market market)
         {
-            var candles = await _exchangeService.GetCandlesAsync(market.MarketName, _tradingContextInterval, _periodToAverage * 3,
+            var candles = await _exchangeService.GetCandlesAsync(market.MarketName, _tradingContextInterval, _periodToAverage * 10,
                 end: _tradingContext.CurrentTime);
 
             var rsiValues = _rsiIndicator.Calculate(candles, _periodToAverage);
