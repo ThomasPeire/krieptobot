@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using KrieptoBot.Application;
 using KrieptoBot.Application.Extensions.Microsoft.DependencyInjection;
 using KrieptoBot.AzureFunction;
 using KrieptoBot.Infrastructure.Bitvavo.Extensions.Microsoft.DependencyInjection;
@@ -29,6 +30,7 @@ namespace KrieptoBot.AzureFunction
             builder.Services.AddOptions();
             builder.Services.AddApplicationServices();
             builder.Services.AddBitvavoService();
+            builder.Services.AddScoped<INotificationManager, NotificationManager>();
         }
     }
 }
