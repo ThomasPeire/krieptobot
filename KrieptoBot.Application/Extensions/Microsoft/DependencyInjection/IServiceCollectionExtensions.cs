@@ -14,6 +14,7 @@ namespace KrieptoBot.Application.Extensions.Microsoft.DependencyInjection
 
             services.AddScoped<IRecommendator, RecommendatorRsi14PeriodInterval>();
             services.AddScoped<IRecommendator, RecommendatorRsi14Period4H>();
+            services.AddScoped<IRecommendator, RecommendatorPercentageProfit>();
 
             services.AddScoped<IRecommendator, RecommendatorSupport>();
 

@@ -71,8 +71,8 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Extensions
             {
                 OrderId = dto.OrderId,
                 Market = dto.Market,
-                Created = new DateTime(dto.Created),
-                Updated = new DateTime(dto.Updated),
+                Created = DateTime.UnixEpoch.AddMilliseconds(dto.Created),
+                Updated = DateTime.UnixEpoch.AddMilliseconds(dto.Updated),
                 Status = dto.Status,
                 Side = dto.Side,
                 OrderType = dto.OrderType,
@@ -105,7 +105,7 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Extensions
             return new Fill
             {
                 Id = dto.Id,
-                Timestamp = new DateTime(dto.Timestamp),
+                Timestamp = DateTime.UnixEpoch.AddMilliseconds(dto.Timestamp),
                 Amount = decimal.Parse(dto.Amount ?? "0", CultureInfo.InvariantCulture),
                 Price = decimal.Parse(dto.Price ?? "0", CultureInfo.InvariantCulture),
                 Taker = dto.Taker,
@@ -119,7 +119,7 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Extensions
         {
             return new Trade
             {
-                Timestamp = new DateTime(dto.Timestamp),
+                Timestamp = DateTime.UnixEpoch.AddMilliseconds(dto.Timestamp),
                 Id = dto.Id,
                 Amount = decimal.Parse(dto.Amount ?? "0", CultureInfo.InvariantCulture),
                 Price = decimal.Parse(dto.Price ?? "0", CultureInfo.InvariantCulture),
