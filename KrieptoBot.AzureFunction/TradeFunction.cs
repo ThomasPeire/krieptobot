@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using KrieptoBot.Application;
 using Microsoft.Azure.Functions.Worker;
-using TimerInfo = Microsoft.Azure.WebJobs.TimerInfo;
 
 namespace KrieptoBot.AzureFunction
 {
