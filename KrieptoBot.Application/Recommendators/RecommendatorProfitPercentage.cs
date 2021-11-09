@@ -11,7 +11,7 @@ namespace KrieptoBot.Application.Recommendators
     {
         private readonly ILogger<RecommendatorProfitPercentage> _logger;
         private readonly IExchangeService _exchangeService;
-        protected override decimal SellRecommendationWeight => 3; //todo make app setting for each recommendator
+        protected override decimal SellRecommendationWeight => 1; //todo make app setting for each recommendator
         protected override decimal BuyRecommendationWeight => 0; //todo make app setting for each recommendator
 
         public RecommendatorProfitPercentage(ILogger<RecommendatorProfitPercentage> logger,
@@ -34,8 +34,7 @@ namespace KrieptoBot.Application.Recommendators
 
             if (lastBuyOrders.Any())
             {
-                //todo take amount into account!
-                var averagePricePaid = lastBuyOrders.Average(x => x.Price);
+                var averagePricePaid = lastBuyOrders.Sum(x => x.Price * x.Amount) / lastBuyOrders.Sum(x => x.Amount);
 
                 var tickerPrice = await _exchangeService.GetTickerPrice(market.MarketName);
 

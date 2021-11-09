@@ -47,23 +47,24 @@ namespace KrieptoBot.Tests.Application.Recommendators
                     It.IsAny<DateTime?>(), It.IsAny<Guid?>(), It.IsAny<Guid?>())).ReturnsAsync(
                     new List<Order>()
                     {
-                        new Order()
+                        new()
                         {
-                            Price = 4, Side = "sell", Status = "filled", Created = DateTime.Now.AddDays(-10)
+                            Price = 4, Side = "sell", Amount = 10, Status = "filled",
+                            Created = DateTime.Now.AddDays(-10)
                         },
-                        new Order()
+                        new()
                         {
-                            Price = 3, Side = "buy", Status = "filled", Created = DateTime.Now.AddDays(-9)
+                            Price = 3, Side = "buy", Amount = 4, Status = "filled", Created = DateTime.Now.AddDays(-9)
                         },
-                        new Order()
+                        new()
                         {
-                            Price = 4, Side = "buy", Status = "filled", Created = DateTime.Now.AddDays(-8)
+                            Price = 4, Side = "buy", Amount = 4, Status = "filled", Created = DateTime.Now.AddDays(-8)
                         },
                     });
 
             _exchangeServiceMock
                 .Setup(x => x.GetTickerPrice(It.IsAny<string>())).ReturnsAsync(
-                    new TickerPrice(){Price = 4, Market = ""});
+                    new TickerPrice() { Price = 4, Market = "" });
 
 
             var result = await recommendator.GetRecommendation(new Market { MarketName = "BTC-EUR" });
@@ -83,19 +84,19 @@ namespace KrieptoBot.Tests.Application.Recommendators
                     It.IsAny<DateTime?>(), It.IsAny<Guid?>(), It.IsAny<Guid?>())).ReturnsAsync(
                     new List<Order>()
                     {
-                        new Order()
+                        new()
                         {
-                            Price = 4, Side = "sell", Status = "filled", Created = DateTime.Now.AddDays(-10)
+                            Price = 4, Side = "sell", Amount = 1, Status = "filled", Created = DateTime.Now.AddDays(-10)
                         },
-                        new Order()
+                        new()
                         {
-                            Price = 3, Side = "buy", Status = "filled", Created = DateTime.Now.AddDays(-9)
+                            Price = 3, Side = "buy", Amount = 1, Status = "filled", Created = DateTime.Now.AddDays(-9)
                         }
                     });
 
             _exchangeServiceMock
                 .Setup(x => x.GetTickerPrice(It.IsAny<string>())).ReturnsAsync(
-                    new TickerPrice(){Price = tickerPrice, Market = ""});
+                    new TickerPrice() { Price = tickerPrice, Market = "" });
 
 
             var result = await recommendator.GetRecommendation(new Market { MarketName = "BTC-EUR" });
