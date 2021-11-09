@@ -7,14 +7,14 @@ using Microsoft.Extensions.Logging;
 
 namespace KrieptoBot.Application.Recommendators
 {
-    public class RecommendatorPercentageProfit : RecommendatorBase
+    public class RecommendatorProfitPercentage : RecommendatorBase
     {
-        private readonly ILogger<RecommendatorPercentageProfit> _logger;
+        private readonly ILogger<RecommendatorProfitPercentage> _logger;
         private readonly IExchangeService _exchangeService;
         protected override decimal SellRecommendationWeight => 3; //todo make app setting for each recommendator
         protected override decimal BuyRecommendationWeight => 0; //todo make app setting for each recommendator
 
-        public RecommendatorPercentageProfit(ILogger<RecommendatorPercentageProfit> logger,
+        public RecommendatorProfitPercentage(ILogger<RecommendatorProfitPercentage> logger,
             IExchangeService exchangeService)
         {
             _logger = logger;
@@ -34,6 +34,7 @@ namespace KrieptoBot.Application.Recommendators
 
             if (lastBuyOrders.Any())
             {
+                //todo take amount into account!
                 var averagePricePaid = lastBuyOrders.Average(x => x.Price);
 
                 var tickerPrice = await _exchangeService.GetTickerPrice(market.MarketName);
