@@ -27,6 +27,7 @@ namespace KrieptoBot.Application
             var amount = budget / tickerPrice.Price;
 
             //todo: take fees into account
+            //todo: take min buy amount into account
             _logger.LogInformation("Buying on {Market} with € {Budget}. Price: € {Price}; Amount: {Amount}",
                 market.MarketName,
                 budget, tickerPrice.Price, amount);

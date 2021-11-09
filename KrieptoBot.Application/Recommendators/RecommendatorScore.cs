@@ -2,7 +2,7 @@
 {
     public class RecommendatorScore
     {
-        public decimal Score { get; set; }
+        public decimal Score { get; init; }
 
         public static RecommendatorScore operator *(RecommendatorScore recommendatorScore, decimal b) =>
             new RecommendatorScore { Score = recommendatorScore.Score * b };

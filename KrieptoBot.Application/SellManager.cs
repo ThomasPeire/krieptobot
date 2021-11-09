@@ -33,6 +33,7 @@ namespace KrieptoBot.Application
                 availableBaseAssetBalance = baseAssetBalance.Available - baseAssetBalance.InOrder;
 
             //todo: take fees into account
+            //todo: take min sell amount into account
             _logger.LogInformation("Selling on {Market}. Price: € {Price}; Amount: {Amount}; € {Euro}",
                 market.MarketName,
                 tickerPrice.Price, availableBaseAssetBalance, availableBaseAssetBalance * tickerPrice.Price);
