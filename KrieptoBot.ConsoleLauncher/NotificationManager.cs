@@ -23,15 +23,5 @@ namespace KrieptoBot.ConsoleLauncher
                 .AddText(subMessage)
                 .Show();
         }
-
-        public async Task SendNotification(string message, string subMessage, string subSubMessage)
-        {
-            new ToastContentBuilder()
-                .AddHeader($"{DateTime.UtcNow:g}", "Recommendations!", "")
-                .AddText(message)
-                .AddText(subMessage)
-                .AddText(subSubMessage)
-                .Show();
-        }
     }
 }
