@@ -3,7 +3,8 @@
     <TargetFramework>net6.0</TargetFramework>
     <AzureFunctionsVersion>v4</AzureFunctionsVersion>
     <UserSecretsId>ece5d799-c787-4d4a-ba37-35a409af4142</UserSecretsId>
-    <LangVersion>8</LangVersion>
+    <LangVersion>10</LangVersion>
+    <OutputType>Exe</OutputType>
   </PropertyGroup>
   <ItemGroup>
     <ProjectCapability Include="DynamicDependentFile" />
@@ -19,17 +20,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="log4net" Version="2.0.13" />
-    <PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.6.0" />
+    <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Timer" Version="4.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KrieptoBot.Application\KrieptoBot.Application.csproj" />
     <ProjectReference Include="..\KrieptoBot.Infrastructure.Bitvavo\KrieptoBot.Infrastructure.Bitvavo.csproj" />
-    <ProjectReference Include="..\KrieptoBot.Infrastructure\KrieptoBot.Infrastructure.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">
@@ -39,13 +36,5 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.Azure.WebJobs, Version=3.0.28.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-      <HintPath>C:\Program Files\Microsoft\Azure Functions Core Tools\Microsoft.Azure.WebJobs.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Azure.WebJobs.Extensions, Version=4.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-      <HintPath>C:\Users\ThPe\AppData\Roaming\JetBrains\Rider2021.2\azure-functions-coretools\3.0.3785\Microsoft.Azure.WebJobs.Extensions.dll</HintPath>
-    </Reference>
   </ItemGroup>
 </Project>
