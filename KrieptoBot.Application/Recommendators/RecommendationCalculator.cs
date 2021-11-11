@@ -25,7 +25,7 @@ namespace KrieptoBot.Application.Recommendators
                 await Task.WhenAll(_recommendators.Select(async recommendator =>
                     await recommendator.GetRecommendation(market)));
 
-            var averageScore = recommendationScores.Average(x=> x.Score);
+            var averageScore = recommendationScores.Where(x => x.IncludeInAverageScore).Average(x => x.Score);
 
             _logger.LogInformation("Market {Market}: Final score: {Score}", market.MarketName, averageScore);
 

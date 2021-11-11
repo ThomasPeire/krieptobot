@@ -11,7 +11,7 @@ namespace KrieptoBot.Application.Recommendators
         protected override Task<RecommendatorScore> CalculateRecommendation(Market market)
         {
             //To be implemented
-            return Task.FromResult(new RecommendatorScore { Score = .0m });
+            return Task.FromResult(new RecommendatorScore { Score = .0m , IncludeInAverageScore = false});
         }
     }
 }

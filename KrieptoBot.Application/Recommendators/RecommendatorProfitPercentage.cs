@@ -54,7 +54,7 @@ namespace KrieptoBot.Application.Recommendators
                 "Market {Market}: Profit recommendator gives recommendation score of {Score}",
                 market.MarketName, recommendatorScore);
 
-            return new RecommendatorScore { Score = recommendatorScore };
+            return new RecommendatorScore { Score = recommendatorScore, IncludeInAverageScore = lastBuyOrders.Any() };
         }
     }
 }
