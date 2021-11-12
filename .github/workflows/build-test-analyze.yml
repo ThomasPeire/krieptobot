@@ -84,10 +84,10 @@ jobs:
         fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
     
     - name: Restore dependencies
-      run: dotnet restore **KrieptoBot.ConsoleLauncher.csproj
+      run: dotnet restore KrieptoBot.ConsoleLauncher
       
     - name: Build
-      run: dotnet build **KrieptoBot.ConsoleLauncher.csproj --no-restore /p:ContinuousIntegrationBuild=true
+      run: dotnet build KrieptoBot.ConsoleLauncher --no-restore /p:ContinuousIntegrationBuild=true
       
     - name: Test
-      run: dotnet test **KrieptoBot.ConsoleLauncher.csproj --no-build --no-restore --verbosity normal
+      run: dotnet test KrieptoBot.ConsoleLauncher --no-build --no-restore --verbosity normal
