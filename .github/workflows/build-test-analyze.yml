@@ -59,7 +59,7 @@ jobs:
       run: dotnet build -c Debug-Non-Windows-Specific /p:ContinuousIntegrationBuild=true
       
     - name: Test
-      run: dotnet test --no-build --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+      run: dotnet test -c Debug-Non-Windows-Specific --no-build --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
   
     - name: End Sonar scan
       env:
