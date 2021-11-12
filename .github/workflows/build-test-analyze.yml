@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:    
@@ -57,16 +56,38 @@ jobs:
       run: dotnet sonarscanner begin /k:"ThomasPeire_krieptobot" /o:"thomaspeire" /d:sonar.login=${{ secrets.SONAR_TOKEN }}  /d:sonar.host.url="https://sonarcloud.io"
     
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore **\KrieptoBot.ConsoleLauncher.csproj
       
     - name: Build
-      run: dotnet build --no-restore /p:ContinuousIntegrationBuild=true
+      run: dotnet build !**\KrieptoBot.ConsoleLauncher.csproj --no-restore /p:ContinuousIntegrationBuild=true
       
     - name: Test
-      run: dotnet test --no-build --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+      run: dotnet test !**\KrieptoBot.ConsoleLauncher.csproj --no-build --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
   
     - name: End Sonar scan
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: dotnet sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }} 
+  
+  Build-ConsoleLauncher:
+    runs-on: windows-latest
+
+    steps:   
+    - name: Setup .NET 6
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+        
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+    
+    - name: Restore dependencies
+      run: dotnet restore **\KrieptoBot.ConsoleLauncher.csproj
+      
+    - name: Build
+      run: dotnet build **\KrieptoBot.ConsoleLauncher.csproj --no-restore /p:ContinuousIntegrationBuild=true
+      
+    - name: Test
+      run: dotnet test **\KrieptoBot.ConsoleLauncher.csproj --no-build --no-restore --verbosity normal
