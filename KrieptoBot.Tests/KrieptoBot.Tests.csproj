@@ -57,7 +57,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KrieptoBot.Infrastructure.Bitvavo\KrieptoBot.Infrastructure.Bitvavo.csproj" />
-    <ProjectReference Include="..\KrieptoBot.Infrastructure\KrieptoBot.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

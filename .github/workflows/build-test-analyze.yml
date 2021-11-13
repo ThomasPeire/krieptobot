@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build-non_windows_specific_projects:
     runs-on: ubuntu-latest
 
     steps:    
@@ -67,7 +67,7 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: dotnet sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }} 
   
-  Build-ConsoleLauncher:
+  build-windows-specific-projects:
     runs-on: windows-latest
 
     steps:   
