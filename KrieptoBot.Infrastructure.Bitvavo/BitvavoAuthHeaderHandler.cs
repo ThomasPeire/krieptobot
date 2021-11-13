@@ -1,13 +1,11 @@
-﻿using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Globalization;
-using System.Linq;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 
 namespace KrieptoBot.Infrastructure.Bitvavo
 {
@@ -20,7 +18,8 @@ namespace KrieptoBot.Infrastructure.Bitvavo
             _bitvavoConfig = bitvavoConfigOptions.Value;
         }
 
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
+            CancellationToken cancellationToken)
         {
             var url = request.RequestUri.AbsolutePath + request.RequestUri.Query;
             var timeStamp = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
@@ -48,10 +47,11 @@ namespace KrieptoBot.Infrastructure.Bitvavo
             byte[] hashBytes;
 
             using (var hash = new HMACSHA256(keyBytes))
+            {
                 hashBytes = hash.ComputeHash(textBytes);
+            }
 
             return BitConverter.ToString(hashBytes).Replace("-", "").ToLower(CultureInfo.InvariantCulture);
         }
     }
-
 }

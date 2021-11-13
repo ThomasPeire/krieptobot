@@ -33,6 +33,12 @@ namespace KrieptoBot.ConsoleLauncher
             timer.Start();
         }
 
+        public Task StopAsync(CancellationToken cancellationToken)
+        {
+            Debug.WriteLine($"Shutting down the service with code {Environment.ExitCode}");
+            return Task.CompletedTask;
+        }
+
         private async void StartTrader(object sender, ElapsedEventArgs e)
         {
             if (DateTime.UtcNow.Minute % GetIntervalInMinutes(_tradingContext.Interval) != 0)
@@ -45,12 +51,6 @@ namespace KrieptoBot.ConsoleLauncher
             _logger.LogDebug("Starting trading service");
             _tradingContext.CurrentTime = DateTime.UtcNow;
             await _trader.Run();
-        }
-
-        public Task StopAsync(CancellationToken cancellationToken)
-        {
-            Debug.WriteLine($"Shutting down the service with code {Environment.ExitCode}");
-            return Task.CompletedTask;
         }
 
         private int GetIntervalInMinutes(string interval)

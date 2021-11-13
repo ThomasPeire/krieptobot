@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using KrieptoBot.Model;
+using KrieptoBot.Domain.Trading.Entity;
+using KrieptoBot.Domain.Trading.ValueObjects;
 
 namespace KrieptoBot.Application
 {

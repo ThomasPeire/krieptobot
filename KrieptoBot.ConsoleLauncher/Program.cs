@@ -27,25 +27,27 @@ namespace KrieptoBot.ConsoleLauncher
             }
         }
 
-        private static IHostBuilder CreateHostBuilder(string[] args) =>
-            new HostBuilder().ConfigureAppConfiguration((context, builder) =>
-            {
-                builder.SetBasePath(AppContext.BaseDirectory)
-                    .AddJsonFile("appsettings.json", false, true)
-                    .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", true)
-                    .AddUserSecrets<Program>()
-                    .AddEnvironmentVariables();
-            })
-            .ConfigureServices((hostContext, services) =>
-            {
-                Log.Logger = new LoggerConfiguration()
-                    .ReadFrom.Configuration(hostContext.Configuration)
-                    .Enrich.FromLogContext()
-                    .CreateLogger();
+        private static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return new HostBuilder().ConfigureAppConfiguration((context, builder) =>
+                {
+                    builder.SetBasePath(AppContext.BaseDirectory)
+                        .AddJsonFile("appsettings.json", false, true)
+                        .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", true)
+                        .AddUserSecrets<Program>()
+                        .AddEnvironmentVariables();
+                })
+                .ConfigureServices((hostContext, services) =>
+                {
+                    Log.Logger = new LoggerConfiguration()
+                        .ReadFrom.Configuration(hostContext.Configuration)
+                        .Enrich.FromLogContext()
+                        .CreateLogger();
 
-                Startup.ConfigureServices(services);
+                    Startup.ConfigureServices(services);
 
-                services.AddHostedService<TradeService>();
-            }).UseSerilog();
+                    services.AddHostedService<TradeService>();
+                }).UseSerilog();
+        }
     }
 }

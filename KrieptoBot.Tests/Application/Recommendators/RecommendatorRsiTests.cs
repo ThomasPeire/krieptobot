@@ -1,24 +1,21 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using KrieptoBot.Application.Recommendators;
-using NUnit.Framework;
 using System.Threading.Tasks;
 using KrieptoBot.Application;
 using KrieptoBot.Application.Indicators;
-using KrieptoBot.Model;
+using KrieptoBot.Application.Recommendators;
+using KrieptoBot.Domain.Trading.ValueObjects;
 using Microsoft.Extensions.Logging;
 using Moq;
-using NUnit.Framework.Internal.Commands;
+using NUnit.Framework;
 
 namespace KrieptoBot.Tests.Application.Recommendators
 {
     public class RecommendatorRsiTests
     {
         private Mock<IExchangeService> _exchangeServiceMock;
-        private Mock<IRsi> _rsiIndicator;
         private Mock<ILogger<RecommendatorRsi14PeriodInterval>> _logger;
+        private Mock<IRsi> _rsiIndicator;
         private TradingContext _tradingContext;
 
         [SetUp]
@@ -35,7 +32,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
                     { DateTime.Today.AddDays(-1), 70 },
                     { DateTime.Today.AddDays(-2), 60 },
                     { DateTime.Today.AddDays(-3), 50 },
-                    { DateTime.Today.AddDays(-4), 40 },
+                    { DateTime.Today.AddDays(-4), 40 }
                 };
 
             _tradingContext = new TradingContext()
@@ -55,7 +52,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
             var rsiResults =
                 new Dictionary<DateTime, decimal>
                 {
-                    { DateTime.Today, 80 },
+                    { DateTime.Today, 80 }
                 };
 
             _rsiIndicator
@@ -65,9 +62,9 @@ namespace KrieptoBot.Tests.Application.Recommendators
             var recommendator = new RecommendatorRsi14PeriodInterval(_exchangeServiceMock.Object, _rsiIndicator.Object,
                 _tradingContext, _logger.Object);
 
-            var result = await recommendator.GetRecommendation(new Market { MarketName = "BTC-EUR" });
+            var result = await recommendator.GetRecommendation(new Market("BTC-EUR"));
 
-            Assert.That(result.Score, Is.LessThan(0));
+            Assert.That(result, Is.LessThan(0));
         }
 
         [Test]
@@ -76,7 +73,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
             var rsiResults =
                 new Dictionary<DateTime, decimal>
                 {
-                    { DateTime.Today, 15 },
+                    { DateTime.Today, 15 }
                 };
 
             _rsiIndicator
@@ -86,9 +83,9 @@ namespace KrieptoBot.Tests.Application.Recommendators
             var recommendator = new RecommendatorRsi14PeriodInterval(_exchangeServiceMock.Object, _rsiIndicator.Object,
                 _tradingContext, _logger.Object);
 
-            var result = await recommendator.GetRecommendation(new Market { MarketName = "BTC-EUR" });
+            var result = await recommendator.GetRecommendation(new Market("BTC-EUR"));
 
-            Assert.That(result.Score, Is.GreaterThan(0));
+            Assert.That(result, Is.GreaterThan(0));
         }
 
         [Test]
@@ -97,7 +94,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
             var rsiResults1 =
                 new Dictionary<DateTime, decimal>
                 {
-                    { DateTime.Today, 15 },
+                    { DateTime.Today, 15 }
                 };
 
             _rsiIndicator
@@ -107,22 +104,22 @@ namespace KrieptoBot.Tests.Application.Recommendators
             var recommendator = new RecommendatorRsi14PeriodInterval(_exchangeServiceMock.Object, _rsiIndicator.Object,
                 _tradingContext, _logger.Object);
 
-            var result1 = await recommendator.GetRecommendation(new Market { MarketName = "BTC-EUR" });
+            var result1 = await recommendator.GetRecommendation(new Market("BTC-EUR"));
 
             var rsiResults2 =
                 new Dictionary<DateTime, decimal>
                 {
-                    { DateTime.Today, 80 },
+                    { DateTime.Today, 80 }
                 };
 
             _rsiIndicator
                 .Setup(x => x.Calculate(It.IsAny<IEnumerable<Candle>>(), It.IsAny<int>()))
                 .Returns(rsiResults2);
 
-            var result2 = await recommendator.GetRecommendation(new Market { MarketName = "BTC-EUR" });
+            var result2 = await recommendator.GetRecommendation(new Market("BTC-EUR"));
 
 
-            Assert.That(result1.Score, Is.GreaterThan(result2.Score));
+            Assert.That(result1, Is.GreaterThan(result2));
         }
 
         [Test]
@@ -131,7 +128,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
             var rsiResults =
                 new Dictionary<DateTime, decimal>
                 {
-                    { DateTime.Today, 50 },
+                    { DateTime.Today, 50 }
                 };
 
             _rsiIndicator
@@ -142,9 +139,9 @@ namespace KrieptoBot.Tests.Application.Recommendators
                 new RecommendatorRsi14PeriodInterval(_exchangeServiceMock.Object, _rsiIndicator.Object, _tradingContext,
                     _logger.Object);
 
-            var result = await recommendator.GetRecommendation(new Market { MarketName = "BTC-EUR" });
+            var result = await recommendator.GetRecommendation(new Market("BTC-EUR"));
 
-            Assert.That(result.Score, Is.EqualTo(0));
+            Assert.That(result, Is.EqualTo(0));
         }
 
         [Test]
@@ -159,7 +156,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
                     { DateTime.Today.AddDays(-3), 13 },
                     { DateTime.Today, todaysRsiValue },
                     { DateTime.Today.AddDays(-1), 98 },
-                    { DateTime.Today.AddDays(-4), 84 },
+                    { DateTime.Today.AddDays(-4), 84 }
                 };
 
             _rsiIndicator
@@ -169,9 +166,9 @@ namespace KrieptoBot.Tests.Application.Recommendators
             var recommendator = new RecommendatorRsi14PeriodInterval(_exchangeServiceMock.Object, _rsiIndicator.Object,
                 _tradingContext, _logger.Object);
 
-            var result = await recommendator.GetRecommendation(new Market { MarketName = "BTC-EUR" });
+            var result = await recommendator.GetRecommendation(new Market("BTC-EUR"));
 
-            Assert.That(result.Score, Is.EqualTo((100 - todaysRsiValue * 2)));
+            Assert.That(result, Is.EqualTo(100 - todaysRsiValue * 2));
         }
     }
 }

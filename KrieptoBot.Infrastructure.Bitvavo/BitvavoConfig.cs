@@ -6,5 +6,4 @@
         public string ApiSecret { get; set; }
         public string BaseUrl { get; set; }
     }
-
 }

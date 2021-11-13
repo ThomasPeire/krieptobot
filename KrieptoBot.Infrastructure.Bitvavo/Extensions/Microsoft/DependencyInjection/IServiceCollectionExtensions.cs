@@ -13,7 +13,6 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Extensions.Microsoft.DependencyInjec
     {
         public static void AddBitvavoService(this IServiceCollection services)
         {
-
             services.AddOptions<BitvavoConfig>()
                 .Configure<IConfiguration>((settings, configuration) =>
                 {
@@ -34,7 +33,8 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Extensions.Microsoft.DependencyInjec
                         configureClient.BaseAddress = new Uri(bitvavoConfig.BaseUrl);
                     }
 
-                    configureClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    configureClient.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json"));
                 })
                 .AddHttpMessageHandler<BitvavoAuthHeaderHandler>();
         }

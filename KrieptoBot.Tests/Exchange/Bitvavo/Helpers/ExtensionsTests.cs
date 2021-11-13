@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using FluentAssertions;
 using KrieptoBot.Infrastructure.Bitvavo.Dtos;
 using KrieptoBot.Infrastructure.Bitvavo.Extensions;
@@ -5,9 +9,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using Snapshooter.NUnit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace KrieptoBot.Tests.Exchange.Bitvavo.Helpers
 {
@@ -33,25 +34,25 @@ namespace KrieptoBot.Tests.Exchange.Bitvavo.Helpers
 
         private void InitAssets()
         {
-            var assetsJson = System.IO.File.ReadAllText(@"./Mocks/Bitvavo/Data/assets.json");
+            var assetsJson = File.ReadAllText(@"./Mocks/Bitvavo/Data/assets.json");
             _assets = JsonConvert.DeserializeObject<IEnumerable<AssetDto>>(assetsJson);
         }
 
         private void InitBalances()
         {
-            var balancesJson = System.IO.File.ReadAllText(@"./Mocks/Bitvavo/Data/balances.json");
+            var balancesJson = File.ReadAllText(@"./Mocks/Bitvavo/Data/balances.json");
             _balances = JsonConvert.DeserializeObject<IEnumerable<BalanceDto>>(balancesJson);
         }
 
         private void InitMarkets()
-        { 
-            var marketsJson = System.IO.File.ReadAllText(@"./Mocks/Bitvavo/Data/markets.json");
+        {
+            var marketsJson = File.ReadAllText(@"./Mocks/Bitvavo/Data/markets.json");
             _markets = JsonConvert.DeserializeObject<IEnumerable<MarketDto>>(marketsJson);
         }
 
         private void InitCandles()
         {
-            var candlesJson = System.IO.File.ReadAllText(@"./Mocks/Bitvavo/Data/candles_btc-eur.json");
+            var candlesJson = File.ReadAllText(@"./Mocks/Bitvavo/Data/candles_btc-eur.json");
             var deserializedCandles = JsonConvert.DeserializeObject(candlesJson) as JArray;
             _candles = deserializedCandles.Select(x =>
                 new CandleDto
@@ -61,19 +62,19 @@ namespace KrieptoBot.Tests.Exchange.Bitvavo.Helpers
                     High = x.Value<decimal>(2),
                     Low = x.Value<decimal>(3),
                     Close = x.Value<decimal>(4),
-                    Volume = x.Value<decimal>(5),
+                    Volume = x.Value<decimal>(5)
                 });
         }
 
         private void InitOrders()
         {
-            var ordersJson = System.IO.File.ReadAllText(@"./Mocks/Bitvavo/Data/orders_btc-eur.json");
+            var ordersJson = File.ReadAllText(@"./Mocks/Bitvavo/Data/orders_btc-eur.json");
             _orders = JsonConvert.DeserializeObject<IEnumerable<OrderDto>>(ordersJson);
         }
 
         private void InitTrades()
         {
-            var tradesJson = System.IO.File.ReadAllText(@"./Mocks/Bitvavo/Data/trades_btc-eur.json");
+            var tradesJson = File.ReadAllText(@"./Mocks/Bitvavo/Data/trades_btc-eur.json");
             _trades = JsonConvert.DeserializeObject<IEnumerable<TradeDto>>(tradesJson);
         }
 
@@ -124,6 +125,5 @@ namespace KrieptoBot.Tests.Exchange.Bitvavo.Helpers
 
             result.Should().MatchSnapshot();
         }
-
     }
 }

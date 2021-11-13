@@ -1,16 +1,13 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using KrieptoBot.Application.Recommendators;
-using NUnit.Framework;
 using System.Threading.Tasks;
 using KrieptoBot.Application;
-using KrieptoBot.Application.Indicators;
-using KrieptoBot.Model;
+using KrieptoBot.Application.Recommendators;
+using KrieptoBot.Domain.Trading.Entity;
+using KrieptoBot.Domain.Trading.ValueObjects;
 using Microsoft.Extensions.Logging;
 using Moq;
-using NUnit.Framework.Internal.Commands;
+using NUnit.Framework;
 
 namespace KrieptoBot.Tests.Application.Recommendators
 {
@@ -45,31 +42,27 @@ namespace KrieptoBot.Tests.Application.Recommendators
             _exchangeServiceMock
                 .Setup(x => x.GetOrdersAsync(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DateTime?>(),
                     It.IsAny<DateTime?>(), It.IsAny<Guid?>(), It.IsAny<Guid?>())).ReturnsAsync(
-                    new List<Order>()
+                    new List<Order>
                     {
-                        new()
-                        {
-                            Price = 4, Side = "sell", Amount = 10, Status = "filled",
-                            Created = DateTime.Now.AddDays(-10)
-                        },
-                        new()
-                        {
-                            Price = 3, Side = "buy", Amount = 4, Status = "filled", Created = DateTime.Now.AddDays(-9)
-                        },
-                        new()
-                        {
-                            Price = 4, Side = "buy", Amount = 4, Status = "filled", Created = DateTime.Now.AddDays(-8)
-                        },
+                        new(Guid.Empty, new Market("btc-eur"), DateTime.Now.AddDays(-10),
+                            DateTime.Now.AddDays(-10), OrderStatus.Filled, OrderSide.Sell, OrderType.Limit,
+                            new Amount(10), new Price(4)),
+                        new(Guid.Empty, new Market("btc-eur"), DateTime.Now.AddDays(-9),
+                            DateTime.Now.AddDays(-9), OrderStatus.Filled, OrderSide.Buy, OrderType.Limit,
+                            new Amount(4), new Price(3)),
+                        new(Guid.Empty, new Market("btc-eur"), DateTime.Now.AddDays(-9),
+                            DateTime.Now.AddDays(-8), OrderStatus.Filled, OrderSide.Buy, OrderType.Limit,
+                            new Amount(4), new Price(4))
                     });
 
             _exchangeServiceMock
                 .Setup(x => x.GetTickerPrice(It.IsAny<string>())).ReturnsAsync(
-                    new TickerPrice() { Price = 4, Market = "" });
+                    new TickerPrice(new Market("btc-eur"), new Price(4)));
 
 
-            var result = await recommendator.GetRecommendation(new Market { MarketName = "BTC-EUR" });
+            var result = await recommendator.GetRecommendation(new Market("BTC-EUR"));
 
-            Assert.That(result.Score, Is.LessThan(0m));
+            Assert.That(result, Is.LessThan(0m));
         }
 
 
@@ -82,26 +75,24 @@ namespace KrieptoBot.Tests.Application.Recommendators
             _exchangeServiceMock
                 .Setup(x => x.GetOrdersAsync(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DateTime?>(),
                     It.IsAny<DateTime?>(), It.IsAny<Guid?>(), It.IsAny<Guid?>())).ReturnsAsync(
-                    new List<Order>()
+                    new List<Order>
                     {
-                        new()
-                        {
-                            Price = 4, Side = "sell", Amount = 1, Status = "filled", Created = DateTime.Now.AddDays(-10)
-                        },
-                        new()
-                        {
-                            Price = 3, Side = "buy", Amount = 1, Status = "filled", Created = DateTime.Now.AddDays(-9)
-                        }
+                        new(Guid.Empty, new Market("btc-eur"), DateTime.Now.AddDays(-10),
+                            DateTime.Now.AddDays(-10), OrderStatus.Filled, OrderSide.Sell, OrderType.Limit,
+                            new Amount(10), new Price(4)),
+                        new(Guid.Empty, new Market("btc-eur"), DateTime.Now.AddDays(-9),
+                            DateTime.Now.AddDays(-9), OrderStatus.Filled, OrderSide.Buy, OrderType.Limit,
+                            new Amount(1), new Price(3))
                     });
 
             _exchangeServiceMock
                 .Setup(x => x.GetTickerPrice(It.IsAny<string>())).ReturnsAsync(
-                    new TickerPrice() { Price = tickerPrice, Market = "" });
+                    new TickerPrice(new Market("btc-eur"), new Price(tickerPrice)));
 
 
-            var result = await recommendator.GetRecommendation(new Market { MarketName = "BTC-EUR" });
+            var result = await recommendator.GetRecommendation(new Market("BTC-EUR"));
 
-            Assert.That(result.Score, Is.EqualTo(0m));
+            Assert.That(result, Is.EqualTo(0m));
         }
     }
 }

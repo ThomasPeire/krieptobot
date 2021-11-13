@@ -1,10 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using KrieptoBot.Application;
 
 namespace KrieptoBot.AzureFunction
 {
-    public class NotificationManager:INotificationManager
+    public class NotificationManager : INotificationManager
     {
         public Task SendNotification(string message)
         {

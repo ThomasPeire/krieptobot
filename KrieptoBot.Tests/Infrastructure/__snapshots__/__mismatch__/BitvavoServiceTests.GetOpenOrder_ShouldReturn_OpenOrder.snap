@@ -1,0 +1,29 @@
+﻿{
+  "Market": {
+    "Name": "KrieptoBot.Domain.Trading.ValueObjects.Symbol-KrieptoBot.Domain.Trading.ValueObjects.Symbol",
+    "BaseSymbol": {
+      "Value": "BTC"
+    },
+    "QuoteSymbol": {
+      "Value": "EUR"
+    }
+  },
+  "Created": "2021-03-11T08:05:31.466Z",
+  "Updated": "2021-03-11T08:05:31.466Z",
+  "Status": {
+    "Value": "filled"
+  },
+  "Side": {
+    "Value": "sell"
+  },
+  "Type": {
+    "Value": "limit"
+  },
+  "Amount": {
+    "Value": 0.00241469
+  },
+  "Price": {
+    "Value": 45928.0
+  },
+  "Id": "4a7bd126-2d21-4918-96dc-0c8f51760a0b"
+}

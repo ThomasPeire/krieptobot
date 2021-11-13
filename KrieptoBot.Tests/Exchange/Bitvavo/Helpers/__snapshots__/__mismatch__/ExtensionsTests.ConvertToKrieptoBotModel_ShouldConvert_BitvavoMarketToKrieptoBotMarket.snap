@@ -1,0 +1,9 @@
+﻿{
+  "Name": "KrieptoBot.Domain.Trading.ValueObjects.Symbol-KrieptoBot.Domain.Trading.ValueObjects.Symbol",
+  "BaseSymbol": {
+    "Value": "AAVE"
+  },
+  "QuoteSymbol": {
+    "Value": "EUR"
+  }
+}

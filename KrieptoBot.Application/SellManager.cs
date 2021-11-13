@@ -1,16 +1,16 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using KrieptoBot.Model;
+using KrieptoBot.Domain.Trading.ValueObjects;
 using Microsoft.Extensions.Logging;
 
 namespace KrieptoBot.Application
 {
     public class SellManager : ISellManager
     {
-        private readonly ILogger<SellManager> _logger;
-        private readonly ITradingContext _tradingContext;
-        private readonly INotificationManager _notificationManager;
         private readonly IExchangeService _exchangeService;
+        private readonly ILogger<SellManager> _logger;
+        private readonly INotificationManager _notificationManager;
+        private readonly ITradingContext _tradingContext;
 
         public SellManager(ILogger<SellManager> logger, ITradingContext tradingContext,
             INotificationManager notificationManager, IExchangeService exchangeService)
@@ -23,10 +23,10 @@ namespace KrieptoBot.Application
 
         public async Task Sell(Market market)
         {
-            var tickerPrice = await _exchangeService.GetTickerPrice(market.MarketName);
+            var tickerPrice = await _exchangeService.GetTickerPrice(market.Name);
 
             var balances = await _exchangeService.GetBalanceAsync();
-            var baseAssetBalance = balances.FirstOrDefault(x => x.Symbol == market.Base);
+            var baseAssetBalance = balances.FirstOrDefault(x => x.Symbol == market.BaseSymbol);
             var availableBaseAssetBalance = 0m;
 
             if (baseAssetBalance != null)
@@ -35,18 +35,16 @@ namespace KrieptoBot.Application
             //todo: take fees into account
             //todo: take min sell amount into account
             _logger.LogInformation("Selling on {Market}. Price: € {Price}; Amount: {Amount}; € {Euro}",
-                market.MarketName,
+                market.Name,
                 tickerPrice.Price, availableBaseAssetBalance, availableBaseAssetBalance * tickerPrice.Price);
 
             await _notificationManager.SendNotification(
-                $"Selling on {market.MarketName}.",
+                $"Selling on {market.Name}.",
                 $"Price: € {tickerPrice.Price} - Amount: {availableBaseAssetBalance} - € {availableBaseAssetBalance * tickerPrice.Price}");
 
             if (!_tradingContext.IsSimulation)
-            {
-                await _exchangeService.PostSellOrderAsync(market.MarketName, "limit", availableBaseAssetBalance,
+                await _exchangeService.PostSellOrderAsync(market.Name, "limit", availableBaseAssetBalance,
                     tickerPrice.Price);
-            }
         }
     }
 }

@@ -1,23 +1,23 @@
 ﻿using System;
-using KrieptoBot.Model;
-using NUnit.Framework;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using FluentAssertions;
 using KrieptoBot.Application.Indicators;
+using KrieptoBot.Domain.Trading.ValueObjects;
 using KrieptoBot.Infrastructure.Bitvavo.Dtos;
 using KrieptoBot.Infrastructure.Bitvavo.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using NUnit.Framework;
 using Snapshooter.NUnit;
 
 namespace KrieptoBot.Tests.Application.Indicators
 {
-    class RsiTests
+    internal class RsiTests
     {
         private IEnumerable<Candle> _candles;
-        
+
         [SetUp]
         public void Setup()
         {
@@ -26,7 +26,7 @@ namespace KrieptoBot.Tests.Application.Indicators
 
         private void InitCandles()
         {
-            var candlesJson = System.IO.File.ReadAllText(@"./Mocks/Bitvavo/Data/candles_btc-eur.json");
+            var candlesJson = File.ReadAllText(@"./Mocks/Bitvavo/Data/candles_btc-eur.json");
             var deserializedCandles = JsonConvert.DeserializeObject(candlesJson) as JArray;
             _candles = deserializedCandles.Select(x =>
                 new CandleDto
@@ -36,7 +36,7 @@ namespace KrieptoBot.Tests.Application.Indicators
                     High = x.Value<decimal>(2),
                     Low = x.Value<decimal>(3),
                     Close = x.Value<decimal>(4),
-                    Volume = x.Value<decimal>(5),
+                    Volume = x.Value<decimal>(5)
                 }.ConvertToKrieptoBotModel());
         }
 
@@ -45,10 +45,12 @@ namespace KrieptoBot.Tests.Application.Indicators
         {
             var datetimeFrom = new DateTime(2021, 08, 13);
 
-            var candlesToWorkWith = _candles.Where(x => x.TimeStamp >= datetimeFrom && x.TimeStamp <= datetimeFrom.AddDays(1)).OrderBy(x => x.TimeStamp);
-            
+            var candlesToWorkWith = _candles
+                .Where(x => x.TimeStamp >= datetimeFrom && x.TimeStamp <= datetimeFrom.AddDays(1))
+                .OrderBy(x => x.TimeStamp);
+
             var rsiValues = new Rsi().Calculate(candlesToWorkWith, 14);
-            
+
             rsiValues.Should().MatchSnapshot();
         }
     }

@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using KrieptoBot.Application.Recommendators;
-using KrieptoBot.Model;
+using KrieptoBot.Domain.Trading.ValueObjects;
 using NUnit.Framework;
 
 namespace KrieptoBot.Tests.Application.Recommendators
@@ -12,9 +12,9 @@ namespace KrieptoBot.Tests.Application.Recommendators
         {
             var recommendator = new RecommendatorSupport();
 
-            var result = await recommendator.GetRecommendation(new Market() { MarketName = "btc-eur" });
+            var result = await recommendator.GetRecommendation(new Market("btc-eur"));
 
-            Assert.That(result.Score, Is.EqualTo(.0m));
+            Assert.That(result, Is.EqualTo(.0m));
         }
     }
 }

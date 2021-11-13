@@ -1,6 +1,6 @@
-﻿using KrieptoBot.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using KrieptoBot.Domain.Trading.ValueObjects;
 
 namespace KrieptoBot.Application.Indicators
 {

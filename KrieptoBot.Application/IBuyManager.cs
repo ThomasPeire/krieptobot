@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using KrieptoBot.Model;
+using KrieptoBot.Domain.Trading.ValueObjects;
 
 namespace KrieptoBot.Application
 {
