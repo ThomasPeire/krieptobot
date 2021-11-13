@@ -4,6 +4,8 @@
     <TargetFramework>net6.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <LangVersion>10</LangVersion>
+    <Configurations>Debug;Release;Debug-Non-Windows-Specific</Configurations>
+    <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -55,7 +57,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KrieptoBot.Infrastructure.Bitvavo\KrieptoBot.Infrastructure.Bitvavo.csproj" />
-    <ProjectReference Include="..\KrieptoBot.Infrastructure\KrieptoBot.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

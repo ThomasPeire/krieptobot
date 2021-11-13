@@ -6,6 +6,8 @@
     <ApplicationIcon />
     <StartupObject />
     <LangVersion>10</LangVersion>
+    <Configurations>Debug;Release;Debug-Non-Windows-Specific</Configurations>
+    <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
