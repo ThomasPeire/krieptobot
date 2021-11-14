@@ -28,7 +28,7 @@ namespace KrieptoBot.Infrastructure.Bitvavo
         [Get("/v2/markets")]
         Task<IEnumerable<MarketDto>> GetMarketsAsync();
 
-        [Get("/v2/{market}/trades")]
+        [Get("/v2/trades")]
         Task<IEnumerable<TradeDto>> GetTradesAsync(string market, int limit = 500, long? start = null, long? end = null,
             Guid? tradeIdFrom = null, Guid? tradeIdTo = null);
 

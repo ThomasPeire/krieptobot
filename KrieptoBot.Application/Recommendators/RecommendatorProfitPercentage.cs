@@ -25,17 +25,16 @@ namespace KrieptoBot.Application.Recommendators
         protected override async Task<RecommendatorScore> CalculateRecommendation(Market market)
         {
             var recommendatorScore = 0m;
-//todo this should use gettrades instead of orders
-            var lastOrders =
-                (await _exchangeService.GetOrdersAsync(market.Name, 20, end: DateTime.Now)).OrderBy(
-                    x => x.Created).ToList();
-            var lastBuyOrders = lastOrders
-                .Skip(lastOrders.FindLastIndex(x => x.Side == OrderSide.Sell && x.Status != OrderStatus.Canceled) + 1)
-                .Where(x => x.Status != OrderStatus.Canceled).ToList();
 
-            if (lastBuyOrders.Any())
+            var trades =
+                (await _exchangeService.GetTradesAsync(market.Name, 20, end: DateTime.Now)).OrderBy(
+                    x => x.Timestamp).ToList();
+            var lastBuyTrades = trades
+                .Skip(trades.FindLastIndex(x => x.Side == OrderSide.Sell) + 1).ToList();
+
+            if (lastBuyTrades.Any())
             {
-                var averagePricePaid = lastBuyOrders.Sum(x => x.Price * x.Amount) / lastBuyOrders.Sum(x => x.Amount);
+                var averagePricePaid = lastBuyTrades.Sum(x => x.Price * x.Amount) / lastBuyTrades.Sum(x => x.Amount);
 
                 var tickerPrice = await _exchangeService.GetTickerPrice(market.Name);
 
@@ -55,7 +54,7 @@ namespace KrieptoBot.Application.Recommendators
                 "Market {Market}: Profit recommendator gives recommendation score of {Score}",
                 market.Name, recommendatorScore);
 
-            return new RecommendatorScore(recommendatorScore, lastBuyOrders.Any());
+            return new RecommendatorScore(recommendatorScore, lastBuyTrades.Any());
         }
     }
 }

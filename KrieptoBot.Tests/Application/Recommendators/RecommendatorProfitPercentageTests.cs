@@ -40,19 +40,16 @@ namespace KrieptoBot.Tests.Application.Recommendators
             var recommendator = new RecommendatorProfitPercentage(_logger.Object, _exchangeServiceMock.Object);
 
             _exchangeServiceMock
-                .Setup(x => x.GetOrdersAsync(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DateTime?>(),
+                .Setup(x => x.GetTradesAsync(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DateTime?>(),
                     It.IsAny<DateTime?>(), It.IsAny<Guid?>(), It.IsAny<Guid?>())).ReturnsAsync(
-                    new List<Order>
+                    new List<Trade>
                     {
-                        new(Guid.Empty, new Market("btc-eur"), DateTime.Now.AddDays(-10),
-                            DateTime.Now.AddDays(-10), OrderStatus.Filled, OrderSide.Sell, OrderType.Limit,
-                            new Amount(10), new Price(4)),
-                        new(Guid.Empty, new Market("btc-eur"), DateTime.Now.AddDays(-9),
-                            DateTime.Now.AddDays(-9), OrderStatus.Filled, OrderSide.Buy, OrderType.Limit,
-                            new Amount(4), new Price(3)),
-                        new(Guid.Empty, new Market("btc-eur"), DateTime.Now.AddDays(-9),
-                            DateTime.Now.AddDays(-8), OrderStatus.Filled, OrderSide.Buy, OrderType.Limit,
-                            new Amount(4), new Price(4))
+                        new(Guid.Empty, DateTime.Now.AddDays(-10), new Market("btc-eur"),
+                            new Amount(10), new Price(4), OrderSide.Sell),
+                        new(Guid.Empty, DateTime.Now.AddDays(-9), new Market("btc-eur"),
+                            new Amount(4), new Price(3), OrderSide.Buy),
+                        new(Guid.Empty, DateTime.Now.AddDays(-9), new Market("btc-eur"),
+                            new Amount(4), new Price(4), OrderSide.Buy)
                     });
 
             _exchangeServiceMock

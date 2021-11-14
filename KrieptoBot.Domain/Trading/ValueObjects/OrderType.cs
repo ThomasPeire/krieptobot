@@ -8,6 +8,7 @@ namespace KrieptoBot.Domain.Trading.ValueObjects
 
     {
         public static readonly OrderType Limit = new("limit");
+        public static readonly OrderType TakeProfitLimit = new("takeProfitLimit");
         public static readonly OrderType Market = new("market");
 
         private OrderType()
@@ -33,6 +34,7 @@ namespace KrieptoBot.Domain.Trading.ValueObjects
             return value.ToLower() switch
             {
                 "limit" => Limit,
+                "takeprofitlimit" => TakeProfitLimit,
                 "market" => Market,
                 _ => throw new ArgumentException($"{value} is not a valid ordertype")
             };
