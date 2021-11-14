@@ -64,7 +64,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
 
             var result = await recommendator.GetRecommendation(new Market("BTC-EUR"));
 
-            Assert.That(result, Is.LessThan(0));
+            Assert.That(result.Value, Is.LessThan(0));
         }
 
         [Test]
@@ -85,7 +85,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
 
             var result = await recommendator.GetRecommendation(new Market("BTC-EUR"));
 
-            Assert.That(result, Is.GreaterThan(0));
+            Assert.That(result.Value, Is.GreaterThan(0));
         }
 
         [Test]
@@ -118,8 +118,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
 
             var result2 = await recommendator.GetRecommendation(new Market("BTC-EUR"));
 
-
-            Assert.That(result1, Is.GreaterThan(result2));
+            Assert.That(result1.Value, Is.GreaterThan(result2.Value));
         }
 
         [Test]
@@ -141,7 +140,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
 
             var result = await recommendator.GetRecommendation(new Market("BTC-EUR"));
 
-            Assert.That(result, Is.EqualTo(0));
+            Assert.That(result.Value, Is.EqualTo(0));
         }
 
         [Test]
@@ -168,7 +167,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
 
             var result = await recommendator.GetRecommendation(new Market("BTC-EUR"));
 
-            Assert.That(result, Is.EqualTo(100 - todaysRsiValue * 2));
+            Assert.That(result.Value, Is.EqualTo(100 - todaysRsiValue * 2));
         }
     }
 }

@@ -30,7 +30,7 @@ namespace KrieptoBot.Domain.Trading.ValueObjects
             QuoteSymbol = new Symbol(splittedName[1]);
         }
 
-        public string Name => $"{BaseSymbol}-{QuoteSymbol}";
+        public string Name => $"{BaseSymbol.Value}-{QuoteSymbol.Value}";
         public Symbol BaseSymbol { get; }
 
         public Symbol QuoteSymbol { get; }

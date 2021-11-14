@@ -1,5 +1,11 @@
 ﻿{
-  "Symbol": "EUR",
-  "Available": 0.0,
-  "InOrder": 11.03
+  "Symbol": {
+    "Value": "EUR"
+  },
+  "Available": {
+    "Value": 0.0
+  },
+  "InOrder": {
+    "Value": 11.03
+  }
 }

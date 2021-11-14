@@ -62,7 +62,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
 
             var result = await recommendator.GetRecommendation(new Market("BTC-EUR"));
 
-            Assert.That(result, Is.LessThan(0m));
+            Assert.That(result.Value, Is.LessThan(0m));
         }
 
 
@@ -79,7 +79,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
                     {
                         new(Guid.Empty, new Market("btc-eur"), DateTime.Now.AddDays(-10),
                             DateTime.Now.AddDays(-10), OrderStatus.Filled, OrderSide.Sell, OrderType.Limit,
-                            new Amount(10), new Price(4)),
+                            new Amount(1), new Price(4)),
                         new(Guid.Empty, new Market("btc-eur"), DateTime.Now.AddDays(-9),
                             DateTime.Now.AddDays(-9), OrderStatus.Filled, OrderSide.Buy, OrderType.Limit,
                             new Amount(1), new Price(3))
@@ -92,7 +92,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
 
             var result = await recommendator.GetRecommendation(new Market("BTC-EUR"));
 
-            Assert.That(result, Is.EqualTo(0m));
+            Assert.That(result.Value, Is.EqualTo(0m));
         }
     }
 }

@@ -12,8 +12,8 @@ namespace KrieptoBot.Domain.Recommendation.ValueObjects
 
         public RecommendatorScore(decimal value, bool includeInAverageScore = true)
         {
-            if (value is < 0m or > 100m)
-                throw new ArgumentOutOfRangeException(nameof(value), "Score must be positive and not greater than 100");
+            if (value is < -100m or > 100m)
+                throw new ArgumentOutOfRangeException(nameof(value), "Score must be between -100 and 100");
 
             Value = value;
             IncludeInAverageScore = includeInAverageScore;
@@ -32,9 +32,16 @@ namespace KrieptoBot.Domain.Recommendation.ValueObjects
             yield return Value;
         }
 
-        public static RecommendatorScore operator *(RecommendatorScore recommendatorScore, decimal b)
-        {
-            return new(recommendatorScore + b, recommendatorScore.IncludeInAverageScore);
-        }
+        public static RecommendatorScore operator *(RecommendatorScore recommendatorScore, decimal b) =>
+            new RecommendatorScore(recommendatorScore.Value * b, recommendatorScore.IncludeInAverageScore);
+
+        public static RecommendatorScore operator /(RecommendatorScore recommendatorScore, decimal b) =>
+            new RecommendatorScore(recommendatorScore.Value / b, recommendatorScore.IncludeInAverageScore);
+
+        public static RecommendatorScore operator +(RecommendatorScore recommendatorScore, decimal b) =>
+            new RecommendatorScore(recommendatorScore.Value + b, recommendatorScore.IncludeInAverageScore);
+
+        public static RecommendatorScore operator -(RecommendatorScore recommendatorScore, decimal b) =>
+            new RecommendatorScore(recommendatorScore.Value - b, recommendatorScore.IncludeInAverageScore);
     }
 }

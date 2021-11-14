@@ -1,41 +1,29 @@
 ﻿{
-  "OrderId": "4a7bd126-2d21-4918-96dc-0c8f51760a0b",
-  "Market": "BTC-EUR",
+  "Market": {
+    "Name": "BTC-EUR",
+    "BaseSymbol": {
+      "Value": "BTC"
+    },
+    "QuoteSymbol": {
+      "Value": "EUR"
+    }
+  },
   "Created": "2021-03-11T08:05:31.466Z",
   "Updated": "2021-03-11T08:05:31.466Z",
-  "Status": "filled",
-  "Side": "sell",
-  "OrderType": "limit",
-  "Amount": 0.00241469,
-  "AmountRemaining": 0.0,
-  "Price": 45928.0,
-  "AmountQuote": 0.0,
-  "AmountQuoteRemaining": 0.0,
-  "OnHold": 0.0,
-  "OnHoldCurrency": "BTC",
-  "TriggerPrice": 0.0,
-  "TriggerAmount": 0.0,
-  "TriggerType": null,
-  "TriggerReference": null,
-  "FilledAmount": 0.00241469,
-  "FilledAmountQuote": 110.90188232,
-  "FeePaid": 0.17188232,
-  "FeeCurrency": "EUR",
-  "Fills": [
-    {
-      "Id": "c9d0abf0-9377-4b1a-ab06-a840f730dc43",
-      "Timestamp": "2021-03-11T08:23:55.833Z",
-      "Amount": 0.00241469,
-      "Price": 45928.0,
-      "Taker": false,
-      "Fee": 0.17188232,
-      "FeeCurrency": "EUR",
-      "Settled": true
-    }
-  ],
-  "SelfTradePrevention": "decrementAndCancel",
-  "Visible": false,
-  "TimeInForce": "GTC",
-  "PostOnly": false,
-  "DisableMarketProtection": false
+  "Status": {
+    "Value": "filled"
+  },
+  "Side": {
+    "Value": "sell"
+  },
+  "Type": {
+    "Value": "limit"
+  },
+  "Amount": {
+    "Value": 0.00241469
+  },
+  "Price": {
+    "Value": 45928.0
+  },
+  "Id": "4a7bd126-2d21-4918-96dc-0c8f51760a0b"
 }

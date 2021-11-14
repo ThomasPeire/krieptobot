@@ -104,7 +104,8 @@ namespace KrieptoBot.Tests.Mocks.Bitvavo
                     Side = side,
                     OrderType = orderType,
                     Amount = amount,
-                    Price = price
+                    Price = price,
+                    Status = "filled"
                 };
 
             _orders.Add(orderDto);

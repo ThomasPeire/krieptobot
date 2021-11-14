@@ -27,7 +27,7 @@ namespace KrieptoBot.Tests.Application
             _recommendationCalculator = new Mock<IRecommendationCalculator>();
             _recommendationCalculator
                 .Setup(x => x.CalculateRecommendation(It.IsAny<Market>()))
-                .Returns(Task.FromResult(new RecommendatorScore(-150)));
+                .Returns(Task.FromResult(new RecommendatorScore(-99)));
 
             _exchangeServiceMock = new Mock<IExchangeService>();
             _exchangeServiceMock

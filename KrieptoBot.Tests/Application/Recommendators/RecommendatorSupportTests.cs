@@ -14,7 +14,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
 
             var result = await recommendator.GetRecommendation(new Market("btc-eur"));
 
-            Assert.That(result, Is.EqualTo(.0m));
+            Assert.That(result.Value, Is.EqualTo(.0m));
         }
     }
 }

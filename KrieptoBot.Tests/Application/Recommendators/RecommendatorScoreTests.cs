@@ -11,10 +11,10 @@ namespace KrieptoBot.Tests.Application.Recommendators
             const decimal score1Value = 20;
             var score1 = new RecommendatorScore(score1Value);
 
-            Assert.That(score1 * 2, Is.EqualTo(score1Value * 2));
-            Assert.That(score1 / 2, Is.EqualTo(score1Value / 2));
-            Assert.That(score1 + 2, Is.EqualTo(score1Value + 2));
-            Assert.That(score1 - 2, Is.EqualTo(score1Value - 2));
+            Assert.That((score1 * 2).Value, Is.EqualTo(score1Value * 2));
+            Assert.That((score1 / 2).Value, Is.EqualTo(score1Value / 2));
+            Assert.That((score1 + 2).Value, Is.EqualTo(score1Value + 2));
+            Assert.That((score1 - 2).Value, Is.EqualTo(score1Value - 2));
         }
     }
 }

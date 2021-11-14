@@ -1,9 +1,0 @@
-﻿{
-  "Name": "KrieptoBot.Domain.Trading.ValueObjects.Symbol-KrieptoBot.Domain.Trading.ValueObjects.Symbol",
-  "BaseSymbol": {
-    "Value": "BTC"
-  },
-  "QuoteSymbol": {
-    "Value": "EUR"
-  }
-}
