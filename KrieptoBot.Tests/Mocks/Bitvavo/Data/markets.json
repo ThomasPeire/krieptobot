@@ -1,2654 +1,2654 @@
 [
-	{
-		"market": "AAVE-EUR",
-		"status": "trading",
-		"base": "AAVE",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.008",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "ADA-BTC",
-		"status": "halted",
-		"base": "ADA",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "10",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "ADA-EUR",
-		"status": "trading",
-		"base": "ADA",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "3",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "AE-BTC",
-		"status": "halted",
-		"base": "AE",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "10",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "AE-EUR",
-		"status": "halted",
-		"base": "AE",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "10",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "AION-BTC",
-		"status": "halted",
-		"base": "AION",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "50",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "AION-EUR",
-		"status": "trading",
-		"base": "AION",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "10",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "ANT-BTC",
-		"status": "halted",
-		"base": "ANT",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "1",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "ANT-EUR",
-		"status": "trading",
-		"base": "ANT",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.5",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "ARK-BTC",
-		"status": "halted",
-		"base": "ARK",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "9",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "ARK-EUR",
-		"status": "trading",
-		"base": "ARK",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "2",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "BAL-EUR",
-		"status": "trading",
-		"base": "BAL",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.08",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "BAND-EUR",
-		"status": "trading",
-		"base": "BAND",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.2",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "BAT-BTC",
-		"status": "halted",
-		"base": "BAT",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "10",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "BAT-EUR",
-		"status": "trading",
-		"base": "BAT",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "3",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "BCH-BTC",
-		"status": "halted",
-		"base": "BCH",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.007",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "BCH-EUR",
-		"status": "trading",
-		"base": "BCH",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.004",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "BNB-EUR",
-		"status": "trading",
-		"base": "BNB",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.01",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "BSV-BTC",
-		"status": "halted",
-		"base": "BSV",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.02",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "BSV-EUR",
-		"status": "trading",
-		"base": "BSV",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.01",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "BTC-EUR",
-		"status": "trading",
-		"base": "BTC",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.0001",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "CHZ-EUR",
-		"status": "trading",
-		"base": "CHZ",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "7",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "CMT-BTC",
-		"status": "halted",
-		"base": "CMT",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "400",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "CMT-EUR",
-		"status": "halted",
-		"base": "CMT",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "400",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "COMP-EUR",
-		"status": "trading",
-		"base": "COMP",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.009",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "DAI-EUR",
-		"status": "trading",
-		"base": "DAI",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "5",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "DCR-BTC",
-		"status": "halted",
-		"base": "DCR",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.06",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "DCR-EUR",
-		"status": "trading",
-		"base": "DCR",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.02",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "DGB-BTC",
-		"status": "halted",
-		"base": "DGB",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "100",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "DGB-EUR",
-		"status": "trading",
-		"base": "DGB",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "30",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "DOGE-EUR",
-		"status": "trading",
-		"base": "DOGE",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "20",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "DOT-EUR",
-		"status": "trading",
-		"base": "DOT",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.3",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "ELF-BTC",
-		"status": "halted",
-		"base": "ELF",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "30",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "ELF-EUR",
-		"status": "trading",
-		"base": "ELF",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "10",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "ENJ-BTC",
-		"status": "halted",
-		"base": "ENJ",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "20",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "ENJ-EUR",
-		"status": "trading",
-		"base": "ENJ",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "1",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "EOS-BTC",
-		"status": "halted",
-		"base": "EOS",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "1",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "EOS-EUR",
-		"status": "trading",
-		"base": "EOS",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.6",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "ETC-BTC",
-		"status": "halted",
-		"base": "ETC",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.5",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "ETC-EUR",
-		"status": "trading",
-		"base": "ETC",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.1",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "ETH-BTC",
-		"status": "halted",
-		"base": "ETH",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.003",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "ETH-EUR",
-		"status": "trading",
-		"base": "ETH",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.001",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "FET-EUR",
-		"status": "trading",
-		"base": "FET",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "5",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "GAS-BTC",
-		"status": "halted",
-		"base": "GAS",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "2",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "GAS-EUR",
-		"status": "trading",
-		"base": "GAS",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.3",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "GLM-EUR",
-		"status": "trading",
-		"base": "GLM",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "8",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "GNO-EUR",
-		"status": "trading",
-		"base": "GNO",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.02",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "GNT-BTC",
-		"status": "halted",
-		"base": "GNT",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "70",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "GNT-EUR",
-		"status": "halted",
-		"base": "GNT",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "70",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "HOT-BTC",
-		"status": "halted",
-		"base": "HOT",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "5000",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "HOT-EUR",
-		"status": "trading",
-		"base": "HOT",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "200",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "ICX-BTC",
-		"status": "halted",
-		"base": "ICX",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "6",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "ICX-EUR",
-		"status": "trading",
-		"base": "ICX",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "2",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "IOST-BTC",
-		"status": "halted",
-		"base": "IOST",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "200",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "IOST-EUR",
-		"status": "trading",
-		"base": "IOST",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "80",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "KMD-BTC",
-		"status": "halted",
-		"base": "KMD",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "6",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "KMD-EUR",
-		"status": "trading",
-		"base": "KMD",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "1",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "KNC-EUR",
-		"status": "trading",
-		"base": "KNC",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "1",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "LINK-BTC",
-		"status": "halted",
-		"base": "LINK",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.2",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "LINK-EUR",
-		"status": "trading",
-		"base": "LINK",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.1",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "LOOM-EUR",
-		"status": "trading",
-		"base": "LOOM",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "20",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "LRC-BTC",
-		"status": "halted",
-		"base": "LRC",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "9",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "LRC-EUR",
-		"status": "trading",
-		"base": "LRC",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "9",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "LSK-BTC",
-		"status": "halted",
-		"base": "LSK",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "3",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "LSK-EUR",
-		"status": "trading",
-		"base": "LSK",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.8",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "LTC-BTC",
-		"status": "halted",
-		"base": "LTC",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.02",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "LTC-EUR",
-		"status": "trading",
-		"base": "LTC",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.01",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "MANA-EUR",
-		"status": "trading",
-		"base": "MANA",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "4",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "MATIC-EUR",
-		"status": "trading",
-		"base": "MATIC",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "3",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "MIOTA-BTC",
-		"status": "halted",
-		"base": "MIOTA",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "9",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "MIOTA-EUR",
-		"status": "trading",
-		"base": "MIOTA",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "2",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "MKR-EUR",
-		"status": "trading",
-		"base": "MKR",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.001",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "NANO-BTC",
-		"status": "halted",
-		"base": "NANO",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "1",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "NANO-EUR",
-		"status": "trading",
-		"base": "NANO",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.4",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "NAS-BTC",
-		"status": "halted",
-		"base": "NAS",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "10",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "NAS-EUR",
-		"status": "trading",
-		"base": "NAS",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "4",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "NEO-BTC",
-		"status": "halted",
-		"base": "NEO",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.2",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "NEO-EUR",
-		"status": "trading",
-		"base": "NEO",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.04",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "NMR-EUR",
-		"status": "trading",
-		"base": "NMR",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.09",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "NPXS-BTC",
-		"status": "halted",
-		"base": "NPXS",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "10000",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "NPXS-EUR",
-		"status": "halted",
-		"base": "NPXS",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "600",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "NULS-BTC",
-		"status": "halted",
-		"base": "NULS",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "10",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "NULS-EUR",
-		"status": "trading",
-		"base": "NULS",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "4",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "OGN-EUR",
-		"status": "trading",
-		"base": "OGN",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "2",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "OMG-BTC",
-		"status": "halted",
-		"base": "OMG",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "1",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "OMG-EUR",
-		"status": "trading",
-		"base": "OMG",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.5",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "ONG-BTC",
-		"status": "halted",
-		"base": "ONG",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "20",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "ONG-EUR",
-		"status": "trading",
-		"base": "ONG",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "5",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "ONT-BTC",
-		"status": "halted",
-		"base": "ONT",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "6",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "ONT-EUR",
-		"status": "trading",
-		"base": "ONT",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "3",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "OXT-EUR",
-		"status": "trading",
-		"base": "OXT",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "6",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "POWR-BTC",
-		"status": "halted",
-		"base": "POWR",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "30",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "POWR-EUR",
-		"status": "trading",
-		"base": "POWR",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "9",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "PUNDIX-EUR",
-		"status": "trading",
-		"base": "PUNDIX",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.6",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "QTUM-BTC",
-		"status": "halted",
-		"base": "QTUM",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "1",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "QTUM-EUR",
-		"status": "trading",
-		"base": "QTUM",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.3",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "RDD-BTC",
-		"status": "halted",
-		"base": "RDD",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "3000",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "RDD-EUR",
-		"status": "halted",
-		"base": "RDD",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "3000",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "REN-EUR",
-		"status": "trading",
-		"base": "REN",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "4",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "REP-EUR",
-		"status": "trading",
-		"base": "REP",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.1",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "REQ-BTC",
-		"status": "halted",
-		"base": "REQ",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "100",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "REQ-EUR",
-		"status": "trading",
-		"base": "REQ",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "30",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "RLC-EUR",
-		"status": "trading",
-		"base": "RLC",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "1",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "RSR-EUR",
-		"status": "trading",
-		"base": "RSR",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "60",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "RVN-BTC",
-		"status": "halted",
-		"base": "RVN",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "200",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "RVN-EUR",
-		"status": "trading",
-		"base": "RVN",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "20",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "SNT-BTC",
-		"status": "halted",
-		"base": "SNT",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "70",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "SNT-EUR",
-		"status": "trading",
-		"base": "SNT",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "30",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "SNX-EUR",
-		"status": "trading",
-		"base": "SNX",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.1",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "SOL-EUR",
-		"status": "trading",
-		"base": "SOL",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.1",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "STEEM-BTC",
-		"status": "halted",
-		"base": "STEEM",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "20",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "STEEM-EUR",
-		"status": "trading",
-		"base": "STEEM",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "4",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "STMX-BTC",
-		"status": "halted",
-		"base": "STMX",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "1000",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "STMX-EUR",
-		"status": "trading",
-		"base": "STMX",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "70",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "STORJ-EUR",
-		"status": "trading",
-		"base": "STORJ",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "2",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "STORM-BTC",
-		"status": "halted",
-		"base": "STORM",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "1500",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "STORM-EUR",
-		"status": "halted",
-		"base": "STORM",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "1500",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "STRAT-BTC",
-		"status": "halted",
-		"base": "STRAT",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "5",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "STRAT-EUR",
-		"status": "halted",
-		"base": "STRAT",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "5",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "STRAX-EUR",
-		"status": "trading",
-		"base": "STRAX",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "2",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "SUSHI-EUR",
-		"status": "trading",
-		"base": "SUSHI",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.2",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "SXP-EUR",
-		"status": "trading",
-		"base": "SXP",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "1",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "TRB-EUR",
-		"status": "trading",
-		"base": "TRB",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.04",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "TRX-BTC",
-		"status": "halted",
-		"base": "TRX",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "100",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "TRX-EUR",
-		"status": "trading",
-		"base": "TRX",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "30",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "UMA-EUR",
-		"status": "trading",
-		"base": "UMA",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.1",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "UNI-EUR",
-		"status": "trading",
-		"base": "UNI",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.1",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "USDC-EUR",
-		"status": "trading",
-		"base": "USDC",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "5",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "USDT-EUR",
-		"status": "trading",
-		"base": "USDT",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "5",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "UTK-EUR",
-		"status": "trading",
-		"base": "UTK",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "8",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "VET-BTC",
-		"status": "halted",
-		"base": "VET",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "100",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "VET-EUR",
-		"status": "trading",
-		"base": "VET",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "20",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "VTC-BTC",
-		"status": "halted",
-		"base": "VTC",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "20",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "VTC-EUR",
-		"status": "trading",
-		"base": "VTC",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "2",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "VTHO-BTC",
-		"status": "halted",
-		"base": "VTHO",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "4000",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "VTHO-EUR",
-		"status": "trading",
-		"base": "VTHO",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "200",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "WAVES-BTC",
-		"status": "halted",
-		"base": "WAVES",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.6",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "WAVES-EUR",
-		"status": "trading",
-		"base": "WAVES",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.3",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "WTC-BTC",
-		"status": "halted",
-		"base": "WTC",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "10",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "WTC-EUR",
-		"status": "trading",
-		"base": "WTC",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "3",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "XEM-BTC",
-		"status": "halted",
-		"base": "XEM",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "20",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "XEM-EUR",
-		"status": "trading",
-		"base": "XEM",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "10",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "XLM-BTC",
-		"status": "halted",
-		"base": "XLM",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "10",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "XLM-EUR",
-		"status": "trading",
-		"base": "XLM",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "10",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "XRP-BTC",
-		"status": "halted",
-		"base": "XRP",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "10",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "XRP-EUR",
-		"status": "trading",
-		"base": "XRP",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "3",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "XTZ-BTC",
-		"status": "halted",
-		"base": "XTZ",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "1",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "XTZ-EUR",
-		"status": "trading",
-		"base": "XTZ",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "1",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "XVG-BTC",
-		"status": "halted",
-		"base": "XVG",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "300",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "XVG-EUR",
-		"status": "trading",
-		"base": "XVG",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "100",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "YFI-EUR",
-		"status": "trading",
-		"base": "YFI",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.0001",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "YFII-EUR",
-		"status": "trading",
-		"base": "YFII",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "0.001",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "ZIL-BTC",
-		"status": "halted",
-		"base": "ZIL",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "50",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "ZIL-EUR",
-		"status": "trading",
-		"base": "ZIL",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "20",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "ZRX-BTC",
-		"status": "halted",
-		"base": "ZRX",
-		"quote": "BTC",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "7",
-		"minOrderInQuoteAsset": "0.001",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	},
-	{
-		"market": "ZRX-EUR",
-		"status": "trading",
-		"base": "ZRX",
-		"quote": "EUR",
-		"pricePrecision": 5,
-		"minOrderInBaseAsset": "3",
-		"minOrderInQuoteAsset": "5",
-		"orderTypes": [
-			"market",
-			"limit",
-			"stopLoss",
-			"stopLossLimit",
-			"takeProfit",
-			"takeProfitLimit"
-		]
-	}
+  {
+    "market": "AAVE-EUR",
+    "status": "trading",
+    "base": "AAVE",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.008",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "ADA-BTC",
+    "status": "halted",
+    "base": "ADA",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "10",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "ADA-EUR",
+    "status": "trading",
+    "base": "ADA",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "3",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "AE-BTC",
+    "status": "halted",
+    "base": "AE",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "10",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "AE-EUR",
+    "status": "halted",
+    "base": "AE",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "10",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "AION-BTC",
+    "status": "halted",
+    "base": "AION",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "50",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "AION-EUR",
+    "status": "trading",
+    "base": "AION",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "10",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "ANT-BTC",
+    "status": "halted",
+    "base": "ANT",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "1",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "ANT-EUR",
+    "status": "trading",
+    "base": "ANT",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.5",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "ARK-BTC",
+    "status": "halted",
+    "base": "ARK",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "9",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "ARK-EUR",
+    "status": "trading",
+    "base": "ARK",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "2",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "BAL-EUR",
+    "status": "trading",
+    "base": "BAL",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.08",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "BAND-EUR",
+    "status": "trading",
+    "base": "BAND",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.2",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "BAT-BTC",
+    "status": "halted",
+    "base": "BAT",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "10",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "BAT-EUR",
+    "status": "trading",
+    "base": "BAT",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "3",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "BCH-BTC",
+    "status": "halted",
+    "base": "BCH",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.007",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "BCH-EUR",
+    "status": "trading",
+    "base": "BCH",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.004",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "BNB-EUR",
+    "status": "trading",
+    "base": "BNB",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.01",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "BSV-BTC",
+    "status": "halted",
+    "base": "BSV",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.02",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "BSV-EUR",
+    "status": "trading",
+    "base": "BSV",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.01",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "BTC-EUR",
+    "status": "trading",
+    "base": "BTC",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.0001",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "CHZ-EUR",
+    "status": "trading",
+    "base": "CHZ",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "7",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "CMT-BTC",
+    "status": "halted",
+    "base": "CMT",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "400",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "CMT-EUR",
+    "status": "halted",
+    "base": "CMT",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "400",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "COMP-EUR",
+    "status": "trading",
+    "base": "COMP",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.009",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "DAI-EUR",
+    "status": "trading",
+    "base": "DAI",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "5",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "DCR-BTC",
+    "status": "halted",
+    "base": "DCR",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.06",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "DCR-EUR",
+    "status": "trading",
+    "base": "DCR",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.02",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "DGB-BTC",
+    "status": "halted",
+    "base": "DGB",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "100",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "DGB-EUR",
+    "status": "trading",
+    "base": "DGB",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "30",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "DOGE-EUR",
+    "status": "trading",
+    "base": "DOGE",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "20",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "DOT-EUR",
+    "status": "trading",
+    "base": "DOT",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.3",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "ELF-BTC",
+    "status": "halted",
+    "base": "ELF",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "30",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "ELF-EUR",
+    "status": "trading",
+    "base": "ELF",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "10",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "ENJ-BTC",
+    "status": "halted",
+    "base": "ENJ",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "20",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "ENJ-EUR",
+    "status": "trading",
+    "base": "ENJ",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "1",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "EOS-BTC",
+    "status": "halted",
+    "base": "EOS",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "1",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "EOS-EUR",
+    "status": "trading",
+    "base": "EOS",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.6",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "ETC-BTC",
+    "status": "halted",
+    "base": "ETC",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.5",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "ETC-EUR",
+    "status": "trading",
+    "base": "ETC",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.1",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "ETH-BTC",
+    "status": "halted",
+    "base": "ETH",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.003",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "ETH-EUR",
+    "status": "trading",
+    "base": "ETH",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.001",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "FET-EUR",
+    "status": "trading",
+    "base": "FET",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "5",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "GAS-BTC",
+    "status": "halted",
+    "base": "GAS",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "2",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "GAS-EUR",
+    "status": "trading",
+    "base": "GAS",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.3",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "GLM-EUR",
+    "status": "trading",
+    "base": "GLM",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "8",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "GNO-EUR",
+    "status": "trading",
+    "base": "GNO",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.02",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "GNT-BTC",
+    "status": "halted",
+    "base": "GNT",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "70",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "GNT-EUR",
+    "status": "halted",
+    "base": "GNT",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "70",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "HOT-BTC",
+    "status": "halted",
+    "base": "HOT",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "5000",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "HOT-EUR",
+    "status": "trading",
+    "base": "HOT",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "200",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "ICX-BTC",
+    "status": "halted",
+    "base": "ICX",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "6",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "ICX-EUR",
+    "status": "trading",
+    "base": "ICX",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "2",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "IOST-BTC",
+    "status": "halted",
+    "base": "IOST",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "200",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "IOST-EUR",
+    "status": "trading",
+    "base": "IOST",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "80",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "KMD-BTC",
+    "status": "halted",
+    "base": "KMD",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "6",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "KMD-EUR",
+    "status": "trading",
+    "base": "KMD",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "1",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "KNC-EUR",
+    "status": "trading",
+    "base": "KNC",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "1",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "LINK-BTC",
+    "status": "halted",
+    "base": "LINK",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.2",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "LINK-EUR",
+    "status": "trading",
+    "base": "LINK",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.1",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "LOOM-EUR",
+    "status": "trading",
+    "base": "LOOM",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "20",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "LRC-BTC",
+    "status": "halted",
+    "base": "LRC",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "9",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "LRC-EUR",
+    "status": "trading",
+    "base": "LRC",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "9",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "LSK-BTC",
+    "status": "halted",
+    "base": "LSK",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "3",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "LSK-EUR",
+    "status": "trading",
+    "base": "LSK",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.8",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "LTC-BTC",
+    "status": "halted",
+    "base": "LTC",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.02",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "LTC-EUR",
+    "status": "trading",
+    "base": "LTC",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.01",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "MANA-EUR",
+    "status": "trading",
+    "base": "MANA",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "4",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "MATIC-EUR",
+    "status": "trading",
+    "base": "MATIC",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "3",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "MIOTA-BTC",
+    "status": "halted",
+    "base": "MIOTA",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "9",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "MIOTA-EUR",
+    "status": "trading",
+    "base": "MIOTA",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "2",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "MKR-EUR",
+    "status": "trading",
+    "base": "MKR",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.001",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "NANO-BTC",
+    "status": "halted",
+    "base": "NANO",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "1",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "NANO-EUR",
+    "status": "trading",
+    "base": "NANO",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.4",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "NAS-BTC",
+    "status": "halted",
+    "base": "NAS",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "10",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "NAS-EUR",
+    "status": "trading",
+    "base": "NAS",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "4",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "NEO-BTC",
+    "status": "halted",
+    "base": "NEO",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.2",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "NEO-EUR",
+    "status": "trading",
+    "base": "NEO",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.04",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "NMR-EUR",
+    "status": "trading",
+    "base": "NMR",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.09",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "NPXS-BTC",
+    "status": "halted",
+    "base": "NPXS",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "10000",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "NPXS-EUR",
+    "status": "halted",
+    "base": "NPXS",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "600",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "NULS-BTC",
+    "status": "halted",
+    "base": "NULS",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "10",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "NULS-EUR",
+    "status": "trading",
+    "base": "NULS",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "4",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "OGN-EUR",
+    "status": "trading",
+    "base": "OGN",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "2",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "OMG-BTC",
+    "status": "halted",
+    "base": "OMG",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "1",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "OMG-EUR",
+    "status": "trading",
+    "base": "OMG",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.5",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "ONG-BTC",
+    "status": "halted",
+    "base": "ONG",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "20",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "ONG-EUR",
+    "status": "trading",
+    "base": "ONG",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "5",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "ONT-BTC",
+    "status": "halted",
+    "base": "ONT",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "6",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "ONT-EUR",
+    "status": "trading",
+    "base": "ONT",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "3",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "OXT-EUR",
+    "status": "trading",
+    "base": "OXT",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "6",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "POWR-BTC",
+    "status": "halted",
+    "base": "POWR",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "30",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "POWR-EUR",
+    "status": "trading",
+    "base": "POWR",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "9",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "PUNDIX-EUR",
+    "status": "trading",
+    "base": "PUNDIX",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.6",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "QTUM-BTC",
+    "status": "halted",
+    "base": "QTUM",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "1",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "QTUM-EUR",
+    "status": "trading",
+    "base": "QTUM",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.3",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "RDD-BTC",
+    "status": "halted",
+    "base": "RDD",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "3000",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "RDD-EUR",
+    "status": "halted",
+    "base": "RDD",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "3000",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "REN-EUR",
+    "status": "trading",
+    "base": "REN",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "4",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "REP-EUR",
+    "status": "trading",
+    "base": "REP",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.1",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "REQ-BTC",
+    "status": "halted",
+    "base": "REQ",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "100",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "REQ-EUR",
+    "status": "trading",
+    "base": "REQ",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "30",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "RLC-EUR",
+    "status": "trading",
+    "base": "RLC",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "1",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "RSR-EUR",
+    "status": "trading",
+    "base": "RSR",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "60",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "RVN-BTC",
+    "status": "halted",
+    "base": "RVN",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "200",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "RVN-EUR",
+    "status": "trading",
+    "base": "RVN",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "20",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "SNT-BTC",
+    "status": "halted",
+    "base": "SNT",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "70",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "SNT-EUR",
+    "status": "trading",
+    "base": "SNT",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "30",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "SNX-EUR",
+    "status": "trading",
+    "base": "SNX",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.1",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "SOL-EUR",
+    "status": "trading",
+    "base": "SOL",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.1",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "STEEM-BTC",
+    "status": "halted",
+    "base": "STEEM",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "20",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "STEEM-EUR",
+    "status": "trading",
+    "base": "STEEM",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "4",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "STMX-BTC",
+    "status": "halted",
+    "base": "STMX",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "1000",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "STMX-EUR",
+    "status": "trading",
+    "base": "STMX",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "70",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "STORJ-EUR",
+    "status": "trading",
+    "base": "STORJ",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "2",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "STORM-BTC",
+    "status": "halted",
+    "base": "STORM",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "1500",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "STORM-EUR",
+    "status": "halted",
+    "base": "STORM",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "1500",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "STRAT-BTC",
+    "status": "halted",
+    "base": "STRAT",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "5",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "STRAT-EUR",
+    "status": "halted",
+    "base": "STRAT",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "5",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "STRAX-EUR",
+    "status": "trading",
+    "base": "STRAX",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "2",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "SUSHI-EUR",
+    "status": "trading",
+    "base": "SUSHI",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.2",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "SXP-EUR",
+    "status": "trading",
+    "base": "SXP",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "1",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "TRB-EUR",
+    "status": "trading",
+    "base": "TRB",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.04",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "TRX-BTC",
+    "status": "halted",
+    "base": "TRX",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "100",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "TRX-EUR",
+    "status": "trading",
+    "base": "TRX",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "30",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "UMA-EUR",
+    "status": "trading",
+    "base": "UMA",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.1",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "UNI-EUR",
+    "status": "trading",
+    "base": "UNI",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.1",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "USDC-EUR",
+    "status": "trading",
+    "base": "USDC",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "5",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "USDT-EUR",
+    "status": "trading",
+    "base": "USDT",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "5",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "UTK-EUR",
+    "status": "trading",
+    "base": "UTK",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "8",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "VET-BTC",
+    "status": "halted",
+    "base": "VET",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "100",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "VET-EUR",
+    "status": "trading",
+    "base": "VET",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "20",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "VTC-BTC",
+    "status": "halted",
+    "base": "VTC",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "20",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "VTC-EUR",
+    "status": "trading",
+    "base": "VTC",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "2",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "VTHO-BTC",
+    "status": "halted",
+    "base": "VTHO",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "4000",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "VTHO-EUR",
+    "status": "trading",
+    "base": "VTHO",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "200",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "WAVES-BTC",
+    "status": "halted",
+    "base": "WAVES",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.6",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "WAVES-EUR",
+    "status": "trading",
+    "base": "WAVES",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.3",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "WTC-BTC",
+    "status": "halted",
+    "base": "WTC",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "10",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "WTC-EUR",
+    "status": "trading",
+    "base": "WTC",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "3",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "XEM-BTC",
+    "status": "halted",
+    "base": "XEM",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "20",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "XEM-EUR",
+    "status": "trading",
+    "base": "XEM",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "10",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "XLM-BTC",
+    "status": "halted",
+    "base": "XLM",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "10",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "XLM-EUR",
+    "status": "trading",
+    "base": "XLM",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "10",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "XRP-BTC",
+    "status": "halted",
+    "base": "XRP",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "10",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "XRP-EUR",
+    "status": "trading",
+    "base": "XRP",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "3",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "XTZ-BTC",
+    "status": "halted",
+    "base": "XTZ",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "1",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "XTZ-EUR",
+    "status": "trading",
+    "base": "XTZ",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "1",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "XVG-BTC",
+    "status": "halted",
+    "base": "XVG",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "300",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "XVG-EUR",
+    "status": "trading",
+    "base": "XVG",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "100",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "YFI-EUR",
+    "status": "trading",
+    "base": "YFI",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.0001",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "YFII-EUR",
+    "status": "trading",
+    "base": "YFII",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "0.001",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "ZIL-BTC",
+    "status": "halted",
+    "base": "ZIL",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "50",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "ZIL-EUR",
+    "status": "trading",
+    "base": "ZIL",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "20",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "ZRX-BTC",
+    "status": "halted",
+    "base": "ZRX",
+    "quote": "BTC",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "7",
+    "minOrderInQuoteAsset": "0.001",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  },
+  {
+    "market": "ZRX-EUR",
+    "status": "trading",
+    "base": "ZRX",
+    "quote": "EUR",
+    "pricePrecision": 5,
+    "minOrderInBaseAsset": "3",
+    "minOrderInQuoteAsset": "5",
+    "orderTypes": [
+      "market",
+      "limit",
+      "stopLoss",
+      "stopLossLimit",
+      "takeProfit",
+      "takeProfitLimit"
+    ]
+  }
 ]

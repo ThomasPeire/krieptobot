@@ -19,8 +19,8 @@ namespace KrieptoBot.AzureFunction
                     builder
                         .SetBasePath(Environment.CurrentDirectory)
                         .AddJsonFile(Path.Combine(context.HostingEnvironment.ContentRootPath, "appsettings.json"),
-                            optional: true,
-                            reloadOnChange: false)
+                            true,
+                            false)
                         .AddUserSecrets<Program>()
                         .AddEnvironmentVariables())
                 .ConfigureServices(services =>

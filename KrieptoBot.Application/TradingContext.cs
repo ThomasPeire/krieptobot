@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace KrieptoBot.Application
 {
-    public class TradingContext: ITradingContext
+    public class TradingContext : ITradingContext
     {
         public string Interval { get; private set; }
         public IEnumerable<string> MarketsToWatch { get; private set; }

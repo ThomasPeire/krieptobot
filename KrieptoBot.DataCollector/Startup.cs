@@ -1,5 +1,4 @@
 ﻿using KrieptoBot.Infrastructure.Bitvavo.Extensions.Microsoft.DependencyInjection;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace KrieptoBot.DataCollector

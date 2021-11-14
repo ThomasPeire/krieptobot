@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
-using KrieptoBot.Model;
+using KrieptoBot.Domain.Recommendation.ValueObjects;
+using KrieptoBot.Domain.Trading.ValueObjects;
 
 namespace KrieptoBot.Application.Recommendators
 {
@@ -8,14 +9,14 @@ namespace KrieptoBot.Application.Recommendators
         protected virtual decimal SellRecommendationWeight => 1; //todo make app setting for each recommendator
         protected virtual decimal BuyRecommendationWeight => 1; //todo make app setting for each recommendator
 
-        protected abstract Task<RecommendatorScore> CalculateRecommendation(Market market);
-
         public async Task<RecommendatorScore> GetRecommendation(Market market)
         {
             var recommendation = await CalculateRecommendation(market);
-            return recommendation.Score > 0
+            return recommendation > 0
                 ? recommendation * BuyRecommendationWeight
                 : recommendation * SellRecommendationWeight;
         }
+
+        protected abstract Task<RecommendatorScore> CalculateRecommendation(Market market);
     }
 }

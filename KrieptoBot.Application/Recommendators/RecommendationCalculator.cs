@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using KrieptoBot.Model;
+using KrieptoBot.Domain.Recommendation.ValueObjects;
+using KrieptoBot.Domain.Trading.ValueObjects;
 using Microsoft.Extensions.Logging;
 
 namespace KrieptoBot.Application.Recommendators
@@ -25,11 +25,11 @@ namespace KrieptoBot.Application.Recommendators
                 await Task.WhenAll(_recommendators.Select(async recommendator =>
                     await recommendator.GetRecommendation(market)));
 
-            var averageScore = recommendationScores.Where(x => x.IncludeInAverageScore).Average(x => x.Score);
+            var averageScore = recommendationScores.Where(x => x.IncludeInAverageScore).Average(x => x);
 
-            _logger.LogInformation("Market {Market}: Final score: {Score}", market.MarketName, averageScore);
+            _logger.LogInformation("Market {Market}: Final score: {Score}", market.Name, averageScore);
 
-            return new RecommendatorScore { Score = averageScore };
+            return new RecommendatorScore(averageScore);
         }
     }
 }

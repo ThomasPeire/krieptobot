@@ -1,18 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Library</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
-    <ApplicationIcon />
-    <StartupObject />
-    <LangVersion>10</LangVersion>
-    <Configurations>Debug;Release;Debug-Non-Windows-Specific</Configurations>
-    <Platforms>AnyCPU</Platforms>
-  </PropertyGroup>
+    <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+        <ApplicationIcon/>
+        <StartupObject/>
+        <LangVersion>10</LangVersion>
+        <Configurations>Debug;Release;Debug-Non-Windows-Specific</Configurations>
+        <Platforms>AnyCPU</Platforms>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\KrieptoBot.Application\KrieptoBot.Application.csproj" />
-    <ProjectReference Include="..\KrieptoBot.Model\KrieptoBot.Model.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\KrieptoBot.Application\KrieptoBot.Application.csproj"/>
+        <ProjectReference Include="..\KrieptoBot.Domain\KrieptoBot.Domain.csproj"/>
+    </ItemGroup>
 
 </Project>

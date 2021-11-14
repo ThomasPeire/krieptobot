@@ -1,7 +1,7 @@
-﻿using KrieptoBot.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using KrieptoBot.Domain.Trading.ValueObjects;
 
 namespace KrieptoBot.Application.Indicators
 {
@@ -18,19 +18,21 @@ namespace KrieptoBot.Application.Indicators
             return rsiValues;
         }
 
-        private Dictionary<DateTime, decimal> CalculateRsi(Dictionary<DateTime, (decimal upAverage, decimal downAverage)> upAndDownAverages)
+        private Dictionary<DateTime, decimal> CalculateRsi(
+            Dictionary<DateTime, (decimal upAverage, decimal downAverage)> upAndDownAverages)
         {
-            return new(upAndDownAverages
+            return new Dictionary<DateTime, decimal>(upAndDownAverages
                 .Select(x =>
                     new KeyValuePair<DateTime, decimal>(x.Key, GetRSI(x.Value.upAverage, x.Value.downAverage))));
         }
 
         private decimal GetRSI(decimal averageUp, decimal averageDown)
         {
-            return 100 - (100 / (1 + (averageUp / averageDown)));
+            return 100 - 100 / (1 + averageUp / averageDown);
         }
 
-        private Dictionary<DateTime, (decimal upAverage, decimal downAverage)> CalculateMovingAverage(Dictionary<DateTime, (decimal up, decimal down)> upAndDownMoves, int movingAveragePeriod)
+        private Dictionary<DateTime, (decimal upAverage, decimal downAverage)> CalculateMovingAverage(
+            Dictionary<DateTime, (decimal up, decimal down)> upAndDownMoves, int movingAveragePeriod)
         {
             var movingAverages = new Dictionary<DateTime, (decimal avgerageUp, decimal averageDown)>();
             var upAndDownMovesArray = upAndDownMoves.OrderBy(x => x.Key).ToArray();
@@ -40,10 +42,13 @@ namespace KrieptoBot.Application.Indicators
             var previousAverageUp = previousValues.Average(x => x.up);
             var previousAverageDown = previousValues.Average(x => x.down);
 
-            for (var i = movingAveragePeriod ; i < upAndDownMovesArray.Length; i++)
+            for (var i = movingAveragePeriod; i < upAndDownMovesArray.Length; i++)
             {
-                var averageUp = (previousAverageUp * (movingAveragePeriod - 1) + upAndDownMovesArray[i].Value.up) / movingAveragePeriod;
-                var averageDown = (previousAverageDown * (movingAveragePeriod - 1) + upAndDownMovesArray[i].Value.down) / movingAveragePeriod;
+                var averageUp = (previousAverageUp * (movingAveragePeriod - 1) + upAndDownMovesArray[i].Value.up) /
+                                movingAveragePeriod;
+                var averageDown =
+                    (previousAverageDown * (movingAveragePeriod - 1) + upAndDownMovesArray[i].Value.down) /
+                    movingAveragePeriod;
 
                 movingAverages.Add(upAndDownMovesArray[i].Key, (averageUp, averageDown));
 
@@ -53,8 +58,10 @@ namespace KrieptoBot.Application.Indicators
 
             return movingAverages;
         }
-        
-        private IEnumerable<(decimal up, decimal down)> GetStartingValues(IEnumerable<KeyValuePair<DateTime, (decimal ups, decimal downs)>> upAndDownMovesArray, int movingAveragePeriod)
+
+        private IEnumerable<(decimal up, decimal down)> GetStartingValues(
+            IEnumerable<KeyValuePair<DateTime, (decimal ups, decimal downs)>> upAndDownMovesArray,
+            int movingAveragePeriod)
         {
             return upAndDownMovesArray.Take(movingAveragePeriod).Select(x => x.Value);
         }

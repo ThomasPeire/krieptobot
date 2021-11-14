@@ -27,13 +27,14 @@ namespace KrieptoBot.DataCollector
             }
         }
 
-        private static IHostBuilder CreateHostBuilder(string[] args) =>
-            new HostBuilder().ConfigureAppConfiguration((context, builder) =>
+        private static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return new HostBuilder().ConfigureAppConfiguration((context, builder) =>
                 {
                     builder.SetBasePath(AppContext.BaseDirectory)
                         .SetBasePath(Environment.CurrentDirectory)
-                        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                        .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                        .AddJsonFile("appsettings.json", false, true)
+                        .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", true, true)
                         .AddUserSecrets<Program>()
                         .AddEnvironmentVariables();
                 })
@@ -48,5 +49,6 @@ namespace KrieptoBot.DataCollector
 
                     services.AddHostedService<CollectorService>();
                 }).UseSerilog();
+        }
     }
 }

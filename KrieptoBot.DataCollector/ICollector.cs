@@ -6,6 +6,7 @@ namespace KrieptoBot.DataCollector
 {
     public interface ICollector
     {
-        Task CollectCandles(IEnumerable<string> markets, ICollection<string> intervals, DateTime fromDateTime, DateTime toDateTime);
+        Task CollectCandles(IEnumerable<string> markets, ICollection<string> intervals, DateTime fromDateTime,
+            DateTime toDateTime);
     }
 }

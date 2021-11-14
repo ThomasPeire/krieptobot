@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KrieptoBot.AzureFunction", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KrieptoBot.Infrastructure.Bitvavo", "KrieptoBot.Infrastructure.Bitvavo\KrieptoBot.Infrastructure.Bitvavo.csproj", "{D4B1AE2F-B140-4378-9AF7-D992243D6038}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KrieptoBot.Model", "KrieptoBot.Model\KrieptoBot.Model.csproj", "{E0CBAA45-A540-4201-95AC-38A5B7FD9ABF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KrieptoBot.Domain", "KrieptoBot.Domain\KrieptoBot.Domain.csproj", "{E0CBAA45-A540-4201-95AC-38A5B7FD9ABF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KrieptoBot.Application", "KrieptoBot.Application\KrieptoBot.Application.csproj", "{2231F5B8-9380-4A8D-BA26-94E85BB566DE}"
 EndProject
