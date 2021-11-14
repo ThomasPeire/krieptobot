@@ -34,22 +34,22 @@ namespace KrieptoBot.Domain.Recommendation.ValueObjects
 
         public static RecommendatorScore operator *(RecommendatorScore recommendatorScore, decimal b)
         {
-            return new(recommendatorScore.Value * b, recommendatorScore.IncludeInAverageScore);
+            return new RecommendatorScore(recommendatorScore.Value * b, recommendatorScore.IncludeInAverageScore);
         }
 
         public static RecommendatorScore operator /(RecommendatorScore recommendatorScore, decimal b)
         {
-            return new(recommendatorScore.Value / b, recommendatorScore.IncludeInAverageScore);
+            return new RecommendatorScore(recommendatorScore.Value / b, recommendatorScore.IncludeInAverageScore);
         }
 
         public static RecommendatorScore operator +(RecommendatorScore recommendatorScore, decimal b)
         {
-            return new(recommendatorScore.Value + b, recommendatorScore.IncludeInAverageScore);
+            return new RecommendatorScore(recommendatorScore.Value + b, recommendatorScore.IncludeInAverageScore);
         }
 
         public static RecommendatorScore operator -(RecommendatorScore recommendatorScore, decimal b)
         {
-            return new(recommendatorScore.Value - b, recommendatorScore.IncludeInAverageScore);
+            return new RecommendatorScore(recommendatorScore.Value - b, recommendatorScore.IncludeInAverageScore);
         }
     }
 }
