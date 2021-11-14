@@ -33,22 +33,22 @@ namespace KrieptoBot.Domain.Trading.ValueObjects
 
         public static Amount operator *(Amount a, Amount b)
         {
-            return new(a.Value * b.Value);
+            return new Amount(a.Value * b.Value);
         }
 
         public static Amount operator /(Amount a, Amount b)
         {
-            return new(a.Value / b.Value);
+            return new Amount(a.Value / b.Value);
         }
 
         public static Amount operator +(Amount a, Amount b)
         {
-            return new(a.Value + b.Value);
+            return new Amount(a.Value + b.Value);
         }
 
         public static Amount operator -(Amount a, Amount b)
         {
-            return new(a.Value - b.Value);
+            return new Amount(a.Value - b.Value);
         }
     }
 }

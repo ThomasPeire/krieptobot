@@ -32,16 +32,24 @@ namespace KrieptoBot.Domain.Recommendation.ValueObjects
             yield return Value;
         }
 
-        public static RecommendatorScore operator *(RecommendatorScore recommendatorScore, decimal b) =>
-            new RecommendatorScore(recommendatorScore.Value * b, recommendatorScore.IncludeInAverageScore);
+        public static RecommendatorScore operator *(RecommendatorScore recommendatorScore, decimal b)
+        {
+            return new(recommendatorScore.Value * b, recommendatorScore.IncludeInAverageScore);
+        }
 
-        public static RecommendatorScore operator /(RecommendatorScore recommendatorScore, decimal b) =>
-            new RecommendatorScore(recommendatorScore.Value / b, recommendatorScore.IncludeInAverageScore);
+        public static RecommendatorScore operator /(RecommendatorScore recommendatorScore, decimal b)
+        {
+            return new(recommendatorScore.Value / b, recommendatorScore.IncludeInAverageScore);
+        }
 
-        public static RecommendatorScore operator +(RecommendatorScore recommendatorScore, decimal b) =>
-            new RecommendatorScore(recommendatorScore.Value + b, recommendatorScore.IncludeInAverageScore);
+        public static RecommendatorScore operator +(RecommendatorScore recommendatorScore, decimal b)
+        {
+            return new(recommendatorScore.Value + b, recommendatorScore.IncludeInAverageScore);
+        }
 
-        public static RecommendatorScore operator -(RecommendatorScore recommendatorScore, decimal b) =>
-            new RecommendatorScore(recommendatorScore.Value - b, recommendatorScore.IncludeInAverageScore);
+        public static RecommendatorScore operator -(RecommendatorScore recommendatorScore, decimal b)
+        {
+            return new(recommendatorScore.Value - b, recommendatorScore.IncludeInAverageScore);
+        }
     }
 }
