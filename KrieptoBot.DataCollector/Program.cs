@@ -7,13 +7,13 @@ using Serilog;
 
 namespace KrieptoBot.DataCollector
 {
-    internal class Program
+    internal static class Program
     {
-        private static async Task Main(string[] args)
+        private static async Task Main()
         {
             try
             {
-                var hostBuilder = CreateHostBuilder(args).Build();
+                var hostBuilder = CreateHostBuilder().Build();
                 Log.Information("Starting up");
                 await hostBuilder.RunAsync();
             }
@@ -27,7 +27,7 @@ namespace KrieptoBot.DataCollector
             }
         }
 
-        private static IHostBuilder CreateHostBuilder(string[] args)
+        private static IHostBuilder CreateHostBuilder()
         {
             return new HostBuilder().ConfigureAppConfiguration((context, builder) =>
                 {
@@ -35,7 +35,7 @@ namespace KrieptoBot.DataCollector
                         .SetBasePath(Environment.CurrentDirectory)
                         .AddJsonFile("appsettings.json", false, true)
                         .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", true, true)
-                        .AddUserSecrets<Program>()
+                        .AddUserSecrets<Startup>()
                         .AddEnvironmentVariables();
                 })
                 .ConfigureServices((context, services) =>

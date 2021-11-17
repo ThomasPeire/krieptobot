@@ -4,8 +4,10 @@ using System.Threading.Tasks;
 using KrieptoBot.Application;
 using KrieptoBot.Application.Indicators;
 using KrieptoBot.Application.Recommendators;
+using KrieptoBot.Application.Settings;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Moq;
 using NUnit.Framework;
 
@@ -15,6 +17,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
     {
         private Mock<IExchangeService> _exchangeServiceMock;
         private Mock<ILogger<RecommendatorRsi14PeriodInterval>> _logger;
+        private Mock<IOptions<RecommendatorSettings>> _recommendatorSettingOptions;
         private Mock<IRsi> _rsiIndicator;
         private TradingContext _tradingContext;
 
@@ -24,7 +27,18 @@ namespace KrieptoBot.Tests.Application.Recommendators
             _exchangeServiceMock = new Mock<IExchangeService>();
             _rsiIndicator = new Mock<IRsi>();
             _logger = new Mock<ILogger<RecommendatorRsi14PeriodInterval>>();
-
+            _recommendatorSettingOptions = new Mock<IOptions<RecommendatorSettings>>();
+            _recommendatorSettingOptions.Setup(x => x.Value).Returns(new RecommendatorSettings
+            {
+                BuyRecommendationWeights = new Dictionary<string, decimal>
+                {
+                    { nameof(RecommendatorRsi14PeriodInterval), 1m }
+                },
+                SellRecommendationWeights = new Dictionary<string, decimal>
+                {
+                    { nameof(RecommendatorRsi14PeriodInterval), 1m }
+                }
+            });
             var rsiResults =
                 new Dictionary<DateTime, decimal>
                 {
@@ -60,7 +74,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
                 .Returns(rsiResults);
 
             var recommendator = new RecommendatorRsi14PeriodInterval(_exchangeServiceMock.Object, _rsiIndicator.Object,
-                _tradingContext, _logger.Object);
+                _tradingContext, _logger.Object, _recommendatorSettingOptions.Object);
 
             var result = await recommendator.GetRecommendation(new Market("BTC-EUR"));
 
@@ -81,7 +95,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
                 .Returns(rsiResults);
 
             var recommendator = new RecommendatorRsi14PeriodInterval(_exchangeServiceMock.Object, _rsiIndicator.Object,
-                _tradingContext, _logger.Object);
+                _tradingContext, _logger.Object, _recommendatorSettingOptions.Object);
 
             var result = await recommendator.GetRecommendation(new Market("BTC-EUR"));
 
@@ -102,7 +116,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
                 .Returns(rsiResults1);
 
             var recommendator = new RecommendatorRsi14PeriodInterval(_exchangeServiceMock.Object, _rsiIndicator.Object,
-                _tradingContext, _logger.Object);
+                _tradingContext, _logger.Object, _recommendatorSettingOptions.Object);
 
             var result1 = await recommendator.GetRecommendation(new Market("BTC-EUR"));
 
@@ -136,7 +150,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
 
             var recommendator =
                 new RecommendatorRsi14PeriodInterval(_exchangeServiceMock.Object, _rsiIndicator.Object, _tradingContext,
-                    _logger.Object);
+                    _logger.Object, _recommendatorSettingOptions.Object);
 
             var result = await recommendator.GetRecommendation(new Market("BTC-EUR"));
 
@@ -163,7 +177,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
                 .Returns(rsiResults);
 
             var recommendator = new RecommendatorRsi14PeriodInterval(_exchangeServiceMock.Object, _rsiIndicator.Object,
-                _tradingContext, _logger.Object);
+                _tradingContext, _logger.Object, _recommendatorSettingOptions.Object);
 
             var result = await recommendator.GetRecommendation(new Market("BTC-EUR"));
 

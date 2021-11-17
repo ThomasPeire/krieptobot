@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using KrieptoBot.Application;
 using KrieptoBot.Application.Recommendators;
+using KrieptoBot.Application.Settings;
 using KrieptoBot.Domain.Trading.Entity;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Moq;
 using NUnit.Framework;
 
@@ -15,6 +17,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
     {
         private Mock<IExchangeService> _exchangeServiceMock;
         private Mock<ILogger<RecommendatorProfitPercentage>> _logger;
+        private Mock<IOptions<RecommendatorSettings>> _recommendatorSettingOptions;
         private TradingContext _tradingContext;
 
         [SetUp]
@@ -22,6 +25,19 @@ namespace KrieptoBot.Tests.Application.Recommendators
         {
             _exchangeServiceMock = new Mock<IExchangeService>();
             _logger = new Mock<ILogger<RecommendatorProfitPercentage>>();
+            _recommendatorSettingOptions = new Mock<IOptions<RecommendatorSettings>>();
+
+            _recommendatorSettingOptions.Setup(x => x.Value).Returns(new RecommendatorSettings
+            {
+                BuyRecommendationWeights = new Dictionary<string, decimal>
+                {
+                    { nameof(RecommendatorProfitPercentage), 1m }
+                },
+                SellRecommendationWeights = new Dictionary<string, decimal>
+                {
+                    { nameof(RecommendatorProfitPercentage), 1m }
+                }
+            });
 
             _tradingContext = new TradingContext()
                 .SetBuyMargin(30)
@@ -37,7 +53,8 @@ namespace KrieptoBot.Tests.Application.Recommendators
         [Test]
         public async Task Recommendation_ShouldReturn_NegativeScoreWhenProfit()
         {
-            var recommendator = new RecommendatorProfitPercentage(_logger.Object, _exchangeServiceMock.Object);
+            var recommendator = new RecommendatorProfitPercentage(_logger.Object, _exchangeServiceMock.Object,
+                _recommendatorSettingOptions.Object);
 
             _exchangeServiceMock
                 .Setup(x => x.GetTradesAsync(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DateTime?>(),
@@ -67,7 +84,8 @@ namespace KrieptoBot.Tests.Application.Recommendators
         [TestCase(2)]
         public async Task Recommendation_ShouldReturn_ZeroWhenNoProfitOrBreakEven(decimal tickerPrice)
         {
-            var recommendator = new RecommendatorProfitPercentage(_logger.Object, _exchangeServiceMock.Object);
+            var recommendator = new RecommendatorProfitPercentage(_logger.Object, _exchangeServiceMock.Object,
+                _recommendatorSettingOptions.Object);
 
             _exchangeServiceMock
                 .Setup(x => x.GetOrdersAsync(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DateTime?>(),

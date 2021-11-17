@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using KrieptoBot.Application.Settings;
 using KrieptoBot.Domain.Recommendation.ValueObjects;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace KrieptoBot.Application.Recommendators
 {
@@ -13,14 +15,13 @@ namespace KrieptoBot.Application.Recommendators
         private readonly ILogger<RecommendatorProfitPercentage> _logger;
 
         public RecommendatorProfitPercentage(ILogger<RecommendatorProfitPercentage> logger,
-            IExchangeService exchangeService)
+            IExchangeService exchangeService, IOptions<RecommendatorSettings> recommendatorSettings) : base(
+            recommendatorSettings.Value)
         {
             _logger = logger;
             _exchangeService = exchangeService;
         }
 
-        protected override decimal SellRecommendationWeight => 1; //todo make app setting for each recommendator
-        protected override decimal BuyRecommendationWeight => 0; //todo make app setting for each recommendator
 
         protected override async Task<RecommendatorScore> CalculateRecommendation(Market market)
         {

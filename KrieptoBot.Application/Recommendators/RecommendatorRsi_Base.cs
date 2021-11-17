@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using KrieptoBot.Application.Indicators;
+using KrieptoBot.Application.Settings;
 using KrieptoBot.Domain.Recommendation.ValueObjects;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using Microsoft.Extensions.Logging;
@@ -18,7 +19,7 @@ namespace KrieptoBot.Application.Recommendators
 
         protected RecommendatorRsiBase(IExchangeService exchangeService, IRsi rsiIndicator,
             ITradingContext tradingContext, ILogger<RecommendatorRsiBase> logger, string tradingContextInterval,
-            int periodToAverage)
+            int periodToAverage, RecommendatorSettings recommendatorSettings) : base(recommendatorSettings)
         {
             _exchangeService = exchangeService;
             _rsiIndicator = rsiIndicator;
