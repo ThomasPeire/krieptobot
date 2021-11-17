@@ -35,7 +35,7 @@ namespace KrieptoBot.DataCollector
                         .SetBasePath(Environment.CurrentDirectory)
                         .AddJsonFile("appsettings.json", false, true)
                         .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", true, true)
-                        .AddUserSecrets<Startup>()
+                        .AddUserSecrets<Collector>()
                         .AddEnvironmentVariables();
                 })
                 .ConfigureServices((context, services) =>

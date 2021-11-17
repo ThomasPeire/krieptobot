@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace KrieptoBot.DataCollector
 {
-    public class Startup
+    public static class Startup
     {
         public static void ConfigureServices(IServiceCollection services)
         {
