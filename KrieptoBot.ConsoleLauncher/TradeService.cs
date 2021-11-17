@@ -53,7 +53,7 @@ namespace KrieptoBot.ConsoleLauncher
             await _trader.Run();
         }
 
-        private int GetIntervalInMinutes(string interval)
+        private static int GetIntervalInMinutes(string interval)
         {
             return interval switch
             {

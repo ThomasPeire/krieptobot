@@ -45,7 +45,7 @@ namespace KrieptoBot.DataCollector
                         .Enrich.FromLogContext()
                         .CreateLogger();
 
-                    new Startup().ConfigureServices(services);
+                    Startup.ConfigureServices(services);
 
                     services.AddHostedService<CollectorService>();
                 }).UseSerilog();

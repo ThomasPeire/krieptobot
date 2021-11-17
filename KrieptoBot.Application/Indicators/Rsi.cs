@@ -59,7 +59,7 @@ namespace KrieptoBot.Application.Indicators
             return movingAverages;
         }
 
-        private IEnumerable<(decimal up, decimal down)> GetStartingValues(
+        private static IEnumerable<(decimal up, decimal down)> GetStartingValues(
             IEnumerable<KeyValuePair<DateTime, (decimal ups, decimal downs)>> upAndDownMovesArray,
             int movingAveragePeriod)
         {

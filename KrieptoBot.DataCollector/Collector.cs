@@ -23,42 +23,44 @@ namespace KrieptoBot.DataCollector
             DateTime fromDateTime, DateTime toDateTime)
         {
             foreach (var market in markets)
-            foreach (var interval in intervals)
             {
-                var tasks = new List<Task<IEnumerable<Candle>>>();
-
-                var intervalInMinutes = GetIntervalInMinutes(interval);
-
-                var currentStartDateTime = fromDateTime;
-                const int numberOfCandlesInOneCall = 1000;
-
-                while (currentStartDateTime <= toDateTime)
+                foreach (var interval in intervals)
                 {
-                    var startTime = currentStartDateTime;
-                    var endTime =
-                        new DateTime(Math.Min(
-                            currentStartDateTime.AddMinutes(intervalInMinutes * numberOfCandlesInOneCall).Ticks,
-                            toDateTime.Ticks));
-                    Debug.WriteLine(startTime);
-                    Debug.WriteLine(endTime);
-                    tasks.Add(_exchangeService.GetCandlesAsync(market, interval, numberOfCandlesInOneCall,
-                        startTime, endTime));
+                    var tasks = new List<Task<IEnumerable<Candle>>>();
 
-                    currentStartDateTime =
-                        currentStartDateTime.AddMinutes(numberOfCandlesInOneCall * intervalInMinutes);
+                    var intervalInMinutes = GetIntervalInMinutes(interval);
+
+                    var currentStartDateTime = fromDateTime;
+                    const int numberOfCandlesInOneCall = 1000;
+
+                    while (currentStartDateTime <= toDateTime)
+                    {
+                        var startTime = currentStartDateTime;
+                        var endTime =
+                            new DateTime(Math.Min(
+                                currentStartDateTime.AddMinutes(intervalInMinutes * numberOfCandlesInOneCall).Ticks,
+                                toDateTime.Ticks));
+                        Debug.WriteLine(startTime);
+                        Debug.WriteLine(endTime);
+                        tasks.Add(_exchangeService.GetCandlesAsync(market, interval, numberOfCandlesInOneCall,
+                            startTime, endTime));
+
+                        currentStartDateTime =
+                            currentStartDateTime.AddMinutes(numberOfCandlesInOneCall * intervalInMinutes);
+                    }
+
+                    await Task.WhenAll(tasks);
+
+                    var candles = new List<Candle>();
+                    foreach (var task in tasks) candles.AddRange(await task);
+
+                    var json = JsonSerializer.Serialize(candles.OrderBy(x => x.TimeStamp));
+                    await File.WriteAllTextAsync($@"D:\{market}-{interval}.json", json);
                 }
-
-                await Task.WhenAll(tasks);
-
-                var candles = new List<Candle>();
-                foreach (var task in tasks) candles.AddRange(await task);
-
-                var json = JsonSerializer.Serialize(candles.OrderBy(x => x.TimeStamp));
-                await File.WriteAllTextAsync($@"D:\{market}-{interval}.json", json);
             }
         }
 
-        private int GetIntervalInMinutes(string interval)
+        private static int GetIntervalInMinutes(string interval)
         {
             return interval switch
             {

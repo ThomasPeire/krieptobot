@@ -5,7 +5,7 @@ namespace KrieptoBot.DataCollector
 {
     public class Startup
     {
-        public void ConfigureServices(IServiceCollection services)
+        public static void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<ICollector, Collector>();
             services.AddBitvavoService();

@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace KrieptoBot.AzureFunction
 {
-    public class Program
+    public static class Program
     {
         public static void Main()
         {
@@ -21,7 +21,7 @@ namespace KrieptoBot.AzureFunction
                         .AddJsonFile(Path.Combine(context.HostingEnvironment.ContentRootPath, "appsettings.json"),
                             true,
                             false)
-                        .AddUserSecrets<Program>()
+                        .AddUserSecrets<TradeFunction>()
                         .AddEnvironmentVariables())
                 .ConfigureServices(services =>
                 {

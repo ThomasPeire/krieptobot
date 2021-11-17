@@ -51,7 +51,7 @@ namespace KrieptoBot.Application.Recommendators
             return recommendatorScore;
         }
 
-        private RecommendatorScore EvaluateRsiValue(decimal rsiValue)
+        private static RecommendatorScore EvaluateRsiValue(decimal rsiValue)
         {
             var rsiRecommendation = new RecommendatorScore(100 - rsiValue * 2);
 
