@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using Serilog.Events;
 
 namespace KrieptoBot.ConsoleLauncher
 {
@@ -41,6 +42,7 @@ namespace KrieptoBot.ConsoleLauncher
                 {
                     Log.Logger = new LoggerConfiguration()
                         .ReadFrom.Configuration(hostContext.Configuration)
+                        .MinimumLevel.Override("System.Net.Http", LogEventLevel.Warning)
                         .Enrich.FromLogContext()
                         .CreateLogger();
 

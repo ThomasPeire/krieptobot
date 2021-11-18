@@ -54,7 +54,7 @@ namespace KrieptoBot.Application
             foreach (var (market, recommendation) in marketsToBuy)
                 dictionary.Add(
                     market,
-                    new Amount(Math.Floor(recommendation * await GetAvailableBudgetToInvest() /
+                    new Amount(Math.Floor(recommendation.Value * (await GetAvailableBudgetToInvest()).Value /
                                           totalRecommendationScore)));
 
             return dictionary;
@@ -64,7 +64,7 @@ namespace KrieptoBot.Application
         {
             var balance = await GetAvailableBalanceForAsset(new Symbol("EUR"));
 
-            _logger.LogInformation("Available budget: {Budget}", balance);
+            _logger.LogInformation("Available budget: {Budget}", balance.Value);
 
             return balance;
         }
