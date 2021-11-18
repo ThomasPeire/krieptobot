@@ -40,13 +40,13 @@ namespace KrieptoBot.Application.Recommendators
             var (_, value) = rsiValues.OrderBy(x => x.Key).Last();
 
             _logger.LogInformation("Market {Market}: RSI{PeriodToAverage} on interval {Interval} is {RsiValue}",
-                market.Name, _periodToAverage, _tradingContextInterval, value);
+                market.Name, _periodToAverage, _tradingContextInterval, value.ToString("0.00"));
 
             var recommendatorScore = EvaluateRsiValue(value);
 
             _logger.LogInformation(
                 "Market {Market}: RSI{PeriodToAverage} on interval {Interval} gives recommendation score of {Score}",
-                market.Name, _periodToAverage, _tradingContextInterval, recommendatorScore.Value);
+                market.Name, _periodToAverage, _tradingContextInterval, recommendatorScore.Value.ToString("0.00"));
 
             return recommendatorScore;
         }

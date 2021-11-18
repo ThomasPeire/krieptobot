@@ -43,7 +43,7 @@ namespace KrieptoBot.Application.Recommendators
 
                 _logger.LogInformation(
                     "Market {Market}: Current profit: {Profit}%",
-                    market.Name, relativeProfitInPct);
+                    market.Name, relativeProfitInPct.ToString("0.00"));
 
                 // negative score = sell recommendation
                 // the larger the profit => the stronger the sell recommendation should be
@@ -53,7 +53,7 @@ namespace KrieptoBot.Application.Recommendators
 
             _logger.LogInformation(
                 "Market {Market}: Profit recommendator gives recommendation score of {Score}",
-                market.Name, recommendatorScore);
+                market.Name, recommendatorScore.ToString("0.00"));
 
             return new RecommendatorScore(recommendatorScore, lastBuyTrades.Any());
         }

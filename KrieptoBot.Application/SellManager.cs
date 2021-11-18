@@ -36,11 +36,12 @@ namespace KrieptoBot.Application
             //todo: take min sell amount into account
             _logger.LogInformation("Selling on {Market}. Price: € {Price}; Amount: {Amount}; € {Euro}",
                 market.Name,
-                tickerPrice.Price, availableBaseAssetBalance, availableBaseAssetBalance * tickerPrice.Price);
+                tickerPrice.Price.Value.ToString("0.00"), availableBaseAssetBalance.ToString("0.00"),
+                (availableBaseAssetBalance * tickerPrice.Price).ToString("0.00"));
 
             await _notificationManager.SendNotification(
                 $"Selling on {market.Name}.",
-                $"Price: € {tickerPrice.Price} - Amount: {availableBaseAssetBalance} - € {availableBaseAssetBalance * tickerPrice.Price}");
+                $"Price: € {tickerPrice.Price.Value:0.00} - Amount: {availableBaseAssetBalance:0.00} - € {(availableBaseAssetBalance * tickerPrice.Price):0.00}");
 
             if (!_tradingContext.IsSimulation)
                 await _exchangeService.PostSellOrderAsync(market.Name, "limit", availableBaseAssetBalance,

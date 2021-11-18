@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Globalization;
+using System.Threading.Tasks;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using Microsoft.Extensions.Logging;
 
@@ -30,9 +31,9 @@ namespace KrieptoBot.Application
             //todo: take min buy amount into account
             _logger.LogInformation("Buying on {Market} with € {Budget}. Price: € {Price}; Amount: {Amount}",
                 market.Name,
-                budget, tickerPrice.Price, amount);
+                budget, tickerPrice.Price.Value.ToString("0.00"), amount.ToString("0.00"));
             await _notificationManager.SendNotification($"Buying on {market.Name} with € {budget}",
-                $"Price: € {tickerPrice.Price}; Amount: {amount}");
+                $"Price: € {tickerPrice.Price.Value:0.00}; Amount: {amount:0.00}");
 
             if (!_tradingContext.IsSimulation)
                 await _exchangeService.PostBuyOrderAsync(market.Name, "limit", amount,
