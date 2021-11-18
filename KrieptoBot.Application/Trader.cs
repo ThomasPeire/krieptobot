@@ -100,7 +100,7 @@ namespace KrieptoBot.Application
 
             foreach (var (market, score) in marketsToBuy)
                 _logger.LogInformation("Buy recommendation for {Market}, with a score of {Score}", market.Name,
-                    score.Value);
+                    score.Value.ToString("0:00"));
 
             return marketsToBuy;
         }
