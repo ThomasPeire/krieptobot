@@ -33,7 +33,7 @@ namespace KrieptoBot.Application
                 market.Name,
                 budget, tickerPrice.Price.Value, amount);
             await _notificationManager.SendNotification($"Buying on {market.Name} with € {budget}",
-                $"Price: € {tickerPrice.Price}; Amount: {amount}");
+                $"Price: € {tickerPrice.Price.Value}; Amount: {amount}");
 
             if (!_tradingContext.IsSimulation)
                 await _exchangeService.PostBuyOrderAsync(market.Name, "limit", amount,

@@ -41,7 +41,7 @@ namespace KrieptoBot.Application
 
             await _notificationManager.SendNotification(
                 $"Selling on {market.Name}.",
-                $"Price: € {tickerPrice.Price} - Amount: {availableBaseAssetBalance} - € {(availableBaseAssetBalance * tickerPrice.Price):0.00}");
+                $"Price: € {tickerPrice.Price.Value} - Amount: {availableBaseAssetBalance} - € {(availableBaseAssetBalance * tickerPrice.Price):0.00}");
 
             if (!_tradingContext.IsSimulation)
                 await _exchangeService.PostSellOrderAsync(market.Name, "limit", availableBaseAssetBalance,
