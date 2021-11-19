@@ -50,8 +50,10 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Extensions
             return
                 new Market
                 (
-                    new Symbol(dto.Base),
-                    new Symbol(dto.Quote)
+                    new MarketName(dto.Base, dto.Quote),
+                    new Amount(decimal.Parse(dto.MinOrderInBaseAsset ?? "0", CultureInfo.InvariantCulture)),
+                    new Amount(decimal.Parse(dto.MinOrderInQuoteAsset ?? "0", CultureInfo.InvariantCulture))
+
                 );
         }
 
@@ -61,7 +63,7 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Extensions
                 new Order
                 (
                     Guid.Parse(dto.OrderId),
-                    new Market(dto.Market),
+                    new MarketName(dto.Market),
                     DateTime.UnixEpoch.AddMilliseconds(dto.Created),
                     DateTime.UnixEpoch.AddMilliseconds(dto.Updated),
                     OrderStatus.FromString(dto.Status),
@@ -79,7 +81,7 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Extensions
                 (
                     Guid.Parse(dto.Id),
                     DateTime.UnixEpoch.AddMilliseconds(dto.Timestamp),
-                    new Market(dto.Market),
+                    new MarketName(dto.Market),
                     new Amount(decimal.Parse(dto.Amount ?? "0", CultureInfo.InvariantCulture)),
                     new Price(decimal.Parse(dto.Price ?? "0", CultureInfo.InvariantCulture)),
                     OrderSide.FromString(dto.Side)
@@ -91,7 +93,7 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Extensions
             return
                 new TickerPrice
                 (
-                    new Market(dto.Market),
+                    new MarketName(dto.Market),
                     new Price(decimal.Parse(dto.Price ?? "0", CultureInfo.InvariantCulture))
                 );
         }

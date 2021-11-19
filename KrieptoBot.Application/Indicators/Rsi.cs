@@ -18,20 +18,20 @@ namespace KrieptoBot.Application.Indicators
             return rsiValues;
         }
 
-        private Dictionary<DateTime, decimal> CalculateRsi(
+        private static Dictionary<DateTime, decimal> CalculateRsi(
             Dictionary<DateTime, (decimal upAverage, decimal downAverage)> upAndDownAverages)
         {
             return new Dictionary<DateTime, decimal>(upAndDownAverages
                 .Select(x =>
-                    new KeyValuePair<DateTime, decimal>(x.Key, GetRSI(x.Value.upAverage, x.Value.downAverage))));
+                    new KeyValuePair<DateTime, decimal>(x.Key, GetRsi(x.Value.upAverage, x.Value.downAverage))));
         }
 
-        private decimal GetRSI(decimal averageUp, decimal averageDown)
+        private static decimal GetRsi(decimal averageUp, decimal averageDown)
         {
             return 100 - 100 / (1 + averageUp / averageDown);
         }
 
-        private Dictionary<DateTime, (decimal upAverage, decimal downAverage)> CalculateMovingAverage(
+        private static Dictionary<DateTime, (decimal upAverage, decimal downAverage)> CalculateMovingAverage(
             Dictionary<DateTime, (decimal up, decimal down)> upAndDownMoves, int movingAveragePeriod)
         {
             var movingAverages = new Dictionary<DateTime, (decimal avgerageUp, decimal averageDown)>();
@@ -67,7 +67,7 @@ namespace KrieptoBot.Application.Indicators
         }
 
 
-        private Dictionary<DateTime, (decimal up, decimal down)> CalculateUpAndDownMoves(IEnumerable<Candle> candles)
+        private static Dictionary<DateTime, (decimal up, decimal down)> CalculateUpAndDownMoves(IEnumerable<Candle> candles)
         {
             var upsAndDowns = new Dictionary<DateTime, (decimal up, decimal down)>();
 

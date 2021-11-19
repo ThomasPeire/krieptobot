@@ -1,7 +1,7 @@
 ﻿{
   "Timestamp": "2021-08-15T12:58:43.428Z",
-  "Market": {
-    "Name": "BTC-EUR",
+  "MarketName": {
+    "Value": "BTC-EUR",
     "BaseSymbol": {
       "Value": "BTC"
     },

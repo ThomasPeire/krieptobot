@@ -10,35 +10,26 @@ namespace KrieptoBot.Domain.Trading.ValueObjects
         {
         }
 
-        public Market(Symbol baseSymbol, Symbol quoteSymbol)
+        public Market(MarketName name, Amount minimumBaseAmount, Amount minimumQuoteAmount)
         {
-            ArgumentNullException.ThrowIfNull(baseSymbol);
-            ArgumentNullException.ThrowIfNull(quoteSymbol);
-            BaseSymbol = baseSymbol;
-            QuoteSymbol = quoteSymbol;
+            ArgumentNullException.ThrowIfNull(name);
+            ArgumentNullException.ThrowIfNull(minimumBaseAmount);
+            ArgumentNullException.ThrowIfNull(minimumQuoteAmount);
+
+            MinimumBaseAmount = minimumBaseAmount;
+            MinimumQuoteAmount = minimumQuoteAmount;
+            Name = name;
         }
 
-        public Market(string name)
-        {
-            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Market name can not be empty");
-
-            var splittedName = name.Split("-");
-
-            if (splittedName.Length != 2) throw new ArgumentException("Market name is not correctly formatted");
-
-            BaseSymbol = new Symbol(splittedName[0]);
-            QuoteSymbol = new Symbol(splittedName[1]);
-        }
-
-        public string Name => $"{BaseSymbol.Value}-{QuoteSymbol.Value}";
-        public Symbol BaseSymbol { get; }
-
-        public Symbol QuoteSymbol { get; }
+        public MarketName Name { get; }
+        public Amount MinimumBaseAmount { get; }
+        public Amount MinimumQuoteAmount { get; set; }
 
         protected override IEnumerable<object> GetEqualityComponents()
         {
-            yield return BaseSymbol;
-            yield return QuoteSymbol;
+            yield return Name;
+            yield return MinimumBaseAmount;
+            yield return MinimumQuoteAmount;
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿{
-  "Market": {
-    "Name": "BTC-EUR",
+  "MarketName": {
+    "Value": "BTC-EUR",
     "BaseSymbol": {
       "Value": "BTC"
     },

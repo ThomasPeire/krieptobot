@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using Microsoft.Extensions.Logging;
 
@@ -24,20 +23,50 @@ namespace KrieptoBot.Application
 
         public async Task Buy(Market market, decimal budget)
         {
-            var tickerPrice = await _exchangeService.GetTickerPrice(market.Name);
-            var amount = budget / tickerPrice.Price;
+            var priceToBuyOn = await GetPriceToBuyOn(market);
+            var amount = GetAmountToBuy(budget, priceToBuyOn);
 
-            //todo: take fees into account
-            //todo: take min buy amount into account
+            LogBuyRecommendation(market, budget, priceToBuyOn, amount);
+            await SendNotificationWithBuyRecommendation(market, budget, priceToBuyOn, amount);
+
+            if (ShouldPlaceOrder())
+                await PlaceOrder(market, amount, priceToBuyOn);
+        }
+
+        private async Task PlaceOrder(Market market, decimal amount, TickerPrice priceToBuyOn)
+        {
+            await _exchangeService.PostBuyOrderAsync(market.Name, "limit", amount,
+                priceToBuyOn.Price);
+        }
+
+        private bool ShouldPlaceOrder()
+        {
+            return !_tradingContext.IsSimulation;
+        }
+
+        private async Task SendNotificationWithBuyRecommendation(Market market, decimal budget,
+            TickerPrice priceToBuyOn,
+            decimal amount)
+        {
+            await _notificationManager.SendNotification($"Buying on {market.Name} with € {budget}",
+                $"Price: € {priceToBuyOn.Price.Value}; Amount: {amount}");
+        }
+
+        private void LogBuyRecommendation(Market market, decimal budget, TickerPrice priceToBuyOn, decimal amount)
+        {
             _logger.LogInformation("Buying on {Market} with € {Budget}. Price: € {Price}; Amount: {Amount}",
                 market.Name,
-                budget, tickerPrice.Price.Value, amount);
-            await _notificationManager.SendNotification($"Buying on {market.Name} with € {budget}",
-                $"Price: € {tickerPrice.Price.Value}; Amount: {amount}");
+                budget, priceToBuyOn.Price.Value, amount);
+        }
 
-            if (!_tradingContext.IsSimulation)
-                await _exchangeService.PostBuyOrderAsync(market.Name, "limit", amount,
-                    tickerPrice.Price);
+        private static decimal GetAmountToBuy(decimal budget, TickerPrice priceToBuyOn)
+        {
+            return budget / priceToBuyOn.Price;
+        }
+
+        private async Task<TickerPrice> GetPriceToBuyOn(Market market)
+        {
+            return await _exchangeService.GetTickerPrice(market.Name);
         }
     }
 }

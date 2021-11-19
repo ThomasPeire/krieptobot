@@ -106,9 +106,9 @@ namespace KrieptoBot.Tests.Infrastructure
         {
             var order = await _bitvavoService.PostBuyOrderAsync("BTC-EUR", "Limit", 9000.00m, 0.0001m);
 
-            var result = await _bitvavoService.GetOrderAsync(order.Market.Name, order.Id);
+            var result = await _bitvavoService.GetOrderAsync(order.MarketName.Value, order.Id);
 
-            Assert.That(order.Market, Is.EqualTo(result.Market));
+            Assert.That(order.MarketName.Value, Is.EqualTo(result.MarketName.Value));
             Assert.That(order.Side, Is.EqualTo(result.Side));
             Assert.That(order.Type, Is.EqualTo(result.Type));
             Assert.That(order.Amount, Is.EqualTo(result.Amount));

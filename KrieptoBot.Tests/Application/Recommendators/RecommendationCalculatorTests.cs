@@ -47,7 +47,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
             var recommendationCalculator = new RecommendationCalculator(_logger.Object, recommendators);
 
             var result =
-                await recommendationCalculator.CalculateRecommendation(new Market("btc-eur"));
+                await recommendationCalculator.CalculateRecommendation(new Market(new MarketName("btc-eur"), Amount.Zero, Amount.Zero));
 
             Assert.That(result.Value, Is.EqualTo(-10));
         }

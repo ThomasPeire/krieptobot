@@ -5,10 +5,10 @@ namespace KrieptoBot.Domain.Trading.Entity
 {
     public class Order : BuildingBlocks.Entity
     {
-        public Order(Guid id, Market market, DateTime created, DateTime updated, OrderStatus status, OrderSide side,
+        public Order(Guid id, MarketName marketName, DateTime created, DateTime updated, OrderStatus status, OrderSide side,
             OrderType type, Amount amount, Price price) : base(id)
         {
-            ArgumentNullException.ThrowIfNull(market);
+            ArgumentNullException.ThrowIfNull(marketName);
             ArgumentNullException.ThrowIfNull(created);
             ArgumentNullException.ThrowIfNull(updated);
             ArgumentNullException.ThrowIfNull(status);
@@ -25,7 +25,7 @@ namespace KrieptoBot.Domain.Trading.Entity
                 throw new ArgumentException("Created datetime can not be in the greater than updated datetime");
 
 
-            Market = market;
+            MarketName = marketName;
             Created = created;
             Updated = updated;
             Status = status;
@@ -35,7 +35,7 @@ namespace KrieptoBot.Domain.Trading.Entity
             Price = price;
         }
 
-        public Market Market { get; }
+        public MarketName MarketName { get; }
         public DateTime Created { get; }
         public DateTime Updated { get; }
         public OrderStatus Status { get; }

@@ -1,9 +1,17 @@
 ﻿{
-  "Name": "AAVE-EUR",
-  "BaseSymbol": {
-    "Value": "AAVE"
+  "Name": {
+    "Value": "AAVE-EUR",
+    "BaseSymbol": {
+      "Value": "AAVE"
+    },
+    "QuoteSymbol": {
+      "Value": "EUR"
+    }
   },
-  "QuoteSymbol": {
-    "Value": "EUR"
+  "MinimumBaseAmount": {
+    "Value": 0.008
+  },
+  "MinimumQuoteAmount": {
+    "Value": 5.0
   }
 }

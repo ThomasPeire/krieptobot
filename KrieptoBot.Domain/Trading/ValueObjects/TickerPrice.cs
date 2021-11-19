@@ -10,21 +10,21 @@ namespace KrieptoBot.Domain.Trading.ValueObjects
         {
         }
 
-        public TickerPrice(Market market, Price price)
+        public TickerPrice(MarketName marketName, Price price)
         {
-            ArgumentNullException.ThrowIfNull(market);
+            ArgumentNullException.ThrowIfNull(marketName);
             ArgumentNullException.ThrowIfNull(price);
 
-            Market = market;
+            MarketName = marketName;
             Price = price;
         }
 
-        public Market Market { get; }
+        public MarketName MarketName { get; }
         public Price Price { get; }
 
         protected override IEnumerable<object> GetEqualityComponents()
         {
-            yield return Market;
+            yield return MarketName;
             yield return Price;
         }
     }

@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using KrieptoBot.Application.Indicators;
 using KrieptoBot.Application.Settings;
@@ -19,7 +21,7 @@ namespace KrieptoBot.Application.Recommendators
 
         protected RecommendatorRsiBase(IExchangeService exchangeService, IRsi rsiIndicator,
             ITradingContext tradingContext, ILogger<RecommendatorRsiBase> logger, string tradingContextInterval,
-            int periodToAverage, RecommendatorSettings recommendatorSettings) : base(recommendatorSettings)
+            int periodToAverage, RecommendatorSettings recommendatorSettings) : base(recommendatorSettings, logger)
         {
             _exchangeService = exchangeService;
             _rsiIndicator = rsiIndicator;
@@ -29,26 +31,40 @@ namespace KrieptoBot.Application.Recommendators
             _periodToAverage = periodToAverage;
         }
 
+        protected override string Name => $"RSI{_periodToAverage} recommendator ({_tradingContext.Interval})";
+
         protected override async Task<RecommendatorScore> CalculateRecommendation(Market market)
         {
-            var candles = await _exchangeService.GetCandlesAsync(market.Name, _tradingContextInterval,
-                _periodToAverage * 10,
-                end: _tradingContext.CurrentTime);
+            var lastRsiValue = await GetLastRsiValue(market);
 
-            var rsiValues = _rsiIndicator.Calculate(candles, _periodToAverage);
+            _logger.LogInformation("Market {Market} - {Recommendator} RSI: {RsiValue}",
+                market.Name.Value, Name, lastRsiValue.ToString("0.00"));
 
-            var (_, value) = rsiValues.OrderBy(x => x.Key).Last();
-
-            _logger.LogInformation("Market {Market}: RSI{PeriodToAverage} on interval {Interval} is {RsiValue}",
-                market.Name, _periodToAverage, _tradingContextInterval, value.ToString("0.00"));
-
-            var recommendatorScore = EvaluateRsiValue(value);
-
-            _logger.LogInformation(
-                "Market {Market}: RSI{PeriodToAverage} on interval {Interval} gives recommendation score of {Score}",
-                market.Name, _periodToAverage, _tradingContextInterval, recommendatorScore.Value.ToString("0.00"));
+            var recommendatorScore = EvaluateRsiValue(lastRsiValue);
 
             return recommendatorScore;
+        }
+
+        private async Task<decimal> GetLastRsiValue(Market market)
+        {
+            var candles = await GetCandlesAsync(market);
+
+            var rsiValues = GetRsiValues(candles);
+
+            var (_, value) = rsiValues.OrderBy(x => x.Key).Last();
+            return value;
+        }
+
+        private Dictionary<DateTime, decimal> GetRsiValues(IEnumerable<Candle> candles)
+        {
+            return _rsiIndicator.Calculate(candles, _periodToAverage);
+        }
+
+        private async Task<IEnumerable<Candle>> GetCandlesAsync(Market market)
+        {
+            return await _exchangeService.GetCandlesAsync(market.Name, _tradingContextInterval,
+                _periodToAverage * 10,
+                end: _tradingContext.CurrentTime);
         }
 
         private static RecommendatorScore EvaluateRsiValue(decimal rsiValue)

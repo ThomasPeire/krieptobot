@@ -34,17 +34,19 @@ namespace KrieptoBot.Application
         {
             var recommendations = await GetRecommendations();
 
-            var marketsToSell = DetermineMarketsToSell(recommendations);
-            var marketsToBuy = DetermineMarketsToBuy(recommendations);
+            var marketsToSell = await DetermineMarketsToSell(recommendations);
+            var marketsToBuy = await DetermineMarketsToBuy(recommendations);
 
-            await Sell(marketsToSell);
+            if (marketsToSell.Any())
+                await Sell(marketsToSell.Select(x => x.Key));
 
-            var marketsToBuyWithBudget = await GetMarketsToBuyWithBudget(marketsToBuy);
-
-            await Buy(marketsToBuyWithBudget);
+            if (marketsToBuy.Any())
+            {
+                await Buy(marketsToBuy);
+            }
         }
 
-        private async Task<Dictionary<Market, Amount>> GetMarketsToBuyWithBudget(
+        private async Task<Dictionary<Market, Amount>> DetermineBudgetForMarket(
             IDictionary<Market, RecommendatorScore> marketsToBuy)
         {
             var totalRecommendationScore = marketsToBuy.Sum(x => x.Value);
@@ -80,52 +82,98 @@ namespace KrieptoBot.Application
                 : Amount.Zero;
         }
 
-        private async Task Buy(Dictionary<Market, Amount> marketsToBuyWithBudget)
+        private async Task Buy(Dictionary<Market, Amount> marketsWithBudget)
         {
-            foreach (var (market, budget) in marketsToBuyWithBudget) await _buyManager.Buy(market, budget);
+            foreach (var (market, budget) in marketsWithBudget)
+                await _buyManager.Buy(market, budget);
         }
 
-        private async Task Sell(IDictionary<Market, RecommendatorScore> marketsToSell)
+        private async Task Sell(IEnumerable<Market> marketsToSell)
         {
-            foreach (var (market, _) in marketsToSell) await _sellManager.Sell(market);
+            foreach (var market in marketsToSell)
+                await _sellManager.Sell(market);
         }
 
-        private IDictionary<Market, RecommendatorScore> DetermineMarketsToBuy(
+        private async Task<Dictionary<Market, Amount>> DetermineMarketsToBuy(
+            Dictionary<Market, RecommendatorScore> marketRecommendations)
+        {
+            var marketsToBuy = GetMarketsWhereBuyRecommendationExceedsMargin(marketRecommendations);
+
+            var budgetForMarkets = await DetermineBudgetForMarket(marketsToBuy);
+            budgetForMarkets = GetMarketsWhereAvailableBalanceExceedsMinimumQuoteAmount(budgetForMarkets);
+
+            foreach (var (market, _) in budgetForMarkets)
+                _logger.LogInformation("Buy recommendation for {Market}, with a score of {Score}", market.Name.Value,
+                    marketsToBuy.First(x => x.Key == market).Value.Value.ToString("0:00"));
+
+            return budgetForMarkets;
+        }
+
+        private Dictionary<Market, RecommendatorScore> GetMarketsWhereBuyRecommendationExceedsMargin(
             Dictionary<Market, RecommendatorScore> recommendations)
         {
-            var marketsToBuy =
-                recommendations
-                    .Where(x => x.Value >= _tradingContext.BuyMargin)
-                    .ToDictionary(x => x.Key, x => x.Value);
-
-            foreach (var (market, score) in marketsToBuy)
-                _logger.LogInformation("Buy recommendation for {Market}, with a score of {Score}", market.Name,
-                    score.Value.ToString("0:00"));
-
-            return marketsToBuy;
+            return recommendations
+                .Where(x => x.Value >= _tradingContext.BuyMargin)
+                .ToDictionary(x => x.Key, x => x.Value);
         }
 
-        private IDictionary<Market, RecommendatorScore> DetermineMarketsToSell(
+        private async Task<IDictionary<Market, RecommendatorScore>> DetermineMarketsToSell(
             Dictionary<Market, RecommendatorScore> recommendations)
         {
-            var marketsToSell =
-                recommendations
-                    .Where(x => x.Value <= _tradingContext.SellMargin)
-                    .ToDictionary(x => x.Key, x => x.Value);
+            var marketsToSell = GetMarketsWhereSellRecommendationExceedsMargin(recommendations);
+
+            marketsToSell = await GetMarketsWhereAvailableBalanceExceedsMinimumBaseAmount(marketsToSell);
 
             foreach (var (market, score) in marketsToSell)
-                _logger.LogInformation("Sell recommendation for {Market}, with a score of {Score}", market.Name,
+                _logger.LogInformation("Sell recommendation for {Market}, with a score of {Score}", market.Name.Value,
                     score.Value);
 
             return marketsToSell;
+        }
+
+        private async Task<Dictionary<Market, RecommendatorScore>>
+            GetMarketsWhereAvailableBalanceExceedsMinimumBaseAmount(
+                Dictionary<Market, RecommendatorScore> marketsToSell)
+        {
+            var marketsToSellWithEnoughBalance = new Dictionary<Market, RecommendatorScore>();
+
+            foreach (var (market, recommendatorScore) in marketsToSell)
+            {
+                var balance = await GetAvailableBalanceForAsset(market.Name.BaseSymbol);
+                if (market.MinimumBaseAmount <= balance)
+                {
+                    marketsToSellWithEnoughBalance.Add(market, recommendatorScore);
+                }
+            }
+
+            return marketsToSellWithEnoughBalance;
+        }
+
+        private static Dictionary<Market, Amount> GetMarketsWhereAvailableBalanceExceedsMinimumQuoteAmount(
+            Dictionary<Market, Amount> marketsWithBudget)
+        {
+            return marketsWithBudget
+                .Where(marketWithBudget => marketWithBudget.Key.MinimumQuoteAmount <= marketWithBudget.Value)
+                .ToDictionary(x => x.Key, x => x.Value);
+        }
+
+        private Dictionary<Market, RecommendatorScore> GetMarketsWhereSellRecommendationExceedsMargin(
+            Dictionary<Market, RecommendatorScore> recommendations)
+        {
+            return recommendations
+                .Where(x => x.Value <= _tradingContext.SellMargin)
+                .ToDictionary(x => x.Key, x => x.Value);
         }
 
         private async Task<Dictionary<Market, RecommendatorScore>> GetRecommendations()
         {
             var marketsToEvaluate = await GetMarketsToEvaluate();
 
-            var marketRecommendations = await Task.WhenAll(marketsToEvaluate.Select(async market =>
-                (market, recommendation: await _recommendationCalculator.CalculateRecommendation(market))));
+            var marketRecommendations =
+                await Task.WhenAll(
+                    marketsToEvaluate.Select(
+                        async market => (market,
+                            recommendation: await _recommendationCalculator.CalculateRecommendation(market))));
 
             return marketRecommendations.ToDictionary(x => x.market, x => x.recommendation);
         }
@@ -139,7 +187,8 @@ namespace KrieptoBot.Application
 
             _logger.LogInformation("Markets to evaluate:");
 
-            foreach (var market in marketsToWatch) _logger.LogInformation("{Market}", market.Name);
+            foreach (var market in marketsToWatch)
+                _logger.LogInformation("{Market}", market.Name.Value);
 
             return marketsToWatch;
         }

@@ -1,1406 +1,2654 @@
 ﻿[
   {
-    "Name": "AAVE-EUR",
-    "BaseSymbol": {
-      "Value": "AAVE"
+    "Name": {
+      "Value": "AAVE-EUR",
+      "BaseSymbol": {
+        "Value": "AAVE"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 0.008
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "ADA-BTC",
-    "BaseSymbol": {
-      "Value": "ADA"
+    "Name": {
+      "Value": "ADA-BTC",
+      "BaseSymbol": {
+        "Value": "ADA"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 10.0
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "ADA-EUR",
-    "BaseSymbol": {
-      "Value": "ADA"
+    "Name": {
+      "Value": "ADA-EUR",
+      "BaseSymbol": {
+        "Value": "ADA"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 3.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "AE-BTC",
-    "BaseSymbol": {
-      "Value": "AE"
+    "Name": {
+      "Value": "AE-BTC",
+      "BaseSymbol": {
+        "Value": "AE"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 10.0
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "AE-EUR",
-    "BaseSymbol": {
-      "Value": "AE"
+    "Name": {
+      "Value": "AE-EUR",
+      "BaseSymbol": {
+        "Value": "AE"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 10.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "AION-BTC",
-    "BaseSymbol": {
-      "Value": "AION"
+    "Name": {
+      "Value": "AION-BTC",
+      "BaseSymbol": {
+        "Value": "AION"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 50.0
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "AION-EUR",
-    "BaseSymbol": {
-      "Value": "AION"
+    "Name": {
+      "Value": "AION-EUR",
+      "BaseSymbol": {
+        "Value": "AION"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 10.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "ANT-BTC",
-    "BaseSymbol": {
-      "Value": "ANT"
+    "Name": {
+      "Value": "ANT-BTC",
+      "BaseSymbol": {
+        "Value": "ANT"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 1.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "ANT-EUR",
-    "BaseSymbol": {
-      "Value": "ANT"
+    "Name": {
+      "Value": "ANT-EUR",
+      "BaseSymbol": {
+        "Value": "ANT"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 0.5
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "ARK-BTC",
-    "BaseSymbol": {
-      "Value": "ARK"
+    "Name": {
+      "Value": "ARK-BTC",
+      "BaseSymbol": {
+        "Value": "ARK"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 9.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "ARK-EUR",
-    "BaseSymbol": {
-      "Value": "ARK"
+    "Name": {
+      "Value": "ARK-EUR",
+      "BaseSymbol": {
+        "Value": "ARK"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 2.0
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "BAL-EUR",
-    "BaseSymbol": {
-      "Value": "BAL"
+    "Name": {
+      "Value": "BAL-EUR",
+      "BaseSymbol": {
+        "Value": "BAL"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 0.08
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "BAND-EUR",
-    "BaseSymbol": {
-      "Value": "BAND"
+    "Name": {
+      "Value": "BAND-EUR",
+      "BaseSymbol": {
+        "Value": "BAND"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 0.2
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "BAT-BTC",
-    "BaseSymbol": {
-      "Value": "BAT"
+    "Name": {
+      "Value": "BAT-BTC",
+      "BaseSymbol": {
+        "Value": "BAT"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 10.0
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "BAT-EUR",
-    "BaseSymbol": {
-      "Value": "BAT"
+    "Name": {
+      "Value": "BAT-EUR",
+      "BaseSymbol": {
+        "Value": "BAT"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 3.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "BCH-BTC",
-    "BaseSymbol": {
-      "Value": "BCH"
+    "Name": {
+      "Value": "BCH-BTC",
+      "BaseSymbol": {
+        "Value": "BCH"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 0.007
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "BCH-EUR",
-    "BaseSymbol": {
-      "Value": "BCH"
+    "Name": {
+      "Value": "BCH-EUR",
+      "BaseSymbol": {
+        "Value": "BCH"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 0.004
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "BNB-EUR",
-    "BaseSymbol": {
-      "Value": "BNB"
+    "Name": {
+      "Value": "BNB-EUR",
+      "BaseSymbol": {
+        "Value": "BNB"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 0.01
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "BSV-BTC",
-    "BaseSymbol": {
-      "Value": "BSV"
+    "Name": {
+      "Value": "BSV-BTC",
+      "BaseSymbol": {
+        "Value": "BSV"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 0.02
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "BSV-EUR",
-    "BaseSymbol": {
-      "Value": "BSV"
+    "Name": {
+      "Value": "BSV-EUR",
+      "BaseSymbol": {
+        "Value": "BSV"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 0.01
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "BTC-EUR",
-    "BaseSymbol": {
-      "Value": "BTC"
+    "Name": {
+      "Value": "BTC-EUR",
+      "BaseSymbol": {
+        "Value": "BTC"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 0.0001
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "CHZ-EUR",
-    "BaseSymbol": {
-      "Value": "CHZ"
+    "Name": {
+      "Value": "CHZ-EUR",
+      "BaseSymbol": {
+        "Value": "CHZ"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 7.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "CMT-BTC",
-    "BaseSymbol": {
-      "Value": "CMT"
+    "Name": {
+      "Value": "CMT-BTC",
+      "BaseSymbol": {
+        "Value": "CMT"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 400.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "CMT-EUR",
-    "BaseSymbol": {
-      "Value": "CMT"
+    "Name": {
+      "Value": "CMT-EUR",
+      "BaseSymbol": {
+        "Value": "CMT"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 400.0
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "COMP-EUR",
-    "BaseSymbol": {
-      "Value": "COMP"
+    "Name": {
+      "Value": "COMP-EUR",
+      "BaseSymbol": {
+        "Value": "COMP"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 0.009
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "DAI-EUR",
-    "BaseSymbol": {
-      "Value": "DAI"
+    "Name": {
+      "Value": "DAI-EUR",
+      "BaseSymbol": {
+        "Value": "DAI"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 5.0
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "DCR-BTC",
-    "BaseSymbol": {
-      "Value": "DCR"
+    "Name": {
+      "Value": "DCR-BTC",
+      "BaseSymbol": {
+        "Value": "DCR"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 0.06
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "DCR-EUR",
-    "BaseSymbol": {
-      "Value": "DCR"
+    "Name": {
+      "Value": "DCR-EUR",
+      "BaseSymbol": {
+        "Value": "DCR"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 0.02
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "DGB-BTC",
-    "BaseSymbol": {
-      "Value": "DGB"
+    "Name": {
+      "Value": "DGB-BTC",
+      "BaseSymbol": {
+        "Value": "DGB"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 100.0
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "DGB-EUR",
-    "BaseSymbol": {
-      "Value": "DGB"
+    "Name": {
+      "Value": "DGB-EUR",
+      "BaseSymbol": {
+        "Value": "DGB"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 30.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "DOGE-EUR",
-    "BaseSymbol": {
-      "Value": "DOGE"
+    "Name": {
+      "Value": "DOGE-EUR",
+      "BaseSymbol": {
+        "Value": "DOGE"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 20.0
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "DOT-EUR",
-    "BaseSymbol": {
-      "Value": "DOT"
+    "Name": {
+      "Value": "DOT-EUR",
+      "BaseSymbol": {
+        "Value": "DOT"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 0.3
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "ELF-BTC",
-    "BaseSymbol": {
-      "Value": "ELF"
+    "Name": {
+      "Value": "ELF-BTC",
+      "BaseSymbol": {
+        "Value": "ELF"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 30.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "ELF-EUR",
-    "BaseSymbol": {
-      "Value": "ELF"
+    "Name": {
+      "Value": "ELF-EUR",
+      "BaseSymbol": {
+        "Value": "ELF"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 10.0
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "ENJ-BTC",
-    "BaseSymbol": {
-      "Value": "ENJ"
+    "Name": {
+      "Value": "ENJ-BTC",
+      "BaseSymbol": {
+        "Value": "ENJ"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 20.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "ENJ-EUR",
-    "BaseSymbol": {
-      "Value": "ENJ"
+    "Name": {
+      "Value": "ENJ-EUR",
+      "BaseSymbol": {
+        "Value": "ENJ"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 1.0
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "EOS-BTC",
-    "BaseSymbol": {
-      "Value": "EOS"
+    "Name": {
+      "Value": "EOS-BTC",
+      "BaseSymbol": {
+        "Value": "EOS"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 1.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "EOS-EUR",
-    "BaseSymbol": {
-      "Value": "EOS"
+    "Name": {
+      "Value": "EOS-EUR",
+      "BaseSymbol": {
+        "Value": "EOS"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 0.6
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "ETC-BTC",
-    "BaseSymbol": {
-      "Value": "ETC"
+    "Name": {
+      "Value": "ETC-BTC",
+      "BaseSymbol": {
+        "Value": "ETC"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 0.5
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "ETC-EUR",
-    "BaseSymbol": {
-      "Value": "ETC"
+    "Name": {
+      "Value": "ETC-EUR",
+      "BaseSymbol": {
+        "Value": "ETC"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 0.1
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "ETH-BTC",
-    "BaseSymbol": {
-      "Value": "ETH"
+    "Name": {
+      "Value": "ETH-BTC",
+      "BaseSymbol": {
+        "Value": "ETH"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 0.003
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "ETH-EUR",
-    "BaseSymbol": {
-      "Value": "ETH"
+    "Name": {
+      "Value": "ETH-EUR",
+      "BaseSymbol": {
+        "Value": "ETH"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 0.001
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "FET-EUR",
-    "BaseSymbol": {
-      "Value": "FET"
+    "Name": {
+      "Value": "FET-EUR",
+      "BaseSymbol": {
+        "Value": "FET"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 5.0
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "GAS-BTC",
-    "BaseSymbol": {
-      "Value": "GAS"
+    "Name": {
+      "Value": "GAS-BTC",
+      "BaseSymbol": {
+        "Value": "GAS"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 2.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "GAS-EUR",
-    "BaseSymbol": {
-      "Value": "GAS"
+    "Name": {
+      "Value": "GAS-EUR",
+      "BaseSymbol": {
+        "Value": "GAS"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 0.3
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "GLM-EUR",
-    "BaseSymbol": {
-      "Value": "GLM"
+    "Name": {
+      "Value": "GLM-EUR",
+      "BaseSymbol": {
+        "Value": "GLM"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 8.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "GNO-EUR",
-    "BaseSymbol": {
-      "Value": "GNO"
+    "Name": {
+      "Value": "GNO-EUR",
+      "BaseSymbol": {
+        "Value": "GNO"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 0.02
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "GNT-BTC",
-    "BaseSymbol": {
-      "Value": "GNT"
+    "Name": {
+      "Value": "GNT-BTC",
+      "BaseSymbol": {
+        "Value": "GNT"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 70.0
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "GNT-EUR",
-    "BaseSymbol": {
-      "Value": "GNT"
+    "Name": {
+      "Value": "GNT-EUR",
+      "BaseSymbol": {
+        "Value": "GNT"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 70.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "HOT-BTC",
-    "BaseSymbol": {
-      "Value": "HOT"
+    "Name": {
+      "Value": "HOT-BTC",
+      "BaseSymbol": {
+        "Value": "HOT"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 5000.0
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "HOT-EUR",
-    "BaseSymbol": {
-      "Value": "HOT"
+    "Name": {
+      "Value": "HOT-EUR",
+      "BaseSymbol": {
+        "Value": "HOT"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 200.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "ICX-BTC",
-    "BaseSymbol": {
-      "Value": "ICX"
+    "Name": {
+      "Value": "ICX-BTC",
+      "BaseSymbol": {
+        "Value": "ICX"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 6.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "ICX-EUR",
-    "BaseSymbol": {
-      "Value": "ICX"
+    "Name": {
+      "Value": "ICX-EUR",
+      "BaseSymbol": {
+        "Value": "ICX"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 2.0
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "IOST-BTC",
-    "BaseSymbol": {
-      "Value": "IOST"
+    "Name": {
+      "Value": "IOST-BTC",
+      "BaseSymbol": {
+        "Value": "IOST"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 200.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "IOST-EUR",
-    "BaseSymbol": {
-      "Value": "IOST"
+    "Name": {
+      "Value": "IOST-EUR",
+      "BaseSymbol": {
+        "Value": "IOST"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 80.0
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "KMD-BTC",
-    "BaseSymbol": {
-      "Value": "KMD"
+    "Name": {
+      "Value": "KMD-BTC",
+      "BaseSymbol": {
+        "Value": "KMD"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 6.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "KMD-EUR",
-    "BaseSymbol": {
-      "Value": "KMD"
+    "Name": {
+      "Value": "KMD-EUR",
+      "BaseSymbol": {
+        "Value": "KMD"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 1.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "KNC-EUR",
-    "BaseSymbol": {
-      "Value": "KNC"
+    "Name": {
+      "Value": "KNC-EUR",
+      "BaseSymbol": {
+        "Value": "KNC"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 1.0
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "LINK-BTC",
-    "BaseSymbol": {
-      "Value": "LINK"
+    "Name": {
+      "Value": "LINK-BTC",
+      "BaseSymbol": {
+        "Value": "LINK"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 0.2
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "LINK-EUR",
-    "BaseSymbol": {
-      "Value": "LINK"
+    "Name": {
+      "Value": "LINK-EUR",
+      "BaseSymbol": {
+        "Value": "LINK"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 0.1
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "LOOM-EUR",
-    "BaseSymbol": {
-      "Value": "LOOM"
+    "Name": {
+      "Value": "LOOM-EUR",
+      "BaseSymbol": {
+        "Value": "LOOM"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 20.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "LRC-BTC",
-    "BaseSymbol": {
-      "Value": "LRC"
+    "Name": {
+      "Value": "LRC-BTC",
+      "BaseSymbol": {
+        "Value": "LRC"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 9.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "LRC-EUR",
-    "BaseSymbol": {
-      "Value": "LRC"
+    "Name": {
+      "Value": "LRC-EUR",
+      "BaseSymbol": {
+        "Value": "LRC"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 9.0
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "LSK-BTC",
-    "BaseSymbol": {
-      "Value": "LSK"
+    "Name": {
+      "Value": "LSK-BTC",
+      "BaseSymbol": {
+        "Value": "LSK"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 3.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "LSK-EUR",
-    "BaseSymbol": {
-      "Value": "LSK"
+    "Name": {
+      "Value": "LSK-EUR",
+      "BaseSymbol": {
+        "Value": "LSK"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 0.8
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "LTC-BTC",
-    "BaseSymbol": {
-      "Value": "LTC"
+    "Name": {
+      "Value": "LTC-BTC",
+      "BaseSymbol": {
+        "Value": "LTC"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 0.02
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "LTC-EUR",
-    "BaseSymbol": {
-      "Value": "LTC"
+    "Name": {
+      "Value": "LTC-EUR",
+      "BaseSymbol": {
+        "Value": "LTC"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 0.01
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "MANA-EUR",
-    "BaseSymbol": {
-      "Value": "MANA"
+    "Name": {
+      "Value": "MANA-EUR",
+      "BaseSymbol": {
+        "Value": "MANA"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 4.0
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "MATIC-EUR",
-    "BaseSymbol": {
-      "Value": "MATIC"
+    "Name": {
+      "Value": "MATIC-EUR",
+      "BaseSymbol": {
+        "Value": "MATIC"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 3.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "MIOTA-BTC",
-    "BaseSymbol": {
-      "Value": "MIOTA"
+    "Name": {
+      "Value": "MIOTA-BTC",
+      "BaseSymbol": {
+        "Value": "MIOTA"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 9.0
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "MIOTA-EUR",
-    "BaseSymbol": {
-      "Value": "MIOTA"
+    "Name": {
+      "Value": "MIOTA-EUR",
+      "BaseSymbol": {
+        "Value": "MIOTA"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 2.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "MKR-EUR",
-    "BaseSymbol": {
-      "Value": "MKR"
+    "Name": {
+      "Value": "MKR-EUR",
+      "BaseSymbol": {
+        "Value": "MKR"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 0.001
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "NANO-BTC",
-    "BaseSymbol": {
-      "Value": "NANO"
+    "Name": {
+      "Value": "NANO-BTC",
+      "BaseSymbol": {
+        "Value": "NANO"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 1.0
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "NANO-EUR",
-    "BaseSymbol": {
-      "Value": "NANO"
+    "Name": {
+      "Value": "NANO-EUR",
+      "BaseSymbol": {
+        "Value": "NANO"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 0.4
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "NAS-BTC",
-    "BaseSymbol": {
-      "Value": "NAS"
+    "Name": {
+      "Value": "NAS-BTC",
+      "BaseSymbol": {
+        "Value": "NAS"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 10.0
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "NAS-EUR",
-    "BaseSymbol": {
-      "Value": "NAS"
+    "Name": {
+      "Value": "NAS-EUR",
+      "BaseSymbol": {
+        "Value": "NAS"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 4.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "NEO-BTC",
-    "BaseSymbol": {
-      "Value": "NEO"
+    "Name": {
+      "Value": "NEO-BTC",
+      "BaseSymbol": {
+        "Value": "NEO"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 0.2
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "NEO-EUR",
-    "BaseSymbol": {
-      "Value": "NEO"
+    "Name": {
+      "Value": "NEO-EUR",
+      "BaseSymbol": {
+        "Value": "NEO"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 0.04
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "NMR-EUR",
-    "BaseSymbol": {
-      "Value": "NMR"
+    "Name": {
+      "Value": "NMR-EUR",
+      "BaseSymbol": {
+        "Value": "NMR"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 0.09
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "NPXS-BTC",
-    "BaseSymbol": {
-      "Value": "NPXS"
+    "Name": {
+      "Value": "NPXS-BTC",
+      "BaseSymbol": {
+        "Value": "NPXS"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 10000.0
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "NPXS-EUR",
-    "BaseSymbol": {
-      "Value": "NPXS"
+    "Name": {
+      "Value": "NPXS-EUR",
+      "BaseSymbol": {
+        "Value": "NPXS"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 600.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "NULS-BTC",
-    "BaseSymbol": {
-      "Value": "NULS"
+    "Name": {
+      "Value": "NULS-BTC",
+      "BaseSymbol": {
+        "Value": "NULS"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 10.0
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "NULS-EUR",
-    "BaseSymbol": {
-      "Value": "NULS"
+    "Name": {
+      "Value": "NULS-EUR",
+      "BaseSymbol": {
+        "Value": "NULS"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 4.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "OGN-EUR",
-    "BaseSymbol": {
-      "Value": "OGN"
+    "Name": {
+      "Value": "OGN-EUR",
+      "BaseSymbol": {
+        "Value": "OGN"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 2.0
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "OMG-BTC",
-    "BaseSymbol": {
-      "Value": "OMG"
+    "Name": {
+      "Value": "OMG-BTC",
+      "BaseSymbol": {
+        "Value": "OMG"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 1.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "OMG-EUR",
-    "BaseSymbol": {
-      "Value": "OMG"
+    "Name": {
+      "Value": "OMG-EUR",
+      "BaseSymbol": {
+        "Value": "OMG"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 0.5
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "ONG-BTC",
-    "BaseSymbol": {
-      "Value": "ONG"
+    "Name": {
+      "Value": "ONG-BTC",
+      "BaseSymbol": {
+        "Value": "ONG"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 20.0
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "ONG-EUR",
-    "BaseSymbol": {
-      "Value": "ONG"
+    "Name": {
+      "Value": "ONG-EUR",
+      "BaseSymbol": {
+        "Value": "ONG"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 5.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "ONT-BTC",
-    "BaseSymbol": {
-      "Value": "ONT"
+    "Name": {
+      "Value": "ONT-BTC",
+      "BaseSymbol": {
+        "Value": "ONT"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 6.0
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "ONT-EUR",
-    "BaseSymbol": {
-      "Value": "ONT"
+    "Name": {
+      "Value": "ONT-EUR",
+      "BaseSymbol": {
+        "Value": "ONT"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 3.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "OXT-EUR",
-    "BaseSymbol": {
-      "Value": "OXT"
+    "Name": {
+      "Value": "OXT-EUR",
+      "BaseSymbol": {
+        "Value": "OXT"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 6.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "POWR-BTC",
-    "BaseSymbol": {
-      "Value": "POWR"
+    "Name": {
+      "Value": "POWR-BTC",
+      "BaseSymbol": {
+        "Value": "POWR"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 30.0
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "POWR-EUR",
-    "BaseSymbol": {
-      "Value": "POWR"
+    "Name": {
+      "Value": "POWR-EUR",
+      "BaseSymbol": {
+        "Value": "POWR"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 9.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "PUNDIX-EUR",
-    "BaseSymbol": {
-      "Value": "PUNDIX"
+    "Name": {
+      "Value": "PUNDIX-EUR",
+      "BaseSymbol": {
+        "Value": "PUNDIX"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 0.6
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "QTUM-BTC",
-    "BaseSymbol": {
-      "Value": "QTUM"
+    "Name": {
+      "Value": "QTUM-BTC",
+      "BaseSymbol": {
+        "Value": "QTUM"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 1.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "QTUM-EUR",
-    "BaseSymbol": {
-      "Value": "QTUM"
+    "Name": {
+      "Value": "QTUM-EUR",
+      "BaseSymbol": {
+        "Value": "QTUM"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 0.3
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "RDD-BTC",
-    "BaseSymbol": {
-      "Value": "RDD"
+    "Name": {
+      "Value": "RDD-BTC",
+      "BaseSymbol": {
+        "Value": "RDD"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 3000.0
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "RDD-EUR",
-    "BaseSymbol": {
-      "Value": "RDD"
+    "Name": {
+      "Value": "RDD-EUR",
+      "BaseSymbol": {
+        "Value": "RDD"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 3000.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "REN-EUR",
-    "BaseSymbol": {
-      "Value": "REN"
+    "Name": {
+      "Value": "REN-EUR",
+      "BaseSymbol": {
+        "Value": "REN"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 4.0
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "REP-EUR",
-    "BaseSymbol": {
-      "Value": "REP"
+    "Name": {
+      "Value": "REP-EUR",
+      "BaseSymbol": {
+        "Value": "REP"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 0.1
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "REQ-BTC",
-    "BaseSymbol": {
-      "Value": "REQ"
+    "Name": {
+      "Value": "REQ-BTC",
+      "BaseSymbol": {
+        "Value": "REQ"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 100.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "REQ-EUR",
-    "BaseSymbol": {
-      "Value": "REQ"
+    "Name": {
+      "Value": "REQ-EUR",
+      "BaseSymbol": {
+        "Value": "REQ"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 30.0
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "RLC-EUR",
-    "BaseSymbol": {
-      "Value": "RLC"
+    "Name": {
+      "Value": "RLC-EUR",
+      "BaseSymbol": {
+        "Value": "RLC"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 1.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "RSR-EUR",
-    "BaseSymbol": {
-      "Value": "RSR"
+    "Name": {
+      "Value": "RSR-EUR",
+      "BaseSymbol": {
+        "Value": "RSR"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 60.0
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "RVN-BTC",
-    "BaseSymbol": {
-      "Value": "RVN"
+    "Name": {
+      "Value": "RVN-BTC",
+      "BaseSymbol": {
+        "Value": "RVN"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 200.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "RVN-EUR",
-    "BaseSymbol": {
-      "Value": "RVN"
+    "Name": {
+      "Value": "RVN-EUR",
+      "BaseSymbol": {
+        "Value": "RVN"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 20.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "SNT-BTC",
-    "BaseSymbol": {
-      "Value": "SNT"
+    "Name": {
+      "Value": "SNT-BTC",
+      "BaseSymbol": {
+        "Value": "SNT"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 70.0
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "SNT-EUR",
-    "BaseSymbol": {
-      "Value": "SNT"
+    "Name": {
+      "Value": "SNT-EUR",
+      "BaseSymbol": {
+        "Value": "SNT"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 30.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "SNX-EUR",
-    "BaseSymbol": {
-      "Value": "SNX"
+    "Name": {
+      "Value": "SNX-EUR",
+      "BaseSymbol": {
+        "Value": "SNX"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 0.1
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "SOL-EUR",
-    "BaseSymbol": {
-      "Value": "SOL"
+    "Name": {
+      "Value": "SOL-EUR",
+      "BaseSymbol": {
+        "Value": "SOL"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 0.1
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "STEEM-BTC",
-    "BaseSymbol": {
-      "Value": "STEEM"
+    "Name": {
+      "Value": "STEEM-BTC",
+      "BaseSymbol": {
+        "Value": "STEEM"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 20.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "STEEM-EUR",
-    "BaseSymbol": {
-      "Value": "STEEM"
+    "Name": {
+      "Value": "STEEM-EUR",
+      "BaseSymbol": {
+        "Value": "STEEM"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 4.0
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "STMX-BTC",
-    "BaseSymbol": {
-      "Value": "STMX"
+    "Name": {
+      "Value": "STMX-BTC",
+      "BaseSymbol": {
+        "Value": "STMX"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 1000.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "STMX-EUR",
-    "BaseSymbol": {
-      "Value": "STMX"
+    "Name": {
+      "Value": "STMX-EUR",
+      "BaseSymbol": {
+        "Value": "STMX"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 70.0
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "STORJ-EUR",
-    "BaseSymbol": {
-      "Value": "STORJ"
+    "Name": {
+      "Value": "STORJ-EUR",
+      "BaseSymbol": {
+        "Value": "STORJ"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 2.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "STORM-BTC",
-    "BaseSymbol": {
-      "Value": "STORM"
+    "Name": {
+      "Value": "STORM-BTC",
+      "BaseSymbol": {
+        "Value": "STORM"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 1500.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "STORM-EUR",
-    "BaseSymbol": {
-      "Value": "STORM"
+    "Name": {
+      "Value": "STORM-EUR",
+      "BaseSymbol": {
+        "Value": "STORM"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 1500.0
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "STRAT-BTC",
-    "BaseSymbol": {
-      "Value": "STRAT"
+    "Name": {
+      "Value": "STRAT-BTC",
+      "BaseSymbol": {
+        "Value": "STRAT"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 5.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "STRAT-EUR",
-    "BaseSymbol": {
-      "Value": "STRAT"
+    "Name": {
+      "Value": "STRAT-EUR",
+      "BaseSymbol": {
+        "Value": "STRAT"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 5.0
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "STRAX-EUR",
-    "BaseSymbol": {
-      "Value": "STRAX"
+    "Name": {
+      "Value": "STRAX-EUR",
+      "BaseSymbol": {
+        "Value": "STRAX"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 2.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "SUSHI-EUR",
-    "BaseSymbol": {
-      "Value": "SUSHI"
+    "Name": {
+      "Value": "SUSHI-EUR",
+      "BaseSymbol": {
+        "Value": "SUSHI"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 0.2
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "SXP-EUR",
-    "BaseSymbol": {
-      "Value": "SXP"
+    "Name": {
+      "Value": "SXP-EUR",
+      "BaseSymbol": {
+        "Value": "SXP"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 1.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "TRB-EUR",
-    "BaseSymbol": {
-      "Value": "TRB"
+    "Name": {
+      "Value": "TRB-EUR",
+      "BaseSymbol": {
+        "Value": "TRB"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 0.04
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "TRX-BTC",
-    "BaseSymbol": {
-      "Value": "TRX"
+    "Name": {
+      "Value": "TRX-BTC",
+      "BaseSymbol": {
+        "Value": "TRX"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 100.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "TRX-EUR",
-    "BaseSymbol": {
-      "Value": "TRX"
+    "Name": {
+      "Value": "TRX-EUR",
+      "BaseSymbol": {
+        "Value": "TRX"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 30.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "UMA-EUR",
-    "BaseSymbol": {
-      "Value": "UMA"
+    "Name": {
+      "Value": "UMA-EUR",
+      "BaseSymbol": {
+        "Value": "UMA"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 0.1
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "UNI-EUR",
-    "BaseSymbol": {
-      "Value": "UNI"
+    "Name": {
+      "Value": "UNI-EUR",
+      "BaseSymbol": {
+        "Value": "UNI"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 0.1
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "USDC-EUR",
-    "BaseSymbol": {
-      "Value": "USDC"
+    "Name": {
+      "Value": "USDC-EUR",
+      "BaseSymbol": {
+        "Value": "USDC"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 5.0
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "USDT-EUR",
-    "BaseSymbol": {
-      "Value": "USDT"
+    "Name": {
+      "Value": "USDT-EUR",
+      "BaseSymbol": {
+        "Value": "USDT"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 5.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "UTK-EUR",
-    "BaseSymbol": {
-      "Value": "UTK"
+    "Name": {
+      "Value": "UTK-EUR",
+      "BaseSymbol": {
+        "Value": "UTK"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 8.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "VET-BTC",
-    "BaseSymbol": {
-      "Value": "VET"
+    "Name": {
+      "Value": "VET-BTC",
+      "BaseSymbol": {
+        "Value": "VET"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 100.0
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "VET-EUR",
-    "BaseSymbol": {
-      "Value": "VET"
+    "Name": {
+      "Value": "VET-EUR",
+      "BaseSymbol": {
+        "Value": "VET"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 20.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "VTC-BTC",
-    "BaseSymbol": {
-      "Value": "VTC"
+    "Name": {
+      "Value": "VTC-BTC",
+      "BaseSymbol": {
+        "Value": "VTC"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 20.0
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "VTC-EUR",
-    "BaseSymbol": {
-      "Value": "VTC"
+    "Name": {
+      "Value": "VTC-EUR",
+      "BaseSymbol": {
+        "Value": "VTC"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 2.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "VTHO-BTC",
-    "BaseSymbol": {
-      "Value": "VTHO"
+    "Name": {
+      "Value": "VTHO-BTC",
+      "BaseSymbol": {
+        "Value": "VTHO"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 4000.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "VTHO-EUR",
-    "BaseSymbol": {
-      "Value": "VTHO"
+    "Name": {
+      "Value": "VTHO-EUR",
+      "BaseSymbol": {
+        "Value": "VTHO"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 200.0
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "WAVES-BTC",
-    "BaseSymbol": {
-      "Value": "WAVES"
+    "Name": {
+      "Value": "WAVES-BTC",
+      "BaseSymbol": {
+        "Value": "WAVES"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 0.6
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "WAVES-EUR",
-    "BaseSymbol": {
-      "Value": "WAVES"
+    "Name": {
+      "Value": "WAVES-EUR",
+      "BaseSymbol": {
+        "Value": "WAVES"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 0.3
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "WTC-BTC",
-    "BaseSymbol": {
-      "Value": "WTC"
+    "Name": {
+      "Value": "WTC-BTC",
+      "BaseSymbol": {
+        "Value": "WTC"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 10.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "WTC-EUR",
-    "BaseSymbol": {
-      "Value": "WTC"
+    "Name": {
+      "Value": "WTC-EUR",
+      "BaseSymbol": {
+        "Value": "WTC"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 3.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "XEM-BTC",
-    "BaseSymbol": {
-      "Value": "XEM"
+    "Name": {
+      "Value": "XEM-BTC",
+      "BaseSymbol": {
+        "Value": "XEM"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 20.0
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "XEM-EUR",
-    "BaseSymbol": {
-      "Value": "XEM"
+    "Name": {
+      "Value": "XEM-EUR",
+      "BaseSymbol": {
+        "Value": "XEM"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 10.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "XLM-BTC",
-    "BaseSymbol": {
-      "Value": "XLM"
+    "Name": {
+      "Value": "XLM-BTC",
+      "BaseSymbol": {
+        "Value": "XLM"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 10.0
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "XLM-EUR",
-    "BaseSymbol": {
-      "Value": "XLM"
+    "Name": {
+      "Value": "XLM-EUR",
+      "BaseSymbol": {
+        "Value": "XLM"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 10.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "XRP-BTC",
-    "BaseSymbol": {
-      "Value": "XRP"
+    "Name": {
+      "Value": "XRP-BTC",
+      "BaseSymbol": {
+        "Value": "XRP"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 10.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "XRP-EUR",
-    "BaseSymbol": {
-      "Value": "XRP"
+    "Name": {
+      "Value": "XRP-EUR",
+      "BaseSymbol": {
+        "Value": "XRP"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 3.0
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "XTZ-BTC",
-    "BaseSymbol": {
-      "Value": "XTZ"
+    "Name": {
+      "Value": "XTZ-BTC",
+      "BaseSymbol": {
+        "Value": "XTZ"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 1.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "XTZ-EUR",
-    "BaseSymbol": {
-      "Value": "XTZ"
+    "Name": {
+      "Value": "XTZ-EUR",
+      "BaseSymbol": {
+        "Value": "XTZ"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 1.0
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "XVG-BTC",
-    "BaseSymbol": {
-      "Value": "XVG"
+    "Name": {
+      "Value": "XVG-BTC",
+      "BaseSymbol": {
+        "Value": "XVG"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 300.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "XVG-EUR",
-    "BaseSymbol": {
-      "Value": "XVG"
+    "Name": {
+      "Value": "XVG-EUR",
+      "BaseSymbol": {
+        "Value": "XVG"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 100.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "YFI-EUR",
-    "BaseSymbol": {
-      "Value": "YFI"
+    "Name": {
+      "Value": "YFI-EUR",
+      "BaseSymbol": {
+        "Value": "YFI"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 0.0001
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "YFII-EUR",
-    "BaseSymbol": {
-      "Value": "YFII"
+    "Name": {
+      "Value": "YFII-EUR",
+      "BaseSymbol": {
+        "Value": "YFII"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 0.001
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "ZIL-BTC",
-    "BaseSymbol": {
-      "Value": "ZIL"
+    "Name": {
+      "Value": "ZIL-BTC",
+      "BaseSymbol": {
+        "Value": "ZIL"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 50.0
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "ZIL-EUR",
-    "BaseSymbol": {
-      "Value": "ZIL"
+    "Name": {
+      "Value": "ZIL-EUR",
+      "BaseSymbol": {
+        "Value": "ZIL"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumBaseAmount": {
+      "Value": 20.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   },
   {
-    "Name": "ZRX-BTC",
-    "BaseSymbol": {
-      "Value": "ZRX"
+    "Name": {
+      "Value": "ZRX-BTC",
+      "BaseSymbol": {
+        "Value": "ZRX"
+      },
+      "QuoteSymbol": {
+        "Value": "BTC"
+      }
     },
-    "QuoteSymbol": {
-      "Value": "BTC"
+    "MinimumBaseAmount": {
+      "Value": 7.0
+    },
+    "MinimumQuoteAmount": {
+      "Value": 0.001
     }
   },
   {
-    "Name": "ZRX-EUR",
-    "BaseSymbol": {
-      "Value": "ZRX"
+    "Name": {
+      "Value": "ZRX-EUR",
+      "BaseSymbol": {
+        "Value": "ZRX"
+      },
+      "QuoteSymbol": {
+        "Value": "EUR"
+      }
+    },
+    "MinimumBaseAmount": {
+      "Value": 3.0
     },
-    "QuoteSymbol": {
-      "Value": "EUR"
+    "MinimumQuoteAmount": {
+      "Value": 5.0
     }
   }
 ]

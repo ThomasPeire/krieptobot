@@ -3,16 +3,19 @@ using System.Threading.Tasks;
 using KrieptoBot.Application.Settings;
 using KrieptoBot.Domain.Recommendation.ValueObjects;
 using KrieptoBot.Domain.Trading.ValueObjects;
+using Microsoft.Extensions.Logging;
 
 namespace KrieptoBot.Application.Recommendators
 {
     public abstract class RecommendatorBase : IRecommendator
     {
         private readonly RecommendatorSettings _recommendatorSettings;
+        private readonly ILogger<RecommendatorBase> _logger;
 
-        protected RecommendatorBase(RecommendatorSettings recommendatorSettings)
+        protected RecommendatorBase(RecommendatorSettings recommendatorSettings, ILogger<RecommendatorBase> logger)
         {
             _recommendatorSettings = recommendatorSettings;
+            _logger = logger;
         }
 
         private decimal SellRecommendationWeight =>
@@ -24,11 +27,26 @@ namespace KrieptoBot.Application.Recommendators
         public async Task<RecommendatorScore> GetRecommendation(Market market)
         {
             var recommendation = await CalculateRecommendation(market);
-            return recommendation > 0
+
+            var weightedRecommendation = recommendation > 0
                 ? recommendation * BuyRecommendationWeight
                 : recommendation * SellRecommendationWeight;
+
+            LogRecommendatorScore(market, weightedRecommendation);
+
+            return weightedRecommendation;
         }
 
         protected abstract Task<RecommendatorScore> CalculateRecommendation(Market market);
+
+
+        private void LogRecommendatorScore(Market market, decimal recommendatorScore)
+        {
+            _logger.LogInformation(
+                "Market {Market} - {Recommendator} Recommendation score: {Score}",
+                market.Name.Value, Name, recommendatorScore.ToString("0.00"));
+        }
+
+        protected virtual string Name => GetType().Name;
     }
 }

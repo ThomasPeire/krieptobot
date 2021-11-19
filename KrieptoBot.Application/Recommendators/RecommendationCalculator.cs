@@ -27,7 +27,7 @@ namespace KrieptoBot.Application.Recommendators
 
             var averageScore = recommendationScores.Where(x => x.IncludeInAverageScore).Average(x => x);
 
-            _logger.LogInformation("Market {Market}: Final score: {Score}", market.Name, averageScore.ToString("0.00"));
+            _logger.LogInformation("Market {Market}: Final score: {Score}", market.Name.Value, averageScore.ToString("0.00"));
 
             return new RecommendatorScore(averageScore);
         }

@@ -9,12 +9,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Remove="Mocks\Bitvavo\Data\assets.json"/>
-        <None Remove="Mocks\Bitvavo\Data\balances.json"/>
-        <None Remove="Mocks\Bitvavo\Data\candles_btc-eur.json"/>
-        <None Remove="Mocks\Bitvavo\Data\markets.json"/>
-        <None Remove="Mocks\Bitvavo\Data\orders_btc-eur.json"/>
-        <None Remove="Mocks\Bitvavo\Data\trades_btc-eur.json"/>
+        <None Remove="Mocks\Bitvavo\Data\assets.json" />
+        <None Remove="Mocks\Bitvavo\Data\balances.json" />
+        <None Remove="Mocks\Bitvavo\Data\candles_btc-eur.json" />
+        <None Remove="Mocks\Bitvavo\Data\markets.json" />
+        <None Remove="Mocks\Bitvavo\Data\orders_btc-eur.json" />
+        <None Remove="Mocks\Bitvavo\Data\trades_btc-eur.json" />
     </ItemGroup>
 
     <ItemGroup>
@@ -47,21 +47,20 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="FluentAssertions" Version="6.2.0"/>
-        <PackageReference Include="Moq" Version="4.16.1"/>
-        <PackageReference Include="NUnit" Version="3.13.2"/>
-        <PackageReference Include="NUnit3TestAdapter" Version="4.1.0"/>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0"/>
-        <PackageReference Include="Snapshooter.NUnit" Version="0.7.1"/>
+        <PackageReference Include="FluentAssertions" Version="6.2.0" />
+        <PackageReference Include="Moq" Version="4.16.1" />
+        <PackageReference Include="NUnit" Version="3.13.2" />
+        <PackageReference Include="NUnit3TestAdapter" Version="4.1.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+        <PackageReference Include="Snapshooter.NUnit" Version="0.7.1" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\KrieptoBot.Infrastructure.Bitvavo\KrieptoBot.Infrastructure.Bitvavo.csproj"/>
+        <ProjectReference Include="..\KrieptoBot.Infrastructure.Bitvavo\KrieptoBot.Infrastructure.Bitvavo.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Application\Indicators\__snapshots__\"/>
-        <Folder Include="Infrastructure\__snapshots__\"/>
+        <Folder Include="Application\Indicators\__snapshots__\" />
     </ItemGroup>
 
 </Project>
