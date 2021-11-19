@@ -55,7 +55,7 @@ namespace KrieptoBot.Application
         private void LogBuyRecommendation(Market market, decimal budget, TickerPrice priceToBuyOn, decimal amount)
         {
             _logger.LogInformation("Buying on {Market} with € {Budget}. Price: € {Price}; Amount: {Amount}",
-                market.Name,
+                market.Name.Value,
                 budget, priceToBuyOn.Price.Value, amount);
         }
 

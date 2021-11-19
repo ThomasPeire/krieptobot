@@ -56,7 +56,7 @@ namespace KrieptoBot.Application
         private void LogSellRecommendation(Market market, TickerPrice priceToSellOn, decimal availableBaseAssetBalance)
         {
             _logger.LogInformation("Selling on {Market}. Price: € {Price}; Amount: {Amount}; € {Euro}",
-                market.Name,
+                market.Name.Value,
                 priceToSellOn.Price.Value, availableBaseAssetBalance,
                 (availableBaseAssetBalance * priceToSellOn.Price).ToString("0.00"));
         }
