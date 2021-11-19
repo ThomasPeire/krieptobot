@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using KrieptoBot.Domain.BuildingBlocks;
 
 namespace KrieptoBot.Domain.Trading.ValueObjects
@@ -30,7 +29,5 @@ namespace KrieptoBot.Domain.Trading.ValueObjects
         {
             yield return Value;
         }
-
-
     }
 }

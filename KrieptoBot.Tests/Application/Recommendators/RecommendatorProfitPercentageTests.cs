@@ -106,7 +106,8 @@ namespace KrieptoBot.Tests.Application.Recommendators
                     new TickerPrice(new MarketName("btc-eur"), new Price(tickerPrice)));
 
 
-            var result = await recommendator.GetRecommendation(new Market(new MarketName("btc-eur"), Amount.Zero, Amount.Zero));
+            var result =
+                await recommendator.GetRecommendation(new Market(new MarketName("btc-eur"), Amount.Zero, Amount.Zero));
 
             Assert.That(result.Value, Is.EqualTo(0m));
         }

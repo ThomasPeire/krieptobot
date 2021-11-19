@@ -16,6 +16,11 @@ namespace KrieptoBot.ConsoleLauncher
                 {
                     configuration.GetSection("RecommendatorSettings").Bind(settings);
                 });
+            services.AddOptions<TradingSettings>()
+                .Configure<IConfiguration>((settings, configuration) =>
+                {
+                    configuration.GetSection("TradingSettings").Bind(settings);
+                });
             services.AddApplicationServices();
             services.AddBitvavoService();
             services.AddScoped<INotificationManager, NotificationManager>();

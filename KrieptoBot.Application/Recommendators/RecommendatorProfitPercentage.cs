@@ -47,8 +47,7 @@ namespace KrieptoBot.Application.Recommendators
 
             // negative score = sell recommendation
             // the larger the profit => the stronger the sell recommendation should be
-            // no buy recommendation should be made when profit is negative => never a positive score
-            recommendatorScore = Math.Min(-relativeProfitInPct, 0);
+            recommendatorScore = -relativeProfitInPct;
 
             return new RecommendatorScore(recommendatorScore, lastBuyTrades.Any());
         }

@@ -53,13 +53,8 @@ namespace KrieptoBot.ConsoleLauncher
         private async Task RunTrader()
         {
             _logger.LogDebug("Starting trading service");
-            UpdateTradingContextCurrentTime();
+            _tradingContext.SetCurrentTime();
             await _trader.Run();
-        }
-
-        private DateTime UpdateTradingContextCurrentTime()
-        {
-            return _tradingContext.CurrentTime = DateTime.UtcNow;
         }
 
         private static int GetIntervalInMinutes(string interval)

@@ -9,8 +9,8 @@ namespace KrieptoBot.Application.Recommendators
 {
     public abstract class RecommendatorBase : IRecommendator
     {
-        private readonly RecommendatorSettings _recommendatorSettings;
         private readonly ILogger<RecommendatorBase> _logger;
+        private readonly RecommendatorSettings _recommendatorSettings;
 
         protected RecommendatorBase(RecommendatorSettings recommendatorSettings, ILogger<RecommendatorBase> logger)
         {
@@ -23,6 +23,8 @@ namespace KrieptoBot.Application.Recommendators
 
         private decimal BuyRecommendationWeight =>
             _recommendatorSettings.BuyRecommendationWeights.GetValueOrDefault(GetType().Name);
+
+        protected virtual string Name => GetType().Name;
 
         public async Task<RecommendatorScore> GetRecommendation(Market market)
         {
@@ -46,7 +48,5 @@ namespace KrieptoBot.Application.Recommendators
                 "Market {Market} - {Recommendator} Recommendation score: {Score}",
                 market.Name.Value, Name, recommendatorScore.ToString("0.00"));
         }
-
-        protected virtual string Name => GetType().Name;
     }
 }

@@ -5,7 +5,8 @@ namespace KrieptoBot.Domain.Trading.Entity
 {
     public class Order : BuildingBlocks.Entity
     {
-        public Order(Guid id, MarketName marketName, DateTime created, DateTime updated, OrderStatus status, OrderSide side,
+        public Order(Guid id, MarketName marketName, DateTime created, DateTime updated, OrderStatus status,
+            OrderSide side,
             OrderType type, Amount amount, Price price) : base(id)
         {
             ArgumentNullException.ThrowIfNull(marketName);

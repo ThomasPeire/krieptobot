@@ -53,7 +53,6 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Extensions
                     new MarketName(dto.Base, dto.Quote),
                     new Amount(decimal.Parse(dto.MinOrderInBaseAsset ?? "0", CultureInfo.InvariantCulture)),
                     new Amount(decimal.Parse(dto.MinOrderInQuoteAsset ?? "0", CultureInfo.InvariantCulture))
-
                 );
         }
 

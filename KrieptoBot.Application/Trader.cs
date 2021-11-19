@@ -40,10 +40,7 @@ namespace KrieptoBot.Application
             if (marketsToSell.Any())
                 await Sell(marketsToSell.Select(x => x.Key));
 
-            if (marketsToBuy.Any())
-            {
-                await Buy(marketsToBuy);
-            }
+            if (marketsToBuy.Any()) await Buy(marketsToBuy);
         }
 
         private async Task<Dictionary<Market, Amount>> DetermineBudgetForMarket(
@@ -78,7 +75,7 @@ namespace KrieptoBot.Application
             var availableBalance = balances.FirstOrDefault(x => x.Symbol.Equals(asset));
 
             return availableBalance != null
-                ? availableBalance.Available - availableBalance.InOrder
+                ? new Amount(Math.Max(availableBalance.Available.Value - availableBalance.InOrder.Value, 0))
                 : Amount.Zero;
         }
 
@@ -126,7 +123,7 @@ namespace KrieptoBot.Application
 
             foreach (var (market, score) in marketsToSell)
                 _logger.LogInformation("Sell recommendation for {Market}, with a score of {Score}", market.Name.Value,
-                    score.Value);
+                    score.Value.ToString("0.00"));
 
             return marketsToSell;
         }
@@ -140,10 +137,7 @@ namespace KrieptoBot.Application
             foreach (var (market, recommendatorScore) in marketsToSell)
             {
                 var balance = await GetAvailableBalanceForAsset(market.Name.BaseSymbol);
-                if (market.MinimumBaseAmount <= balance)
-                {
-                    marketsToSellWithEnoughBalance.Add(market, recommendatorScore);
-                }
+                if (market.MinimumBaseAmount <= balance) marketsToSellWithEnoughBalance.Add(market, recommendatorScore);
             }
 
             return marketsToSellWithEnoughBalance;

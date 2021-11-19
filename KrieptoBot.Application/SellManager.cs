@@ -34,7 +34,8 @@ namespace KrieptoBot.Application
                 await PlaceOrder(market, availableBaseAssetBalance, priceToSellOn);
         }
 
-        private async Task<Order> PlaceOrder(Market market, decimal availableBaseAssetBalance, TickerPrice priceToSellOn)
+        private async Task<Order> PlaceOrder(Market market, decimal availableBaseAssetBalance,
+            TickerPrice priceToSellOn)
         {
             return await _exchangeService.PostSellOrderAsync(market.Name, "limit", availableBaseAssetBalance,
                 priceToSellOn.Price);
@@ -49,8 +50,8 @@ namespace KrieptoBot.Application
             decimal availableBaseAssetBalance)
         {
             await _notificationManager.SendNotification(
-                $"Selling on {market.Name}.",
-                $"Price: € {priceToSellOn.Price.Value} - Amount: {availableBaseAssetBalance} - € {(availableBaseAssetBalance * priceToSellOn.Price):0.00}");
+                $"Selling on {market.Name.Value}.",
+                $"Price: € {priceToSellOn.Price.Value} - Amount: {availableBaseAssetBalance} - € {availableBaseAssetBalance * priceToSellOn.Price:0.00}");
         }
 
         private void LogSellRecommendation(Market market, TickerPrice priceToSellOn, decimal availableBaseAssetBalance)

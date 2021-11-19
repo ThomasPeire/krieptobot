@@ -48,7 +48,7 @@ namespace KrieptoBot.Application
             TickerPrice priceToBuyOn,
             decimal amount)
         {
-            await _notificationManager.SendNotification($"Buying on {market.Name} with € {budget}",
+            await _notificationManager.SendNotification($"Buying on {market.Name.Value} with € {budget}",
                 $"Price: € {priceToBuyOn.Price.Value}; Amount: {amount}");
         }
 

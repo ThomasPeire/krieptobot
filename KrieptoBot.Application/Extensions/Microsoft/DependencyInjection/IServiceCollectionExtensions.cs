@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using KrieptoBot.Application.Indicators;
+﻿using KrieptoBot.Application.Indicators;
 using KrieptoBot.Application.Recommendators;
+using KrieptoBot.Application.Settings;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace KrieptoBot.Application.Extensions.Microsoft.DependencyInjection
 {
@@ -21,17 +22,18 @@ namespace KrieptoBot.Application.Extensions.Microsoft.DependencyInjection
 
             services.AddScoped<IRsi, Rsi>();
 
+
             services.AddSingleton<ITradingContext>(x =>
-                new TradingContext()
-                    .SetMarketsToWatch(new List<string>
-                    {
-                        "CHZ-EUR", "BTC-EUR", "ADA-EUR", "HOT-EUR", "1INCH-EUR", "ETH-EUR", "DOGE-EUR", "SHIB-EUR",
-                        "SOL-EUR", "MANA-EUR"
-                    }) // todo: appsettings
-                    .SetInterval("5m")
-                    .SetBuyMargin(30)
-                    .SetSellMargin(-30)
-                    .SetIsSimulation(true));
+            {
+                var tradingSettings = x.GetRequiredService<IOptions<TradingSettings>>().Value;
+
+                return new TradingContext()
+                    .SetMarketsToWatch(tradingSettings.MarketsToWatch)
+                    .SetInterval(tradingSettings.Interval)
+                    .SetBuyMargin(tradingSettings.BuyMargin)
+                    .SetSellMargin(tradingSettings.SellMargin)
+                    .SetIsSimulation(tradingSettings.IsSimulation);
+            });
         }
     }
 }

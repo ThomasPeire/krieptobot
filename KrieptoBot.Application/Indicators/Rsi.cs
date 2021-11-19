@@ -67,7 +67,8 @@ namespace KrieptoBot.Application.Indicators
         }
 
 
-        private static Dictionary<DateTime, (decimal up, decimal down)> CalculateUpAndDownMoves(IEnumerable<Candle> candles)
+        private static Dictionary<DateTime, (decimal up, decimal down)> CalculateUpAndDownMoves(
+            IEnumerable<Candle> candles)
         {
             var upsAndDowns = new Dictionary<DateTime, (decimal up, decimal down)>();
 

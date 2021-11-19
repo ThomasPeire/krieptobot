@@ -5,7 +5,8 @@ namespace KrieptoBot.Domain.Trading.Entity
 {
     public class Trade : BuildingBlocks.Entity
     {
-        public Trade(Guid id, DateTime timestamp, MarketName marketName, Amount amount, Price price, OrderSide side) : base(id)
+        public Trade(Guid id, DateTime timestamp, MarketName marketName, Amount amount, Price price,
+            OrderSide side) : base(id)
         {
             ArgumentNullException.ThrowIfNull(marketName);
             ArgumentNullException.ThrowIfNull(timestamp);

@@ -6,10 +6,6 @@ namespace KrieptoBot.Domain.Trading.ValueObjects
 {
     public class MarketName : ValueObject
     {
-        public string Value => $"{BaseSymbol.Value}-{QuoteSymbol.Value}";
-        public Symbol BaseSymbol { get; }
-        public Symbol QuoteSymbol { get; }
-
         private MarketName()
         {
         }
@@ -17,9 +13,7 @@ namespace KrieptoBot.Domain.Trading.ValueObjects
         public MarketName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
-            {
                 throw new ArgumentException("Market name can not be empty", nameof(name));
-            }
 
             var splittedName = name.Split("-");
 
@@ -41,6 +35,10 @@ namespace KrieptoBot.Domain.Trading.ValueObjects
         public MarketName(string baseSymbol, string quoteSymbol) : this(new Symbol(baseSymbol), new Symbol(quoteSymbol))
         {
         }
+
+        public string Value => $"{BaseSymbol.Value}-{QuoteSymbol.Value}";
+        public Symbol BaseSymbol { get; }
+        public Symbol QuoteSymbol { get; }
 
         public static implicit operator string(MarketName marketName)
         {
