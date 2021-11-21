@@ -49,7 +49,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
                     { DateTime.Today.AddDays(-4), 40 }
                 };
 
-            _tradingContext = new TradingContext()
+            _tradingContext = new TradingContext(new DateTimeProvider())
                 .SetBuyMargin(30)
                 .SetSellMargin(-30)
                 .SetMarketsToWatch(

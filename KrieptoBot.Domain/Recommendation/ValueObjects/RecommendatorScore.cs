@@ -26,6 +26,7 @@ namespace KrieptoBot.Domain.Recommendation.ValueObjects
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return Value;
+            yield return IncludeInAverageScore;
         }
 
         public static RecommendatorScore operator *(RecommendatorScore recommendatorScore, decimal b)

@@ -22,12 +22,11 @@ namespace KrieptoBot.Application.Extensions.Microsoft.DependencyInjection
 
             services.AddScoped<IRsi, Rsi>();
 
-
             services.AddSingleton<ITradingContext>(x =>
             {
                 var tradingSettings = x.GetRequiredService<IOptions<TradingSettings>>().Value;
 
-                return new TradingContext()
+                return new TradingContext(new DateTimeProvider())
                     .SetMarketsToWatch(tradingSettings.MarketsToWatch)
                     .SetInterval(tradingSettings.Interval)
                     .SetBuyMargin(tradingSettings.BuyMargin)

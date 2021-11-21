@@ -20,8 +20,7 @@ namespace KrieptoBot.AzureFunction
 
         [Function(nameof(TradeFunction))]
         public async Task Run(
-            [TimerTrigger(ScheduleExpression, RunOnStartup = true, UseMonitor = true)]
-            TimerInfo myTimer)
+            [TimerTrigger(ScheduleExpression, RunOnStartup = true, UseMonitor = true)] TimerInfo myTimer)
         {
             await _trader.Run();
         }

@@ -42,7 +42,7 @@ namespace KrieptoBot.Tests.Application
             _exchangeServiceMock
                 .Setup(x => x.GetMarketAsync(It.IsAny<string>()))
                 .Returns(Task.FromResult(new Market(new MarketName("BTC-EUR"), Amount.Zero, Amount.Zero)));
-            _tradingContext = new TradingContext()
+            _tradingContext = new TradingContext(new DateTimeProvider())
                 .SetBuyMargin(30)
                 .SetSellMargin(-30)
                 .SetMarketsToWatch(
