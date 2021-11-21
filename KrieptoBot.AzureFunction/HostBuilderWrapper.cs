@@ -28,7 +28,7 @@ namespace KrieptoBot.AzureFunction
                 .AddJsonFile(Path.Combine(context.HostingEnvironment.ContentRootPath, "appsettings.json"),
                     true,
                     false)
-                .AddUserSecrets<TradeFunction>()
+                .AddUserSecrets<TradeFunction>(optional:true)
                 .AddEnvironmentVariables();
         }
 
