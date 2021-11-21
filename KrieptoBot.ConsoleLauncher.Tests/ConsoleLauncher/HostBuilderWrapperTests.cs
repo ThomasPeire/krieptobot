@@ -1,12 +1,10 @@
-using System;
 using KrieptoBot.Application;
 using KrieptoBot.Application.Settings;
-using KrieptoBot.AzureFunction;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using NUnit.Framework;
 
-namespace KrieptoBot.Tests.AzureFunction
+namespace KrieptoBot.ConsoleLauncher.Tests.ConsoleLauncher
 {
     public class HostBuilderWrapperTests
 

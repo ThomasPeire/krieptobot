@@ -15,12 +15,15 @@ namespace KrieptoBot.ConsoleLauncher
         private readonly ILogger<TradeService> _logger;
         private readonly ITrader _trader;
         private readonly ITradingContext _tradingContext;
+        private readonly IDateTimeProvider _dateTimeProvider;
 
-        public TradeService(ILogger<TradeService> logger, ITrader trader, ITradingContext tradingContext)
+        public TradeService(ILogger<TradeService> logger, ITrader trader, ITradingContext tradingContext,
+            IDateTimeProvider dateTimeProvider)
         {
             _logger = logger;
             _trader = trader;
             _tradingContext = tradingContext;
+            _dateTimeProvider = dateTimeProvider;
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
@@ -47,7 +50,9 @@ namespace KrieptoBot.ConsoleLauncher
 
         private bool TraderCanRun()
         {
-            return DateTime.UtcNow.Minute % GetIntervalInMinutes(_tradingContext.Interval) == 0;
+            var dateTimeNow = _dateTimeProvider.UtcDateTimeNow();
+            return (dateTimeNow.Day * 24 * 60 + dateTimeNow.Hour * 60 + dateTimeNow.Minute) %
+                GetIntervalInMinutes(_tradingContext.Interval) == 0;
         }
 
         private async Task RunTrader()

@@ -14,7 +14,7 @@ namespace KrieptoBot.ConsoleLauncher
         {
             try
             {
-                var hostBuilder = CreateHostBuilder(args).Build();
+                var hostBuilder = HostBuilderWrapper.BuildHost();
                 Log.Information("Starting up");
                 await hostBuilder.RunAsync();
             }
@@ -26,30 +26,6 @@ namespace KrieptoBot.ConsoleLauncher
             {
                 Log.CloseAndFlush();
             }
-        }
-
-        private static IHostBuilder CreateHostBuilder(string[] args)
-        {
-            return new HostBuilder().ConfigureAppConfiguration((context, builder) =>
-                {
-                    builder.SetBasePath(AppContext.BaseDirectory)
-                        .AddJsonFile("appsettings.json", false, true)
-                        .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", true)
-                        .AddUserSecrets<Program>()
-                        .AddEnvironmentVariables();
-                })
-                .ConfigureServices((hostContext, services) =>
-                {
-                    Log.Logger = new LoggerConfiguration()
-                        .ReadFrom.Configuration(hostContext.Configuration)
-                        .MinimumLevel.Override("System.Net.Http", LogEventLevel.Warning)
-                        .Enrich.FromLogContext()
-                        .CreateLogger();
-
-                    Startup.ConfigureServices(services);
-
-                    services.AddHostedService<TradeService>();
-                }).UseSerilog();
         }
     }
 }

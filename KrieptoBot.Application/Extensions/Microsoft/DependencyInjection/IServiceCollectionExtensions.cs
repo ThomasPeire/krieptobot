@@ -1,4 +1,5 @@
-﻿using KrieptoBot.Application.Indicators;
+﻿using System;
+using KrieptoBot.Application.Indicators;
 using KrieptoBot.Application.Recommendators;
 using KrieptoBot.Application.Settings;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +20,7 @@ namespace KrieptoBot.Application.Extensions.Microsoft.DependencyInjection
             services.AddScoped<IRecommendator, RecommendatorProfitPercentage>();
 
             services.AddScoped<IRecommendationCalculator, RecommendationCalculator>();
+            services.AddScoped<IDateTimeProvider, DateTimeProvider>();
 
             services.AddScoped<IRsi, Rsi>();
 

@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KrieptoBot.ConsoleLauncher"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KrieptoBot.DataCollector", "KrieptoBot.DataCollector\KrieptoBot.DataCollector.csproj", "{AE58EE43-F7DB-4F36-A8C5-44589A05B75D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KrieptoBot.ConsoleLauncher.Tests", "KrieptoBot.ConsoleLauncher.Tests\KrieptoBot.ConsoleLauncher.Tests.csproj", "{0EFC9693-9012-44FB-80C8-A6D7F005EF43}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,13 +68,18 @@ Global
 		{9A20F355-C392-453F-8DC9-5BAFE3674DA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A20F355-C392-453F-8DC9-5BAFE3674DA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A20F355-C392-453F-8DC9-5BAFE3674DA5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9A20F355-C392-453F-8DC9-5BAFE3674DA5}.Debug-Non-Windows-Specific|Any CPU.ActiveCfg = Debug-Non-Windows-Specific|Any CPU
+		{9A20F355-C392-453F-8DC9-5BAFE3674DA5}.Debug-Non-Windows-Specific|Any CPU.ActiveCfg = Debug|Any CPU
 		{AE58EE43-F7DB-4F36-A8C5-44589A05B75D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AE58EE43-F7DB-4F36-A8C5-44589A05B75D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE58EE43-F7DB-4F36-A8C5-44589A05B75D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE58EE43-F7DB-4F36-A8C5-44589A05B75D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AE58EE43-F7DB-4F36-A8C5-44589A05B75D}.Debug-Non-Windows-Specific|Any CPU.ActiveCfg = Debug-Non-Windows-Specific|Any CPU
 		{AE58EE43-F7DB-4F36-A8C5-44589A05B75D}.Debug-Non-Windows-Specific|Any CPU.Build.0 = Debug-Non-Windows-Specific|Any CPU
+		{0EFC9693-9012-44FB-80C8-A6D7F005EF43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EFC9693-9012-44FB-80C8-A6D7F005EF43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EFC9693-9012-44FB-80C8-A6D7F005EF43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EFC9693-9012-44FB-80C8-A6D7F005EF43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EFC9693-9012-44FB-80C8-A6D7F005EF43}.Debug-Non-Windows-Specific|Any CPU.ActiveCfg = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
