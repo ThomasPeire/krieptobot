@@ -42,6 +42,13 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
             return dtos.ConvertToKrieptoBotModel();
         }
 
+        public async Task<Balance> GetBalanceAsync(string symbol)
+        {
+            var dto = await _bitvavoApi.GetBalanceAsync(symbol);
+
+            return dto.ConvertToKrieptoBotModel();
+        }
+
         public async Task<IEnumerable<Candle>> GetCandlesAsync(string market, string interval = "5m", int limit = 1000,
             DateTime? start = null, DateTime? end = null)
         {
@@ -51,7 +58,7 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
             return candleJArrayList?.Select(x =>
                 new CandleDto
                 {
-                    TimeStamp = DateTime.UnixEpoch.AddMilliseconds(x.Value<long>(0)),
+                    TimeStamp = x.Value<long>(0),
                     Open = x.Value<decimal>(1),
                     High = x.Value<decimal>(2),
                     Low = x.Value<decimal>(3),
@@ -74,16 +81,16 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
             return dtos.ConvertToKrieptoBotModel();
         }
 
-        public async Task<Order> GetOpenOrderAsync()
+        public async Task<IEnumerable<Order>> GetOpenOrderAsync()
         {
-            var dto = await _bitvavoApi.GetOpenOrderAsync();
+            var dto = await _bitvavoApi.GetOpenOrdersAsync();
 
             return dto.ConvertToKrieptoBotModel();
         }
 
-        public async Task<Order> GetOpenOrderAsync(string market)
+        public async Task<IEnumerable<Order>> GetOpenOrderAsync(string market)
         {
-            var dto = await _bitvavoApi.GetOpenOrderAsync(market);
+            var dto = await _bitvavoApi.GetOpenOrdersAsync(market);
 
             return dto.ConvertToKrieptoBotModel();
         }

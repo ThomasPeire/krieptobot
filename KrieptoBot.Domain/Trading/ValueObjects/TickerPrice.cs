@@ -6,10 +6,6 @@ namespace KrieptoBot.Domain.Trading.ValueObjects
 {
     public class TickerPrice : ValueObject
     {
-        private TickerPrice()
-        {
-        }
-
         public TickerPrice(MarketName marketName, Price price)
         {
             ArgumentNullException.ThrowIfNull(marketName);

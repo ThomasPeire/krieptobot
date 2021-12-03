@@ -18,6 +18,9 @@ namespace KrieptoBot.Infrastructure.Bitvavo
         [Get("/v2/balance")]
         Task<IEnumerable<BalanceDto>> GetBalanceAsync();
 
+        [Get("/v2/balance")]
+        Task<BalanceDto> GetBalanceAsync(string symbol);
+
         [Get("/v2/{market}/candles")]
         Task<IEnumerable<JArray>> GetCandlesAsync(string market, string interval = "5m", int limit = 1000,
             long? start = null, long? end = null);
@@ -40,7 +43,7 @@ namespace KrieptoBot.Infrastructure.Bitvavo
         Task<OrderDto> GetOrderAsync(string market, Guid orderId);
 
         [Get("/v2/ordersOpen")]
-        Task<OrderDto> GetOpenOrderAsync(string market = "");
+        Task<IEnumerable<OrderDto>> GetOpenOrdersAsync(string market = "");
 
         [Post("/v2/order")]
         Task<OrderDto> PostOrderAsync(string market, string side, string orderType, string amount, string price);

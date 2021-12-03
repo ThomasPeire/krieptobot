@@ -26,12 +26,12 @@ namespace KrieptoBot.Tests.Application.Indicators
 
         private void InitCandles()
         {
-            var candlesJson = File.ReadAllText(@"./Mocks/Bitvavo/Data/candles_btc-eur.json");
+            var candlesJson = File.ReadAllText(@"./MockData/Bitvavo/candles_btc-eur.json");
             var deserializedCandles = JsonConvert.DeserializeObject(candlesJson) as JArray;
             _candles = deserializedCandles.Select(x =>
                 new CandleDto
                 {
-                    TimeStamp = DateTime.UnixEpoch.AddMilliseconds(x.Value<long>(0)),
+                    TimeStamp = x.Value<long>(0),
                     Open = x.Value<decimal>(1),
                     High = x.Value<decimal>(2),
                     Low = x.Value<decimal>(3),

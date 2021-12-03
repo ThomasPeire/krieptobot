@@ -6,10 +6,6 @@ namespace KrieptoBot.Domain.Trading.ValueObjects
 {
     public class Amount : ValueObject
     {
-        private Amount()
-        {
-        }
-
         public Amount(decimal value)
         {
             if (value < 0m)

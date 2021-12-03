@@ -6,10 +6,6 @@ namespace KrieptoBot.Domain.Trading.ValueObjects
 {
     public class AssetName : ValueObject
     {
-        private AssetName()
-        {
-        }
-
         public AssetName(string value)
         {
             if (string.IsNullOrWhiteSpace(value)) throw new ArgumentException("Asset name can not be empty");

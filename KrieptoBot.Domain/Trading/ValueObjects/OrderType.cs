@@ -11,10 +11,6 @@ namespace KrieptoBot.Domain.Trading.ValueObjects
         public static readonly OrderType TakeProfitLimit = new("takeProfitLimit");
         public static readonly OrderType Market = new("market");
 
-        private OrderType()
-        {
-        }
-
         private OrderType(string value)
         {
             Value = value;

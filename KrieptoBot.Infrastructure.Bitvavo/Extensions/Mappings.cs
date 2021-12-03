@@ -36,7 +36,7 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Extensions
             return
                 new Candle
                 (
-                    dto.TimeStamp,
+                    DateTime.UnixEpoch.AddMilliseconds(dto.TimeStamp),
                     new Price(dto.High),
                     new Price(dto.Low),
                     new Price(dto.Open),

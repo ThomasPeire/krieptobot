@@ -5,10 +5,6 @@ namespace KrieptoBot.Domain.Trading.ValueObjects
 {
     public class Balance : ValueObject
     {
-        private Balance()
-        {
-        }
-
         public Balance(Symbol symbol, Amount available, Amount inOrder)
         {
             Symbol = symbol;

@@ -6,10 +6,6 @@ namespace KrieptoBot.Domain.Trading.ValueObjects
 {
     public class Symbol : ValueObject
     {
-        private Symbol()
-        {
-        }
-
         public Symbol(string value)
         {
             if (string.IsNullOrWhiteSpace(value)) throw new ArgumentException("Symbol can not be empty");

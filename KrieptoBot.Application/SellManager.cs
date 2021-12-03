@@ -75,8 +75,7 @@ namespace KrieptoBot.Application
 
         private async Task<Balance> GetBalanceAsync(Market market)
         {
-            var balances = await _exchangeService.GetBalanceAsync();
-            return balances.FirstOrDefault(x => x.Symbol == market.Name.BaseSymbol);
+            return await _exchangeService.GetBalanceAsync(market.Name.BaseSymbol);
         }
 
         private async Task<TickerPrice> GetPriceToSellOn(Market market)

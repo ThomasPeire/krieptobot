@@ -70,9 +70,7 @@ namespace KrieptoBot.Application
 
         private async Task<Amount> GetAvailableBalanceForAsset(Symbol asset)
         {
-            var balances = await _exchangeService.GetBalanceAsync();
-
-            var availableBalance = balances.FirstOrDefault(x => x.Symbol.Equals(asset));
+            var availableBalance = await _exchangeService.GetBalanceAsync(asset);
 
             return availableBalance != null
                 ? new Amount(Math.Max(availableBalance.Available.Value - availableBalance.InOrder.Value, 0))

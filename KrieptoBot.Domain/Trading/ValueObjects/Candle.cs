@@ -4,10 +4,6 @@ namespace KrieptoBot.Domain.Trading.ValueObjects
 {
     public class Candle
     {
-        private Candle()
-        {
-        }
-
         public Candle(DateTime timeStamp, Price high, Price low, Price open, Price close, decimal volume)
         {
             ArgumentNullException.ThrowIfNull(timeStamp);

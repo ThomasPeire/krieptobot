@@ -5,7 +5,7 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Dtos
 {
     public class CandleDto
     {
-        [JsonProperty(Order = 0)] public DateTime TimeStamp { get; set; }
+        [JsonProperty(Order = 0)] public long TimeStamp { get; set; }
 
         [JsonProperty(Order = 1)] public decimal Open { get; set; }
 

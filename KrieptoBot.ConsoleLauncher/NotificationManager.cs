@@ -10,7 +10,7 @@ namespace KrieptoBot.ConsoleLauncher
         public async Task SendNotification(string message)
         {
             new ToastContentBuilder()
-                .AddHeader($"{DateTime.UtcNow:g}", "Recommendations!", "")
+                .AddHeader($"{DateTime.UtcNow:g}", "KrieptoBot!", "")
                 .AddText(message)
                 .Show();
         }
@@ -18,7 +18,7 @@ namespace KrieptoBot.ConsoleLauncher
         public async Task SendNotification(string message, string subMessage)
         {
             new ToastContentBuilder()
-                .AddHeader($"{DateTime.UtcNow:g}", "Recommendations!", "")
+                .AddHeader($"{DateTime.UtcNow:g}", "KrieptoBot!", "")
                 .AddText(message)
                 .AddText(subMessage)
                 .Show();

@@ -40,9 +40,8 @@ namespace KrieptoBot.Tests.Application
 
             _exchangeServiceMock.Setup(x => x.GetTickerPrice(It.IsAny<string>()))
                 .ReturnsAsync(new TickerPrice(new MarketName(market), new Price(tickerPrice)));
-            _exchangeServiceMock.Setup(x => x.GetBalanceAsync())
-                .ReturnsAsync(new List<Balance>
-                    { new Balance(new Symbol("btc"), new Amount(amountAvailable), new Amount(amountInOrder)) });
+            _exchangeServiceMock.Setup(x => x.GetBalanceAsync(new Symbol("btc")))
+                .ReturnsAsync(new Balance(new Symbol("btc"), new Amount(amountAvailable), new Amount(amountInOrder)));
 
             var sellManager = new SellManager(_loggerMock.Object, _tradingContextMock.Object,
                 _notificationManagerMock.Object, _exchangeServiceMock.Object);
@@ -68,9 +67,8 @@ namespace KrieptoBot.Tests.Application
 
             _exchangeServiceMock.Setup(x => x.GetTickerPrice(It.IsAny<string>()))
                 .ReturnsAsync(new TickerPrice(new MarketName(market), new Price(tickerPrice)));
-            _exchangeServiceMock.Setup(x => x.GetBalanceAsync())
-                .ReturnsAsync(new List<Balance>
-                    { new Balance(new Symbol("btc"), new Amount(amountAvailable), new Amount(amountInOrder)) });
+            _exchangeServiceMock.Setup(x => x.GetBalanceAsync("btc"))
+                .ReturnsAsync(new Balance(new Symbol("btc"), new Amount(amountAvailable), new Amount(amountInOrder)));
 
             var sellManager = new SellManager(_loggerMock.Object, _tradingContextMock.Object,
                 _notificationManagerMock.Object, _exchangeServiceMock.Object);

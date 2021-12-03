@@ -5,10 +5,6 @@ namespace KrieptoBot.Domain.Trading.ValueObjects
 {
     public class Asset : ValueObject
     {
-        private Asset()
-        {
-        }
-
         public Asset(Symbol symbol, AssetName name)
         {
             Symbol = symbol;

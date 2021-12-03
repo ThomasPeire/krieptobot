@@ -20,10 +20,6 @@ namespace KrieptoBot.Domain.Trading.ValueObjects
         public static readonly OrderStatus Expired = new("expired");
         public static readonly OrderStatus Rejected = new("rejected");
 
-        private OrderStatus()
-        {
-        }
-
         private OrderStatus(string value)
         {
             Value = value;

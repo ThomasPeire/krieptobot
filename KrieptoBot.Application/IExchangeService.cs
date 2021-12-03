@@ -10,6 +10,8 @@ namespace KrieptoBot.Application
     {
         Task<IEnumerable<Balance>> GetBalanceAsync();
 
+        Task<Balance> GetBalanceAsync(string symbol);
+
         Task<IEnumerable<Candle>> GetCandlesAsync(string market, string interval = "5m", int limit = 1000,
             DateTime? start = null, DateTime? end = null);
 
@@ -26,8 +28,8 @@ namespace KrieptoBot.Application
         Task<IEnumerable<Order>> GetOrdersAsync(string market, int limit = 500, DateTime? start = null,
             DateTime? end = null, Guid? orderIdFrom = null, Guid? orderIdTo = null);
 
-        Task<Order> GetOpenOrderAsync();
-        Task<Order> GetOpenOrderAsync(string market);
+        Task<IEnumerable<Order>> GetOpenOrderAsync();
+        Task<IEnumerable<Order>> GetOpenOrderAsync(string market);
         Task<Order> PostSellOrderAsync(string market, string orderType, decimal amount, decimal price);
         Task<Order> PostBuyOrderAsync(string market, string orderType, decimal amount, decimal price);
         Task<TickerPrice> GetTickerPrice(string market);

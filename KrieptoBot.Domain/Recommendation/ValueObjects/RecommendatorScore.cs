@@ -5,10 +5,6 @@ namespace KrieptoBot.Domain.Recommendation.ValueObjects
 {
     public class RecommendatorScore : ValueObject
     {
-        private RecommendatorScore()
-        {
-        }
-
         public RecommendatorScore(decimal value, bool includeInAverageScore = true)
         {
             Value = value;

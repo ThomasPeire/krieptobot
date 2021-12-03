@@ -10,10 +10,6 @@ namespace KrieptoBot.Domain.Trading.ValueObjects
         public static readonly OrderSide Sell = new("sell");
         public static readonly OrderSide Buy = new("buy");
 
-        private OrderSide()
-        {
-        }
-
         private OrderSide(string value)
         {
             Value = value;

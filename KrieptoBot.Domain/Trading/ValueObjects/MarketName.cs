@@ -6,10 +6,6 @@ namespace KrieptoBot.Domain.Trading.ValueObjects
 {
     public class MarketName : ValueObject
     {
-        private MarketName()
-        {
-        }
-
         public MarketName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))

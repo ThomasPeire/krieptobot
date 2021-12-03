@@ -6,10 +6,6 @@ namespace KrieptoBot.Domain.Trading.ValueObjects
 {
     public class Market : ValueObject
     {
-        private Market()
-        {
-        }
-
         public Market(MarketName name, Amount minimumBaseAmount, Amount minimumQuoteAmount)
         {
             ArgumentNullException.ThrowIfNull(name);

@@ -1,11 +1,6 @@
-using System;
 using System.Threading.Tasks;
-using FluentAssertions;
 using KrieptoBot.AzureFunction;
-using KrieptoBot.Infrastructure.Bitvavo.Services;
-using KrieptoBot.Tests.Mocks.Bitvavo;
 using NUnit.Framework;
-using Snapshooter.NUnit;
 
 namespace KrieptoBot.Tests.AzureFunction
 {
