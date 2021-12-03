@@ -31,6 +31,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\KrieptoBot.AzureFunction\KrieptoBot.AzureFunction.csproj" />
+        <ProjectReference Include="..\KrieptoBot.DataCollector\KrieptoBot.DataCollector.csproj" />
         <ProjectReference Include="..\KrieptoBot.Infrastructure.Bitvavo\KrieptoBot.Infrastructure.Bitvavo.csproj" />
     </ItemGroup>
 

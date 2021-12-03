@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,13 +8,14 @@ using Serilog;
 
 namespace KrieptoBot.DataCollector
 {
+    [ExcludeFromCodeCoverage]
     internal static class Program
     {
         private static async Task Main()
         {
             try
             {
-                var hostBuilder = CreateHostBuilder().Build();
+                var hostBuilder = HostBuilderWrapper.BuildHost();
                 Log.Information("Starting up");
                 await hostBuilder.RunAsync();
             }
@@ -25,30 +27,6 @@ namespace KrieptoBot.DataCollector
             {
                 Log.CloseAndFlush();
             }
-        }
-
-        private static IHostBuilder CreateHostBuilder()
-        {
-            return new HostBuilder().ConfigureAppConfiguration((context, builder) =>
-                {
-                    builder.SetBasePath(AppContext.BaseDirectory)
-                        .SetBasePath(Environment.CurrentDirectory)
-                        .AddJsonFile("appsettings.json", false, true)
-                        .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", true, true)
-                        .AddUserSecrets<Collector>()
-                        .AddEnvironmentVariables();
-                })
-                .ConfigureServices((context, services) =>
-                {
-                    Log.Logger = new LoggerConfiguration()
-                        .ReadFrom.Configuration(context.Configuration)
-                        .Enrich.FromLogContext()
-                        .CreateLogger();
-
-                    Startup.ConfigureServices(services);
-
-                    services.AddHostedService<CollectorService>();
-                }).UseSerilog();
         }
     }
 }
