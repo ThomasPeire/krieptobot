@@ -10,20 +10,24 @@ namespace KrieptoBot.Application.Recommendators
     public class RecommendationCalculator : IRecommendationCalculator
     {
         private readonly ILogger<RecommendationCalculator> _logger;
-        private readonly IEnumerable<IRecommendator> _recommendators;
+        private readonly IRecommendatorSorter _recommendatorSorter;
 
         public RecommendationCalculator(ILogger<RecommendationCalculator> logger,
-            IEnumerable<IRecommendator> recommendators)
+            IRecommendatorSorter recommendatorSorter)
         {
             _logger = logger;
-            _recommendators = recommendators;
+            _recommendatorSorter = recommendatorSorter;
         }
 
         public async Task<RecommendatorScore> CalculateRecommendation(Market market)
         {
-            var recommendationScores =
-                await Task.WhenAll(_recommendators.Select(async recommendator =>
-                    await recommendator.GetRecommendation(market)));
+            var sortedRecommendators = _recommendatorSorter.GetSortRecommendators().ToList();
+            List<RecommendatorScore> recommendationScores = new();
+
+            foreach (var recommendator in sortedRecommendators)
+            {
+                recommendationScores.Add(await recommendator.GetRecommendation(market));
+            }
 
             var averageScore = recommendationScores.Where(x => x.IncludeInAverageScore).Average(x => x);
 
