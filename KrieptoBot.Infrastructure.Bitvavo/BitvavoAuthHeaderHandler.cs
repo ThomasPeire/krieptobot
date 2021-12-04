@@ -37,7 +37,7 @@ namespace KrieptoBot.Infrastructure.Bitvavo
             return base.SendAsync(request, cancellationToken);
         }
 
-        private string GenerateHeaderSignature(string toHash, string apiSecret)
+        private static string GenerateHeaderSignature(string toHash, string apiSecret)
         {
             var encoding = new UTF8Encoding();
 
