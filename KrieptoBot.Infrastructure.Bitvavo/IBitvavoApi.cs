@@ -19,7 +19,7 @@ namespace KrieptoBot.Infrastructure.Bitvavo
         Task<IEnumerable<BalanceDto>> GetBalanceAsync();
 
         [Get("/v2/balance")]
-        Task<BalanceDto> GetBalanceAsync(string symbol);
+        Task<IEnumerable<BalanceDto>> GetBalanceAsync(string symbol);
 
         [Get("/v2/{market}/candles")]
         Task<IEnumerable<JArray>> GetCandlesAsync(string market, string interval = "5m", int limit = 1000,

@@ -50,10 +50,12 @@ namespace KrieptoBot.Application
 
             var dictionary = new Dictionary<Market, Amount>();
 
+            var availableBudget = await GetAvailableBudgetToInvest();
+
             foreach (var (market, recommendation) in marketsToBuy)
                 dictionary.Add(
                     market,
-                    new Amount(Math.Floor(recommendation.Value * (await GetAvailableBudgetToInvest()).Value /
+                    new Amount(Math.Floor(recommendation.Value * availableBudget.Value /
                                           totalRecommendationScore)));
 
             return dictionary;
