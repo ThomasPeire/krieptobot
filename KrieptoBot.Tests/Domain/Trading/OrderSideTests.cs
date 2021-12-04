@@ -10,7 +10,7 @@ namespace KrieptoBot.Tests.Domain.Trading
         [Test]
         public void Value_ShouldNot_BeInvalid()
         {
-            Action act = () => OrderSide.FromString("invalid");
+            Func<OrderSide> act = () => OrderSide.FromString("invalid");
 
             act.Should().Throw<ArgumentException>().WithMessage("invalid is not a valid order side");
         }
@@ -18,7 +18,7 @@ namespace KrieptoBot.Tests.Domain.Trading
         [Test]
         public void Value_ShouldNot_BeNullOrEmpty()
         {
-            Action act = () => OrderSide.FromString("");
+            Func<OrderSide> act = () => OrderSide.FromString("");
 
             act.Should().Throw<ArgumentException>().WithMessage("Value can not be empty");
         }

@@ -10,7 +10,7 @@ namespace KrieptoBot.Tests.Domain.Trading
         [Test]
         public void Value_ShouldNot_BeNegative()
         {
-            Action act = () => new Amount(-10);
+            Func<Amount> act = () => new Amount(-10);
 
             act.Should().Throw<ArgumentException>().WithMessage("Amount can not be negative (Parameter 'value')");
         }

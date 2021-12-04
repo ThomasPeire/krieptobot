@@ -10,8 +10,8 @@ namespace KrieptoBot.Tests.Domain.Trading
         [Test]
         public void Value_ShouldNot_BeNullOrEmpty()
         {
-            Action act1 = () => new Symbol(null);
-            Action act2 = () => new Symbol("");
+            Func<Symbol> act1 = () => new Symbol(null);
+            Func<Symbol> act2 = () => new Symbol("");
 
             act1.Should().Throw<ArgumentException>().WithMessage("Symbol can not be empty");
             act2.Should().Throw<ArgumentException>().WithMessage("Symbol can not be empty");

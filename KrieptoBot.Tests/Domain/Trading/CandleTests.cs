@@ -10,7 +10,7 @@ namespace KrieptoBot.Tests.Domain.Trading
         [Test]
         public void Volume_ShouldNot_BeNegative()
         {
-            Action act = () =>
+            Func<Candle> act = () =>
                 new Candle(DateTime.Now, new Price(100), new Price(100), new Price(100), new Price(100), -100);
 
             act.Should().Throw<ArgumentException>().WithMessage("Volume can not be negative (Parameter 'volume')");
