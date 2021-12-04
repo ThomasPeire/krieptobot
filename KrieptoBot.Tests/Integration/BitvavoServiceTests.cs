@@ -60,10 +60,11 @@ namespace KrieptoBot.Tests.Integration
         public async Task GetBalance_ShouldReturn_Balance()
         {
             var balance = JsonConvert.DeserializeObject<IEnumerable<BalanceDto>>(_balancesJson).First();
+            var balanceAsList = new List<BalanceDto> { balance };
 
             _wireMockServer
                 .Given(Request.Create().WithPath("/v2/balance").WithParam("symbol", balance.Symbol))
-                .RespondWith(Response.Create().WithBodyAsJson(balance).WithStatusCode(HttpStatusCode.OK));
+                .RespondWith(Response.Create().WithBodyAsJson(balanceAsList).WithStatusCode(HttpStatusCode.OK));
 
             var result = await _bitvavoService.GetBalanceAsync(balance.Symbol);
 
