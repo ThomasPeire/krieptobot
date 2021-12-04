@@ -117,12 +117,10 @@ namespace KrieptoBot.Tests.Domain.BuildingBlocks
     [ExcludeFromCodeCoverage]
     internal class DummyEntityObject : Entity
     {
-        public Guid Id { get; }
         public string OtherProp { get; }
 
         public DummyEntityObject(Guid id, string otherProp) : base(id)
         {
-            Id = id;
             OtherProp = otherProp;
         }
     }
@@ -130,12 +128,10 @@ namespace KrieptoBot.Tests.Domain.BuildingBlocks
     [ExcludeFromCodeCoverage]
     internal class OtherDummyEntityObject : Entity
     {
-        public Guid Id { get; }
         public string OtherProp { get; }
 
         public OtherDummyEntityObject(Guid id, string otherProp) : base(id)
         {
-            Id = id;
             OtherProp = otherProp;
         }
     }

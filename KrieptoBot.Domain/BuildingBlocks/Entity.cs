@@ -22,7 +22,7 @@ namespace KrieptoBot.Domain.BuildingBlocks
             if (GetType() != other.GetType())
                 return false;
 
-            if (Id.Equals(default) || other.Id.Equals(default))
+            if (Id.Equals(Guid.Empty) || other.Id.Equals(Guid.Empty))
                 return false;
 
             return Id.Equals(other.Id);
