@@ -12,6 +12,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
     public class RecommendationCalculatorTests
     {
         private Mock<ILogger<RecommendationCalculator>> _logger;
+        private Mock<IRecommendatorSorter> _recommendatorSorter;
         private Mock<IRecommendator> _recommendatorBuy90;
         private Mock<IRecommendator> _recommendatorSell50;
         private Mock<IRecommendator> _recommendatorSell70;
@@ -34,17 +35,18 @@ namespace KrieptoBot.Tests.Application.Recommendators
                 .Setup(x => x.GetRecommendation(It.IsAny<Market>()))
                 .Returns(Task.FromResult(new RecommendatorScore(90)));
 
-
+            _recommendatorSorter = new Mock<IRecommendatorSorter>();
+            _recommendatorSorter
+                .Setup(x => x.GetSortRecommendators())
+                .Returns(new List<IRecommendator>
+                    { _recommendatorSell50.Object, _recommendatorSell70.Object, _recommendatorBuy90.Object });
             _logger = new Mock<ILogger<RecommendationCalculator>>();
         }
 
         [Test]
         public async Task RecommendationCalculator_ShouldReturn_AvgOfRecommendators()
         {
-            var recommendators = new List<IRecommendator>
-                { _recommendatorSell50.Object, _recommendatorSell70.Object, _recommendatorBuy90.Object };
-
-            var recommendationCalculator = new RecommendationCalculator(_logger.Object, recommendators);
+            var recommendationCalculator = new RecommendationCalculator(_logger.Object, _recommendatorSorter.Object);
 
             var result =
                 await recommendationCalculator.CalculateRecommendation(new Market(new MarketName("btc-eur"),

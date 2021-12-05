@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using KrieptoBot.Application.Settings;
 using KrieptoBot.Domain.Recommendation.ValueObjects;
@@ -25,6 +26,7 @@ namespace KrieptoBot.Application.Recommendators
             _recommendatorSettings.BuyRecommendationWeights.GetValueOrDefault(GetType().Name);
 
         protected virtual string Name => GetType().Name;
+        public virtual IEnumerable<Type> DependencyRecommendators => new List<Type>();
 
         public async Task<RecommendatorScore> GetRecommendation(Market market)
         {
