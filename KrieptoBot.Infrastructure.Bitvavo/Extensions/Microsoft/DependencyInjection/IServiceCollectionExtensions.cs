@@ -2,6 +2,7 @@
 using System.Net.Http.Headers;
 using KrieptoBot.Application;
 using KrieptoBot.Infrastructure.Bitvavo.Services;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -18,7 +19,7 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Extensions.Microsoft.DependencyInjec
                 {
                     configuration.GetSection("Secrets:BitvavoConfig").Bind(settings);
                 });
-
+            services.AddScoped<IMemoryCache, MemoryCache>();
             services.AddTransient<BitvavoAuthHeaderHandler>();
 
             services.AddScoped<IExchangeService, BitvavoService>();
