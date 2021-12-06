@@ -23,7 +23,8 @@ namespace KrieptoBot.Infrastructure.Bitvavo
         {
             var url = request.RequestUri.AbsolutePath + request.RequestUri.Query;
             var timeStamp = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
-            const string httpMethod = "GET";
+
+            var httpMethod = request.Method.Method;
             const string body = "";
 
             var toHash = timeStamp + httpMethod + url + body;

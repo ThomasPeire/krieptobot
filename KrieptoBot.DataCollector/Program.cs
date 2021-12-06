@@ -9,7 +9,7 @@ using Serilog;
 namespace KrieptoBot.DataCollector
 {
     [ExcludeFromCodeCoverage]
-    internal static class Program
+    internal class Program
     {
         private static async Task Main()
         {

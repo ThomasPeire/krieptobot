@@ -42,8 +42,7 @@ namespace KrieptoBot.DataCollector
         {
             builder.SetBasePath(AppContext.BaseDirectory)
                 .AddJsonFile("appsettings.json", false, true)
-                .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", true, true)
-                .AddUserSecrets<Collector>(optional: true)
+                .AddUserSecrets<Program>(optional: true)
                 .AddEnvironmentVariables();
         }
     }
