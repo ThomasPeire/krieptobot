@@ -18,7 +18,7 @@ namespace KrieptoBot.DataCollector
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            await _collector.CollectCandles(new List<string> { "BTC-EUR" }, new List<string> { "1h", "4h" },
+            await _collector.CollectCandles(new List<string> { "BTC-EUR" }, new List<string> { "5m" },
                 new DateTime(2021, 11, 01), new DateTime(2021, 11, 30));
         }
 

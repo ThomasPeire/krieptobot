@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KrieptoBot.DataCollector", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KrieptoBot.ConsoleLauncher.Tests", "KrieptoBot.ConsoleLauncher.Tests\KrieptoBot.ConsoleLauncher.Tests.csproj", "{0EFC9693-9012-44FB-80C8-A6D7F005EF43}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KrieptoBot.DataVisualizer", "KrieptoBot.DataVisualizer\KrieptoBot.DataVisualizer.csproj", "{79212C03-800D-4317-A763-0F34C64176C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +82,12 @@ Global
 		{0EFC9693-9012-44FB-80C8-A6D7F005EF43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EFC9693-9012-44FB-80C8-A6D7F005EF43}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0EFC9693-9012-44FB-80C8-A6D7F005EF43}.Debug-Non-Windows-Specific|Any CPU.ActiveCfg = Debug|Any CPU
+		{79212C03-800D-4317-A763-0F34C64176C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79212C03-800D-4317-A763-0F34C64176C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79212C03-800D-4317-A763-0F34C64176C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79212C03-800D-4317-A763-0F34C64176C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79212C03-800D-4317-A763-0F34C64176C8}.Debug-Non-Windows-Specific|Any CPU.ActiveCfg = Debug|Any CPU
+		{79212C03-800D-4317-A763-0F34C64176C8}.Debug-Non-Windows-Specific|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

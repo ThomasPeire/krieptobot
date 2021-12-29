@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using KrieptoBot.Domain.Recommendation.ValueObjects;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using Microsoft.FSharp.Collections;
 
@@ -10,59 +11,50 @@ namespace KrieptoBot.Application.Indicators
     {
         private const int _windowLength = 5;
 
-        public IDictionary<Price, int> CalculateLevelsWithStrength(IEnumerable<Candle> candles)
+        public IEnumerable<SupportResistanceLevel> CalculateLevels(IEnumerable<Candle> candles)
         {
             var averageHighLowDifference = candles.Select(x => x.High - x.Low).Average();
 
             var fractals = CreateFractals(candles);
             var rawLevels = GetRawLevels(fractals);
 
-            var levels = AverageOutLevels(averageHighLowDifference/4, rawLevels);
-
-            return levels.ToDictionary(x => x, x => 1);
+            return rawLevels
+                .OrderBy(x => x.From)
+                .Where(level =>
+                    !rawLevels.Any(x => x.From < level.From && Math.Abs(level - x) <= averageHighLowDifference/2))
+                .ToList();
         }
 
-        private static IEnumerable<Price> AverageOutLevels(decimal averageHighLowDifference,
-            IEnumerable<Price> levels)
-        {
-            var newLevels = levels
-                .Select(currentLevel => GetNearLevelsForLevel(averageHighLowDifference, levels, currentLevel))
-                .Select(nearLevels => new Price(nearLevels.Average(x => x.Value))).Distinct();
-
-            return levels.Count() == newLevels.Count()
-                ? newLevels.Distinct()
-                : AverageOutLevels(averageHighLowDifference, newLevels).Distinct();
-        }
-
-        private static IEnumerable<Price> GetNearLevelsForLevel(decimal averageHighLowDifference,
-            IEnumerable<Price> levels, Price currentLevel)
+        private static IEnumerable<SupportResistanceLevel> GetNearLevelsForLevel(decimal averageHighLowDifference,
+            IEnumerable<SupportResistanceLevel> levels, SupportResistanceLevel currentLevel)
         {
             return levels.Where(x => Math.Abs(currentLevel - x) <= averageHighLowDifference);
         }
 
-        private static IEnumerable<Price> GetRawLevels(IEnumerable<Candle[]> fractals)
+        private static IEnumerable<SupportResistanceLevel> GetRawLevels(IEnumerable<Candle[]> fractals)
         {
-            var levels = new List<Price>();
+            var levels = new List<SupportResistanceLevel>();
 
             foreach (var fractal in fractals)
             {
                 if (FractalTryToFindSupport(fractal, out var supportLevel))
                 {
-                    levels.Add(new Price(supportLevel));
+                    levels.Add(supportLevel);
                 }
 
                 if (FractalTryToFindResistance(fractal, out var resistanceLevel))
                 {
-                    levels.Add(new Price(resistanceLevel));
+                    levels.Add(resistanceLevel);
                 }
             }
 
             return levels.Distinct();
         }
 
-        private static bool FractalTryToFindSupport(IReadOnlyList<Candle> fractal, out decimal supportLevel)
+        private static bool FractalTryToFindSupport(IReadOnlyList<Candle> fractal,
+            out SupportResistanceLevel supportLevel)
         {
-            supportLevel = 0;
+            supportLevel = null;
             var firstCandleHasHigherLowThanSecondCandle = fractal[0].Low > fractal[1].Low;
             var secondCandleHasHigherLowThanThirdCandle = fractal[1].Low > fractal[2].Low;
             var thirdCandleHasLowerLowThanFourthCandle = fractal[2].Low < fractal[3].Low;
@@ -71,16 +63,17 @@ namespace KrieptoBot.Application.Indicators
             if (firstCandleHasHigherLowThanSecondCandle && secondCandleHasHigherLowThanThirdCandle &&
                 thirdCandleHasLowerLowThanFourthCandle && fourthCandleHasLowerLowThanFifthCandle)
             {
-                supportLevel = fractal[2].Low;
+                supportLevel = new SupportResistanceLevel(fractal[2].Low, fractal[2].TimeStamp);
                 return true;
             }
 
             return false;
         }
 
-        private static bool FractalTryToFindResistance(IReadOnlyList<Candle> fractal, out decimal resistanceLevel)
+        private static bool FractalTryToFindResistance(IReadOnlyList<Candle> fractal,
+            out SupportResistanceLevel resistanceLevel)
         {
-            resistanceLevel = 0;
+            resistanceLevel = null;
 
             var firstCandleHasLowerHighThanSecondCandle = fractal[0].High < fractal[1].High;
             var secondCandleHasLowerHighThanThirdCandle = fractal[1].High < fractal[2].High;
@@ -90,7 +83,7 @@ namespace KrieptoBot.Application.Indicators
             if (firstCandleHasLowerHighThanSecondCandle && secondCandleHasLowerHighThanThirdCandle &&
                 thirdCandleHasHigherHighThanFourthCandle && fourthCandleHasHigherHighThanFifthCandle)
             {
-                resistanceLevel = fractal[2].High;
+                resistanceLevel = new SupportResistanceLevel(fractal[2].High, fractal[2].TimeStamp);
                 return true;
             }
 

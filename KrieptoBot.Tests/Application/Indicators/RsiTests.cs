@@ -4,12 +4,17 @@ using System.IO;
 using System.Linq;
 using FluentAssertions;
 using KrieptoBot.Application.Indicators;
+using KrieptoBot.DataVisualizer;
+using KrieptoBot.DataVisualizer.Extensions;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using KrieptoBot.Infrastructure.Bitvavo.Dtos;
 using KrieptoBot.Infrastructure.Bitvavo.Extensions;
+using Microsoft.FSharp.Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
+using Plotly.NET;
+using Plotly.NET.LayoutObjects;
 using Snapshooter.NUnit;
 
 namespace KrieptoBot.Tests.Application.Indicators
@@ -37,21 +42,33 @@ namespace KrieptoBot.Tests.Application.Indicators
                     Low = x.Value<decimal>(3),
                     Close = x.Value<decimal>(4),
                     Volume = x.Value<decimal>(5)
-                }.ConvertToKrieptoBotModel());
+                }.ConvertToKrieptoBotModel()).DistinctBy(x => x.TimeStamp);
         }
 
         [Test]
         public void Rsi_Should_CalculateRsi()
         {
-            var datetimeFrom = new DateTime(2021, 08, 13);
+            var datetimeFrom = new DateTime(2021, 11, 01);
+            var dateTimeTo = datetimeFrom.AddHours(8);
 
             var candlesToWorkWith = _candles
-                .Where(x => x.TimeStamp >= datetimeFrom && x.TimeStamp <= datetimeFrom.AddDays(1))
+                .Where(x => x.TimeStamp >= datetimeFrom && x.TimeStamp <= dateTimeTo)
                 .OrderBy(x => x.TimeStamp);
 
             var rsiValues = new Rsi().Calculate(candlesToWorkWith, 14);
 
+            rsiValues = candlesToWorkWith.ToDictionary(x => x.TimeStamp,
+                x => rsiValues.TryGetValue(x.TimeStamp, out var rsiValue) ? rsiValue : 0);
+
             rsiValues.Should().MatchSnapshot();
+
+#if DEBUG
+            var candleVisualizer = new CandlesVisualizer();
+            var candleChart = candleVisualizer.Visualize(candlesToWorkWith);
+
+            candleChart = candleChart.AddRsi(rsiValues);
+            candleChart.WithSize(1920, 1080).WithConfig(Config.init(Responsive: true)).Show();
+#endif
         }
     }
 }

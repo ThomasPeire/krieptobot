@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using FluentAssertions;
 using KrieptoBot.Application.Indicators;
+using KrieptoBot.DataVisualizer;
+using KrieptoBot.DataVisualizer.Extensions;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using KrieptoBot.Infrastructure.Bitvavo.Dtos;
 using KrieptoBot.Infrastructure.Bitvavo.Extensions;
@@ -46,33 +48,22 @@ namespace KrieptoBot.Tests.Application.Indicators
         [Test]
         public void CalculateWithStrength_Should_DetermineSupportAndResistanceLevelsWithStrength()
         {
-            var datetimeFrom = new DateTime(2021, 11, 1);
+            var datetimeFrom = new DateTime(2021, 11, 01);
             var dateTimeTo = new DateTime(2021, 11, 30);
 
             var candlesToWorkWith = _candles
                 .Where(x => x.TimeStamp >= datetimeFrom && x.TimeStamp <= dateTimeTo)
                 .OrderBy(x => x.TimeStamp);
 
-            var supportLevels = new SupportResistanceLevels().CalculateLevelsWithStrength(candlesToWorkWith);
+            var supportLevels = new SupportResistanceLevels().CalculateLevels(candlesToWorkWith);
+            supportLevels.Should().MatchSnapshot();
 
-            var levelsToPlot = supportLevels.Keys.Select(x => new List<Tuple<DateTime, decimal>>
-            {
-                new(candlesToWorkWith.Select(x => x.TimeStamp).Min(), x.Value),
-                new(candlesToWorkWith.Select(x => x.TimeStamp).Max(), x.Value)
-            });
-
-            var charts = levelsToPlot.Select(levelToPlot =>
-                    Chart2D.Chart.Line<DateTime, decimal, string>(levelToPlot, MarkerColor: Color.fromString("Gray")))
-                .ToList();
-            charts.Add(Chart2D.Chart.Candlestick<decimal, decimal, decimal, decimal, DateTime, string>(
-                candlesToWorkWith.Select(x => x.Open.Value), candlesToWorkWith.Select(x => x.High.Value),
-                candlesToWorkWith.Select(x => x.Low.Value), candlesToWorkWith.Select(x => x.Close.Value),
-                candlesToWorkWith.Select(x => x.TimeStamp)));
-
-            Chart
-                .Combine(charts)
-                .WithConfig(Config.init(Responsive: true, Autosizable: true)).WithSize(2000, 1200)
-                .Show();
+#if DEBUG
+            var candleVisualizer = new CandlesVisualizer();
+            var candleChart = candleVisualizer.Visualize(candlesToWorkWith);
+            candleChart = candleChart.AddSupportLevels(supportLevels, datetimeFrom, dateTimeTo);
+            candleChart.WithSize(1920, 1080).WithConfig(Config.init(Responsive: true)).Show();
+#endif
         }
     }
 }

@@ -26,7 +26,6 @@
         <PackageReference Include="NUnit" Version="3.13.2" />
         <PackageReference Include="NUnit3TestAdapter" Version="4.1.0" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
-        <PackageReference Include="Plotly.NET" Version="2.0.0-preview.16" />
         <PackageReference Include="Snapshooter.NUnit" Version="0.7.1" />
         <PackageReference Include="WireMock.Net" Version="1.4.27" />
     </ItemGroup>
@@ -34,6 +33,7 @@
     <ItemGroup>
         <ProjectReference Include="..\KrieptoBot.AzureFunction\KrieptoBot.AzureFunction.csproj" />
         <ProjectReference Include="..\KrieptoBot.DataCollector\KrieptoBot.DataCollector.csproj" />
+        <ProjectReference Include="..\KrieptoBot.DataVisualizer\KrieptoBot.DataVisualizer.csproj" />
         <ProjectReference Include="..\KrieptoBot.Infrastructure.Bitvavo\KrieptoBot.Infrastructure.Bitvavo.csproj" />
     </ItemGroup>
 
