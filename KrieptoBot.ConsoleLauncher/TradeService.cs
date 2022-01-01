@@ -77,7 +77,7 @@ namespace KrieptoBot.ConsoleLauncher
                 "8h" => 480,
                 "12h" => 720,
                 "1d" => 1440,
-                _ => 0
+                _ => 240
             };
         }
     }

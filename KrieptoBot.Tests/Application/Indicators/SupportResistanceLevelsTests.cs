@@ -9,17 +9,17 @@ using KrieptoBot.DataVisualizer.Extensions;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using KrieptoBot.Infrastructure.Bitvavo.Dtos;
 using KrieptoBot.Infrastructure.Bitvavo.Extensions;
-using Microsoft.FSharp.Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using Plotly.NET;
 using Plotly.NET.LayoutObjects;
+using Plotly.NET.TraceObjects;
 using Snapshooter.NUnit;
 
 namespace KrieptoBot.Tests.Application.Indicators
 {
-    internal class RsiTests
+    internal class SupportResistanceLevelsTests
     {
         private IEnumerable<Candle> _candles;
 
@@ -31,7 +31,7 @@ namespace KrieptoBot.Tests.Application.Indicators
 
         private void InitCandles()
         {
-            var candlesJson = File.ReadAllText(@"./MockData/Bitvavo/candles_btc-eur.json");
+            var candlesJson = File.ReadAllText(@"./MockData/Bitvavo/candles_btc-eur_4h.json");
             var deserializedCandles = JsonConvert.DeserializeObject(candlesJson) as JArray;
             _candles = deserializedCandles.Select(x =>
                 new CandleDto
@@ -42,31 +42,26 @@ namespace KrieptoBot.Tests.Application.Indicators
                     Low = x.Value<decimal>(3),
                     Close = x.Value<decimal>(4),
                     Volume = x.Value<decimal>(5)
-                }.ConvertToKrieptoBotModel()).DistinctBy(x => x.TimeStamp);
+                }.ConvertToKrieptoBotModel());
         }
 
         [Test]
-        public void Rsi_Should_CalculateRsi()
+        public void CalculateWithStrength_Should_DetermineSupportAndResistanceLevelsWithStrength()
         {
             var datetimeFrom = new DateTime(2021, 11, 01);
-            var dateTimeTo = datetimeFrom.AddHours(8);
+            var dateTimeTo = new DateTime(2021, 11, 30);
 
             var candlesToWorkWith = _candles
                 .Where(x => x.TimeStamp >= datetimeFrom && x.TimeStamp <= dateTimeTo)
                 .OrderBy(x => x.TimeStamp);
 
-            var rsiValues = new Rsi().Calculate(candlesToWorkWith, 14);
-
-            rsiValues = candlesToWorkWith.ToDictionary(x => x.TimeStamp,
-                x => rsiValues.TryGetValue(x.TimeStamp, out var rsiValue) ? rsiValue : 0);
-
-            rsiValues.Should().MatchSnapshot();
+            var supportLevels = new SupportResistanceLevels().CalculateLevels(candlesToWorkWith);
+            supportLevels.Should().MatchSnapshot();
 
 #if DEBUG
             var candleVisualizer = new CandlesVisualizer();
             var candleChart = candleVisualizer.Visualize(candlesToWorkWith);
-
-            candleChart = candleChart.AddRsi(rsiValues);
+            candleChart = candleChart.AddSupportLevels(supportLevels, datetimeFrom, dateTimeTo);
             candleChart.WithSize(1920, 1080).WithConfig(Config.init(Responsive: true)).Show();
 #endif
         }

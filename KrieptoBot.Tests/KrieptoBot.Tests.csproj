@@ -6,6 +6,7 @@
         <LangVersion>10</LangVersion>
         <Configurations>Debug;Release;Debug-Non-Windows-Specific</Configurations>
         <Platforms>AnyCPU</Platforms>
+        <UserSecretsId>a1532697-09d5-4ca3-88ec-f77d075f93fa</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
@@ -32,6 +33,7 @@
     <ItemGroup>
         <ProjectReference Include="..\KrieptoBot.AzureFunction\KrieptoBot.AzureFunction.csproj" />
         <ProjectReference Include="..\KrieptoBot.DataCollector\KrieptoBot.DataCollector.csproj" />
+        <ProjectReference Include="..\KrieptoBot.DataVisualizer\KrieptoBot.DataVisualizer.csproj" />
         <ProjectReference Include="..\KrieptoBot.Infrastructure.Bitvavo\KrieptoBot.Infrastructure.Bitvavo.csproj" />
     </ItemGroup>
 
@@ -58,6 +60,14 @@
       </Content>
       <Content Include="MockData\Bitvavo\trades_btc-eur.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="MockData\Bitvavo\candles_btc-eur_4h.json" />
+      <Content Include="MockData\Bitvavo\candles_btc-eur_4h.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="MockData\Bitvavo\candles_btc-eur_1h.json" />
+      <Content Include="MockData\Bitvavo\candles_btc-eur_1h.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
     </ItemGroup>
 
