@@ -9,30 +9,41 @@ using KrieptoBot.Domain.Trading.ValueObjects;
 using KrieptoBot.Infrastructure.Bitvavo.Dtos;
 using KrieptoBot.Infrastructure.Bitvavo.Extensions;
 using KrieptoBot.Infrastructure.Bitvavo.Extensions.Helper;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace KrieptoBot.Infrastructure.Bitvavo.Services
 {
     public class BitvavoService : IExchangeService
     {
         private readonly IBitvavoApi _bitvavoApi;
+        private readonly IMemoryCache _cache;
 
-        public BitvavoService(IBitvavoApi bitvavoApi)
+        public BitvavoService(IBitvavoApi bitvavoApi, IMemoryCache cache)
         {
             _bitvavoApi = bitvavoApi;
+            _cache = cache;
         }
 
         public async Task<Asset> GetAssetAsync(string symbol)
         {
-            var dto = await _bitvavoApi.GetAssetAsync(symbol);
+            return await _cache.GetOrCreateAsync($"{nameof(GetAssetAsync)}-{symbol}", async cacheEntry =>
+            {
+                cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(1);
+                var dto = await _bitvavoApi.GetAssetAsync(symbol);
 
-            return dto.ConvertToKrieptoBotModel();
+                return dto.ConvertToKrieptoBotModel();
+            });
         }
 
         public async Task<IEnumerable<Asset>> GetAssetsAsync()
         {
-            var dtos = await _bitvavoApi.GetAssetsAsync();
+            return await _cache.GetOrCreateAsync($"{nameof(GetAssetsAsync)}", async cacheEntry =>
+            {
+                cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(1);
+                var dtos = await _bitvavoApi.GetAssetsAsync();
 
-            return dtos.ConvertToKrieptoBotModel();
+                return dtos.ConvertToKrieptoBotModel();
+            });
         }
 
         public async Task<IEnumerable<Balance>> GetBalanceAsync()
@@ -52,33 +63,47 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
         public async Task<IEnumerable<Candle>> GetCandlesAsync(string market, string interval = "5m", int limit = 1000,
             DateTime? start = null, DateTime? end = null)
         {
-            var candleJArrayList = await _bitvavoApi.GetCandlesAsync(market, interval, limit,
-                start.ToUnixTimeMilliseconds(), end.ToUnixTimeMilliseconds());
-
-            return candleJArrayList?.Select(x =>
-                new CandleDto
+            return await _cache.GetOrCreateAsync($"{nameof(GetCandlesAsync)}-{market}-{interval}-{limit}-{start}-{end}",
+                async cacheEntry =>
                 {
-                    TimeStamp = x.Value<long>(0),
-                    Open = x.Value<decimal>(1),
-                    High = x.Value<decimal>(2),
-                    Low = x.Value<decimal>(3),
-                    Close = x.Value<decimal>(4),
-                    Volume = x.Value<decimal>(5)
-                }).ConvertToKrieptoBotModel();
+                    cacheEntry.AbsoluteExpirationRelativeToNow =
+                        TimeSpan.FromMinutes(HelperMethods.GetIntervalInMinutes(interval) - 1);
+                    var candleJArrayList = await _bitvavoApi.GetCandlesAsync(market, interval, limit,
+                        start.ToUnixTimeMilliseconds(), end.ToUnixTimeMilliseconds());
+
+                    return candleJArrayList?.Select(x =>
+                        new CandleDto
+                        {
+                            TimeStamp = x.Value<long>(0),
+                            Open = x.Value<decimal>(1),
+                            High = x.Value<decimal>(2),
+                            Low = x.Value<decimal>(3),
+                            Close = x.Value<decimal>(4),
+                            Volume = x.Value<decimal>(5)
+                        }).ConvertToKrieptoBotModel();
+                });
         }
 
         public async Task<Market> GetMarketAsync(string market)
         {
-            var dto = await _bitvavoApi.GetMarketAsync(market);
+            return await _cache.GetOrCreateAsync($"{nameof(GetMarketAsync)}-{market}", async cacheEntry =>
+            {
+                cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(1);
+                var dto = await _bitvavoApi.GetMarketAsync(market);
 
-            return dto.ConvertToKrieptoBotModel();
+                return dto.ConvertToKrieptoBotModel();
+            });
         }
 
         public async Task<IEnumerable<Market>> GetMarketsAsync()
         {
-            var dtos = await _bitvavoApi.GetMarketsAsync();
+            return await _cache.GetOrCreateAsync($"{nameof(GetMarketsAsync)}", async cacheEntry =>
+            {
+                cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(1);
+                var dtos = await _bitvavoApi.GetMarketsAsync();
 
-            return dtos.ConvertToKrieptoBotModel();
+                return dtos.ConvertToKrieptoBotModel();
+            });
         }
 
         public async Task<IEnumerable<Order>> GetOpenOrderAsync()

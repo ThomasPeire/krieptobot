@@ -7,9 +7,9 @@ using KrieptoBot.Infrastructure.Bitvavo.Dtos;
 using KrieptoBot.Infrastructure.Bitvavo.Extensions;
 using NUnit.Framework;
 
-namespace KrieptoBot.Tests.Exchange.Bitvavo.Helpers
+namespace KrieptoBot.Tests.Exchange.Bitvavo.Helper
 {
-    public class ExtensionsTests
+    public class MappingTests
     {
         [Test]
         public void ConvertToKrieptoBotModel_ShouldConvert_BitvavoAssetToKrieptoBotAsset()
