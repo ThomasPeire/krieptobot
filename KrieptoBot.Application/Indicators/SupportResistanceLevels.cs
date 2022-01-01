@@ -25,12 +25,6 @@ namespace KrieptoBot.Application.Indicators
                 .ToList();
         }
 
-        private static IEnumerable<SupportResistanceLevel> GetNearLevelsForLevel(decimal averageHighLowDifference,
-            IEnumerable<SupportResistanceLevel> levels, SupportResistanceLevel currentLevel)
-        {
-            return levels.Where(x => Math.Abs(currentLevel - x) <= averageHighLowDifference);
-        }
-
         private static IEnumerable<SupportResistanceLevel> GetRawLevels(IEnumerable<Candle[]> fractals)
         {
             var levels = new List<SupportResistanceLevel>();
