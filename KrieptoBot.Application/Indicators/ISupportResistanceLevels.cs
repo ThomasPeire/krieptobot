@@ -6,6 +6,6 @@ namespace KrieptoBot.Application.Indicators
 {
     public interface ISupportResistanceLevels
     {
-        IEnumerable<SupportResistanceLevel> CalculateLevels(IEnumerable<Candle> candles);
+        IEnumerable<SupportResistanceLevel> Calculate(IEnumerable<Candle> candles);
     }
 }

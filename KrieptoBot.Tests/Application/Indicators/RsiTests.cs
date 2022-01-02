@@ -66,7 +66,7 @@ namespace KrieptoBot.Tests.Application.Indicators
             var candleVisualizer = new CandlesVisualizer();
             var candleChart = candleVisualizer.Visualize(candlesToWorkWith);
 
-            candleChart = candleChart.AddRsi(rsiValues);
+            candleChart = candleChart.AddSubChart(rsiValues);
             candleChart.WithSize(1920, 1080).WithConfig(Config.init(Responsive: true)).Show();
 #endif
         }

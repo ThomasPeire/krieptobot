@@ -11,7 +11,7 @@ namespace KrieptoBot.Application.Indicators
     {
         private const int _windowLength = 5;
 
-        public IEnumerable<SupportResistanceLevel> CalculateLevels(IEnumerable<Candle> candles)
+        public IEnumerable<SupportResistanceLevel> Calculate(IEnumerable<Candle> candles)
         {
             var averageHighLowDifference = candles.Select(x => x.High - x.Low).Average();
 
