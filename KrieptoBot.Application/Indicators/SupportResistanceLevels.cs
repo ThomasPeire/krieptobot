@@ -9,7 +9,7 @@ namespace KrieptoBot.Application.Indicators
 {
     public class SupportResistanceLevels : ISupportResistanceLevels
     {
-        private const int _windowLength = 5;
+        private const int WindowLength = 5;
 
         public IEnumerable<SupportResistanceLevel> Calculate(IEnumerable<Candle> candles)
         {
@@ -86,7 +86,7 @@ namespace KrieptoBot.Application.Indicators
 
         private static IEnumerable<Candle[]> CreateFractals(IEnumerable<Candle> candles)
         {
-            return SeqModule.Windowed(_windowLength, candles);
+            return SeqModule.Windowed(WindowLength, candles);
         }
     }
 }
