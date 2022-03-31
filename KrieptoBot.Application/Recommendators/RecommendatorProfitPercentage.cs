@@ -49,7 +49,9 @@ namespace KrieptoBot.Application.Recommendators
             // the larger the profit => the stronger the sell recommendation should be
             recommendatorScore = -relativeProfitInPct;
 
-            return new RecommendatorScore(recommendatorScore, lastBuyTrades.Any());
+            var includeInAverageCalculation = lastBuyTrades.Any() && recommendatorScore < 0;
+
+            return new RecommendatorScore(recommendatorScore, includeInAverageCalculation);
         }
 
 

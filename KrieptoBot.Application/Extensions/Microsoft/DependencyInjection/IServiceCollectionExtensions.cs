@@ -18,12 +18,15 @@ namespace KrieptoBot.Application.Extensions.Microsoft.DependencyInjection
             services.AddScoped<IRecommendator, RecommendatorRsi14PeriodInterval>();
             services.AddScoped<IRecommendator, RecommendatorRsi14Period4H>();
             services.AddScoped<IRecommendator, RecommendatorProfitPercentage>();
+            services.AddScoped<IRecommendator, RecommendatorMacd>();
 
             services.AddScoped<IRecommendatorSorter, RecommendatorSorter>();
             services.AddScoped<IRecommendationCalculator, RecommendationCalculator>();
             services.AddScoped<IDateTimeProvider, DateTimeProvider>();
 
             services.AddScoped<IRsi, Rsi>();
+            services.AddScoped<IMacd, Macd>();
+            services.AddScoped<IExponentialMovingAverage, ExponentialMovingAverage>();
 
             services.AddSingleton<ITradingContext>(x =>
             {

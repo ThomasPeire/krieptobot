@@ -16,7 +16,7 @@ namespace KrieptoBot.Application.Indicators
             var averageHighLowDifference = candles.Select(x => x.High - x.Low).Average();
 
             var fractals = CreateFractals(candles);
-            var rawLevels = GetRawLevels(fractals);
+            var rawLevels = GetRawLevels(fractals).ToList();
 
             return rawLevels
                 .OrderBy(x => x.From)
