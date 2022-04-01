@@ -9,14 +9,14 @@ namespace KrieptoBot.Application.Indicators
 {
     public class SupportResistanceLevels : ISupportResistanceLevels
     {
-        private const int _windowLength = 5;
+        private const int WindowLength = 5;
 
-        public IEnumerable<SupportResistanceLevel> CalculateLevels(IEnumerable<Candle> candles)
+        public IEnumerable<SupportResistanceLevel> Calculate(IEnumerable<Candle> candles)
         {
             var averageHighLowDifference = candles.Select(x => x.High - x.Low).Average();
 
             var fractals = CreateFractals(candles);
-            var rawLevels = GetRawLevels(fractals);
+            var rawLevels = GetRawLevels(fractals).ToList();
 
             return rawLevels
                 .OrderBy(x => x.From)
@@ -86,7 +86,7 @@ namespace KrieptoBot.Application.Indicators
 
         private static IEnumerable<Candle[]> CreateFractals(IEnumerable<Candle> candles)
         {
-            return SeqModule.Windowed(_windowLength, candles);
+            return SeqModule.Windowed(WindowLength, candles);
         }
     }
 }

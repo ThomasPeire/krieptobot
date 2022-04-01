@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using KrieptoBot.Domain.Recommendation.ValueObjects;
 using Microsoft.FSharp.Core;
 using Plotly.NET;
-using Plotly.NET.LayoutObjects;
+using Color = System.Drawing.Color;
 
 namespace KrieptoBot.DataVisualizer.Extensions
 {
@@ -21,7 +22,7 @@ namespace KrieptoBot.DataVisualizer.Extensions
 
             var charts = levelsToPlot.Select(level =>
                     Chart2D.Chart.Line<DateTime, decimal, string>(level,
-                        MarkerColor: Color.fromString("Gray")))
+                        MarkerColor: Plotly.NET.Color.fromString("Gray")))
                 .ToList();
 
             charts.Add(chart);
@@ -29,10 +30,10 @@ namespace KrieptoBot.DataVisualizer.Extensions
             return Chart.Combine(charts);
         }
 
-        public static GenericChart.GenericChart AddRsi(this GenericChart.GenericChart chart,
-            IDictionary<DateTime, decimal> rsiValues)
+        public static GenericChart.GenericChart AddSubChart(this GenericChart.GenericChart chart,
+            IDictionary<DateTime, decimal> values)
         {
-            var valuesToPlot = rsiValues.Select(x => new Tuple<DateTime, decimal>(x.Key, x.Value));
+            var valuesToPlot = values.Select(x => new Tuple<DateTime, decimal>(x.Key, x.Value));
 
             var charts = new List<GenericChart.GenericChart>
             {
@@ -45,6 +46,25 @@ namespace KrieptoBot.DataVisualizer.Extensions
                 .SingleStack<IEnumerable<GenericChart.GenericChart>>(Pattern: StyleParam.LayoutGridPattern.Coupled)
                 .Invoke(charts)
                 .WithLayoutGridStyle(XSide: StyleParam.LayoutGridXSide.Bottom, YGap: 0.01).WithXAxisStyle(Title.init());
+        }
+
+        public static GenericChart.GenericChart AddLineChart(this GenericChart.GenericChart chart,
+            IDictionary<DateTime, decimal> values, Color color = default)
+        {
+            color = color.IsEmpty ? Color.Red : color;
+
+            var valuesToPlot = values.Select(x => new Tuple<DateTime, decimal>(x.Key, x.Value));
+
+            var charts = new List<GenericChart.GenericChart>
+            {
+                chart,
+                Chart2D.Chart.Line<DateTime, decimal, string>(valuesToPlot,
+                        LineColor: new FSharpOption<Plotly.NET.Color>(
+                            Plotly.NET.Color.fromARGB(color.A, color.R, color.G, color.B)))
+                    .WithYAxisStyle(Title.init(), ZeroLine: false).WithConfig(Config.init())
+            };
+
+            return Chart.Combine(charts);
         }
     }
 }

@@ -9,17 +9,17 @@ using KrieptoBot.DataVisualizer.Extensions;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using KrieptoBot.Infrastructure.Bitvavo.Dtos;
 using KrieptoBot.Infrastructure.Bitvavo.Extensions;
+using Microsoft.FSharp.Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using Plotly.NET;
-using Plotly.NET.LayoutObjects;
-using Plotly.NET.TraceObjects;
 using Snapshooter.NUnit;
+using Color = System.Drawing.Color;
 
 namespace KrieptoBot.Tests.Application.Indicators
 {
-    internal class SupportResistanceLevelsTests
+    internal class MacdTests
     {
         private IEnumerable<Candle> _candles;
 
@@ -31,7 +31,7 @@ namespace KrieptoBot.Tests.Application.Indicators
 
         private void InitCandles()
         {
-            var candlesJson = File.ReadAllText(@"./MockData/Bitvavo/candles_btc-eur_4h.json");
+            var candlesJson = File.ReadAllText(@"./MockData/Bitvavo/candles_btc-eur.json");
             var deserializedCandles = JsonConvert.DeserializeObject(candlesJson) as JArray;
             _candles = deserializedCandles.Select(x =>
                 new CandleDto
@@ -42,26 +42,31 @@ namespace KrieptoBot.Tests.Application.Indicators
                     Low = x.Value<decimal>(3),
                     Close = x.Value<decimal>(4),
                     Volume = x.Value<decimal>(5)
-                }.ConvertToKrieptoBotModel());
+                }.ConvertToKrieptoBotModel()).DistinctBy(x => x.TimeStamp);
         }
 
         [Test]
-        public void CalculateWithStrength_Should_DetermineSupportAndResistanceLevelsWithStrength()
+        public void Macd_Should_CalculateMacd()
         {
             var datetimeFrom = new DateTime(2021, 11, 01);
-            var dateTimeTo = new DateTime(2021, 11, 30);
+            var dateTimeTo = datetimeFrom.AddHours(8);
 
             var candlesToWorkWith = _candles
                 .Where(x => x.TimeStamp >= datetimeFrom && x.TimeStamp <= dateTimeTo)
-                .OrderBy(x => x.TimeStamp);
+                .OrderBy(x => x.TimeStamp).ToList();
 
-            var supportLevels = new SupportResistanceLevels().Calculate(candlesToWorkWith);
-            supportLevels.Should().MatchSnapshot();
+            var values = new Macd(new ExponentialMovingAverage()).Calculate(candlesToWorkWith);
+
+            values = candlesToWorkWith.ToDictionary(x => x.TimeStamp,
+                x => values.TryGetValue(x.TimeStamp, out var value) ? value : 0);
+
+            values.Should().MatchSnapshot();
 
 #if DEBUG
             var candleVisualizer = new CandlesVisualizer();
             var candleChart = candleVisualizer.Visualize(candlesToWorkWith);
-            candleChart = candleChart.AddSupportLevels(supportLevels, datetimeFrom, dateTimeTo);
+
+            candleChart = candleChart.AddSubChart(values);
             candleChart.WithSize(1920, 1080).WithConfig(Config.init(Responsive: true)).Show();
 #endif
         }
