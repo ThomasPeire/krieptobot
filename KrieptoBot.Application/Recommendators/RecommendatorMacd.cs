@@ -42,7 +42,7 @@ public class RecommendatorMacd : RecommendatorBase
 
         var macdValues = _macd.Calculate(candles);
 
-        var lastValues = macdValues.OrderByDescending(x => x.Key).Take(2).ToList();
+        var lastValues = macdValues.OrderByDescending(x => x.Key).Skip(1).Take(2).ToList();
         var currentValue = lastValues[0].Value;
         var previousVal = lastValues[1].Value;
 
@@ -63,12 +63,12 @@ public class RecommendatorMacd : RecommendatorBase
         return 0;
     }
 
-    private bool MacdGivesBuySignal(decimal currentValue, decimal previousVal)
+    private bool MacdGivesSellSignal(decimal currentValue, decimal previousVal)
     {
         return previousVal > 0 && currentValue < 0;
     }
 
-    private static bool MacdGivesSellSignal(decimal currentValue, decimal previousVal)
+    private static bool MacdGivesBuySignal(decimal currentValue, decimal previousVal)
     {
         return previousVal < 0 && currentValue > 0;
     }
