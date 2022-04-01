@@ -48,8 +48,8 @@ public class RecommendatorMacd : RecommendatorBase
         var previousPreviousVal = lastValues[2].Value;
 
 
-        _logger.LogInformation("Market {Market} - {Recommendator} Macd previous: {previousValue} - Macd current: {currentValue}",
-            market.Name.Value, Name, previousVal.ToString("0.00"), currentValue.ToString("0.00"));
+        _logger.LogInformation("Market {Market} - {Recommendator} Macd values: {PreviousPreviousValue}, {PreviousValue}, {CurrentValue}",
+            market.Name.Value, Name, previousPreviousVal.ToString("0.0000"), previousVal.ToString("0.0000"), currentValue.ToString("0.0000"));
 
         var macdStrength = Math.Abs(currentValue) + Math.Abs(previousVal);
         if (MacdGivesSellSignal(currentValue, previousVal))
