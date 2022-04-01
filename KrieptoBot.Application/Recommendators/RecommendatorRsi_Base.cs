@@ -31,7 +31,7 @@ namespace KrieptoBot.Application.Recommendators
             _periodToAverage = periodToAverage;
         }
 
-        protected override string Name => $"RSI{_periodToAverage} recommendator ({_tradingContext.Interval})";
+        protected override string Name => $"RSI{_periodToAverage} recommendator ({_tradingContextInterval})";
 
         protected override async Task<RecommendatorScore> CalculateRecommendation(Market market)
         {

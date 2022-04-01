@@ -7,6 +7,7 @@ namespace KrieptoBot.Application.Recommendators
 {
     public class RecommendatorRsi14Period4H : RecommendatorRsiBase
     {
+
         public RecommendatorRsi14Period4H(IExchangeService exchangeService, IRsi rsiIndicator,
             ITradingContext tradingContext, ILogger<RecommendatorRsi14Period4H> logger,
             IOptions<RecommendatorSettings> recommendatorSettings) : base(exchangeService,

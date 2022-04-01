@@ -6,6 +6,6 @@ namespace KrieptoBot.Application.Indicators
 {
     public interface IExponentialMovingAverage
     {
-        Dictionary<DateTime, decimal> Calculate(IEnumerable<Candle> candles, int averagePeriod);
+        Dictionary<DateTime, decimal> Calculate(Dictionary<DateTime, decimal> prices, int averagePeriod);
     }
 }

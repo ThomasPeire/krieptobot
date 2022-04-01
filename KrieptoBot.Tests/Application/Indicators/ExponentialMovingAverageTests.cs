@@ -53,10 +53,11 @@ namespace KrieptoBot.Tests.Application.Indicators
 
             var candlesToWorkWith = _candles
                 .Where(x => x.TimeStamp >= datetimeFrom && x.TimeStamp <= dateTimeTo)
-                .OrderBy(x => x.TimeStamp);
+                .OrderBy(x => x.TimeStamp).ToList();
+            var candlePrices = candlesToWorkWith.ToDictionary(x => x.TimeStamp, x => x.Close.Value);
 
-            var values5 = new ExponentialMovingAverage().Calculate(candlesToWorkWith, 5);
-            var values10 = new ExponentialMovingAverage().Calculate(candlesToWorkWith, 14);
+            var values5 = new ExponentialMovingAverage().Calculate(candlePrices, 5);
+            var values10 = new ExponentialMovingAverage().Calculate(candlePrices, 14);
 
             values5 = candlesToWorkWith.ToDictionary(x => x.TimeStamp,
                 x => values5.TryGetValue(x.TimeStamp, out var value) ? value : 0);
