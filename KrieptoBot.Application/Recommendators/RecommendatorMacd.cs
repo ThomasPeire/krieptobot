@@ -42,9 +42,11 @@ public class RecommendatorMacd : RecommendatorBase
 
         var macdValues = _macd.Calculate(candles);
 
-        var lastValues = macdValues.OrderByDescending(x => x.Key).Skip(1).Take(2).ToList();
+        var lastValues = macdValues.OrderByDescending(x => x.Key).Take(3).ToList();
         var currentValue = lastValues[0].Value;
         var previousVal = lastValues[1].Value;
+        var previousPreviousVal = lastValues[2].Value;
+
 
         _logger.LogInformation("Market {Market} - {Recommendator} Macd previous: {previousValue} - Macd current: {currentValue}",
             market.Name.Value, Name, previousVal.ToString("0.00"), currentValue.ToString("0.00"));
@@ -56,6 +58,16 @@ public class RecommendatorMacd : RecommendatorBase
         }
 
         if (MacdGivesBuySignal(currentValue, previousVal))
+        {
+            return macdStrength;
+        }
+
+        if (MacdGivesSellSignal(previousVal, previousPreviousVal))
+        {
+            return macdStrength * -1;
+        }
+
+        if (MacdGivesBuySignal(previousVal, previousPreviousVal))
         {
             return macdStrength;
         }
