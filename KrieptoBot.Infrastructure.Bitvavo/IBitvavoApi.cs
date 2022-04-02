@@ -46,7 +46,7 @@ namespace KrieptoBot.Infrastructure.Bitvavo
         Task<IEnumerable<OrderDto>> GetOpenOrdersAsync(string market = "");
 
         [Post("/v2/order")]
-        Task<OrderDto> PostOrderAsync(string market, string side, string orderType, string amount, string price);
+        Task<OrderDto> PostOrderAsync([Body] Dictionary<string, string> body);
 
         [Get("/v2/ticker/price")]
         Task<TickerPriceDto> GetTickerPrice(string market);

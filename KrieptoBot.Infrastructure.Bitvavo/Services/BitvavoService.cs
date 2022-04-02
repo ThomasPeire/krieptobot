@@ -56,8 +56,10 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
         public async Task<Balance> GetBalanceAsync(string symbol)
         {
             var dto = await _bitvavoApi.GetBalanceAsync(symbol);
+            var balance = dto.ToList().FirstOrDefault() ??
+                          new BalanceDto { Available = "0", Symbol = symbol, InOrder = "0" };
 
-            return dto.FirstOrDefault().ConvertToKrieptoBotModel();
+            return balance.ConvertToKrieptoBotModel();
         }
 
         public async Task<IEnumerable<Candle>> GetCandlesAsync(string market, string interval = "5m", int limit = 1000,
@@ -122,16 +124,32 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
 
         public async Task<Order> PostSellOrderAsync(string market, string orderType, decimal amount, decimal price)
         {
-            var dto = await _bitvavoApi.PostOrderAsync(market, "sell", orderType,
-                amount.ToString(CultureInfo.InvariantCulture), price.ToString(CultureInfo.InvariantCulture));
+            var dto = await _bitvavoApi.PostOrderAsync(
+                new Dictionary<string, string>
+                {
+                    { "market", market },
+                    { "orderType", orderType },
+                    { "side", "sell" },
+                    { "amount", amount.TruncateToSignificantDigits(5).ToString(CultureInfo.InvariantCulture) },
+                    { "price", price.TruncateToSignificantDigits(5).ToString(CultureInfo.InvariantCulture) }
+                }
+            );
 
             return dto.ConvertToKrieptoBotModel();
         }
 
         public async Task<Order> PostBuyOrderAsync(string market, string orderType, decimal amount, decimal price)
         {
-            var dto = await _bitvavoApi.PostOrderAsync(market, "buy", orderType,
-                amount.ToString(CultureInfo.InvariantCulture), price.ToString(CultureInfo.InvariantCulture));
+            var dto = await _bitvavoApi.PostOrderAsync(
+                new Dictionary<string, string>
+                {
+                    { "market", market },
+                    { "orderType", orderType },
+                    { "side", "buy" },
+                    { "amount", amount.TruncateToSignificantDigits(5).ToString(CultureInfo.InvariantCulture) },
+                    { "price", price.TruncateToSignificantDigits(5).ToString(CultureInfo.InvariantCulture) }
+                }
+            );
 
             return dto.ConvertToKrieptoBotModel();
         }

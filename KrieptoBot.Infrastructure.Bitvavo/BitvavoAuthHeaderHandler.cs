@@ -18,24 +18,31 @@ namespace KrieptoBot.Infrastructure.Bitvavo
             _bitvavoConfig = bitvavoConfigOptions.Value;
         }
 
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
             CancellationToken cancellationToken)
         {
-            var url = request.RequestUri.AbsolutePath + request.RequestUri.Query;
-            var timeStamp = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
+            if (request.RequestUri != null)
+            {
+                var url = request.RequestUri.AbsolutePath + request.RequestUri.Query;
+                var timeStamp = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
 
-            var httpMethod = request.Method.Method;
-            const string body = "";
+                var httpMethod = request.Method.Method;
+                var body = string.Empty;
+                if (request.Content != null)
+                {
+                    body = await request.Content.ReadAsStringAsync(cancellationToken);
+                }
 
-            var toHash = timeStamp + httpMethod + url + body;
-            var signature = GenerateHeaderSignature(toHash, _bitvavoConfig.ApiSecret);
+                var toHash = timeStamp + httpMethod + url + body;
+                var signature = GenerateHeaderSignature(toHash, _bitvavoConfig.ApiSecret);
 
-            request.Headers.Add("Bitvavo-Access-Key", _bitvavoConfig.ApiKey);
-            request.Headers.Add("Bitvavo-Access-Window", "20000");
-            request.Headers.Add("Bitvavo-Access-Timestamp", timeStamp);
-            request.Headers.Add("Bitvavo-Access-Signature", signature);
+                request.Headers.Add("Bitvavo-Access-Key", _bitvavoConfig.ApiKey);
+                request.Headers.Add("Bitvavo-Access-Window", "20000");
+                request.Headers.Add("Bitvavo-Access-Timestamp", timeStamp);
+                request.Headers.Add("Bitvavo-Access-Signature", signature);
+            }
 
-            return base.SendAsync(request, cancellationToken);
+            return await base.SendAsync(request, cancellationToken);
         }
 
         private static string GenerateHeaderSignature(string toHash, string apiSecret)

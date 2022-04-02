@@ -31,15 +31,23 @@ namespace KrieptoBot.Tests.Application
         [Test]
         public async Task SellManager_ShouldPlaceSellOrder()
         {
-            const int tickerPrice = 3;
             const decimal amountInOrder = 20;
             const decimal amountAvailable = 100;
             const string market = "btc-eur";
+            const int currentHigh = 100;
+            const int currentLow = 10;
 
             _tradingContextMock.Setup(x => x.IsSimulation).Returns(false);
 
-            _exchangeServiceMock.Setup(x => x.GetTickerPrice(It.IsAny<string>()))
-                .ReturnsAsync(new TickerPrice(new MarketName(market), new Price(tickerPrice)));
+            _exchangeServiceMock.Setup(x => x.GetCandlesAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(),
+                    It.IsAny<DateTime?>(), It.IsAny<DateTime?>()))
+                .ReturnsAsync(new List<Candle>(new[]
+                {
+                    new Candle(DateTime.Today, new Price(currentHigh), new Price(currentLow), new Price(3), new Price(3), 100),
+                    new Candle(DateTime.Today.AddDays(-1), new Price(3), new Price(3), new Price(3), new Price(3), 100),
+                    new Candle(DateTime.Today.AddDays(-2), new Price(3), new Price(3), new Price(3), new Price(3), 100),
+                    new Candle(DateTime.Today.AddDays(-3), new Price(3), new Price(3), new Price(3), new Price(3), 100)
+                }));
             _exchangeServiceMock.Setup(x => x.GetBalanceAsync(new Symbol("btc")))
                 .ReturnsAsync(new Balance(new Symbol("btc"), new Amount(amountAvailable), new Amount(amountInOrder)));
 
@@ -48,8 +56,10 @@ namespace KrieptoBot.Tests.Application
 
             await sellManager.Sell(new Market(new MarketName(market), Amount.Zero, Amount.Zero));
 
+            const int priceToSell = currentHigh - (currentHigh - currentLow) / 3;
+
             _exchangeServiceMock.Verify(x =>
-                x.PostSellOrderAsync(market, It.IsAny<string>(), amountAvailable-amountInOrder, tickerPrice));
+                x.PostSellOrderAsync(market, It.IsAny<string>(), amountAvailable - amountInOrder, priceToSell));
             _notificationManagerMock.Verify(x => x.SendNotification(It.IsAny<string>(), It.IsAny<string>()),
                 Times.Once);
         }
@@ -57,16 +67,24 @@ namespace KrieptoBot.Tests.Application
         [Test]
         public async Task SellManager_ShouldNotPlaceSellOrder_WhenInSimulationMode()
         {
-
-            const int tickerPrice = 3;
             const decimal amountInOrder = 20;
             const decimal amountAvailable = 100;
             const string market = "btc-eur";
+            const int currentHigh = 100;
+            const int currentLow = 10;
 
             _tradingContextMock.Setup(x => x.IsSimulation).Returns(true);
 
-            _exchangeServiceMock.Setup(x => x.GetTickerPrice(It.IsAny<string>()))
-                .ReturnsAsync(new TickerPrice(new MarketName(market), new Price(tickerPrice)));
+            _exchangeServiceMock.Setup(x => x.GetCandlesAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(),
+                    It.IsAny<DateTime?>(), It.IsAny<DateTime?>()))
+                .ReturnsAsync(new List<Candle>(new[]
+                {
+                    new Candle(DateTime.Today, new Price(currentHigh), new Price(currentLow), new Price(3), new Price(3), 100),
+                    new Candle(DateTime.Today.AddDays(-1), new Price(3), new Price(3), new Price(3), new Price(3), 100),
+                    new Candle(DateTime.Today.AddDays(-2), new Price(3), new Price(3), new Price(3), new Price(3), 100),
+                    new Candle(DateTime.Today.AddDays(-3), new Price(3), new Price(3), new Price(3), new Price(3), 100)
+                }));
+
             _exchangeServiceMock.Setup(x => x.GetBalanceAsync("btc"))
                 .ReturnsAsync(new Balance(new Symbol("btc"), new Amount(amountAvailable), new Amount(amountInOrder)));
 

@@ -31,36 +31,52 @@ namespace KrieptoBot.Tests.Application
         [Test]
         public async Task BuyManager_ShouldPlaceBuyOrder()
         {
-            const int tickerPrice = 3;
             const decimal budget = 50;
             const string market = "btc-eur";
+            const int currentHigh = 100;
+            const int currentLow = 10;
 
             _tradingContextMock.Setup(x => x.IsSimulation).Returns(false);
 
-            _exchangeServiceMock.Setup(x => x.GetTickerPrice(It.IsAny<string>()))
-                .ReturnsAsync(new TickerPrice(new MarketName(market), new Price(tickerPrice)));
-
+            _exchangeServiceMock.Setup(x => x.GetCandlesAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(),
+                    It.IsAny<DateTime?>(), It.IsAny<DateTime?>()))
+                .ReturnsAsync(new List<Candle>(new[]
+                {
+                    new Candle(DateTime.Today, new Price(currentHigh), new Price(currentLow), new Price(3), new Price(3), 100),
+                    new Candle(DateTime.Today.AddDays(-1), new Price(3), new Price(3), new Price(3), new Price(3), 100),
+                    new Candle(DateTime.Today.AddDays(-2), new Price(3), new Price(3), new Price(3), new Price(3), 100),
+                    new Candle(DateTime.Today.AddDays(-3), new Price(3), new Price(3), new Price(3), new Price(3), 100)
+                }));
             var buyManager = new BuyManager(_loggerMock.Object, _tradingContextMock.Object,
                 _notificationManagerMock.Object, _exchangeServiceMock.Object);
 
             await buyManager.Buy(new Market(new MarketName(market), Amount.Zero, Amount.Zero), budget);
+            const int priceToBuy = currentLow + (currentHigh - currentLow) / 3;
 
             _exchangeServiceMock.Verify(x =>
-                x.PostBuyOrderAsync(market, It.IsAny<string>(), budget / tickerPrice, tickerPrice));
+                x.PostBuyOrderAsync(market, It.IsAny<string>(), budget / priceToBuy, priceToBuy));
             _notificationManagerMock.Verify(x => x.SendNotification(It.IsAny<string>(), It.IsAny<string>()),Times.Once);
         }
 
         [Test]
         public async Task BuyManager_ShouldNotPlaceBuyOrder_WhenInSimulationMode()
         {
-            const int tickerPrice = 3;
             const decimal budget = 50;
             const string market = "btc-eur";
+            const int currentHigh = 100;
+            const int currentLow = 10;
 
             _tradingContextMock.Setup(x => x.IsSimulation).Returns(true);
 
-            _exchangeServiceMock.Setup(x => x.GetTickerPrice(It.IsAny<string>()))
-                .ReturnsAsync(new TickerPrice(new MarketName(market), new Price(tickerPrice)));
+            _exchangeServiceMock.Setup(x => x.GetCandlesAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(),
+                    It.IsAny<DateTime?>(), It.IsAny<DateTime?>()))
+                .ReturnsAsync(new List<Candle>(new[]
+                {
+                    new Candle(DateTime.Today, new Price(currentHigh), new Price(currentLow), new Price(3), new Price(3), 100),
+                    new Candle(DateTime.Today.AddDays(-1), new Price(3), new Price(3), new Price(3), new Price(3), 100),
+                    new Candle(DateTime.Today.AddDays(-2), new Price(3), new Price(3), new Price(3), new Price(3), 100),
+                    new Candle(DateTime.Today.AddDays(-3), new Price(3), new Price(3), new Price(3), new Price(3), 100)
+                }));
 
             var buyManager = new BuyManager(_loggerMock.Object, _tradingContextMock.Object,
                 _notificationManagerMock.Object, _exchangeServiceMock.Object);

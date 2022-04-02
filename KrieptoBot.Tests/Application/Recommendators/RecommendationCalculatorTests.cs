@@ -44,7 +44,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
         }
 
         [Test]
-        public async Task RecommendationCalculator_ShouldReturn_AvgOfRecommendators()
+        public async Task RecommendationCalculator_ShouldReturn_SumOfRecommendators()
         {
             var recommendationCalculator = new RecommendationCalculator(_logger.Object, _recommendatorSorter.Object);
 
@@ -52,7 +52,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
                 await recommendationCalculator.CalculateRecommendation(new Market(new MarketName("btc-eur"),
                     Amount.Zero, Amount.Zero));
 
-            Assert.That(result.Value, Is.EqualTo(-10));
+            Assert.That(result.Value, Is.EqualTo(-30));
         }
     }
 }

@@ -80,7 +80,14 @@ namespace KrieptoBot.Application
 
         private async Task<TickerPrice> GetPriceToSellOn(Market market)
         {
-            return await _exchangeService.GetTickerPrice(market.Name);
+            var lastCandles = await _exchangeService.GetCandlesAsync(market.Name, _tradingContext.Interval,
+                5,
+                end: _tradingContext.CurrentTime);
+            var lastCandle = lastCandles.OrderByDescending(x => x.TimeStamp).First();
+            var high = lastCandle.High;
+            var low = lastCandle.Low;
+
+            return new TickerPrice(market.Name, new Price(high - (high - low) / 3));
         }
     }
 }

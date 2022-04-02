@@ -251,11 +251,8 @@ namespace KrieptoBot.Tests.Integration
                 .Given(
                     Request.Create()
                         .WithPath("/v2/order")
-                        .WithParam("market", orderDto.Market)
-                        .WithParam("side", "buy")
-                        .WithParam("orderType", orderDto.OrderType)
-                        .WithParam("amount", orderDto.Amount)
-                        .WithParam("price", orderDto.Price)
+                        .WithBody(
+                            $"{{\"market\":\"{orderDto.Market}\",\"orderType\":\"{orderDto.OrderType}\",\"side\":\"buy\",\"amount\":\"{orderDto.Amount}\",\"price\":\"{orderDto.Price}\"}}")
                         .UsingPost())
                 .RespondWith(Response.Create().WithBodyAsJson(orderDto).WithStatusCode(HttpStatusCode.OK));
 
@@ -275,11 +272,8 @@ namespace KrieptoBot.Tests.Integration
                 .Given(
                     Request.Create()
                         .WithPath("/v2/order")
-                        .WithParam("market", orderDto.Market)
-                        .WithParam("side", "sell")
-                        .WithParam("orderType", orderDto.OrderType)
-                        .WithParam("amount", orderDto.Amount)
-                        .WithParam("price", orderDto.Price)
+                        .WithBody(
+                            $"{{\"market\":\"{orderDto.Market}\",\"orderType\":\"{orderDto.OrderType}\",\"side\":\"sell\",\"amount\":\"{orderDto.Amount}\",\"price\":\"{orderDto.Price}\"}}")
                         .UsingPost())
                 .RespondWith(Response.Create().WithBodyAsJson(orderDto).WithStatusCode(HttpStatusCode.OK));
 
