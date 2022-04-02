@@ -8,8 +8,8 @@ namespace KrieptoBot.Application
         string Interval { get; }
         IEnumerable<string> MarketsToWatch { get; }
         DateTime CurrentTime { get; }
-        int BuyMargin { get; }
-        int SellMargin { get; }
+        decimal BuyMargin { get; }
+        decimal SellMargin { get; }
         bool IsSimulation { get; }
         TradingContext SetCurrentTime();
     }

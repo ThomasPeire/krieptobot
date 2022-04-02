@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using KrieptoBot.Application.Constants;
 using KrieptoBot.Application.Settings;
 using KrieptoBot.Domain.Recommendation.ValueObjects;
 using KrieptoBot.Domain.Trading.Entity;
@@ -28,7 +29,7 @@ namespace KrieptoBot.Application.Recommendators
 
         protected override async Task<RecommendatorScore> CalculateRecommendation(Market market)
         {
-            var recommendatorScore = 0m;
+            var recommendatorScore = RecommendationAction.None;
 
             var trades =
                 (await _exchangeService.GetTradesAsync(market.Name, 20, end: DateTime.Now)).OrderBy(
@@ -37,7 +38,7 @@ namespace KrieptoBot.Application.Recommendators
                 .Skip(trades.FindLastIndex(x => x.Side == OrderSide.Sell) + 1).ToList();
 
             if (!lastBuyTrades.Any())
-                return new RecommendatorScore(recommendatorScore, lastBuyTrades.Any());
+                return new RecommendatorScore(RecommendationAction.None, false);
 
             var averagePricePaid = GetAveragePricePaid(lastBuyTrades);
             var priceToCompare = await GetPriceToCompare(market);
@@ -45,19 +46,22 @@ namespace KrieptoBot.Application.Recommendators
 
             LogCurrentProfit(market, relativeProfitInPct);
 
-            // negative score = sell recommendation
-            // the larger the profit => the stronger the sell recommendation should be
-            recommendatorScore = -relativeProfitInPct;
+            if (relativeProfitInPct >= RecommendatorSettings.ProfitRecommendatorThresholdPct)
+            {
+                recommendatorScore = RecommendationAction.Sell;
+            }
+            if (relativeProfitInPct < RecommendatorSettings.ProfitRecommendatorThresholdPct)
+            {
+                recommendatorScore = RecommendationAction.Buy;
+            }
 
-            var includeInAverageCalculation = lastBuyTrades.Any() && recommendatorScore < 0;
-
-            return new RecommendatorScore(recommendatorScore, includeInAverageCalculation);
+            return new RecommendatorScore(recommendatorScore);
         }
 
 
         private void LogCurrentProfit(Market market, decimal relativeProfitInPct)
         {
-            _logger.LogInformation(
+            _logger.LogDebug(
                 "Market {Market} - {Recommendator} Profit of: {Profit}%",
                 market.Name.Value, Name, relativeProfitInPct.ToString("0.00"));
         }

@@ -6,5 +6,6 @@ namespace KrieptoBot.Application.Settings
     {
         public Dictionary<string, decimal> BuyRecommendationWeights { get; set; }
         public Dictionary<string, decimal> SellRecommendationWeights { get; set; }
+        public decimal ProfitRecommendatorThresholdPct { get; set; }
     }
 }
