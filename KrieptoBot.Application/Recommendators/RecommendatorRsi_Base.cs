@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using KrieptoBot.Application.Constants;
 using KrieptoBot.Application.Indicators;
 using KrieptoBot.Application.Settings;
 using KrieptoBot.Domain.Recommendation.ValueObjects;
@@ -37,7 +38,7 @@ namespace KrieptoBot.Application.Recommendators
         {
             var lastRsiValue = await GetLastRsiValue(market);
 
-            _logger.LogInformation("Market {Market} - {Recommendator} RSI: {RsiValue}",
+            _logger.LogDebug("Market {Market} - {Recommendator} RSI: {RsiValue}",
                 market.Name.Value, Name, lastRsiValue.ToString("0.00"));
 
             var recommendatorScore = EvaluateRsiValue(lastRsiValue);
@@ -69,9 +70,12 @@ namespace KrieptoBot.Application.Recommendators
 
         private static RecommendatorScore EvaluateRsiValue(decimal rsiValue)
         {
-            var rsiRecommendation = new RecommendatorScore(100 - rsiValue * 2);
-
-            return rsiRecommendation;
+            return rsiValue switch
+            {
+                <= 30 => new RecommendatorScore(RecommendationAction.Buy),
+                >= 70 => new RecommendatorScore(RecommendationAction.Sell),
+                _ => new RecommendatorScore(RecommendationAction.None)
+            };
         }
     }
 }

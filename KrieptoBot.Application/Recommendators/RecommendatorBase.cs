@@ -11,19 +11,19 @@ namespace KrieptoBot.Application.Recommendators
     public abstract class RecommendatorBase : IRecommendator
     {
         private readonly ILogger<RecommendatorBase> _logger;
-        private readonly RecommendatorSettings _recommendatorSettings;
+        protected readonly RecommendatorSettings RecommendatorSettings;
 
         protected RecommendatorBase(RecommendatorSettings recommendatorSettings, ILogger<RecommendatorBase> logger)
         {
-            _recommendatorSettings = recommendatorSettings;
+            RecommendatorSettings = recommendatorSettings;
             _logger = logger;
         }
 
         private decimal SellRecommendationWeight =>
-            _recommendatorSettings.SellRecommendationWeights.GetValueOrDefault(GetType().Name);
+            RecommendatorSettings.SellRecommendationWeights.GetValueOrDefault(GetType().Name);
 
         private decimal BuyRecommendationWeight =>
-            _recommendatorSettings.BuyRecommendationWeights.GetValueOrDefault(GetType().Name);
+            RecommendatorSettings.BuyRecommendationWeights.GetValueOrDefault(GetType().Name);
 
         protected virtual string Name => GetType().Name;
         public virtual IEnumerable<Type> DependencyRecommendators => new List<Type>();

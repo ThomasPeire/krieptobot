@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using KrieptoBot.Application;
+using KrieptoBot.Application.Constants;
 using KrieptoBot.Application.Indicators;
 using KrieptoBot.Application.Recommendators;
 using KrieptoBot.Application.Settings;
@@ -171,7 +172,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
                 {
                     { DateTime.Today.AddDays(-2), 98 },
                     { DateTime.Today.AddDays(-5), 32 },
-                    { DateTime.Today.AddDays(-3), 13 },
+                    { DateTime.Today.AddDays(-3), 45 },
                     { DateTime.Today, todaysRsiValue },
                     { DateTime.Today.AddDays(-1), 98 },
                     { DateTime.Today.AddDays(-4), 84 }
@@ -187,7 +188,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
             var result =
                 await recommendator.GetRecommendation(new Market(new MarketName("BTC-EUR"), Amount.Zero, Amount.Zero));
 
-            Assert.That(result.Value, Is.EqualTo(100 - todaysRsiValue * 2));
+            Assert.That(result.Value, Is.EqualTo(RecommendationAction.Buy));
         }
     }
 }

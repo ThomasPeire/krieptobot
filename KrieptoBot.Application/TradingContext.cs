@@ -16,8 +16,8 @@ namespace KrieptoBot.Application
         public string Interval { get; private set; } = "5m";
         public IEnumerable<string> MarketsToWatch { get; private set; } = new List<string> { "BTC-EUR" };
         public DateTime CurrentTime { get; private set; }
-        public int BuyMargin { get; private set; } = 30;
-        public int SellMargin { get; private set; } = -30;
+        public decimal BuyMargin { get; private set; } = 0.5m;
+        public decimal SellMargin { get; private set; } = -0.5m;
 
         public bool IsSimulation { get; private set; } = true;
 
@@ -39,13 +39,13 @@ namespace KrieptoBot.Application
             return this;
         }
 
-        public TradingContext SetBuyMargin(int buyMargin)
+        public TradingContext SetBuyMargin(decimal buyMargin)
         {
             BuyMargin = buyMargin;
             return this;
         }
 
-        public TradingContext SetSellMargin(int sellMargin)
+        public TradingContext SetSellMargin(decimal sellMargin)
         {
             SellMargin = sellMargin;
             return this;
