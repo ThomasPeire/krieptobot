@@ -57,7 +57,7 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
         {
             var dto = await _bitvavoApi.GetBalanceAsync(symbol);
 
-            return dto.First().ConvertToKrieptoBotModel();
+            return dto.FirstOrDefault().ConvertToKrieptoBotModel();
         }
 
         public async Task<IEnumerable<Candle>> GetCandlesAsync(string market, string interval = "5m", int limit = 1000,
