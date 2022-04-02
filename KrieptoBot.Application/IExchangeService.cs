@@ -33,5 +33,6 @@ namespace KrieptoBot.Application
         Task<Order> PostSellOrderAsync(string market, string orderType, decimal amount, decimal price);
         Task<Order> PostBuyOrderAsync(string market, string orderType, decimal amount, decimal price);
         Task<TickerPrice> GetTickerPrice(string market);
+        Task CancelOrders(string market = "");
     }
 }

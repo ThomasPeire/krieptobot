@@ -18,9 +18,11 @@ namespace KrieptoBot.Domain.Trading.Entity
             ArgumentNullException.ThrowIfNull(amount);
             ArgumentNullException.ThrowIfNull(price);
 
-            if (created > DateTime.UtcNow) throw new ArgumentException("Created datetime can not be in the future");
+            var now = DateTime.UtcNow;
 
-            if (updated > DateTime.UtcNow) throw new ArgumentException("Updated datetime can not be in the future");
+            if (created > now) throw new ArgumentException("Created datetime can not be in the future");
+
+            if (updated > now) throw new ArgumentException("Updated datetime can not be in the future");
 
             if (created > updated)
                 throw new ArgumentException("Created datetime can not be in the greater than updated datetime");

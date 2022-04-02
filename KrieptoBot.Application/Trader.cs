@@ -32,6 +32,8 @@ namespace KrieptoBot.Application
 
         public async Task Run()
         {
+            await CancelOpenOrders();
+
             var recommendations = await GetRecommendations();
 
             var marketsToSell = await DetermineMarketsToSell(recommendations);
@@ -41,6 +43,14 @@ namespace KrieptoBot.Application
                 await Sell(marketsToSell.Select(x => x.Key));
 
             if (marketsToBuy.Any()) await Buy(marketsToBuy);
+        }
+
+        private async Task CancelOpenOrders()
+        {
+            if (!_tradingContext.IsSimulation)
+            {
+                await _exchangeService.CancelOrders(string.Empty);
+            }
         }
 
         private async Task<Dictionary<Market, Amount>> DetermineBudgetForMarket(

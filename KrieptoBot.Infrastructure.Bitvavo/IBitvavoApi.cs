@@ -50,5 +50,11 @@ namespace KrieptoBot.Infrastructure.Bitvavo
 
         [Get("/v2/ticker/price")]
         Task<TickerPriceDto> GetTickerPrice(string market);
+
+        [Delete("/v2/orders")]
+        Task CancelOrders(string market);
+
+        [Delete("/v2/orders")]
+        Task CancelOrders();
     }
 }

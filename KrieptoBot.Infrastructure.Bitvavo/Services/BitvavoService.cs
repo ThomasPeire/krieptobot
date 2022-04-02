@@ -130,8 +130,8 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
                     { "market", market },
                     { "orderType", orderType },
                     { "side", "sell" },
-                    { "amount", amount.TruncateToSignificantDigits(5).ToString(CultureInfo.InvariantCulture) },
-                    { "price", price.TruncateToSignificantDigits(5).ToString(CultureInfo.InvariantCulture) }
+                    { "amount", amount.RoundToSignificantDigits(5).ToString(CultureInfo.InvariantCulture) },
+                    { "price", price.RoundToSignificantDigits(5).ToString(CultureInfo.InvariantCulture) }
                 }
             );
 
@@ -146,8 +146,8 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
                     { "market", market },
                     { "orderType", orderType },
                     { "side", "buy" },
-                    { "amount", amount.TruncateToSignificantDigits(5).ToString(CultureInfo.InvariantCulture) },
-                    { "price", price.TruncateToSignificantDigits(5).ToString(CultureInfo.InvariantCulture) }
+                    { "amount", amount.RoundToSignificantDigits(5).ToString(CultureInfo.InvariantCulture) },
+                    { "price", price.RoundToSignificantDigits(5).ToString(CultureInfo.InvariantCulture) }
                 }
             );
 
@@ -159,6 +159,18 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
             var dto = await _bitvavoApi.GetTickerPrice(market);
 
             return dto.ConvertToKrieptoBotModel();
+        }
+
+        public async Task CancelOrders(string market = "")
+        {
+            if (market.Equals(string.Empty))
+            {
+                await _bitvavoApi.CancelOrders();
+            }
+            else
+            {
+                await _bitvavoApi.CancelOrders(market);
+            }
         }
 
         public async Task<Order> GetOrderAsync(string market, Guid orderId)

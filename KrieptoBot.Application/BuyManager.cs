@@ -33,7 +33,9 @@ namespace KrieptoBot.Application
             await SendNotificationWithBuyRecommendation(market, budget, priceToBuyOn, amount);
 
             if (ShouldPlaceOrder())
+            {
                 await PlaceOrder(market, amount, priceToBuyOn);
+            }
         }
 
         private async Task PlaceOrder(Market market, decimal amount, TickerPrice priceToBuyOn)
