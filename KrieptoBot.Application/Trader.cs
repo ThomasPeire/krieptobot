@@ -101,7 +101,7 @@ namespace KrieptoBot.Application
 
             foreach (var (market, _) in budgetForMarkets)
                 _logger.LogInformation("Buy recommendation for {Market}, with a score of {Score}", market.Name.Value,
-                    marketsToBuy.First(x => x.Key == market).Value.Value.ToString("0:00"));
+                    marketsToBuy.First(x => x.Key == market).Value.Value.ToString("0.00"));
 
             return budgetForMarkets;
         }

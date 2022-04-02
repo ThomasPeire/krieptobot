@@ -12,6 +12,6 @@ namespace KrieptoBot.Application.Settings
         public DateTime CurrentTime { get; set; }
         public decimal BuyMargin { get; set;}
         public decimal SellMargin { get;  set;}
-        public bool IsSimulation { get;  set;}
+        public bool IsSimulation { get; set; } = true;
     }
 }
