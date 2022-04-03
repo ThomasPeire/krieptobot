@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using KrieptoBot.Application;
 using KrieptoBot.Application.Recommendators;
+using KrieptoBot.Application.Settings;
 using KrieptoBot.Domain.Recommendation.ValueObjects;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Moq;
 using NUnit.Framework;
 
@@ -19,6 +21,7 @@ namespace KrieptoBot.Tests.Application
         private Mock<ISellManager> _sellManagerMock;
         private TradingContext _tradingContext;
         private Mock<ILogger<Trader>> _logger;
+        private TradingSettings _tradingSettings;
 
         [SetUp]
         public void Setup()
@@ -42,6 +45,8 @@ namespace KrieptoBot.Tests.Application
                         "BTC-EUR"
                     })
                 .SetInterval("5m");
+
+            _tradingSettings = new TradingSettings { MaxBuyBudgetPerCoin = 100m, MinBuyBudgetPerCoin = 0m };
         }
 
         [Test]
@@ -52,7 +57,8 @@ namespace KrieptoBot.Tests.Application
                 .Returns(Task.FromResult(new RecommendatorScore(-99)));
 
             var trader = new Trader(_logger.Object, _tradingContext, _exchangeServiceMock.Object,
-                _recommendationCalculator.Object, _sellManagerMock.Object, _buyManagerMock.Object);
+                _recommendationCalculator.Object, _sellManagerMock.Object, _buyManagerMock.Object,
+                new OptionsWrapper<TradingSettings>(_tradingSettings));
 
             await trader.Run();
 
@@ -68,7 +74,8 @@ namespace KrieptoBot.Tests.Application
                 .Returns(Task.FromResult(new RecommendatorScore(+99)));
 
             var trader = new Trader(_logger.Object, _tradingContext, _exchangeServiceMock.Object,
-                _recommendationCalculator.Object, _sellManagerMock.Object, _buyManagerMock.Object);
+                _recommendationCalculator.Object, _sellManagerMock.Object, _buyManagerMock.Object,
+                new OptionsWrapper<TradingSettings>(_tradingSettings));
 
             await trader.Run();
 
@@ -107,14 +114,19 @@ namespace KrieptoBot.Tests.Application
                 .Returns(Task.FromResult(new Market(new MarketName("DOGE-EUR"), Amount.Zero, Amount.Zero)));
 
             var trader = new Trader(_logger.Object, localTradingContext, _exchangeServiceMock.Object,
-                _recommendationCalculator.Object, _sellManagerMock.Object, _buyManagerMock.Object);
+                _recommendationCalculator.Object, _sellManagerMock.Object, _buyManagerMock.Object,
+                new OptionsWrapper<TradingSettings>(_tradingSettings));
 
             await trader.Run();
 
 
-            _buyManagerMock.Verify(x => x.Buy(new Market(new MarketName("DOGE-EUR"), Amount.Zero, Amount.Zero), 70),
+            _buyManagerMock.Verify(
+                x => x.Buy(new Market(new MarketName("DOGE-EUR"), Amount.Zero, Amount.Zero),
+                    Math.Min(_tradingSettings.MaxBuyBudgetPerCoin, 66)),
                 Times.Once);
-            _buyManagerMock.Verify(x => x.Buy(new Market(new MarketName("BTC-EUR"), Amount.Zero, Amount.Zero), 130),
+            _buyManagerMock.Verify(
+                x => x.Buy(new Market(new MarketName("BTC-EUR"), Amount.Zero, Amount.Zero),
+                    Math.Min(_tradingSettings.MaxBuyBudgetPerCoin, 123)),
                 Times.Once);
         }
     }

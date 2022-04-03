@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using KrieptoBot.Application.Recommendators;
+using KrieptoBot.Application.Settings;
 using KrieptoBot.Domain.Recommendation.ValueObjects;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace KrieptoBot.Application
 {
     public class Trader : ITrader
     {
         private readonly IBuyManager _buyManager;
+        private readonly TradingSettings _tradingSettings;
         private readonly IExchangeService _exchangeService;
         private readonly ILogger<Trader> _logger;
         private readonly IRecommendationCalculator _recommendationCalculator;
@@ -19,13 +22,14 @@ namespace KrieptoBot.Application
         private readonly ITradingContext _tradingContext;
 
         public Trader(ILogger<Trader> logger, ITradingContext tradingContext, IExchangeService exchangeService,
-            IRecommendationCalculator recommendationCalculator, ISellManager sellManager, IBuyManager buyManager
-        )
+            IRecommendationCalculator recommendationCalculator, ISellManager sellManager, IBuyManager buyManager,
+            IOptions<TradingSettings> tradingSettings)
         {
             _exchangeService = exchangeService;
             _recommendationCalculator = recommendationCalculator;
             _sellManager = sellManager;
             _buyManager = buyManager;
+            _tradingSettings = tradingSettings.Value;
             _tradingContext = tradingContext;
             _logger = logger;
         }
@@ -60,13 +64,22 @@ namespace KrieptoBot.Application
 
             var dictionary = new Dictionary<Market, Amount>();
 
-            var availableBudget = await GetAvailableBudgetToInvest();
+            var availableBudget = new Amount((await GetAvailableBudgetToInvest()) / 100 * 95);
 
             foreach (var (market, recommendation) in marketsToBuy)
+            {
+                var amount = Math.Floor(recommendation.Value * availableBudget.Value /
+                                        totalRecommendationScore);
+
+                if (amount < _tradingSettings.MinBuyBudgetPerCoin)
+                {
+                    continue;
+                }
+
                 dictionary.Add(
                     market,
-                    new Amount(Math.Floor(recommendation.Value * availableBudget.Value /
-                                          totalRecommendationScore)));
+                    new Amount(Math.Min(amount, _tradingSettings.MaxBuyBudgetPerCoin)));
+            }
 
             return dictionary;
         }
