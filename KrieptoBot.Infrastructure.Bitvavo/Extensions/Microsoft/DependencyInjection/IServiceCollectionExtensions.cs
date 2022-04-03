@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using KrieptoBot.Application;
 using KrieptoBot.Infrastructure.Bitvavo.Services;
@@ -6,6 +7,8 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Polly;
+using Polly.Extensions.Http;
 using Refit;
 
 namespace KrieptoBot.Infrastructure.Bitvavo.Extensions.Microsoft.DependencyInjection
@@ -37,7 +40,16 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Extensions.Microsoft.DependencyInjec
                     configureClient.DefaultRequestHeaders.Accept.Add(
                         new MediaTypeWithQualityHeaderValue("application/json"));
                 })
-                .AddHttpMessageHandler<BitvavoAuthHeaderHandler>();
+                .AddHttpMessageHandler<BitvavoAuthHeaderHandler>().AddPolicyHandler(GetRetryPolicy());
+        }
+
+        private static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
+        {
+            return HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .OrResult(msg => msg.StatusCode == System.Net.HttpStatusCode.NotFound)
+                .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2,
+                    retryAttempt)));
         }
     }
 }
