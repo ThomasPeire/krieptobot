@@ -46,13 +46,13 @@ namespace KrieptoBot.Application.Recommendators
 
             LogCurrentProfit(market, relativeProfitInPct);
 
-            if (relativeProfitInPct >= RecommendatorSettings.ProfitRecommendatorThresholdPct)
+            if (relativeProfitInPct >= RecommendatorSettings.ProfitRecommendatorProfitThresholdPct)
             {
                 recommendatorScore = RecommendationAction.Sell;
             }
-            if (relativeProfitInPct < RecommendatorSettings.ProfitRecommendatorThresholdPct)
+            if (relativeProfitInPct <= -RecommendatorSettings.ProfitRecommendatorLossThresholdPct)
             {
-                recommendatorScore = RecommendationAction.Buy;
+                recommendatorScore = RecommendationAction.Sell;
             }
 
             return new RecommendatorScore(recommendatorScore);

@@ -55,22 +55,12 @@ public class RecommendatorMacd : RecommendatorBase
             market.Name.Value, Name, previousPreviousVal.ToString("0.0000"), previousVal.ToString("0.0000"),
             currentValue.ToString("0.0000"));
 
-        if (MacdGivesSellSignal(currentValue, previousVal))
+        if (MacdGivesSellSignal(currentValue, previousVal, previousPreviousVal))
         {
             return RecommendationAction.Sell;
         }
 
-        if (MacdGivesBuySignal(currentValue, previousVal))
-        {
-            return RecommendationAction.Buy;
-        }
-
-        if (MacdGivesSellSignal(previousVal, previousPreviousVal))
-        {
-            return RecommendationAction.Sell;
-        }
-
-        if (MacdGivesBuySignal(previousVal, previousPreviousVal))
+        if (MacdGivesBuySignal(currentValue, previousVal, previousPreviousVal))
         {
             return RecommendationAction.Buy;
         }
@@ -78,14 +68,14 @@ public class RecommendatorMacd : RecommendatorBase
         return 0;
     }
 
-    private static bool MacdGivesSellSignal(decimal currentValue, decimal previousVal)
+    private static bool MacdGivesSellSignal(decimal currentValue, decimal previousVal, decimal previousPreviousVal)
     {
-        return previousVal > 0 && currentValue < 0;
+        return previousPreviousVal > 0 && previousVal < 0 && currentValue < 0;
     }
 
-    private static bool MacdGivesBuySignal(decimal currentValue, decimal previousVal)
+    private static bool MacdGivesBuySignal(decimal currentValue, decimal previousVal, decimal previousPreviousVal)
     {
-        return previousVal < 0 && currentValue > 0;
+        return previousPreviousVal < 0 && previousVal > 0 && currentValue > 0;
     }
 
 

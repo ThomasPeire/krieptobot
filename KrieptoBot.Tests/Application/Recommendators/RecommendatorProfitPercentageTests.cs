@@ -82,7 +82,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
 
 
         [Test]
-        public async Task Recommendation_ShouldReturn_PositiveScoreWhenNoProfit()
+        public async Task Recommendation_ShouldReturn_NegativeScoreWhenNoProfit()
         {
             var recommendator = new RecommendatorProfitPercentage(_logger.Object, _exchangeServiceMock.Object,
                 _recommendatorSettingOptions.Object);
@@ -105,7 +105,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
             var result =
                 await recommendator.GetRecommendation(new Market(new MarketName("btc-eur"), Amount.Zero, Amount.Zero));
 
-            Assert.That(result.Value, Is.GreaterThan(0m));
+            Assert.That(result.Value, Is.LessThan(0m));
         }
 
         [Test]
