@@ -15,11 +15,11 @@ namespace KrieptoBot.Application.Indicators
         {
             _multiplier = Smoothing / (averagePeriod + 1);
 
-            return CalculateExponentialMovingAverage(prices, averagePeriod);
+            return CalculateExponentialMovingAverage(prices);
         }
 
         private Dictionary<DateTime, decimal> CalculateExponentialMovingAverage(
-            Dictionary<DateTime, decimal> prices, int movingAveragePeriod)
+            Dictionary<DateTime, decimal> prices)
         {
             var exponentialMovingAverages = new Dictionary<DateTime, decimal>();
             var priceArray = prices.OrderBy(x => x.Key).ToArray();

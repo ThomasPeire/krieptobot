@@ -78,7 +78,7 @@ public class RecommendatorMacd : RecommendatorBase
         return 0;
     }
 
-    private bool MacdGivesSellSignal(decimal currentValue, decimal previousVal)
+    private static bool MacdGivesSellSignal(decimal currentValue, decimal previousVal)
     {
         return previousVal > 0 && currentValue < 0;
     }

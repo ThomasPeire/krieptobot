@@ -56,7 +56,7 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
         public async Task<Balance> GetBalanceAsync(string symbol)
         {
             var dto = await _bitvavoApi.GetBalanceAsync(symbol);
-            var balance = dto.ToList().FirstOrDefault() ??
+            var balance = dto.FirstOrDefault() ??
                           new BalanceDto { Available = "0", Symbol = symbol, InOrder = "0" };
 
             return balance.ConvertToKrieptoBotModel();
@@ -163,7 +163,7 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
 
         public async Task CancelOrders(string market = "")
         {
-            if (market.Equals(string.Empty))
+            if (string.IsNullOrEmpty(market))
             {
                 await _bitvavoApi.CancelOrders();
             }
