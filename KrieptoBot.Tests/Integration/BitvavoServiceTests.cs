@@ -9,6 +9,7 @@ using FluentAssertions;
 using KrieptoBot.Infrastructure.Bitvavo;
 using KrieptoBot.Infrastructure.Bitvavo.Dtos;
 using KrieptoBot.Infrastructure.Bitvavo.Extensions;
+using KrieptoBot.Infrastructure.Bitvavo.Extensions.Helper;
 using KrieptoBot.Infrastructure.Bitvavo.Services;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
@@ -247,12 +248,15 @@ namespace KrieptoBot.Tests.Integration
         {
             var orderDto = JsonConvert.DeserializeObject<IEnumerable<OrderDto>>(_ordersJson).First();
 
+            var orderDtoAmount = decimal.Parse(orderDto.Amount, CultureInfo.InvariantCulture).RoundToSignificantDigits(5).ToString(CultureInfo.InvariantCulture);
+            var orderDtoPrice = decimal.Parse(orderDto.Price, CultureInfo.InvariantCulture).RoundToSignificantDigits(5).ToString(CultureInfo.InvariantCulture);
+
             _wireMockServer
                 .Given(
                     Request.Create()
                         .WithPath("/v2/order")
                         .WithBody(
-                            $"{{\"market\":\"{orderDto.Market}\",\"orderType\":\"{orderDto.OrderType}\",\"side\":\"buy\",\"amount\":\"{orderDto.Amount}\",\"price\":\"{orderDto.Price}\"}}")
+                            $"{{\"market\":\"{orderDto.Market}\",\"orderType\":\"{orderDto.OrderType}\",\"side\":\"buy\",\"amount\":\"{orderDtoAmount}\",\"price\":\"{orderDtoPrice}\"}}")
                         .UsingPost())
                 .RespondWith(Response.Create().WithBodyAsJson(orderDto).WithStatusCode(HttpStatusCode.OK));
 
@@ -268,12 +272,15 @@ namespace KrieptoBot.Tests.Integration
         {
             var orderDto = JsonConvert.DeserializeObject<IEnumerable<OrderDto>>(_ordersJson).First();
 
+            var orderDtoAmount = decimal.Parse(orderDto.Amount, CultureInfo.InvariantCulture).RoundToSignificantDigits(5).ToString(CultureInfo.InvariantCulture);
+            var orderDtoPrice = decimal.Parse(orderDto.Price, CultureInfo.InvariantCulture).RoundToSignificantDigits(5).ToString(CultureInfo.InvariantCulture);
+
             _wireMockServer
                 .Given(
                     Request.Create()
                         .WithPath("/v2/order")
                         .WithBody(
-                            $"{{\"market\":\"{orderDto.Market}\",\"orderType\":\"{orderDto.OrderType}\",\"side\":\"sell\",\"amount\":\"{orderDto.Amount}\",\"price\":\"{orderDto.Price}\"}}")
+                            $"{{\"market\":\"{orderDto.Market}\",\"orderType\":\"{orderDto.OrderType}\",\"side\":\"sell\",\"amount\":\"{orderDtoAmount}\",\"price\":\"{orderDtoPrice}\"}}")
                         .UsingPost())
                 .RespondWith(Response.Create().WithBodyAsJson(orderDto).WithStatusCode(HttpStatusCode.OK));
 
