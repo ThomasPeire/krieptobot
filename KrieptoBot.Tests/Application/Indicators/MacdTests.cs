@@ -46,7 +46,7 @@ namespace KrieptoBot.Tests.Application.Indicators
         }
 
         [Test]
-        public void Macd_Should_CalculateMacd()
+        public void Macd_Should_CalculateMacdValues()
         {
             var datetimeFrom = new DateTime(2021, 11, 01);
             var dateTimeTo = datetimeFrom.AddHours(8);
@@ -55,18 +55,22 @@ namespace KrieptoBot.Tests.Application.Indicators
                 .Where(x => x.TimeStamp >= datetimeFrom && x.TimeStamp <= dateTimeTo)
                 .OrderBy(x => x.TimeStamp).ToList();
 
-            var values = new Macd(new ExponentialMovingAverage()).Calculate(candlesToWorkWith);
+            var result = new Macd(new ExponentialMovingAverage()).Calculate(candlesToWorkWith);
 
-            values = candlesToWorkWith.ToDictionary(x => x.TimeStamp,
-                x => values.TryGetValue(x.TimeStamp, out var value) ? value : 0);
+            var macdLine = candlesToWorkWith.ToDictionary(x => x.TimeStamp,
+                x => result.MacdLine.TryGetValue(x.TimeStamp, out var value) ? value : 0);
+            var signalLine = candlesToWorkWith.ToDictionary(x => x.TimeStamp,
+                x => result.SignalLine.TryGetValue(x.TimeStamp, out var value) ? value : 0);
+            var histogram = candlesToWorkWith.ToDictionary(x => x.TimeStamp,
+                x => result.Histogram.TryGetValue(x.TimeStamp, out var value) ? value : 0);
 
-            values.Should().MatchSnapshot();
+            result.Should().MatchSnapshot();
 
 #if DEBUG
             var candleVisualizer = new CandlesVisualizer();
             var candleChart = candleVisualizer.Visualize(candlesToWorkWith);
 
-            candleChart = candleChart.AddSubChart(values);
+            candleChart = candleChart.AddSubChartLine(macdLine).AddLineChart(signalLine, Color.Chartreuse).AddLineChart(histogram, Color.Gold);
             candleChart.WithSize(1920, 1080).WithConfig(Config.init(Responsive: true)).Show();
 #endif
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using KrieptoBot.Application.Indicators.Results;
 using KrieptoBot.Domain.Trading.ValueObjects;
 
 namespace KrieptoBot.Application.Indicators
@@ -14,18 +15,20 @@ namespace KrieptoBot.Application.Indicators
             _ema = ema;
         }
 
-        public Dictionary<DateTime, decimal> Calculate(IEnumerable<Candle> candles)
+        public MacdResult Calculate(IEnumerable<Candle> candles)
         {
             var priceDictionary = candles.ToDictionary(x => x.TimeStamp, x => x.Close.Value);
             var ema12 = _ema.Calculate(priceDictionary, 12);
             var ema26 = _ema.Calculate(priceDictionary, 26);
             var datetimeIntersect = ema12.Keys.Intersect(ema26.Keys);
-            var difference =
+            var macd =
                 datetimeIntersect.ToDictionary(datetime => datetime, datetime => ema12[datetime] - ema26[datetime]);
 
-            var ema9 = _ema.Calculate(difference, 9);
+            var signalLine = _ema.Calculate(macd, 9);
 
-            return ema9.ToDictionary(x => x.Key, x => difference[x.Key] - x.Value);
+            var histogram = signalLine.ToDictionary(x => x.Key, x => macd[x.Key] - x.Value);
+
+            return new MacdResult { MacdLine = macd, SignalLine = signalLine, Histogram = histogram };
         }
     }
 }

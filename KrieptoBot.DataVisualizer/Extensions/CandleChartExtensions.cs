@@ -30,7 +30,7 @@ namespace KrieptoBot.DataVisualizer.Extensions
             return Chart.Combine(charts);
         }
 
-        public static GenericChart.GenericChart AddSubChart(this GenericChart.GenericChart chart,
+        public static GenericChart.GenericChart AddSubChartLine(this GenericChart.GenericChart chart,
             IDictionary<DateTime, decimal> values)
         {
             var valuesToPlot = values.Select(x => new Tuple<DateTime, decimal>(x.Key, x.Value));

@@ -19,16 +19,18 @@ public class RecommendatorMacd : RecommendatorBase
     private readonly IMacd _macd;
     private readonly IExchangeService _exchangeService;
     private readonly ITradingContext _tradingContext;
+    private readonly IExponentialMovingAverage _ema;
 
     public RecommendatorMacd(IOptions<RecommendatorSettings> recommendatorSettings, ILogger<RecommendatorMacd> logger,
         IMacd macd,
-        IExchangeService exchangeService, ITradingContext tradingContext)
+        IExchangeService exchangeService, ITradingContext tradingContext, IExponentialMovingAverage ema)
         : base(recommendatorSettings.Value, logger)
     {
         _logger = logger;
         _macd = macd;
         _exchangeService = exchangeService;
         _tradingContext = tradingContext;
+        _ema = ema;
     }
 
     protected override async Task<RecommendatorScore> CalculateRecommendation(Market market)
@@ -40,27 +42,27 @@ public class RecommendatorMacd : RecommendatorBase
 
     private async Task<decimal> GetMacdRecommendationValue(Market market)
     {
-        var candles = await GetCandlesAsync(market);
+        var candles = (await GetCandlesAsync(market)).ToList();
 
-        var macdValues = _macd.Calculate(candles);
+        var macdResult = _macd.Calculate(candles);
 
-        var lastValues = macdValues.OrderByDescending(x => x.Key).Take(3).ToList();
+        var lastValues = macdResult.Histogram.OrderByDescending(x => x.Key).Take(3).ToList();
         var currentValue = lastValues[0].Value;
         var previousVal = lastValues[1].Value;
-        var previousPreviousVal = lastValues[2].Value;
-
+        var currentMacdLineValue = macdResult.MacdLine.OrderByDescending(x => x.Key).FirstOrDefault().Value;
 
         _logger.LogDebug(
-            "Market {Market} - {Recommendator} Macd values: {PreviousPreviousValue}, {PreviousValue}, {CurrentValue}",
-            market.Name.Value, Name, previousPreviousVal.ToString("0.0000000000"), previousVal.ToString("0.0000000000"),
+            "Market {Market} - {Recommendator} CurrentMacd: {MacdValue}, SignalLine (previous, current): {PreviousValue}, {CurrentValue}",
+            market.Name.Value, Name, currentMacdLineValue.ToString("0.0000000000"), previousVal.ToString("0.0000000000"),
             currentValue.ToString("0.0000000000"));
 
-        if (MacdGivesSellSignal(currentValue, previousVal))
+
+        if (MacdGivesSellSignal(currentValue, previousVal) && currentMacdLineValue > 0)
         {
             return RecommendationAction.Sell;
         }
 
-        if (MacdGivesBuySignal(currentValue, previousVal))
+        if (MacdGivesBuySignal(currentValue, previousVal) && currentMacdLineValue < 0)
         {
             return RecommendationAction.Buy;
         }
@@ -68,7 +70,7 @@ public class RecommendatorMacd : RecommendatorBase
         return 0;
     }
 
-    private static bool MacdGivesSellSignal(decimal currentValue, decimal previousVal)
+    private bool MacdGivesSellSignal(decimal currentValue, decimal previousVal)
     {
         return previousVal > 0 && currentValue < 0;
     }

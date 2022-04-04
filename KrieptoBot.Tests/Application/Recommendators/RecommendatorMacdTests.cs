@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using KrieptoBot.Application;
 using KrieptoBot.Application.Indicators;
+using KrieptoBot.Application.Indicators.Results;
 using KrieptoBot.Application.Recommendators;
 using KrieptoBot.Application.Settings;
 using KrieptoBot.Domain.Trading.ValueObjects;
@@ -54,21 +55,31 @@ namespace KrieptoBot.Tests.Application.Recommendators
         [Test]
         public async Task RecommendationMacd_ShouldReturn_NegativeScoreWhenGoesBelowZero()
         {
-            var macdResults =
-                new Dictionary<DateTime, decimal>
+            var macdResults = new MacdResult()
+            {
+                Histogram = new Dictionary<DateTime, decimal>
                 {
                     { DateTime.Today, -10 },
                     { DateTime.Today.AddDays(-1), 5 },
                     { DateTime.Today.AddDays(-2), 5 }
-                };
+                },
 
+                MacdLine = new Dictionary<DateTime, decimal>
+                {
+                    { DateTime.Today, 10 },
+                    { DateTime.Today.AddDays(-1), 5 },
+                    { DateTime.Today.AddDays(-2), 5 }
+                }
+            };
+
+            var ema = new Mock<IExponentialMovingAverage>();
             _macdIndicator
                 .Setup(x => x.Calculate(It.IsAny<IEnumerable<Candle>>()))
                 .Returns(macdResults);
 
             var recommendator = new RecommendatorMacd(_recommendatorSettingOptions.Object, _logger.Object,
                 _macdIndicator.Object, _exchangeServiceMock.Object,
-                _tradingContext);
+                _tradingContext, ema.Object);
 
             var result =
                 await recommendator.GetRecommendation(new Market(new MarketName("BTC-EUR"), Amount.Zero, Amount.Zero));
@@ -79,21 +90,31 @@ namespace KrieptoBot.Tests.Application.Recommendators
         [Test]
         public async Task RecommendationMacd_ShouldReturn_PositiveScoreWhenGoesAboveZero()
         {
-            var macdResults =
-                new Dictionary<DateTime, decimal>
+            var macdResults = new MacdResult()
+            {
+                Histogram = new Dictionary<DateTime, decimal>
                 {
                     { DateTime.Today, 10 },
                     { DateTime.Today.AddDays(-1), -5 },
                     { DateTime.Today.AddDays(-2), -5 }
-                };
+                },
 
+                MacdLine = new Dictionary<DateTime, decimal>
+                {
+                    { DateTime.Today, -10 },
+                    { DateTime.Today.AddDays(-1), -5 },
+                    { DateTime.Today.AddDays(-2), -5 }
+                }
+            };
+
+            var ema = new Mock<IExponentialMovingAverage>();
             _macdIndicator
                 .Setup(x => x.Calculate(It.IsAny<IEnumerable<Candle>>()))
                 .Returns(macdResults);
 
             var recommendator = new RecommendatorMacd(_recommendatorSettingOptions.Object, _logger.Object,
                 _macdIndicator.Object, _exchangeServiceMock.Object,
-                _tradingContext);
+                _tradingContext, ema.Object);
 
             var result =
                 await recommendator.GetRecommendation(new Market(new MarketName("BTC-EUR"), Amount.Zero, Amount.Zero));
