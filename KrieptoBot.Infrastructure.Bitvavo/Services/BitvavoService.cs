@@ -130,8 +130,8 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
                     { "market", market },
                     { "orderType", orderType },
                     { "side", "sell" },
-                    { "amount", amount.RoundToSignificantDigits(5).ToString(CultureInfo.InvariantCulture) },
-                    { "price", price.RoundToSignificantDigits(5).ToString(CultureInfo.InvariantCulture) }
+                    { "amount", amount.RoundToSignificantDigits(5, MidpointRounding.ToZero).ToString(CultureInfo.InvariantCulture) },
+                    { "price", price.RoundToSignificantDigits(5, MidpointRounding.ToZero).ToString(CultureInfo.InvariantCulture) }
                 }
             );
 

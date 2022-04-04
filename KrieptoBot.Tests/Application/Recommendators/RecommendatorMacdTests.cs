@@ -58,7 +58,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
                 new Dictionary<DateTime, decimal>
                 {
                     { DateTime.Today, -10 },
-                    { DateTime.Today.AddDays(-1), -5 },
+                    { DateTime.Today.AddDays(-1), 5 },
                     { DateTime.Today.AddDays(-2), 5 }
                 };
 
@@ -83,7 +83,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
                 new Dictionary<DateTime, decimal>
                 {
                     { DateTime.Today, 10 },
-                    { DateTime.Today.AddDays(-1), 5 },
+                    { DateTime.Today.AddDays(-1), -5 },
                     { DateTime.Today.AddDays(-2), -5 }
                 };
 

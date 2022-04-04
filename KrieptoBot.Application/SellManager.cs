@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using KrieptoBot.Domain.Trading.Entity;
 using KrieptoBot.Domain.Trading.ValueObjects;
@@ -37,8 +38,16 @@ namespace KrieptoBot.Application
         private async Task<Order> PlaceOrder(Market market, decimal availableBaseAssetBalance,
             TickerPrice priceToSellOn)
         {
-            return await _exchangeService.PostSellOrderAsync(market.Name, "limit", availableBaseAssetBalance,
-                priceToSellOn.Price);
+            try
+            {
+                return await _exchangeService.PostSellOrderAsync(market.Name, "limit", availableBaseAssetBalance,
+                    priceToSellOn.Price);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         private bool ShouldPlaceOrder()
