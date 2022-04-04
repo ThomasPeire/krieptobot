@@ -30,6 +30,9 @@ namespace KrieptoBot.ConsoleLauncher
         {
             WaitForSecond45();
 
+            if (TraderCanRun())
+                await RunTrader();
+
             var timer = new Timer(TimeSpan.FromMinutes(1).TotalMilliseconds);
             timer.AutoReset = true;
             timer.Elapsed += StartTrader;
