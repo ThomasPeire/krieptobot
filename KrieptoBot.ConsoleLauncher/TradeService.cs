@@ -28,12 +28,25 @@ namespace KrieptoBot.ConsoleLauncher
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            await RunTrader();
+            WaitForSecond45();
 
             var timer = new Timer(TimeSpan.FromMinutes(1).TotalMilliseconds);
             timer.AutoReset = true;
             timer.Elapsed += StartTrader;
             timer.Start();
+        }
+
+        private void WaitForSecond45()
+        {
+            _logger.LogInformation("Trader will start on +/- second 45 of last minute of interval");
+
+            while (true)
+            {
+                if (_dateTimeProvider.UtcDateTimeNow().Second > 45)
+                {
+                    break;
+                }
+            }
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
@@ -51,8 +64,22 @@ namespace KrieptoBot.ConsoleLauncher
         private bool TraderCanRun()
         {
             var dateTimeNow = _dateTimeProvider.UtcDateTimeNow();
-            return (dateTimeNow.Day * 24 * 60 + dateTimeNow.Hour * 60 + dateTimeNow.Minute) %
-                GetIntervalInMinutes(_tradingContext.Interval) == 0;
+            var intervalInMinutes = GetIntervalInMinutes(_tradingContext.Interval);
+            return CurrentMinuteIsLastOfInterval(dateTimeNow, intervalInMinutes);
+        }
+
+        private bool CurrentMinuteIsLastOfInterval(DateTime dateTimeNow, int intervalInMinutes)
+        {
+            var minutesModulo = (dateTimeNow.Day * 24 * 60 + dateTimeNow.Hour * 60 + dateTimeNow.Minute) %
+                                intervalInMinutes;
+            var minutesTillRun = intervalInMinutes - minutesModulo - 1;
+
+            if (minutesTillRun != 0)
+            {
+                _logger.LogInformation("Trader will run in {Minute} minutes", minutesTillRun);
+            }
+
+            return minutesModulo == intervalInMinutes - 1;
         }
 
         private async Task RunTrader()
