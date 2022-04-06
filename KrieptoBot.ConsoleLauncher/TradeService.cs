@@ -45,7 +45,7 @@ namespace KrieptoBot.ConsoleLauncher
 
             while (true)
             {
-                if (_dateTimeProvider.UtcDateTimeNow().Second > 45)
+                if (_dateTimeProvider.UtcDateTimeNow().Second is > 45 and < 50)
                 {
                     break;
                 }
@@ -67,8 +67,7 @@ namespace KrieptoBot.ConsoleLauncher
         private bool TraderCanRun()
         {
             var dateTimeNow = _dateTimeProvider.UtcDateTimeNow();
-            var intervalInMinutes = GetIntervalInMinutes(_tradingContext.Interval);
-            return CurrentMinuteIsLastOfInterval(dateTimeNow, intervalInMinutes);
+            return CurrentMinuteIsLastOfInterval(dateTimeNow, _tradingContext.PollingIntervalInMinutes);
         }
 
         private bool CurrentMinuteIsLastOfInterval(DateTime dateTimeNow, int intervalInMinutes)

@@ -12,5 +12,6 @@ namespace KrieptoBot.Application
         decimal SellMargin { get; }
         bool IsSimulation { get; }
         TradingContext SetCurrentTime();
+        int PollingIntervalInMinutes { get; }
     }
 }

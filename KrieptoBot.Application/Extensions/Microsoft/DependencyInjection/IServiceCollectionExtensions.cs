@@ -37,7 +37,8 @@ namespace KrieptoBot.Application.Extensions.Microsoft.DependencyInjection
                     .SetInterval(tradingSettings.Interval)
                     .SetBuyMargin(tradingSettings.BuyMargin)
                     .SetSellMargin(tradingSettings.SellMargin)
-                    .SetIsSimulation(tradingSettings.IsSimulation);
+                    .SetIsSimulation(tradingSettings.IsSimulation)
+                    .SetPollingInterval(tradingSettings.PollingIntervalInMinutes);
             });
         }
     }

@@ -52,7 +52,7 @@ public class RecommendatorMacd : RecommendatorBase
         var currentMacdLineValue = macdResult.MacdLine.OrderByDescending(x => x.Key).FirstOrDefault().Value;
 
         _logger.LogDebug(
-            "Market {Market} - {Recommendator} CurrentMacd: {MacdValue}, SignalLine (previous, current): {PreviousValue}, {CurrentValue}",
+            "Market {Market} - {Recommendator} CurrentMacd: {MacdValue}, Histogram (previous, current): {PreviousValue}, {CurrentValue}",
             market.Name.Value, Name, currentMacdLineValue.ToString("0.0000000000"), previousVal.ToString("0.0000000000"),
             currentValue.ToString("0.0000000000"));
 

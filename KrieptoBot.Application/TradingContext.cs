@@ -21,11 +21,14 @@ namespace KrieptoBot.Application
 
         public bool IsSimulation { get; private set; } = true;
 
+        public int PollingIntervalInMinutes { get; private set; } = 5;
+
         public TradingContext SetCurrentTime()
         {
             CurrentTime = _dateTimeProvider.UtcDateTimeNow();
             return this;
         }
+
 
         public TradingContext SetMarketsToWatch(IEnumerable<string> markets)
         {
@@ -54,6 +57,12 @@ namespace KrieptoBot.Application
         public TradingContext SetIsSimulation(bool isSimulation)
         {
             IsSimulation = isSimulation;
+            return this;
+        }
+
+        public TradingContext SetPollingInterval(int pollingIntervalInMinutes)
+        {
+            PollingIntervalInMinutes = pollingIntervalInMinutes;
             return this;
         }
     }
