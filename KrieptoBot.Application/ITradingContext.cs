@@ -13,5 +13,6 @@ namespace KrieptoBot.Application
         bool IsSimulation { get; }
         TradingContext SetCurrentTime();
         int PollingIntervalInMinutes { get; }
+        int BuyCoolDownPeriodInMinutes { get; }
     }
 }

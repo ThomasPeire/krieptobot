@@ -31,8 +31,10 @@ namespace KrieptoBot.Application.Recommendators
         {
             var recommendatorScore = RecommendationAction.None;
 
+            //todo figure out a way to calculate profit when last trade was only a partially filled sell order
+
             var trades =
-                (await _exchangeService.GetTradesAsync(market.Name, 20, end: DateTime.Now)).OrderBy(
+                (await _exchangeService.GetTradesAsync(market.Name, 50, end: DateTime.Now)).OrderBy(
                     x => x.Timestamp).ToList();
             var lastBuyTrades = trades
                 .Skip(trades.FindLastIndex(x => x.Side == OrderSide.Sell) + 1).ToList();

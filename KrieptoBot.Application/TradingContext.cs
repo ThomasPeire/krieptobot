@@ -23,12 +23,13 @@ namespace KrieptoBot.Application
 
         public int PollingIntervalInMinutes { get; private set; } = 5;
 
+        public int BuyCoolDownPeriodInMinutes { get; private set; } = 5;
+
         public TradingContext SetCurrentTime()
         {
             CurrentTime = _dateTimeProvider.UtcDateTimeNow();
             return this;
         }
-
 
         public TradingContext SetMarketsToWatch(IEnumerable<string> markets)
         {
@@ -63,6 +64,12 @@ namespace KrieptoBot.Application
         public TradingContext SetPollingInterval(int pollingIntervalInMinutes)
         {
             PollingIntervalInMinutes = pollingIntervalInMinutes;
+            return this;
+        }
+
+        public TradingContext SetBuyCoolDownPeriod(int buyCoolDownPeriodInMinutes)
+        {
+            BuyCoolDownPeriodInMinutes = buyCoolDownPeriodInMinutes;
             return this;
         }
     }

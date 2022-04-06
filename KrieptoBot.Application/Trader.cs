@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using KrieptoBot.Application.Recommendators;
 using KrieptoBot.Application.Settings;
 using KrieptoBot.Domain.Recommendation.ValueObjects;
+using KrieptoBot.Domain.Trading.Entity;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -105,7 +106,23 @@ namespace KrieptoBot.Application
         private async Task Buy(Dictionary<Market, Amount> marketsWithBudget)
         {
             foreach (var (market, budget) in marketsWithBudget)
-                await _buyManager.Buy(market, budget);
+            {
+                if (await NoTradesInCoolDownPeriod(market))
+                {
+                    await _buyManager.Buy(market, budget);
+                }
+            }
+        }
+
+        private async Task<bool> NoTradesInCoolDownPeriod(Market market)
+        {
+            var trades = await _exchangeService.GetTradesAsync(market.Name, 5, end: _tradingContext.CurrentTime);
+
+            var buyTradesInCoolDown = trades.Any(x =>
+                x.Side == OrderSide.Buy &&
+                x.Timestamp.AddMinutes(_tradingContext.BuyCoolDownPeriodInMinutes) >= _tradingContext.CurrentTime);
+
+            return buyTradesInCoolDown == false;
         }
 
         private async Task Sell(IEnumerable<Market> marketsToSell)
