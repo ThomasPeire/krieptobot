@@ -60,6 +60,8 @@ namespace KrieptoBot.ConsoleLauncher
 
         private async void StartTrader(object sender, ElapsedEventArgs e)
         {
+            GroupingGuidEnricher.CurrentGroupingGuid = Guid.NewGuid();
+
             if (TraderCanRun())
                 await RunTrader();
         }

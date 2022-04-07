@@ -28,9 +28,11 @@
         <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.0" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
         <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.1" />
+        <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
         <PackageReference Include="Serilog.Extensions.Hosting" Version="4.1.2" />
         <PackageReference Include="Serilog.Settings.Configuration" Version="3.3.0" />
         <PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
+        <PackageReference Include="Serilog.Sinks.MSSqlServer" Version="5.7.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -38,6 +40,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Folder Include="Files\SQL" />
         <Folder Include="Properties" />
     </ItemGroup>
 

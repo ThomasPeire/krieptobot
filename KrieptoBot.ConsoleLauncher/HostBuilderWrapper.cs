@@ -34,6 +34,7 @@ namespace KrieptoBot.ConsoleLauncher
                 .ReadFrom.Configuration(hostContext.Configuration)
                 .MinimumLevel.Override("System.Net.Http", LogEventLevel.Warning)
                 .Enrich.FromLogContext()
+                .Enrich.With(new GroupingGuidEnricher())
                 .CreateLogger();
 
 
