@@ -52,8 +52,8 @@ public class RecommendatorDownTrend : RecommendatorBase
             market.Name.Value, Name, allPricesBelowEma);
 
         return allPricesBelowEma
-            ? new RecommendatorScore(RecommendationAction.None, false)
-            : new RecommendatorScore(RecommendationAction.Sell);
+            ? new RecommendatorScore(RecommendationAction.Sell)
+            : new RecommendatorScore(RecommendationAction.None, false);
     }
 
     private IDictionary<DateTime, decimal> CalculateEma55ValuesInterpolated(
