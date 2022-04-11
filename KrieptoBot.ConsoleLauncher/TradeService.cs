@@ -28,7 +28,7 @@ namespace KrieptoBot.ConsoleLauncher
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            WaitForSecond45();
+            WaitForSecond1();
 
             if (TraderCanRun())
                 await RunTrader();
@@ -39,13 +39,13 @@ namespace KrieptoBot.ConsoleLauncher
             timer.Start();
         }
 
-        private void WaitForSecond45()
+        private void WaitForSecond1()
         {
-            _logger.LogInformation("Trader will start on +/- second 45 of last minute of interval");
+            _logger.LogInformation("Trader will start on +/- second 1 of first minute of interval");
 
             while (true)
             {
-                if (_dateTimeProvider.UtcDateTimeNow().Second is > 45 and < 50)
+                if (_dateTimeProvider.UtcDateTimeNow().Second is > 1 and < 5)
                 {
                     break;
                 }
@@ -69,7 +69,21 @@ namespace KrieptoBot.ConsoleLauncher
         private bool TraderCanRun()
         {
             var dateTimeNow = _dateTimeProvider.UtcDateTimeNow();
-            return CurrentMinuteIsLastOfInterval(dateTimeNow, _tradingContext.PollingIntervalInMinutes);
+            return CurrentMinuteIsFirstOfInterval(dateTimeNow, _tradingContext.PollingIntervalInMinutes);
+        }
+
+        private bool CurrentMinuteIsFirstOfInterval(DateTime dateTimeNow, int intervalInMinutes)
+        {
+            var minutesModulo = (dateTimeNow.Day * 24 * 60 + dateTimeNow.Hour * 60 + dateTimeNow.Minute) %
+                                intervalInMinutes;
+            var minutesTillRun = intervalInMinutes - minutesModulo;
+
+            if (minutesTillRun != intervalInMinutes)
+            {
+                _logger.LogInformation("Trader will run in {Minute} minutes", minutesTillRun);
+            }
+
+            return minutesModulo == 0;
         }
 
         private bool CurrentMinuteIsLastOfInterval(DateTime dateTimeNow, int intervalInMinutes)
