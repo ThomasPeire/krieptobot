@@ -42,7 +42,6 @@ public class RecommendatorDownTrend : RecommendatorBase
         var ema55ValuesToCheckInterpolated = CalculateEma55ValuesInterpolated(ema55,
             intervalCandlesDictionary.Select(x => x.Key).ToList());
 
-
         var allPricesBelowEma = intervalCandlesDictionary.OrderByDescending(x => x.Key)
             .Take(RecommendatorSettings.DownTrendRecommendatorNumberOfConsecutiveCandles)
             .All(x => PriceBelowEmaValue(x, ema55ValuesToCheckInterpolated));
@@ -51,8 +50,15 @@ public class RecommendatorDownTrend : RecommendatorBase
             "Market {Market} - {Recommendator} Downtrend detected: {DownTrendDetected}",
             market.Name.Value, Name, allPricesBelowEma);
 
+        var balance = await GetAvailableBalanceForAsset(market.Name.BaseSymbol);
+        var thereIsOpenBalance = market.MinimumBaseAmount <= balance;
+
+        _logger.LogDebug(
+            "Market {Market} - {Recommendator} Sufficient open balance: {OpenBalance}, score {IncludeOrNot} included in final score",
+            market.Name.Value, Name, thereIsOpenBalance, thereIsOpenBalance ? "won't be" : "will be");
+
         return allPricesBelowEma
-            ? new RecommendatorScore(RecommendationAction.Sell)
+            ? new RecommendatorScore(RecommendationAction.Sell, !thereIsOpenBalance)
             : new RecommendatorScore(RecommendationAction.None, false);
     }
 
@@ -111,6 +117,15 @@ public class RecommendatorDownTrend : RecommendatorBase
         return await _exchangeService.GetCandlesAsync(market.Name,
             RecommendatorSettings.DownTrendRecommendatorInterval, 200,
             end: _tradingContext.CurrentTime);
+    }
+
+    private async Task<Amount> GetAvailableBalanceForAsset(Symbol asset)
+    {
+        var availableBalance = await _exchangeService.GetBalanceAsync(asset);
+
+        return availableBalance != null
+            ? new Amount(Math.Max(availableBalance.Available.Value - availableBalance.InOrder.Value, 0))
+            : Amount.Zero;
     }
 
     private static int GetIntervalInMinutes(string interval)
