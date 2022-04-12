@@ -41,6 +41,8 @@ namespace KrieptoBot.Application
 
             var recommendations = await GetRecommendations();
 
+            LogFinalScores(recommendations);
+
             var marketsToSell = await DetermineMarketsToSell(recommendations);
             var marketsToBuy = await DetermineMarketsToBuy(recommendations);
 
@@ -48,6 +50,15 @@ namespace KrieptoBot.Application
                 await Sell(marketsToSell.Select(x => x.Key));
 
             if (marketsToBuy.Any()) await Buy(marketsToBuy);
+        }
+
+        private void LogFinalScores(Dictionary<Market, RecommendatorScore> recommendations)
+        {
+            foreach (var recommendatorScore in recommendations)
+            {
+                _logger.LogInformation("Market {Market}: Final score: {Score}", recommendatorScore.Key.Name.Value,
+                    recommendatorScore.Value.Value.ToString("0.00"));
+            }
         }
 
         private async Task CancelOpenOrders()
