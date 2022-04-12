@@ -58,7 +58,7 @@ namespace KrieptoBot.Application.Recommendators
 
         private Dictionary<DateTime, decimal> GetRsiValues(IEnumerable<Candle> candles)
         {
-            return _rsiIndicator.Calculate(candles, _periodToAverage);
+            return _rsiIndicator.Calculate(candles, _periodToAverage).RsiValues;
         }
 
         private async Task<IEnumerable<Candle>> GetCandlesAsync(Market market)

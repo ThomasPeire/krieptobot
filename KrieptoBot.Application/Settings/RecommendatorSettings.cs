@@ -10,5 +10,7 @@ namespace KrieptoBot.Application.Settings
         public decimal ProfitRecommendatorLossThresholdPct { get; set; }
         public int DownTrendRecommendatorNumberOfConsecutiveCandles { get; set; }
         public string DownTrendRecommendatorInterval { get; set; }
+        public int RsiEmaRecommendatorEmaPeriod { get; set; }
+        public int RsiEmaRecommendatorRsiPeriod { get; set; }
     }
 }
