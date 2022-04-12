@@ -14,6 +14,7 @@ namespace KrieptoBot.Application.Indicators
         {
             _exponentialMovingAverage = exponentialMovingAverage;
         }
+
         public RsiResult Calculate(IEnumerable<Candle> candles, int averagePeriod)
         {
             var upsAndDownMoves = CalculateUpAndDownMoves(candles);
@@ -22,7 +23,7 @@ namespace KrieptoBot.Application.Indicators
 
             var rsiValues = CalculateRsi(upAndDownAverages);
 
-            return new RsiResult(){RsiValues = rsiValues};
+            return new RsiResult() { RsiValues = rsiValues };
         }
 
         public RsiResult CalculateWithEma(IEnumerable<Candle> candles, int averagePeriod, int emaPeriod)
@@ -30,7 +31,7 @@ namespace KrieptoBot.Application.Indicators
             var rsiValues = Calculate(candles, averagePeriod).RsiValues;
             var emaValues = _exponentialMovingAverage.Calculate(rsiValues, emaPeriod);
 
-            return new RsiResult() { RsiValues = rsiValues, EmaValues = emaValues};
+            return new RsiResult() { RsiValues = rsiValues, EmaValues = emaValues };
         }
 
         private static Dictionary<DateTime, decimal> CalculateRsi(
@@ -43,7 +44,16 @@ namespace KrieptoBot.Application.Indicators
 
         private static decimal GetRsi(decimal averageUp, decimal averageDown)
         {
-            return 100 - 100 / (1 + averageUp / averageDown);
+            if (averageDown != 0)
+            {
+                var avg = (1 + averageUp / averageDown);
+                if (avg != 0)
+                {
+                    return 100 - 100 / avg;
+                }
+            }
+
+            return 50;
         }
 
         private static Dictionary<DateTime, (decimal upAverage, decimal downAverage)> CalculateMovingAverage(
