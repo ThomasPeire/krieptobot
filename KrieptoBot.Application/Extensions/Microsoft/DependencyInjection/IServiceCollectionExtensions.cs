@@ -20,6 +20,7 @@ namespace KrieptoBot.Application.Extensions.Microsoft.DependencyInjection
             services.AddScoped<IRecommendator, RecommendatorProfitPercentage>();
             services.AddScoped<IRecommendator, RecommendatorMacd>();
             services.AddScoped<IRecommendator, RecommendatorDownTrend>();
+            services.AddScoped<IRecommendator, RecommendatorRsiEma>();
 
             services.AddScoped<IRecommendatorSorter, RecommendatorSorter>();
             services.AddScoped<IRecommendationCalculator, RecommendationCalculator>();

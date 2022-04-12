@@ -53,9 +53,9 @@ namespace KrieptoBot.Tests.Application.Indicators
 
             var candlesToWorkWith = _candles
                 .Where(x => x.TimeStamp >= datetimeFrom && x.TimeStamp <= dateTimeTo)
-                .OrderBy(x => x.TimeStamp);
+                .OrderBy(x => x.TimeStamp).ToList();
 
-            var rsiValues = new Rsi().Calculate(candlesToWorkWith, 14);
+            var rsiValues = new Rsi(new ExponentialMovingAverage()).Calculate(candlesToWorkWith, 14).RsiValues;
 
             rsiValues = candlesToWorkWith.ToDictionary(x => x.TimeStamp,
                 x => rsiValues.TryGetValue(x.TimeStamp, out var rsiValue) ? rsiValue : 0);
