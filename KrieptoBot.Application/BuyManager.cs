@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using Microsoft.Extensions.Logging;
@@ -72,13 +73,13 @@ namespace KrieptoBot.Application
         private async Task<TickerPrice> GetPriceToBuyOn(Market market)
         {
             var lastCandles = await _exchangeService.GetCandlesAsync(market.Name, _tradingContext.Interval,
-                5,
+                1,
                 end: _tradingContext.CurrentTime);
             var lastCandle = lastCandles.OrderByDescending(x => x.TimeStamp).First();
-            var high = lastCandle.High;
-            var low = lastCandle.Low;
+            var high = Math.Max(lastCandle.Close, lastCandle.Open);
+            var low = Math.Min(lastCandle.Close, lastCandle.Open);
 
-            return new TickerPrice(market.Name, new Price(low + (high - low) / 3));
+            return new TickerPrice(market.Name, new Price(low + (high - low) / 2));
         }
     }
 }
