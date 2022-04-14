@@ -30,6 +30,11 @@ namespace KrieptoBot.Application.Recommendators
 
         public async Task<RecommendatorScore> GetRecommendation(Market market)
         {
+            if (SellRecommendationWeight == 0m && BuyRecommendationWeight == 0m)
+            {
+                return new RecommendatorScore(0m, false);
+            }
+
             var recommendation = await CalculateRecommendation(market);
 
             var weightedRecommendation = recommendation > 0
@@ -44,11 +49,11 @@ namespace KrieptoBot.Application.Recommendators
         protected abstract Task<RecommendatorScore> CalculateRecommendation(Market market);
 
 
-        private void LogRecommendatorScore(Market market, decimal recommendatorScore)
+        private void LogRecommendatorScore(Market market, RecommendatorScore recommendatorScore)
         {
             _logger.LogInformation(
-                "Market {Market} - {Recommendator} Recommendation score: {Score}",
-                market.Name.Value, Name, recommendatorScore.ToString("0.00"));
+                "Market {Market} - {Recommendator} Recommendation score: {Score} - Included in final score {Included}",
+                market.Name.Value, Name, recommendatorScore.Value.ToString("0.00"), recommendatorScore.IncludeInAverageScore);
         }
     }
 }

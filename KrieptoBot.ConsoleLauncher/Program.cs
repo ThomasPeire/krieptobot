@@ -17,7 +17,7 @@ namespace KrieptoBot.ConsoleLauncher
             try
             {
                 var hostBuilder = HostBuilderWrapper.BuildHost();
-                Log.Information("Starting up");
+                Log.Debug("Starting up");
                 await hostBuilder.RunAsync();
             }
             catch (Exception ex)
