@@ -67,7 +67,7 @@ namespace KrieptoBot.Application.Recommendators
         private async Task<IEnumerable<Candle>> GetCandlesAsync(Market market)
         {
             return await _exchangeService.GetCandlesAsync(market.Name, _tradingContext.Interval,
-                _rsiEmaRecommendatorRsiPeriod * 10,
+                _rsiEmaRecommendatorRsiPeriod * 100,
                 end: _tradingContext.CurrentTime);
         }
 

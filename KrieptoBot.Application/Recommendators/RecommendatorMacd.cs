@@ -46,9 +46,9 @@ public class RecommendatorMacd : RecommendatorBase
 
         var macdResult = _macd.Calculate(candles);
 
-        var lastValues = macdResult.Histogram.OrderByDescending(x => x.Key).Take(3).ToList();
-        var currentValue = lastValues[0].Value;
-        var previousVal = lastValues[1].Value;
+        var lastHistogramValues = macdResult.Histogram.OrderByDescending(x => x.Key).Take(3).ToList();
+        var currentValue = lastHistogramValues[0].Value;
+        var previousVal = lastHistogramValues[1].Value;
         var currentMacdLineValue = macdResult.MacdLine.OrderByDescending(x => x.Key).FirstOrDefault().Value;
 
         _logger.LogDebug(
@@ -57,7 +57,7 @@ public class RecommendatorMacd : RecommendatorBase
             currentValue.ToString("0.0000000000"));
 
 
-        if (MacdGivesSellSignal(currentValue, previousVal) && currentMacdLineValue > 0)
+        if (MacdGivesSellSignal(lastHistogramValues) && currentMacdLineValue > 0)
         {
             return RecommendationAction.Sell;
         }
@@ -70,9 +70,20 @@ public class RecommendatorMacd : RecommendatorBase
         return 0;
     }
 
-    private bool MacdGivesSellSignal(decimal currentValue, decimal previousVal)
+    private bool MacdGivesSellSignal(List<KeyValuePair<DateTime, decimal>> lastHistogramValues)
     {
-        return previousVal > 0 && currentValue < 0;
+        const int numberOfConsecutiveDescendingValues = 2;
+        var values = lastHistogramValues.OrderByDescending(x => x.Key).ToList();
+
+        for (var i = 0; i < numberOfConsecutiveDescendingValues; i++)
+        {
+            if (values[i].Value > values[i + 1].Value)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private static bool MacdGivesBuySignal(decimal currentValue, decimal previousVal)
@@ -84,7 +95,7 @@ public class RecommendatorMacd : RecommendatorBase
     private async Task<IEnumerable<Candle>> GetCandlesAsync(Market market)
     {
         return await _exchangeService.GetCandlesAsync(market.Name, _tradingContext.Interval,
-            100,
+            1000,
             end: _tradingContext.CurrentTime);
     }
 }
