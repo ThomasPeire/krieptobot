@@ -56,5 +56,8 @@ namespace KrieptoBot.Infrastructure.Bitvavo
 
         [Delete("/v2/orders")]
         Task CancelOrders();
+
+        [Get("/v2/time")]
+        Task<TimeDto> GetTime();
     }
 }

@@ -6,6 +6,7 @@ using KrieptoBot.Application.Recommendators;
 using KrieptoBot.Application.Settings;
 using KrieptoBot.Domain.Recommendation.ValueObjects;
 using KrieptoBot.Domain.Trading.ValueObjects;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
@@ -36,7 +37,7 @@ namespace KrieptoBot.Tests.Application
                 .Setup(x => x.GetMarketAsync("BTC-EUR"))
                 .Returns(Task.FromResult(new Market(new MarketName("BTC-EUR"), Amount.Zero, Amount.Zero)));
 
-            _tradingContext = new TradingContext(new DateTimeProvider())
+            _tradingContext = new TradingContext(new DateTimeProvider(_exchangeServiceMock.Object,new Mock<IMemoryCache>().Object))
                 .SetBuyMargin(30)
                 .SetSellMargin(-30)
                 .SetMarketsToWatch(
@@ -87,7 +88,8 @@ namespace KrieptoBot.Tests.Application
         [Test]
         public async Task Trader_Should_DivideBudgetWhenBuying()
         {
-            var localTradingContext = new TradingContext(new DateTimeProvider())
+            var iExchangeServiceMock = new Mock<IExchangeService>();
+            var localTradingContext = new TradingContext(new DateTimeProvider(iExchangeServiceMock.Object, new Mock<IMemoryCache>().Object))
                 .SetBuyMargin(30)
                 .SetSellMargin(-30)
                 .SetMarketsToWatch(

@@ -15,14 +15,16 @@ namespace KrieptoBot.Application.Recommendators
     public class RecommendatorProfitPercentage : RecommendatorBase
     {
         private readonly IExchangeService _exchangeService;
+        private readonly IDateTimeProvider _dateTimeProvider;
         private readonly ILogger<RecommendatorProfitPercentage> _logger;
 
         public RecommendatorProfitPercentage(ILogger<RecommendatorProfitPercentage> logger,
-            IExchangeService exchangeService, IOptions<RecommendatorSettings> recommendatorSettings) : base(
+            IExchangeService exchangeService, IOptions<RecommendatorSettings> recommendatorSettings, IDateTimeProvider dateTimeProvider) : base(
             recommendatorSettings.Value, logger)
         {
             _logger = logger;
             _exchangeService = exchangeService;
+            _dateTimeProvider = dateTimeProvider;
         }
 
         protected override string Name => "Profit recommendator";
@@ -34,7 +36,7 @@ namespace KrieptoBot.Application.Recommendators
             //todo figure out a way to calculate profit when last trade was only a partially filled sell order
 
             var trades =
-                (await _exchangeService.GetTradesAsync(market.Name, 50, end: DateTime.Now)).OrderBy(
+                (await _exchangeService.GetTradesAsync(market.Name, 50, end: await _dateTimeProvider.UtcDateTimeNow())).OrderBy(
                     x => x.Timestamp).ToList();
             var lastBuyTrades = trades
                 .Skip(trades.FindLastIndex(x => x.Side == OrderSide.Sell) + 1).ToList();

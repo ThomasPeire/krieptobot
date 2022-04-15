@@ -6,6 +6,7 @@ using KrieptoBot.Application.Recommendators;
 using KrieptoBot.Application.Settings;
 using KrieptoBot.Domain.Trading.Entity;
 using KrieptoBot.Domain.Trading.ValueObjects;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
@@ -39,7 +40,8 @@ namespace KrieptoBot.Tests.Application.Recommendators
                 }
             });
 
-            _tradingContext = new TradingContext(new DateTimeProvider())
+            _tradingContext = new TradingContext(new DateTimeProvider(_exchangeServiceMock.Object,
+                    new Mock<IMemoryCache>().Object))
                 .SetBuyMargin(30)
                 .SetSellMargin(-30)
                 .SetMarketsToWatch(
@@ -54,7 +56,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
         public async Task Recommendation_ShouldReturn_NegativeScoreWhenProfit()
         {
             var recommendator = new RecommendatorProfitPercentage(_logger.Object, _exchangeServiceMock.Object,
-                _recommendatorSettingOptions.Object);
+                _recommendatorSettingOptions.Object, new Mock<IDateTimeProvider>().Object);
 
             _exchangeServiceMock
                 .Setup(x => x.GetTradesAsync(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DateTime?>(),
@@ -85,7 +87,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
         public async Task Recommendation_ShouldReturn_NegativeScoreWhenNoProfit()
         {
             var recommendator = new RecommendatorProfitPercentage(_logger.Object, _exchangeServiceMock.Object,
-                _recommendatorSettingOptions.Object);
+                _recommendatorSettingOptions.Object, new Mock<IDateTimeProvider>().Object);
 
             _exchangeServiceMock
                 .Setup(x => x.GetTradesAsync(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DateTime?>(),
@@ -112,7 +114,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
         public async Task Recommendation_ShouldReturnRecommendationZeroAndExcluded_WhenNoBuyTradesWereFound()
         {
             var recommendator = new RecommendatorProfitPercentage(_logger.Object, _exchangeServiceMock.Object,
-                _recommendatorSettingOptions.Object);
+                _recommendatorSettingOptions.Object, new Mock<IDateTimeProvider>().Object);
 
             _exchangeServiceMock
                 .Setup(x => x.GetTradesAsync(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DateTime?>(),

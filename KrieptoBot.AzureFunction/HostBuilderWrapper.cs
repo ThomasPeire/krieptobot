@@ -7,6 +7,8 @@ using KrieptoBot.Infrastructure.Bitvavo.Extensions.Microsoft.DependencyInjection
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
+using Serilog.Events;
 
 namespace KrieptoBot.AzureFunction
 {
@@ -32,8 +34,15 @@ namespace KrieptoBot.AzureFunction
                 .AddEnvironmentVariables();
         }
 
-        private static void AddServices(IServiceCollection services)
+        private static void AddServices(HostBuilderContext hostContext, IServiceCollection services)
         {
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(hostContext.Configuration)
+                .MinimumLevel.Override("System.Net.Http", LogEventLevel.Warning)
+                .Enrich.FromLogContext()
+                .Enrich.With(new GroupingGuidEnricher())
+                .CreateLogger();
+
             services.AddOptions<RecommendatorSettings>()
                 .Configure<IConfiguration>((settings, configuration) =>
                 {
@@ -47,6 +56,7 @@ namespace KrieptoBot.AzureFunction
             services.AddApplicationServices();
             services.AddBitvavoService();
             services.AddScoped<INotificationManager, NotificationManager>();
+            services.AddTransient<TradeFunction>();
         }
     }
 }

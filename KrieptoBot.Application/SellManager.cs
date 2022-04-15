@@ -38,16 +38,8 @@ namespace KrieptoBot.Application
         private async Task<Order> PlaceOrder(Market market, decimal availableBaseAssetBalance,
             TickerPrice priceToSellOn)
         {
-            try
-            {
-                return await _exchangeService.PostSellOrderAsync(market.Name, "limit", availableBaseAssetBalance,
-                    priceToSellOn.Price);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            return await _exchangeService.PostSellOrderAsync(market.Name, "limit", availableBaseAssetBalance,
+                priceToSellOn.Price);
         }
 
         private bool ShouldPlaceOrder()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace KrieptoBot.Application
 {
@@ -10,7 +11,7 @@ namespace KrieptoBot.Application
         public TradingContext(IDateTimeProvider dateTimeProvider)
         {
             _dateTimeProvider = dateTimeProvider;
-            SetCurrentTime();
+            var _ = SetCurrentTime().Result;
         }
 
         public string Interval { get; private set; } = "5m";
@@ -25,9 +26,9 @@ namespace KrieptoBot.Application
 
         public int BuyCoolDownPeriodInMinutes { get; private set; } = 5;
 
-        public TradingContext SetCurrentTime()
+        public async Task<TradingContext> SetCurrentTime()
         {
-            CurrentTime = _dateTimeProvider.UtcDateTimeNow();
+            CurrentTime = await _dateTimeProvider.UtcDateTimeNow();
             return this;
         }
 

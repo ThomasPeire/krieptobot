@@ -28,10 +28,9 @@ namespace KrieptoBot.ConsoleLauncher
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            WaitForSecond1();
+            await WaitForBeginningOfMinute().WaitAsync(cancellationToken);
 
-            if (TraderCanRun())
-                await RunTrader();
+            StartTrader(null, null);
 
             var timer = new Timer(TimeSpan.FromMinutes(1).TotalMilliseconds);
             timer.AutoReset = true;
@@ -39,17 +38,16 @@ namespace KrieptoBot.ConsoleLauncher
             timer.Start();
         }
 
-        private void WaitForSecond1()
+        private async Task WaitForBeginningOfMinute()
         {
-            _logger.LogInformation("Trader will start on +/- second 1 of first minute of interval");
+            var exchangeTime = await _dateTimeProvider.UtcDateTimeNowExchange();
+            _logger.LogInformation("Trader will start on +/- second 1 of first minute of interval (Exchange time)");
+            _logger.LogInformation("Exchange time: {ExchangeTime}, Local time: {LocalTime}", exchangeTime.ToLocalTime(),
+                DateTime.UtcNow.ToLocalTime());
 
-            while (true)
-            {
-                if (_dateTimeProvider.UtcDateTimeNow().Second is > 1 and < 5)
-                {
-                    break;
-                }
-            }
+            var secondsUntilNewMinute = 60 - exchangeTime.Second;
+
+            await Task.Delay((secondsUntilNewMinute + 1) * 1000);
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
@@ -62,13 +60,13 @@ namespace KrieptoBot.ConsoleLauncher
         {
             GroupingGuidEnricher.CurrentGroupingGuid = Guid.NewGuid();
 
-            if (TraderCanRun())
+            if (await TraderCanRun())
                 await RunTrader();
         }
 
-        private bool TraderCanRun()
+        private async Task<bool> TraderCanRun()
         {
-            var dateTimeNow = _dateTimeProvider.UtcDateTimeNow();
+            var dateTimeNow = await _dateTimeProvider.UtcDateTimeNow();
             return CurrentMinuteIsFirstOfInterval(dateTimeNow, _tradingContext.PollingIntervalInMinutes);
         }
 
@@ -86,44 +84,11 @@ namespace KrieptoBot.ConsoleLauncher
             return minutesModulo == 0;
         }
 
-        private bool CurrentMinuteIsLastOfInterval(DateTime dateTimeNow, int intervalInMinutes)
-        {
-            var minutesModulo = (dateTimeNow.Day * 24 * 60 + dateTimeNow.Hour * 60 + dateTimeNow.Minute) %
-                                intervalInMinutes;
-            var minutesTillRun = intervalInMinutes - minutesModulo - 1;
-
-            if (minutesTillRun != 0)
-            {
-                _logger.LogInformation("Trader will run in {Minute} minutes", minutesTillRun);
-            }
-
-            return minutesModulo == intervalInMinutes - 1;
-        }
-
         private async Task RunTrader()
         {
             _logger.LogDebug("Starting trading service");
-            _tradingContext.SetCurrentTime();
+            await _tradingContext.SetCurrentTime();
             await _trader.Run();
-        }
-
-        private static int GetIntervalInMinutes(string interval)
-        {
-            return interval switch
-            {
-                "1m" => 1,
-                "5m" => 5,
-                "15m" => 15,
-                "30m" => 30,
-                "1h" => 60,
-                "2h" => 120,
-                "4h" => 240,
-                "6h" => 360,
-                "8h" => 480,
-                "12h" => 720,
-                "1d" => 1440,
-                _ => 240
-            };
         }
     }
 }

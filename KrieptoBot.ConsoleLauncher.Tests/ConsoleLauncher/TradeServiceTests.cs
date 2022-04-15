@@ -18,7 +18,8 @@ namespace KrieptoBot.ConsoleLauncher.Tests.ConsoleLauncher
         [SetUp]
         public void Setup()
         {
-            _mockDateTimeProvider.Setup(x => x.UtcDateTimeNow()).Returns(new DateTime(2001, 1, 1));
+            _mockDateTimeProvider.Setup(x => x.UtcDateTimeNow())
+                .Returns(Task.FromResult(new DateTime(2001, 1, 1)));
             _mockTradingContext.Setup(x => x.Interval).Returns("5m");
         }
 

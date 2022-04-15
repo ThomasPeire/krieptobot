@@ -33,8 +33,8 @@ namespace KrieptoBot.Application.Extensions.Microsoft.DependencyInjection
             services.AddSingleton<ITradingContext>(x =>
             {
                 var tradingSettings = x.GetRequiredService<IOptions<TradingSettings>>().Value;
-
-                return new TradingContext(new DateTimeProvider())
+                var dateTimeProvider = x.GetRequiredService<IDateTimeProvider>();
+                return new TradingContext(dateTimeProvider)
                     .SetMarketsToWatch(tradingSettings.MarketsToWatch)
                     .SetInterval(tradingSettings.Interval)
                     .SetBuyMargin(tradingSettings.BuyMargin)

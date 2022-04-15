@@ -173,6 +173,13 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
             }
         }
 
+        public async Task<DateTime> GetTime()
+        {
+            var time = await _bitvavoApi.GetTime();
+
+            return DateTime.UnixEpoch.AddMilliseconds(time.TimeInMilliseconds);
+        }
+
         public async Task<Order> GetOrderAsync(string market, Guid orderId)
         {
             var dto = await _bitvavoApi.GetOrderAsync(market, orderId);

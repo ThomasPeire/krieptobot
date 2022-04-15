@@ -25,9 +25,11 @@
         <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.6.0" />
         <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Timer" Version="4.1.0" />
         <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.0" />
+        <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.1.0" />
+        <PackageReference Include="Serilog.Settings.Configuration" Version="3.3.0" />
+        <PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\KrieptoBot.Application\KrieptoBot.Application.csproj" />
         <ProjectReference Include="..\KrieptoBot.Infrastructure.Bitvavo\KrieptoBot.Infrastructure.Bitvavo.csproj" />
     </ItemGroup>
     <ItemGroup>

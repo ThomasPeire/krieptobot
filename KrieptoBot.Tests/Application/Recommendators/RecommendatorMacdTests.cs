@@ -7,6 +7,7 @@ using KrieptoBot.Application.Indicators.Results;
 using KrieptoBot.Application.Recommendators;
 using KrieptoBot.Application.Settings;
 using KrieptoBot.Domain.Trading.ValueObjects;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
@@ -41,7 +42,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
                 }
             });
 
-            _tradingContext = new TradingContext(new DateTimeProvider())
+            _tradingContext = new TradingContext(new DateTimeProvider(_exchangeServiceMock.Object, new Mock<IMemoryCache>().Object))
                 .SetBuyMargin(30)
                 .SetSellMargin(-30)
                 .SetMarketsToWatch(

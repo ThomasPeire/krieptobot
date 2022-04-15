@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 
 namespace KrieptoBot.AzureFunction
@@ -6,9 +7,9 @@ namespace KrieptoBot.AzureFunction
     [ExcludeFromCodeCoverage]
     public static class Program
     {
-        public static void Main()
+        public async static Task Main()
         {
-            HostBuilderWrapper.BuildHost().Run();
+            await HostBuilderWrapper.BuildHost().RunAsync();
         }
     }
 }
