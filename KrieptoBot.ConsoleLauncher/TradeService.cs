@@ -45,7 +45,7 @@ namespace KrieptoBot.ConsoleLauncher
             _logger.LogInformation("Exchange time: {ExchangeTime}, Local time: {LocalTime}", exchangeTime.ToLocalTime(),
                 DateTime.UtcNow.ToLocalTime());
 
-            var secondsUntilNewMinute = 60 - exchangeTime.Second;
+            var secondsUntilNewMinute = 60 - exchangeTime.Second == 0 ? 60 : exchangeTime.Second;
 
             await Task.Delay((secondsUntilNewMinute + 1) * 1000);
         }

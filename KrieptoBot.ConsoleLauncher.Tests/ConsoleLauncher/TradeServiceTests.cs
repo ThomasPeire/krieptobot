@@ -18,14 +18,19 @@ namespace KrieptoBot.ConsoleLauncher.Tests.ConsoleLauncher
         [SetUp]
         public void Setup()
         {
-            _mockDateTimeProvider.Setup(x => x.UtcDateTimeNow())
-                .Returns(Task.FromResult(new DateTime(2001, 1, 1)));
-            _mockTradingContext.Setup(x => x.Interval).Returns("5m");
+            _mockTradingContext.Setup(x => x.PollingIntervalInMinutes).Returns(5);
         }
+
 
         [Test]
         public async Task TradeService_Should_RunTrader()
         {
+            _mockDateTimeProvider.Setup(x => x.UtcDateTimeNow())
+                .Returns(Task.FromResult(new DateTime(2001, 1, 1, 10, 0, 0)));
+            _mockDateTimeProvider.Setup(x => x.UtcDateTimeNowExchange())
+                .Returns(Task.FromResult(new DateTime(2001, 1, 1, 10, 0, 0)));
+            _mockTradingContext.Setup(x => x.Interval).Returns("5m");
+
             var tradeService = new TradeService(_mockLogger.Object, _mockTrader.Object, _mockTradingContext.Object,
                 _mockDateTimeProvider.Object);
 
