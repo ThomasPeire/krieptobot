@@ -38,7 +38,7 @@ namespace KrieptoBot.Application
         public async Task Run()
         {
             var bitvavoTime = await _exchangeService.GetTime();
-            _logger.LogInformation("Bitvavo time: {BitvavoTime}, Local time: {Local}", bitvavoTime, DateTime.Now);
+            _logger.LogInformation("Exchange time: {BitvavoTime}, Local time: {Local}", bitvavoTime.ToLocalTime(), DateTime.Now);
 
             await CancelOpenOrders();
 

@@ -18,7 +18,7 @@ namespace KrieptoBot.Tests.Application
         public void TradingContext_Should_SetProperties()
         {
             var mockDateTimeProvider = new Mock<IDateTimeProvider>();
-            mockDateTimeProvider.Setup(x => x.UtcDateTimeNow()).Returns(Task.FromResult(new DateTime(2001, 1, 1)));
+            mockDateTimeProvider.Setup(x => x.UtcDateTimeNowSyncedWithExchange()).Returns(Task.FromResult(new DateTime(2001, 1, 1)));
 
             var tradingContext = new TradingContext(mockDateTimeProvider.Object);
 

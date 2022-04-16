@@ -28,7 +28,7 @@ namespace KrieptoBot.Application
 
         public async Task<TradingContext> SetCurrentTime()
         {
-            CurrentTime = await _dateTimeProvider.UtcDateTimeNow();
+            CurrentTime = await _dateTimeProvider.UtcDateTimeNowSyncedWithExchange();
             return this;
         }
 

@@ -25,7 +25,7 @@ namespace KrieptoBot.ConsoleLauncher.Tests.ConsoleLauncher
         [Test]
         public async Task TradeService_Should_RunTrader()
         {
-            _mockDateTimeProvider.Setup(x => x.UtcDateTimeNow())
+            _mockDateTimeProvider.Setup(x => x.UtcDateTimeNowSyncedWithExchange())
                 .Returns(Task.FromResult(new DateTime(2001, 1, 1, 10, 0, 0)));
             _mockDateTimeProvider.Setup(x => x.UtcDateTimeNowExchange())
                 .Returns(Task.FromResult(new DateTime(2001, 1, 1, 10, 0, 0)));

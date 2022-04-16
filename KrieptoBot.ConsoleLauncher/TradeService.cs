@@ -41,13 +41,13 @@ namespace KrieptoBot.ConsoleLauncher
         private async Task WaitForBeginningOfMinute()
         {
             var exchangeTime = await _dateTimeProvider.UtcDateTimeNowExchange();
-            _logger.LogInformation("Trader will start on +/- second 1 of first minute of interval (Exchange time)");
+            _logger.LogInformation("Trader will start on +/- second 5 of first minute of interval (Exchange time)");
             _logger.LogInformation("Exchange time: {ExchangeTime}, Local time: {LocalTime}", exchangeTime.ToLocalTime(),
                 DateTime.UtcNow.ToLocalTime());
 
-            var secondsUntilNewMinute = 60 - exchangeTime.Second == 0 ? 60 : exchangeTime.Second;
+            var secondsUntilNewMinute = 60 - (exchangeTime.Second == 0 ? 60 : exchangeTime.Second);
 
-            await Task.Delay((secondsUntilNewMinute + 1) * 1000);
+            await Task.Delay((secondsUntilNewMinute + 5) * 1000);
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
@@ -66,7 +66,7 @@ namespace KrieptoBot.ConsoleLauncher
 
         private async Task<bool> TraderCanRun()
         {
-            var dateTimeNow = await _dateTimeProvider.UtcDateTimeNow();
+            var dateTimeNow = await _dateTimeProvider.UtcDateTimeNowSyncedWithExchange();
             return CurrentMinuteIsFirstOfInterval(dateTimeNow, _tradingContext.PollingIntervalInMinutes);
         }
 

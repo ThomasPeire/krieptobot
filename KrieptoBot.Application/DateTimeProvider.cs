@@ -6,7 +6,7 @@ namespace KrieptoBot.Application
 {
     public interface IDateTimeProvider
     {
-        Task<DateTime> UtcDateTimeNow();
+        Task<DateTime> UtcDateTimeNowSyncedWithExchange();
         Task<DateTime> UtcDateTimeNowExchange();
     }
 
@@ -35,7 +35,7 @@ namespace KrieptoBot.Application
                 });
         }
 
-        public async Task<DateTime> UtcDateTimeNow() =>
+        public async Task<DateTime> UtcDateTimeNowSyncedWithExchange() =>
             DateTime.UtcNow.AddMilliseconds(await TimeDifferenceWithExchangeInMilliSeconds());
 
         public async Task<DateTime> UtcDateTimeNowExchange() => await _exchangeService.GetTime();
