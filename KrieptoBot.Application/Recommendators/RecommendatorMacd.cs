@@ -95,7 +95,6 @@ public class RecommendatorMacd : RecommendatorBase
     private async Task<IEnumerable<Candle>> GetCandlesAsync(Market market)
     {
         return await _exchangeService.GetCandlesAsync(market.Name, _tradingContext.Interval,
-            1000,
             end: _tradingContext.CurrentTime);
     }
 }

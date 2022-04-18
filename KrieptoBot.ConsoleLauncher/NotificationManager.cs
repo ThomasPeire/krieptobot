@@ -13,6 +13,8 @@ namespace KrieptoBot.ConsoleLauncher
                 .AddHeader($"{DateTime.UtcNow:g}", "KrieptoBot!", "")
                 .AddText(message)
                 .Show();
+
+            await Task.CompletedTask;
         }
 
         public async Task SendNotification(string message, string subMessage)
@@ -22,6 +24,8 @@ namespace KrieptoBot.ConsoleLauncher
                 .AddText(message)
                 .AddText(subMessage)
                 .Show();
+
+            await Task.CompletedTask;
         }
     }
 }

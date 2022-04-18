@@ -37,7 +37,7 @@ namespace KrieptoBot.Infrastructure.Bitvavo
                 var signature = GenerateHeaderSignature(toHash, _bitvavoConfig.ApiSecret);
 
                 request.Headers.Add("Bitvavo-Access-Key", _bitvavoConfig.ApiKey);
-                request.Headers.Add("Bitvavo-Access-Window", "20000");
+                request.Headers.Add("Bitvavo-Access-Window", "60000");
                 request.Headers.Add("Bitvavo-Access-Timestamp", timeStamp);
                 request.Headers.Add("Bitvavo-Access-Signature", signature);
             }

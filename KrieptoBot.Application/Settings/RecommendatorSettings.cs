@@ -12,5 +12,7 @@ namespace KrieptoBot.Application.Settings
         public string DownTrendRecommendatorInterval { get; set; }
         public int RsiEmaRecommendatorEmaPeriod { get; set; }
         public int RsiEmaRecommendatorRsiPeriod { get; set; }
+        public decimal RsiEmaRecommendatorBuySignalThreshold { get; set; }
+        public decimal RsiEmaRecommendatorSellSignalThreshold { get; set; }
     }
 }

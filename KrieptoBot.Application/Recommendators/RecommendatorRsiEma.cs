@@ -20,6 +20,8 @@ namespace KrieptoBot.Application.Recommendators
         private readonly ITradingContext _tradingContext;
         private readonly int _rsiEmaRecommendatorEmaPeriod;
         private readonly int _rsiEmaRecommendatorRsiPeriod;
+        private readonly decimal _rsiEmaRecommendatorSellSignalThreshold;
+        private readonly decimal _rsiEmaRecommendatorBuySignalThreshold;
 
         public RecommendatorRsiEma(IExchangeService exchangeService, IRsi rsiIndicator,
             ITradingContext tradingContext, ILogger<RecommendatorRsiEma> logger,
@@ -31,6 +33,9 @@ namespace KrieptoBot.Application.Recommendators
             _logger = logger;
             _rsiEmaRecommendatorEmaPeriod = recommendatorSettings.Value.RsiEmaRecommendatorEmaPeriod;
             _rsiEmaRecommendatorRsiPeriod = recommendatorSettings.Value.RsiEmaRecommendatorRsiPeriod;
+            _rsiEmaRecommendatorSellSignalThreshold =
+                recommendatorSettings.Value.RsiEmaRecommendatorSellSignalThreshold;
+            _rsiEmaRecommendatorBuySignalThreshold = recommendatorSettings.Value.RsiEmaRecommendatorBuySignalThreshold;
         }
 
         protected override string Name =>
@@ -67,18 +72,22 @@ namespace KrieptoBot.Application.Recommendators
         private async Task<IEnumerable<Candle>> GetCandlesAsync(Market market)
         {
             return await _exchangeService.GetCandlesAsync(market.Name, _tradingContext.Interval,
-                _rsiEmaRecommendatorRsiPeriod * 100,
                 end: _tradingContext.CurrentTime);
         }
 
-        private static RecommendatorScore EvaluateEmaValue(decimal emaValue)
+        private RecommendatorScore EvaluateEmaValue(decimal emaValue)
         {
-            return emaValue switch
+            if (emaValue <= _rsiEmaRecommendatorBuySignalThreshold)
             {
-                <= 40 => new RecommendatorScore(RecommendationAction.Buy),
-                >= 60 => new RecommendatorScore(RecommendationAction.Sell),
-                _ => new RecommendatorScore(RecommendationAction.None)
-            };
+                return new RecommendatorScore(RecommendationAction.Buy);
+            }
+
+            if (emaValue >= _rsiEmaRecommendatorSellSignalThreshold)
+            {
+                return new RecommendatorScore(RecommendationAction.Sell);
+            }
+
+            return new RecommendatorScore(RecommendationAction.None);
         }
     }
 }

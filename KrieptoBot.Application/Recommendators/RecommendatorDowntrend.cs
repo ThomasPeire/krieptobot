@@ -108,14 +108,13 @@ public class RecommendatorDownTrend : RecommendatorBase
     {
         return await _exchangeService.GetCandlesAsync(market.Name,
             _tradingContext.Interval,
-            RecommendatorSettings.DownTrendRecommendatorNumberOfConsecutiveCandles,
             end: _tradingContext.CurrentTime);
     }
 
     private async Task<IEnumerable<Candle>> GetTrendCandles(Market market)
     {
         return await _exchangeService.GetCandlesAsync(market.Name,
-            RecommendatorSettings.DownTrendRecommendatorInterval, 1000,
+            RecommendatorSettings.DownTrendRecommendatorInterval,
             end: _tradingContext.CurrentTime);
     }
 
