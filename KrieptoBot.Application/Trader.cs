@@ -56,7 +56,7 @@ namespace KrieptoBot.Application
             {
                 //get balances
                 var openStopLossOrders = await GetOpenStopLossOrders(market);
-                var balance = await _exchangeService.GetBalanceAsync(market.Name.Value);
+                var balance = await _exchangeService.GetBalanceAsync(market.Name.BaseSymbol.Value);
                 var amountInStopLossOrders = openStopLossOrders.Sum(x => x.Amount.Value);
 
                 if (balance.Available.Value + amountInStopLossOrders < market.MinimumQuoteAmount)
@@ -66,18 +66,20 @@ namespace KrieptoBot.Application
 
                 var candles = await _exchangeService.GetCandlesAsync(market.Name.Value, _tradingContext.Interval,
                     end: _tradingContext.CurrentTime);
-                
-                var stopLossPrice = candles.MaxBy(x=>x.TimeStamp)!.Close.Value * (1 - _tradingSettings.StopLossPercentage);
 
-                if (balance.Available.Value >= market.MinimumQuoteAmount)
+                var stopLossPrice = candles.MaxBy(x => x.TimeStamp)!.Close.Value *
+                                    (1 - _tradingSettings.StopLossPercentage / 100);
+
+                if (balance.Available.Value >= market.MinimumBaseAmount)
                 {
-                    await _exchangeService.PostSellOrderAsync(market.Name.Value, OrderType.StopLoss, balance.Available.Value,
+                    await _exchangeService.PostStopLossOrderAsync(market.Name.Value, balance.Available.Value,
                         stopLossPrice);
                 }
 
                 foreach (var existingStopLoss in openStopLossOrders.Where(x => x.Price.Value < stopLossPrice))
                 {
-                    await _exchangeService.UpdateOrder(market.Name.Value, existingStopLoss.Id, stopLossPrice);
+                    await _exchangeService.UpdateOrderOrderTriggerAmount(market.Name.Value, existingStopLoss.Id,
+                        stopLossPrice);
                 }
             }
         }
@@ -260,7 +262,6 @@ namespace KrieptoBot.Application
 
             foreach (var (market, recommendatorScore) in marketsToSell)
             {
-                //todo: include budget in order to 
                 var balance = await GetTotalBalanceForAsset(market.Name.BaseSymbol);
                 if (market.MinimumBaseAmount <= balance) marketsToSellWithEnoughBalance.Add(market, recommendatorScore);
             }
