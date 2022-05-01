@@ -130,8 +130,16 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
                     { "market", market },
                     { "orderType", orderType },
                     { "side", "sell" },
-                    { "amount", amount.RoundToSignificantDigits(5, MidpointRounding.ToZero).ToString(CultureInfo.InvariantCulture) },
-                    { "price", price.RoundToSignificantDigits(5, MidpointRounding.ToZero).ToString(CultureInfo.InvariantCulture) }
+                    {
+                        "amount",
+                        amount.RoundToSignificantDigits(5, MidpointRounding.ToZero)
+                            .ToString(CultureInfo.InvariantCulture)
+                    },
+                    {
+                        "price",
+                        price.RoundToSignificantDigits(5, MidpointRounding.ToZero)
+                            .ToString(CultureInfo.InvariantCulture)
+                    }
                 }
             );
 
@@ -173,11 +181,28 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
             }
         }
 
+        public async Task CancelOrder(string market, Guid orderId)
+        {
+            await _bitvavoApi.CancelOrder(market, orderId);
+        }
+
         public async Task<DateTime> GetTime()
         {
             var time = await _bitvavoApi.GetTime();
 
             return DateTime.UnixEpoch.AddMilliseconds(time.TimeInMilliseconds);
+        }
+
+        public async Task UpdateOrder(string market, Guid id, decimal price)
+        {
+            await _bitvavoApi.UpdateOrderAsync(
+                new Dictionary<string, string>
+                {
+                    { "market", market },
+                    { "orderId", id.ToString() },
+                    { "price", price.RoundToSignificantDigits(5).ToString(CultureInfo.InvariantCulture) }
+                }
+            );
         }
 
         public async Task<Order> GetOrderAsync(string market, Guid orderId)

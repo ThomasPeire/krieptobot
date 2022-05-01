@@ -30,11 +30,13 @@ namespace KrieptoBot.Application
 
         Task<IEnumerable<Order>> GetOpenOrderAsync();
         Task<IEnumerable<Order>> GetOpenOrderAsync(string market);
-        Task<Order> PostSellOrderAsync(string market, string orderType, decimal amount, decimal price);
+        Task<Order> PostSellOrderAsync(string market, string orderType, decimal amount, decimal price = default);
         Task<Order> PostBuyOrderAsync(string market, string orderType, decimal amount, decimal price);
         Task<TickerPrice> GetTickerPrice(string market);
         Task CancelOrders(string market = "");
+        Task CancelOrder(string market, Guid orderId);
 
         Task<DateTime> GetTime();
+        Task UpdateOrder(string market, Guid id, decimal stopLossPrice);
     }
 }
