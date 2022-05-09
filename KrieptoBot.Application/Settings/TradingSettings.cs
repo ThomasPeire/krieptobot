@@ -17,5 +17,6 @@ namespace KrieptoBot.Application.Settings
         public decimal MinBuyBudgetPerCoin { get; set; } = 20m;
         public int PollingIntervalInMinutes { get; set; } = 5;
         public int BuyCoolDownPeriodInMinutes { get; set; } = 5;
+        public decimal StopLossPercentage { get; set; } = 2;
     }
 }

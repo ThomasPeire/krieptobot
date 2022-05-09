@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using KrieptoBot.Domain.Recommendation.ValueObjects;
 using KrieptoBot.Domain.Trading.ValueObjects;
-using Microsoft.FSharp.Collections;
 
 namespace KrieptoBot.Application.Indicators
 {
@@ -21,7 +20,7 @@ namespace KrieptoBot.Application.Indicators
             return rawLevels
                 .OrderBy(x => x.From)
                 .Where(level =>
-                    !rawLevels.Any(x => x.From < level.From && Math.Abs(level - x) <= averageHighLowDifference/2))
+                    !rawLevels.Any(x => x.From < level.From && Math.Abs(level - x) <= averageHighLowDifference / 2))
                 .ToList();
         }
 
@@ -86,7 +85,15 @@ namespace KrieptoBot.Application.Indicators
 
         private static IEnumerable<Candle[]> CreateFractals(IEnumerable<Candle> candles)
         {
-            return SeqModule.Windowed(WindowLength, candles);
+            var window = new List<Candle>();
+            foreach (var candle in candles)
+            {
+                window.Add(candle);
+                if (window.Count != WindowLength) 
+                    continue;
+                yield return window.ToArray();
+                window.RemoveAt(0);
+            }
         }
     }
 }

@@ -69,7 +69,8 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Extensions
                     OrderSide.FromString(dto.Side),
                     OrderType.FromString(dto.OrderType),
                     new Amount(decimal.Parse(dto.Amount ?? "0", CultureInfo.InvariantCulture)),
-                    new Price(decimal.Parse(dto.Price ?? "0", CultureInfo.InvariantCulture))
+                    new Price(decimal.Parse(dto.Price ?? "0", CultureInfo.InvariantCulture)),
+                    new Price(decimal.Parse(dto.TriggerPrice ?? "0", CultureInfo.InvariantCulture))
                 );
         }
 

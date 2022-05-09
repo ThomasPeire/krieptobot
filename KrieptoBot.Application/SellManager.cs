@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using KrieptoBot.Domain.Trading.Entity;
+﻿using System.Threading.Tasks;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using Microsoft.Extensions.Logging;
 
@@ -25,21 +22,27 @@ namespace KrieptoBot.Application
 
         public async Task Sell(Market market)
         {
-            var priceToSellOn = await GetPriceToSellOn(market);
-            var availableBaseAssetBalance = await GetBalanceAvailableToSell(market);
+            var availableBaseAssetBalance = await GetSellableBalance(market);
 
+            var priceToSellOn = await _exchangeService.GetTickerPrice(market.Name.Value);
             LogSellRecommendation(market, priceToSellOn, availableBaseAssetBalance);
             await SendNotificationWithSellRecommendation(market, priceToSellOn, availableBaseAssetBalance);
 
             if (ShouldPlaceOrder())
-                await PlaceOrder(market, availableBaseAssetBalance, priceToSellOn);
+            {
+                await CancelOpenOrders(market);
+                await PlaceOrder(market, availableBaseAssetBalance);
+            }
         }
 
-        private async Task<Order> PlaceOrder(Market market, decimal availableBaseAssetBalance,
-            TickerPrice priceToSellOn)
+        private async Task CancelOpenOrders(Market market)
         {
-            return await _exchangeService.PostSellOrderAsync(market.Name, "limit", availableBaseAssetBalance,
-                priceToSellOn.Price);
+            await _exchangeService.CancelOrders(market.Name.Value);
+        }
+
+        private async Task PlaceOrder(Market market, decimal availableBaseAssetBalance)
+        {
+            await _exchangeService.PostSellOrderAsync(market.Name, "market", availableBaseAssetBalance);
         }
 
         private bool ShouldPlaceOrder()
@@ -55,7 +58,8 @@ namespace KrieptoBot.Application
                 $"Price: € {priceToSellOn.Price.Value} - Amount: {availableBaseAssetBalance} - € {availableBaseAssetBalance * priceToSellOn.Price:0.00}");
         }
 
-        private void LogSellRecommendation(Market market, TickerPrice priceToSellOn, decimal availableBaseAssetBalance)
+        private void LogSellRecommendation(Market market, TickerPrice priceToSellOn,
+            decimal availableBaseAssetBalance)
         {
             _logger.LogInformation("Selling on {Market}. Price: € {Price}; Amount: {Amount}; € {Euro}",
                 market.Name.Value,
@@ -63,15 +67,15 @@ namespace KrieptoBot.Application
                 (availableBaseAssetBalance * priceToSellOn.Price).ToString("0.00"));
         }
 
-        private async Task<decimal> GetBalanceAvailableToSell(Market market)
+        private async Task<decimal> GetSellableBalance(Market market)
         {
             var balance = await GetBalanceAsync(market);
-            var availableBaseAssetBalance = 0m;
+            var sellableBalance = 0m;
 
             if (balance != null)
-                availableBaseAssetBalance = balance.Available - balance.InOrder;
+                sellableBalance = balance.Available + balance.InOrder;
 
-            return availableBaseAssetBalance;
+            return sellableBalance;
         }
 
         private async Task<Balance> GetBalanceAsync(Market market)
@@ -79,16 +83,16 @@ namespace KrieptoBot.Application
             return await _exchangeService.GetBalanceAsync(market.Name.BaseSymbol);
         }
 
-        private async Task<TickerPrice> GetPriceToSellOn(Market market)
-        {
-            var lastCandles = await _exchangeService.GetCandlesAsync(market.Name, _tradingContext.Interval,
-                end: _tradingContext.CurrentTime);
-            var lastCandle = lastCandles.OrderByDescending(x => x.TimeStamp).First();
-
-            var high = Math.Max(lastCandle.Close, lastCandle.Open);
-            var low = Math.Min(lastCandle.Close, lastCandle.Open);
-
-            return new TickerPrice(market.Name, new Price(high - (high - low) / 2));
-        }
+        // private async Task<TickerPrice> GetPriceToSellOn(Market market)
+        // {
+        //     var lastCandles = await _exchangeService.GetCandlesAsync(market.Name, _tradingContext.Interval,
+        //         end: _tradingContext.CurrentTime);
+        //     var lastCandle = lastCandles.OrderByDescending(x => x.TimeStamp).First();
+        //
+        //     var high = Math.Max(lastCandle.Close, lastCandle.Open);
+        //     var low = Math.Min(lastCandle.Close, lastCandle.Open);
+        //
+        //     return new TickerPrice(market.Name, new Price(high - (high - low) / 2));
+        // }
     }
 }

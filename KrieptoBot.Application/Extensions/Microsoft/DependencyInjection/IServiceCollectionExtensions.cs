@@ -34,7 +34,7 @@ namespace KrieptoBot.Application.Extensions.Microsoft.DependencyInjection
             {
                 var tradingSettings = x.GetRequiredService<IOptions<TradingSettings>>().Value;
                 var dateTimeProvider = x.GetRequiredService<IDateTimeProvider>();
-                return new TradingContext(dateTimeProvider)
+                var tradingContext= new TradingContext(dateTimeProvider)
                     .SetMarketsToWatch(tradingSettings.MarketsToWatch)
                     .SetInterval(tradingSettings.Interval)
                     .SetBuyMargin(tradingSettings.BuyMargin)
@@ -42,6 +42,8 @@ namespace KrieptoBot.Application.Extensions.Microsoft.DependencyInjection
                     .SetIsSimulation(tradingSettings.IsSimulation)
                     .SetPollingInterval(tradingSettings.PollingIntervalInMinutes)
                     .SetBuyCoolDownPeriod(tradingSettings.BuyCoolDownPeriodInMinutes);
+                tradingContext.SetCurrentTime();
+                return tradingContext;
             });
         }
     }

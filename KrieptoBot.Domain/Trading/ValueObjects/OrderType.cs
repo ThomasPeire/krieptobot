@@ -10,6 +10,9 @@ namespace KrieptoBot.Domain.Trading.ValueObjects
         public static readonly OrderType Limit = new("limit");
         public static readonly OrderType TakeProfitLimit = new("takeProfitLimit");
         public static readonly OrderType Market = new("market");
+        public static readonly OrderType StopLoss = new("stopLoss");
+        public static readonly OrderType StopLossLimit = new("stopLossLimit");
+        public static readonly OrderType TakeProfit = new("takeProfit");
 
         private OrderType(string value)
         {
@@ -32,7 +35,10 @@ namespace KrieptoBot.Domain.Trading.ValueObjects
                 "limit" => Limit,
                 "takeprofitlimit" => TakeProfitLimit,
                 "market" => Market,
-                _ => throw new ArgumentException($"{value} is not a valid ordertype")
+                "stoploss" => StopLoss,
+                "stoplosslimit" => StopLossLimit,
+                "takeprofit" => TakeProfit,
+                _ => throw new ArgumentException($"{value} is not a valid order type")
             };
         }
 

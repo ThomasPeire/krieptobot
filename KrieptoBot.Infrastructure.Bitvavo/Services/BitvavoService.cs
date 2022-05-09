@@ -124,14 +124,51 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
 
         public async Task<Order> PostSellOrderAsync(string market, string orderType, decimal amount, decimal price)
         {
+            var paramDictionary = new Dictionary<string, string>()
+            {
+                { "market", market },
+                { "orderType", orderType },
+                { "side", "sell" },
+                {
+                    "amount",
+                    amount.RoundToSignificantDigits(5, MidpointRounding.ToZero)
+                        .ToString(CultureInfo.InvariantCulture)
+                }
+            };
+
+            if (price != 0m)
+            {
+                paramDictionary.Add("price", price.RoundToSignificantDigits(5, MidpointRounding.ToZero)
+                    .ToString(CultureInfo.InvariantCulture));
+            }
+
+            var dto = await _bitvavoApi.PostOrderAsync(
+                paramDictionary
+            );
+
+            return dto.ConvertToKrieptoBotModel();
+        }
+
+        public async Task<Order> PostStopLossOrderAsync(string market, decimal amount, decimal price)
+        {
             var dto = await _bitvavoApi.PostOrderAsync(
                 new Dictionary<string, string>
                 {
                     { "market", market },
-                    { "orderType", orderType },
+                    { "orderType", OrderType.StopLoss },
                     { "side", "sell" },
-                    { "amount", amount.RoundToSignificantDigits(5, MidpointRounding.ToZero).ToString(CultureInfo.InvariantCulture) },
-                    { "price", price.RoundToSignificantDigits(5, MidpointRounding.ToZero).ToString(CultureInfo.InvariantCulture) }
+                    {
+                        "amount",
+                        amount.RoundToSignificantDigits(5, MidpointRounding.ToZero)
+                            .ToString(CultureInfo.InvariantCulture)
+                    },
+                    {
+                        "triggerAmount",
+                        price.RoundToSignificantDigits(5, MidpointRounding.ToZero)
+                            .ToString(CultureInfo.InvariantCulture)
+                    },
+                    { "triggerType", "price" },
+                    { "triggerReference", "lastTrade" }
                 }
             );
 
@@ -173,11 +210,40 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
             }
         }
 
+        public async Task CancelOrder(string market, Guid orderId)
+        {
+            await _bitvavoApi.CancelOrder(market, orderId);
+        }
+
         public async Task<DateTime> GetTime()
         {
             var time = await _bitvavoApi.GetTime();
 
             return DateTime.UnixEpoch.AddMilliseconds(time.TimeInMilliseconds);
+        }
+
+        public async Task UpdateOrderPrice(string market, Guid id, decimal price)
+        {
+            await _bitvavoApi.UpdateOrderAsync(
+                new Dictionary<string, string>
+                {
+                    { "market", market },
+                    { "orderId", id.ToString() },
+                    { "price", price.RoundToSignificantDigits(5).ToString(CultureInfo.InvariantCulture) }
+                }
+            );
+        }
+
+        public async Task UpdateOrderTriggerAmount(string market, Guid id, decimal price)
+        {
+            await _bitvavoApi.UpdateOrderAsync(
+                new Dictionary<string, string>
+                {
+                    { "market", market },
+                    { "orderId", id.ToString() },
+                    { "triggerAmount", price.RoundToSignificantDigits(5).ToString(CultureInfo.InvariantCulture) }
+                }
+            );
         }
 
         public async Task<Order> GetOrderAsync(string market, Guid orderId)
