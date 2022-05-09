@@ -46,12 +46,14 @@ namespace KrieptoBot.Application
 
             await SellIfNeeded(recommendations);
             await BuyIfNeeded(recommendations);
-
             await SetOrUpdateStopLossForMarketsWithSellableAmount();
         }
 
         private async Task SetOrUpdateStopLossForMarketsWithSellableAmount()
         {
+            if (_tradingSettings.IsSimulation)
+                return;
+
             foreach (var market in await GetMarketsToEvaluate())
             {
                 //get balances
@@ -59,7 +61,7 @@ namespace KrieptoBot.Application
                 var balance = await _exchangeService.GetBalanceAsync(market.Name.BaseSymbol.Value);
                 var amountInStopLossOrders = openStopLossOrders.Sum(x => x.Amount.Value);
 
-                if (balance.Available.Value + amountInStopLossOrders < market.MinimumQuoteAmount)
+                if (balance.Available.Value + amountInStopLossOrders < market.MinimumBaseAmount)
                 {
                     continue;
                 }
@@ -76,9 +78,9 @@ namespace KrieptoBot.Application
                         stopLossPrice);
                 }
 
-                foreach (var existingStopLoss in openStopLossOrders.Where(x => x.Price.Value < stopLossPrice))
+                foreach (var existingStopLoss in openStopLossOrders.Where(x => x.TriggerPrice.Value < stopLossPrice))
                 {
-                    await _exchangeService.UpdateOrderOrderTriggerAmount(market.Name.Value, existingStopLoss.Id,
+                    await _exchangeService.UpdateOrderTriggerAmount(market.Name.Value, existingStopLoss.Id,
                         stopLossPrice);
                 }
             }
@@ -287,7 +289,9 @@ namespace KrieptoBot.Application
 
         private async Task<Dictionary<Market, RecommendatorScore>> GetRecommendations()
         {
-            var marketsToEvaluate = await GetMarketsToEvaluate();
+            var marketsToEvaluate = (await GetMarketsToEvaluate()).ToList();
+
+            LogMarketsToEvaluate(marketsToEvaluate);
 
             var marketRecommendations =
                 await Task.WhenAll(
@@ -305,12 +309,15 @@ namespace KrieptoBot.Application
             foreach (var market in _tradingContext.MarketsToWatch)
                 marketsToWatch.Add(await _exchangeService.GetMarketAsync(market));
 
+            return marketsToWatch;
+        }
+
+        private void LogMarketsToEvaluate(List<Market> marketsToWatch)
+        {
             _logger.LogInformation("Markets to evaluate:");
 
             foreach (var market in marketsToWatch)
                 _logger.LogInformation("{Market}", market.Name.Value);
-
-            return marketsToWatch;
         }
     }
 }

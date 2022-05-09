@@ -39,6 +39,6 @@ namespace KrieptoBot.Application
 
         Task<DateTime> GetTime();
         Task UpdateOrderPrice(string market, Guid id, decimal price);
-        Task UpdateOrderOrderTriggerAmount(string market, Guid id, decimal price);
+        Task UpdateOrderTriggerAmount(string market, Guid id, decimal price);
     }
 }

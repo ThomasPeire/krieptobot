@@ -7,7 +7,7 @@ namespace KrieptoBot.Domain.Trading.Entity
     {
         public Order(Guid id, MarketName marketName, DateTime created, DateTime updated, OrderStatus status,
             OrderSide side,
-            OrderType type, Amount amount, Price price) : base(id)
+            OrderType type, Amount amount, Price price, Price triggerPrice) : base(id)
         {
             ArgumentNullException.ThrowIfNull(marketName);
             ArgumentNullException.ThrowIfNull(created);
@@ -17,6 +17,7 @@ namespace KrieptoBot.Domain.Trading.Entity
             ArgumentNullException.ThrowIfNull(type);
             ArgumentNullException.ThrowIfNull(amount);
             ArgumentNullException.ThrowIfNull(price);
+            ArgumentNullException.ThrowIfNull(triggerPrice);
 
             MarketName = marketName;
             Created = created;
@@ -26,6 +27,7 @@ namespace KrieptoBot.Domain.Trading.Entity
             Type = type;
             Amount = amount;
             Price = price;
+            TriggerPrice = triggerPrice;
         }
 
         public MarketName MarketName { get; }
@@ -36,5 +38,6 @@ namespace KrieptoBot.Domain.Trading.Entity
         public OrderType Type { get; }
         public Amount Amount { get; }
         public Price Price { get; }
+        public Price TriggerPrice { get; }
     }
 }

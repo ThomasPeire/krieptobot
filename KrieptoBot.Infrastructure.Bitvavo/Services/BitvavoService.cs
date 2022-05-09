@@ -124,23 +124,26 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
 
         public async Task<Order> PostSellOrderAsync(string market, string orderType, decimal amount, decimal price)
         {
-            var dto = await _bitvavoApi.PostOrderAsync(
-                new Dictionary<string, string>
+            var paramDictionary = new Dictionary<string, string>()
+            {
+                { "market", market },
+                { "orderType", orderType },
+                { "side", "sell" },
                 {
-                    { "market", market },
-                    { "orderType", orderType },
-                    { "side", "sell" },
-                    {
-                        "amount",
-                        amount.RoundToSignificantDigits(5, MidpointRounding.ToZero)
-                            .ToString(CultureInfo.InvariantCulture)
-                    },
-                    {
-                        "price",
-                        price.RoundToSignificantDigits(5, MidpointRounding.ToZero)
-                            .ToString(CultureInfo.InvariantCulture)
-                    }
+                    "amount",
+                    amount.RoundToSignificantDigits(5, MidpointRounding.ToZero)
+                        .ToString(CultureInfo.InvariantCulture)
                 }
+            };
+
+            if (price != 0m)
+            {
+                paramDictionary.Add("price", price.RoundToSignificantDigits(5, MidpointRounding.ToZero)
+                    .ToString(CultureInfo.InvariantCulture));
+            }
+
+            var dto = await _bitvavoApi.PostOrderAsync(
+                paramDictionary
             );
 
             return dto.ConvertToKrieptoBotModel();
@@ -231,7 +234,7 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
             );
         }
 
-        public async Task UpdateOrderOrderTriggerAmount(string market, Guid id, decimal price)
+        public async Task UpdateOrderTriggerAmount(string market, Guid id, decimal price)
         {
             await _bitvavoApi.UpdateOrderAsync(
                 new Dictionary<string, string>
