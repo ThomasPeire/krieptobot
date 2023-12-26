@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using KrieptoBot.Application;
 using KrieptoBot.Application.Recommendators;
@@ -41,7 +42,7 @@ namespace KrieptoBot.Tests.Application
             _exchangeServiceMock.Setup(x => x.GetTickerPrice(It.IsAny<string>())).ReturnsAsync(new TickerPrice(new MarketName(market), new Price(10000)));
 
             _exchangeServiceMock.Setup(x => x.GetCandlesAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(),
-                    It.IsAny<DateTime?>(), It.IsAny<DateTime?>()))
+                    It.IsAny<DateTime?>(), It.IsAny<DateTime?>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(new List<Candle>(new[]
                 {
                     new Candle(DateTime.Today, new Price(currentHigh), new Price(currentLow), new Price(currentHigh), new Price(currentLow), 100),
@@ -80,7 +81,7 @@ namespace KrieptoBot.Tests.Application
 
             _exchangeServiceMock.Setup(x => x.GetTickerPrice(It.IsAny<string>())).ReturnsAsync(new TickerPrice(new MarketName(market), new Price(10000)));
             _exchangeServiceMock.Setup(x => x.GetCandlesAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(),
-                    It.IsAny<DateTime?>(), It.IsAny<DateTime?>()))
+                    It.IsAny<DateTime?>(), It.IsAny<DateTime?>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(new List<Candle>(new[]
                 {
                     new Candle(DateTime.Today, new Price(currentHigh), new Price(currentLow), new Price(3), new Price(3), 100),
