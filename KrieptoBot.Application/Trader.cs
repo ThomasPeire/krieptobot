@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using KrieptoBot.Application.Recommendators;
 using KrieptoBot.Application.Settings;
 using KrieptoBot.Domain.Recommendation.ValueObjects;
+using KrieptoBot.Domain.Trading.Entity;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -36,22 +37,80 @@ namespace KrieptoBot.Application
 
         public async Task Run()
         {
-            var bitvavoTime = await _exchangeService.GetTime();
-            _logger.LogInformation("Exchange time: {BitvavoTime}, Local time: {Local}", bitvavoTime.ToLocalTime(), DateTime.Now);
-
-            await CancelOpenOrders();
+            await LogTime();
+            await CancelOpenLimitOrMarketOrders();
 
             var recommendations = await GetRecommendations();
 
             LogFinalScores(recommendations);
 
-            var marketsToSell = await DetermineMarketsToSell(recommendations);
-            var marketsToBuy = await DetermineMarketsToBuy(recommendations);
+            await SellIfNeeded(recommendations);
+            await BuyIfNeeded(recommendations);
+            await SetOrUpdateStopLossForMarketsWithSellableAmount();
+        }
 
+        private async Task SetOrUpdateStopLossForMarketsWithSellableAmount()
+        {
+            if (_tradingSettings.IsSimulation)
+                return;
+
+            foreach (var market in await GetMarketsToEvaluate())
+            {
+                //get balances
+                var openStopLossOrders = await GetOpenStopLossOrders(market);
+                var balance = await _exchangeService.GetBalanceAsync(market.Name.BaseSymbol.Value);
+                var amountInStopLossOrders = openStopLossOrders.Sum(x => x.Amount.Value);
+
+                if (balance.Available.Value + amountInStopLossOrders < market.MinimumBaseAmount)
+                {
+                    continue;
+                }
+
+                var candles = await _exchangeService.GetCandlesAsync(market.Name.Value, _tradingContext.Interval,
+                    end: _tradingContext.CurrentTime);
+
+                var stopLossPrice = candles.MaxBy(x => x.TimeStamp)!.Close.Value *
+                                    (1 - _tradingSettings.StopLossPercentage / 100);
+
+                if (balance.Available.Value >= market.MinimumBaseAmount)
+                {
+                    await _exchangeService.PostStopLossOrderAsync(market.Name.Value, balance.Available.Value,
+                        stopLossPrice);
+                }
+
+                foreach (var existingStopLoss in openStopLossOrders.Where(x => x.TriggerPrice.Value < stopLossPrice))
+                {
+                    await _exchangeService.UpdateOrderTriggerAmount(market.Name.Value, existingStopLoss.Id,
+                        stopLossPrice);
+                }
+            }
+        }
+
+        private async Task<List<Order>> GetOpenStopLossOrders(Market market)
+        {
+            var openOrders = await _exchangeService.GetOpenOrderAsync(market.Name.Value);
+            var openStopLossOrders = openOrders.Where(o => o.Type.Value == OrderType.StopLoss).ToList();
+            return openStopLossOrders;
+        }
+
+        private async Task LogTime()
+        {
+            var bitvavoTime = await _exchangeService.GetTime();
+            _logger.LogInformation("Exchange time: {BitvavoTime}, Local time: {Local}",
+                bitvavoTime.ToLocalTime(), DateTime.Now);
+        }
+
+        private async Task BuyIfNeeded(Dictionary<Market, RecommendatorScore> recommendations)
+        {
+            var marketsToBuy = await DetermineMarketsToBuy(recommendations);
+            if (marketsToBuy.Any()) await Buy(marketsToBuy);
+        }
+
+        private async Task SellIfNeeded(Dictionary<Market, RecommendatorScore> recommendations)
+        {
+            var marketsToSell = await DetermineMarketsToSell(recommendations);
             if (marketsToSell.Any())
                 await Sell(marketsToSell.Select(x => x.Key));
-
-            if (marketsToBuy.Any()) await Buy(marketsToBuy);
         }
 
         private void LogFinalScores(Dictionary<Market, RecommendatorScore> recommendations)
@@ -63,11 +122,18 @@ namespace KrieptoBot.Application
             }
         }
 
-        private async Task CancelOpenOrders()
+        private async Task CancelOpenLimitOrMarketOrders()
         {
             if (!_tradingContext.IsSimulation)
             {
-                await _exchangeService.CancelOrders(string.Empty);
+                foreach (var market in await GetMarketsToEvaluate())
+                {
+                    var openMarketOrders = await _exchangeService.GetOpenOrderAsync(market.Name.Value);
+                    var openMarketOrdersIdsToCancel = openMarketOrders.Where(x =>
+                        x.Type == OrderType.Limit || x.Type == OrderType.Market).ToList();
+
+                    openMarketOrdersIdsToCancel.ForEach(x => _exchangeService.CancelOrder(x.MarketName.Value, x.Id));
+                }
             }
         }
 
@@ -112,7 +178,16 @@ namespace KrieptoBot.Application
             var availableBalance = await _exchangeService.GetBalanceAsync(asset);
 
             return availableBalance != null
-                ? new Amount(Math.Max(availableBalance.Available.Value - availableBalance.InOrder.Value, 0))
+                ? availableBalance.Available
+                : Amount.Zero;
+        }
+
+        private async Task<Amount> GetTotalBalanceForAsset(Symbol asset)
+        {
+            var availableBalance = await _exchangeService.GetBalanceAsync(asset);
+
+            return availableBalance != null
+                ? availableBalance.Available + availableBalance.InOrder
                 : Amount.Zero;
         }
 
@@ -172,7 +247,7 @@ namespace KrieptoBot.Application
         {
             var marketsToSell = GetMarketsWhereSellRecommendationExceedsMargin(recommendations);
 
-            marketsToSell = await GetMarketsWhereAvailableBalanceExceedsMinimumBaseAmount(marketsToSell);
+            marketsToSell = await GetMarketsWhereBalanceExceedsMinimumBaseAmount(marketsToSell);
 
             foreach (var (market, score) in marketsToSell)
                 _logger.LogInformation("Sell recommendation for {Market}, with a score of {Score}", market.Name.Value,
@@ -182,14 +257,14 @@ namespace KrieptoBot.Application
         }
 
         private async Task<Dictionary<Market, RecommendatorScore>>
-            GetMarketsWhereAvailableBalanceExceedsMinimumBaseAmount(
+            GetMarketsWhereBalanceExceedsMinimumBaseAmount(
                 Dictionary<Market, RecommendatorScore> marketsToSell)
         {
             var marketsToSellWithEnoughBalance = new Dictionary<Market, RecommendatorScore>();
 
             foreach (var (market, recommendatorScore) in marketsToSell)
             {
-                var balance = await GetAvailableBalanceForAsset(market.Name.BaseSymbol);
+                var balance = await GetTotalBalanceForAsset(market.Name.BaseSymbol);
                 if (market.MinimumBaseAmount <= balance) marketsToSellWithEnoughBalance.Add(market, recommendatorScore);
             }
 
@@ -214,7 +289,9 @@ namespace KrieptoBot.Application
 
         private async Task<Dictionary<Market, RecommendatorScore>> GetRecommendations()
         {
-            var marketsToEvaluate = await GetMarketsToEvaluate();
+            var marketsToEvaluate = (await GetMarketsToEvaluate()).ToList();
+
+            LogMarketsToEvaluate(marketsToEvaluate);
 
             var marketRecommendations =
                 await Task.WhenAll(
@@ -232,12 +309,15 @@ namespace KrieptoBot.Application
             foreach (var market in _tradingContext.MarketsToWatch)
                 marketsToWatch.Add(await _exchangeService.GetMarketAsync(market));
 
+            return marketsToWatch;
+        }
+
+        private void LogMarketsToEvaluate(List<Market> marketsToWatch)
+        {
             _logger.LogInformation("Markets to evaluate:");
 
             foreach (var market in marketsToWatch)
                 _logger.LogInformation("{Market}", market.Name.Value);
-
-            return marketsToWatch;
         }
     }
 }

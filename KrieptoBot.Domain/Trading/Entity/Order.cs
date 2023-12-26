@@ -7,7 +7,7 @@ namespace KrieptoBot.Domain.Trading.Entity
     {
         public Order(Guid id, MarketName marketName, DateTime created, DateTime updated, OrderStatus status,
             OrderSide side,
-            OrderType type, Amount amount, Price price) : base(id)
+            OrderType type, Amount amount, Price price, Price triggerPrice) : base(id)
         {
             ArgumentNullException.ThrowIfNull(marketName);
             ArgumentNullException.ThrowIfNull(created);
@@ -17,16 +17,7 @@ namespace KrieptoBot.Domain.Trading.Entity
             ArgumentNullException.ThrowIfNull(type);
             ArgumentNullException.ThrowIfNull(amount);
             ArgumentNullException.ThrowIfNull(price);
-
-            // var now = DateTime.UtcNow.AddSeconds(10);
-
-            // if (created > now) throw new ArgumentException("Created datetime can not be in the future");
-            //
-            // if (updated > now) throw new ArgumentException("Updated datetime can not be in the future");
-            //
-            // if (created > updated)
-            //     throw new ArgumentException("Created datetime can not be in the greater than updated datetime");
-
+            ArgumentNullException.ThrowIfNull(triggerPrice);
 
             MarketName = marketName;
             Created = created;
@@ -36,6 +27,7 @@ namespace KrieptoBot.Domain.Trading.Entity
             Type = type;
             Amount = amount;
             Price = price;
+            TriggerPrice = triggerPrice;
         }
 
         public MarketName MarketName { get; }
@@ -46,5 +38,6 @@ namespace KrieptoBot.Domain.Trading.Entity
         public OrderType Type { get; }
         public Amount Amount { get; }
         public Price Price { get; }
+        public Price TriggerPrice { get; }
     }
 }
