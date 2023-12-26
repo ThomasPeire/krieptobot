@@ -18,7 +18,7 @@ namespace KrieptoBot.DataCollector
         private static IHostBuilder CreateHostBuilder()
         {
             return new HostBuilder()
-                .ConfigureAppConfiguration((context, builder) =>
+                .ConfigureAppConfiguration((_, builder) =>
                     AddAppConfiguration(builder)
                 )
                 .ConfigureServices(AddServices).UseSerilog();

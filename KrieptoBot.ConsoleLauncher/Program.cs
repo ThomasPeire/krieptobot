@@ -26,7 +26,7 @@ namespace KrieptoBot.ConsoleLauncher
             }
             finally
             {
-                Log.CloseAndFlush();
+                await Log.CloseAndFlushAsync();
             }
         }
     }

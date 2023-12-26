@@ -1,8 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using KrieptoBot.Domain;
 using Microsoft.Extensions.Hosting;
 
 namespace KrieptoBot.DataCollector
@@ -16,10 +16,10 @@ namespace KrieptoBot.DataCollector
             _collector = collector;
         }
 
-        public async Task StartAsync(CancellationToken cancellationToken)
+        public Task StartAsync(CancellationToken cancellationToken)
         {
-            await _collector.CollectCandles(new List<string> { "BTC-EUR" }, new List<string> { "5m" },
-                new DateTime(2021, 11, 01), new DateTime(2021, 11, 30));
+            return _collector.CollectCandles([ "BTC-EUR" ], [ Interval.FiveMinutes ],
+                DateTime.Today.AddDays(-30), DateTime.Today, cancellationToken);
         }
 
         public Task StopAsync(CancellationToken cancellationToken)

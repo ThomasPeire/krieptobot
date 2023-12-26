@@ -2,10 +2,10 @@
 
     <PropertyGroup>
         <OutputType>Library</OutputType>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <ApplicationIcon/>
         <StartupObject/>
-        <LangVersion>10</LangVersion>
+        <LangVersion>12</LangVersion>
         <Configurations>Debug;Release;Debug-Non-Windows-Specific</Configurations>
         <Platforms>AnyCPU</Platforms>
     </PropertyGroup>

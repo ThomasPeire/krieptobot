@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using KrieptoBot.Application;
 using KrieptoBot.Application.Extensions.Microsoft.DependencyInjection;
 using KrieptoBot.Application.Settings;

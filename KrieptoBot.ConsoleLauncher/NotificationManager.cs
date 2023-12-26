@@ -13,7 +13,7 @@ namespace KrieptoBot.ConsoleLauncher
                 .AddHeader($"{DateTime.UtcNow:g}", "KrieptoBot!", "")
                 .AddText(message)
                 .Show();
-
+            
             await Task.CompletedTask;
         }
 

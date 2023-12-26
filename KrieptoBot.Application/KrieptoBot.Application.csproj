@@ -2,11 +2,11 @@
 
     <PropertyGroup>
         <OutputType>Library</OutputType>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <UserSecretsId>7d4ac361-7f6d-424e-9aef-57e92d9b44b3</UserSecretsId>
         <ApplicationIcon />
         <StartupObject />
-        <LangVersion>10</LangVersion>
+        <LangVersion>12</LangVersion>
         <Company>KrieptoBot</Company>
         <Product>KrieptoBot</Product>
         <Configurations>Debug;Release;Debug-Non-Windows-Specific</Configurations>
@@ -14,10 +14,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="FSharp.Core" Version="6.0.1" />
-        <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="6.0.0" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+        <PackageReference Include="FSharp.Core" Version="8.0.100" />
+        <PackageReference Include="MediatR" Version="12.2.0" />
+        <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
     </ItemGroup>
 
     <ItemGroup>
