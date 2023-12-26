@@ -11,7 +11,6 @@ namespace KrieptoBot.Application
         public TradingContext(IDateTimeProvider dateTimeProvider)
         {
             _dateTimeProvider = dateTimeProvider;
-            var _ = SetCurrentTime().Result;
         }
 
         public string Interval { get; private set; } = Domain.Interval.FiveMinutes;

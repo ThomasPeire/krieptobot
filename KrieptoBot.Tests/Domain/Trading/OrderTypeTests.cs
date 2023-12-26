@@ -12,7 +12,7 @@ namespace KrieptoBot.Tests.Domain.Trading
         {
             Action act = () => OrderType.FromString("invalid");
 
-            act.Should().Throw<ArgumentException>().WithMessage("invalid is not a valid ordertype");
+            act.Should().Throw<ArgumentException>().WithMessage("invalid is not a valid order type");
         }
 
         [Test]

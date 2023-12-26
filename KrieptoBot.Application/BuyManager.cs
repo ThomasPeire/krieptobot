@@ -70,13 +70,21 @@ namespace KrieptoBot.Application
 
         private async Task<TickerPrice> GetPriceToBuyOn(Market market)
         {
+            var halfOfOpenClose =  await GetHalfOfOpenAndClosePrices(market);
+            var tickerPrice = await _exchangeService.GetTickerPrice(market.Name);
+
+            var priceToBuy = Math.Min(halfOfOpenClose, tickerPrice.Price);
+            
+            return new TickerPrice(market.Name, new Price(priceToBuy));
+        }
+        private async Task<decimal> GetHalfOfOpenAndClosePrices(Market market)
+        {
             var lastCandles = await _exchangeService.GetCandlesAsync(market.Name, _tradingContext.Interval,
                 end: _tradingContext.CurrentTime);
             var lastCandle = lastCandles.OrderByDescending(x => x.TimeStamp).First();
-            var high = Math.Max(lastCandle.Close, lastCandle.Open);
-            var low = Math.Min(lastCandle.Close, lastCandle.Open);
-
-            return new TickerPrice(market.Name, new Price(low + (high - low) / 2));
+            var bodyHigh = Math.Max(lastCandle.Close, lastCandle.Open);
+            var bodyLow = Math.Min(lastCandle.Close, lastCandle.Open);
+            return bodyLow + (bodyHigh - bodyLow) / 2;
         }
     }
 }
