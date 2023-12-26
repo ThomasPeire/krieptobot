@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using KrieptoBot.Application;
 using KrieptoBot.Application.Recommendators;
 using KrieptoBot.Application.Settings;
+using KrieptoBot.Domain;
 using KrieptoBot.Domain.Recommendation.ValueObjects;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using Microsoft.Extensions.Caching.Memory;
@@ -45,7 +46,7 @@ namespace KrieptoBot.Tests.Application
                     {
                         "BTC-EUR"
                     })
-                .SetInterval("5m");
+                .SetInterval(Interval.FiveMinutes);
 
             _tradingSettings = new TradingSettings { MaxBuyBudgetPerCoin = 100m, MinBuyBudgetPerCoin = 0m };
         }
@@ -97,7 +98,7 @@ namespace KrieptoBot.Tests.Application
                     {
                         "BTC-EUR", "DOGE-EUR"
                     })
-                .SetInterval("5m");
+                .SetInterval(Interval.FiveMinutes);
 
             _recommendationCalculator
                 .Setup(x => x.CalculateRecommendation(new Market(new MarketName("BTC-EUR"), Amount.Zero, Amount.Zero)))

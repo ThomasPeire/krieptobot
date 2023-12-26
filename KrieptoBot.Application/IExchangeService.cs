@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
+using KrieptoBot.Domain;
 using KrieptoBot.Domain.Trading.Entity;
 using KrieptoBot.Domain.Trading.ValueObjects;
 
@@ -12,8 +14,8 @@ namespace KrieptoBot.Application
 
         Task<Balance> GetBalanceAsync(string symbol);
 
-        Task<IEnumerable<Candle>> GetCandlesAsync(string market, string interval = "5m", int limit = 1000,
-            DateTime? start = null, DateTime? end = null);
+        Task<IEnumerable<Candle>> GetCandlesAsync(string market, string interval = Interval.Minutes.Five, int limit = 1000,
+            DateTime? start = null, DateTime? end = null, CancellationToken ct = default);
 
         Task<IEnumerable<Market>> GetMarketsAsync();
         Task<Market> GetMarketAsync(string market);

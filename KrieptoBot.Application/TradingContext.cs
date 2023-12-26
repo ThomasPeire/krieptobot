@@ -13,7 +13,7 @@ namespace KrieptoBot.Application
             _dateTimeProvider = dateTimeProvider;
         }
 
-        public string Interval { get; private set; } = "5m";
+        public string Interval { get; private set; } = Domain.Interval.FiveMinutes;
         public IEnumerable<string> MarketsToWatch { get; private set; } = new List<string> { "BTC-EUR" };
         public DateTime CurrentTime { get; private set; }
         public decimal BuyMargin { get; private set; } = 0.5m;

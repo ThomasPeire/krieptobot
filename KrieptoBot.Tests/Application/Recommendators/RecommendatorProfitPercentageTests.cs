@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using KrieptoBot.Application;
 using KrieptoBot.Application.Recommendators;
 using KrieptoBot.Application.Settings;
+using KrieptoBot.Domain;
 using KrieptoBot.Domain.Trading.Entity;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using Microsoft.Extensions.Caching.Memory;
@@ -49,7 +50,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
                     {
                         "BTC-EUR"
                     })
-                .SetInterval("5m");
+                .SetInterval(Interval.FiveMinutes);
         }
 
         [Test]

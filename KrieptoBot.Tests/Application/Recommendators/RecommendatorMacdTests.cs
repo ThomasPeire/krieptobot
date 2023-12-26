@@ -12,6 +12,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
+using Interval = KrieptoBot.Domain.Interval;
 
 namespace KrieptoBot.Tests.Application.Recommendators
 {
@@ -50,7 +52,7 @@ namespace KrieptoBot.Tests.Application.Recommendators
                     {
                         "BTC-EUR"
                     })
-                .SetInterval("5m");
+                .SetInterval(Interval.Minutes.Five);
         }
 
         [Test]

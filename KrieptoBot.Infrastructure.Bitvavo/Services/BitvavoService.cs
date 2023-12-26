@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using KrieptoBot.Application;
+using KrieptoBot.Domain;
 using KrieptoBot.Domain.Trading.Entity;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using KrieptoBot.Infrastructure.Bitvavo.Dtos;
@@ -62,14 +64,14 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
             return balance.ConvertToKrieptoBotModel();
         }
 
-        public async Task<IEnumerable<Candle>> GetCandlesAsync(string market, string interval = "5m", int limit = 1000,
-            DateTime? start = null, DateTime? end = null)
+        public async Task<IEnumerable<Candle>> GetCandlesAsync(string market, string interval = Interval.Minutes.Five, int limit = 1000,
+            DateTime? start = null, DateTime? end = null, CancellationToken ct = default)
         {
             return await _cache.GetOrCreateAsync($"{nameof(GetCandlesAsync)}-{market}-{interval}-{limit}-{start}-{end}",
                 async cacheEntry =>
                 {
                     cacheEntry.AbsoluteExpirationRelativeToNow =
-                        TimeSpan.FromMinutes(HelperMethods.GetIntervalInMinutes(interval) - 1);
+                        TimeSpan.FromMinutes(Interval.Of(interval).InMinutes() - 1);
                     var candleJArrayList = await _bitvavoApi.GetCandlesAsync(market, interval, limit,
                         start.ToUnixTimeMilliseconds(), end.ToUnixTimeMilliseconds());
 

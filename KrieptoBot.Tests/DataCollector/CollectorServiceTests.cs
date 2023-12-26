@@ -27,7 +27,7 @@ namespace KrieptoBot.Tests.DataCollector
             await collectorService.StartAsync(new CancellationToken());
             _mockCollector.Verify(
                 x => x.CollectCandles(It.IsAny<IEnumerable<string>>(), It.IsAny<ICollection<string>>(),
-                    It.IsAny<DateTime>(), It.IsAny<DateTime>()), Times.Once);
+                    It.IsAny<DateTime>(), It.IsAny<DateTime>(), It.IsAny<CancellationToken>()), Times.Once);
         }
 
         [Test]
