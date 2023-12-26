@@ -31,7 +31,7 @@ namespace KrieptoBot.Application
             if (ShouldPlaceOrder())
             {
                 await CancelOpenOrders(market);
-                await PlaceOrder(market, availableBaseAssetBalance);
+                await PlaceOrder(market, availableBaseAssetBalance, priceToSellOn);
             }
         }
 
@@ -40,9 +40,9 @@ namespace KrieptoBot.Application
             await _exchangeService.CancelOrders(market.Name.Value);
         }
 
-        private async Task PlaceOrder(Market market, decimal availableBaseAssetBalance)
+        private async Task PlaceOrder(Market market, decimal availableBaseAssetBalance, TickerPrice priceToSellOn)
         {
-            await _exchangeService.PostSellOrderAsync(market.Name, "market", availableBaseAssetBalance);
+            await _exchangeService.PostSellOrderAsync(market.Name, "market", availableBaseAssetBalance, priceToSellOn.Price);
         }
 
         private bool ShouldPlaceOrder()
@@ -89,10 +89,10 @@ namespace KrieptoBot.Application
         //         end: _tradingContext.CurrentTime);
         //     var lastCandle = lastCandles.OrderByDescending(x => x.TimeStamp).First();
         //
-        //     var high = Math.Max(lastCandle.Close, lastCandle.Open);
-        //     var low = Math.Min(lastCandle.Close, lastCandle.Open);
+        //     var bodyHigh = Math.Max(lastCandle.Close, lastCandle.Open);
+        //     var bodyLow = Math.Min(lastCandle.Close, lastCandle.Open);
         //
-        //     return new TickerPrice(market.Name, new Price(high - (high - low) / 2));
+        //     return new TickerPrice(market.Name, new Price(bodyHigh - (bodyHigh - bodyLow) / 2));
         // }
     }
 }

@@ -99,6 +99,7 @@ namespace KrieptoBot.Tests.Exchange.Bitvavo.Helper
                     f => f.PickRandom("canceled", "expired", "filled", "new", "rejected", "partiallyfilled",
                         "awaitingtrigger"))
                 .RuleFor(x => x.OrderType, f => f.PickRandom("takeProfitLimit", "market", "limit"))
+                .RuleFor(x => x.TriggerPrice, f => f.Finance.Amount().ToString(CultureInfo.InvariantCulture))
                 .Generate();
             var result = order.ConvertToKrieptoBotModel();
 
