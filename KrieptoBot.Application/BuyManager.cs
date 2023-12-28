@@ -39,7 +39,7 @@ namespace KrieptoBot.Application
 
         private async Task PlaceOrder(Market market, decimal amount, TickerPrice priceToBuyOn)
         {
-            await _exchangeService.PostBuyOrderAsync(market.Name, "limit", amount,
+            await _exchangeService.PostBuyOrderAsync(market.Name, OrderType.Limit, amount,
                 priceToBuyOn.Price);
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
@@ -21,26 +22,28 @@ namespace KrieptoBot.Infrastructure.Bitvavo
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
             CancellationToken cancellationToken)
         {
-            if (request.RequestUri != null)
+            if (request.RequestUri == null)
             {
-                var url = request.RequestUri.AbsolutePath + request.RequestUri.Query;
-                var timeStamp = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
-
-                var httpMethod = request.Method.Method;
-                var body = string.Empty;
-                if (request.Content != null)
-                {
-                    body = await request.Content.ReadAsStringAsync(cancellationToken);
-                }
-
-                var toHash = timeStamp + httpMethod + url + body;
-                var signature = GenerateHeaderSignature(toHash, _bitvavoConfig.ApiSecret);
-
-                request.Headers.Add("Bitvavo-Access-Key", _bitvavoConfig.ApiKey);
-                request.Headers.Add("Bitvavo-Access-Window", "60000");
-                request.Headers.Add("Bitvavo-Access-Timestamp", timeStamp);
-                request.Headers.Add("Bitvavo-Access-Signature", signature);
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
             }
+
+            var url = request.RequestUri.AbsolutePath + request.RequestUri.Query;
+            var timeStamp = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
+
+            var httpMethod = request.Method.Method;
+            var body = string.Empty;
+            if (request.Content != null)
+            {
+                body = await request.Content.ReadAsStringAsync(cancellationToken);
+            }
+
+            var toHash = timeStamp + httpMethod + url + body;
+            var signature = GenerateHeaderSignature(toHash, _bitvavoConfig.ApiSecret);
+
+            request.Headers.Add("Bitvavo-Access-Key", _bitvavoConfig.ApiKey);
+            request.Headers.Add("Bitvavo-Access-Window", "60000");
+            request.Headers.Add("Bitvavo-Access-Timestamp", timeStamp);
+            request.Headers.Add("Bitvavo-Access-Signature", signature);
 
             return await base.SendAsync(request, cancellationToken);
         }

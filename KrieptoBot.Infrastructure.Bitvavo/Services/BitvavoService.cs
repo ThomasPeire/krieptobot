@@ -12,6 +12,7 @@ using KrieptoBot.Infrastructure.Bitvavo.Dtos;
 using KrieptoBot.Infrastructure.Bitvavo.Extensions;
 using KrieptoBot.Infrastructure.Bitvavo.Extensions.Helper;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
 
 namespace KrieptoBot.Infrastructure.Bitvavo.Services
 {
@@ -19,11 +20,13 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
     {
         private readonly IBitvavoApi _bitvavoApi;
         private readonly IMemoryCache _cache;
+        private readonly ILogger<BitvavoService> _logger;
 
-        public BitvavoService(IBitvavoApi bitvavoApi, IMemoryCache cache)
+        public BitvavoService(IBitvavoApi bitvavoApi, IMemoryCache cache, ILogger<BitvavoService> logger)
         {
             _bitvavoApi = bitvavoApi;
             _cache = cache;
+            _logger = logger;
         }
 
         public async Task<Asset> GetAssetAsync(string symbol)
@@ -59,7 +62,12 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
         {
             var dto = await _bitvavoApi.GetBalanceAsync(symbol);
             var balance = dto.FirstOrDefault() ??
-                          new BalanceDto { Available = "0", Symbol = symbol, InOrder = "0" };
+                          new BalanceDto
+                          {
+                              Available = "0",
+                              Symbol = symbol,
+                              InOrder = "0"
+                          };
 
             return balance.ConvertToKrieptoBotModel();
         }
@@ -128,12 +136,17 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
         {
             var paramDictionary = new Dictionary<string, string>()
             {
-                { "market", market },
-                { "orderType", orderType },
-                { "side", "sell" },
                 {
-                    "amount",
-                    amount.RoundToSignificantDigits(5, MidpointRounding.ToZero)
+                    "market", market
+                },
+                {
+                    "orderType", orderType
+                },
+                {
+                    "side", "sell"
+                },
+                {
+                    "amount", amount.RoundToSignificantDigits(5, MidpointRounding.ToZero)
                         .ToString(CultureInfo.InvariantCulture)
                 }
             };
@@ -143,6 +156,14 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
                 paramDictionary.Add("price", price.RoundToSignificantDigits(5, MidpointRounding.ToZero)
                     .ToString(CultureInfo.InvariantCulture));
             }
+
+            _logger.LogInformation(
+                "Posting sell order: Market: {Market} - OrderType: {OrderType} - Side: {Side} - Amount: {Amount} - Price: {Price}",
+                paramDictionary["Market"], 
+                paramDictionary["OrderType"], 
+                paramDictionary["Side"], 
+                paramDictionary["Amount"], 
+                paramDictionary["Price"]);
 
             var dto = await _bitvavoApi.PostOrderAsync(
                 paramDictionary
@@ -156,21 +177,29 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
             var dto = await _bitvavoApi.PostOrderAsync(
                 new Dictionary<string, string>
                 {
-                    { "market", market },
-                    { "orderType", OrderType.StopLoss },
-                    { "side", "sell" },
                     {
-                        "amount",
-                        amount.RoundToSignificantDigits(5, MidpointRounding.ToZero)
+                        "market", market
+                    },
+                    {
+                        "orderType", OrderType.StopLoss
+                    },
+                    {
+                        "side", "sell"
+                    },
+                    {
+                        "amount", amount.RoundToSignificantDigits(5, MidpointRounding.ToZero)
                             .ToString(CultureInfo.InvariantCulture)
                     },
                     {
-                        "triggerAmount",
-                        price.RoundToSignificantDigits(5, MidpointRounding.ToZero)
+                        "triggerAmount", price.RoundToSignificantDigits(5, MidpointRounding.ToZero)
                             .ToString(CultureInfo.InvariantCulture)
                     },
-                    { "triggerType", "price" },
-                    { "triggerReference", "lastTrade" }
+                    {
+                        "triggerType", "price"
+                    },
+                    {
+                        "triggerReference", "lastTrade"
+                    }
                 }
             );
 
@@ -182,11 +211,21 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
             var dto = await _bitvavoApi.PostOrderAsync(
                 new Dictionary<string, string>
                 {
-                    { "market", market },
-                    { "orderType", orderType },
-                    { "side", "buy" },
-                    { "amount", amount.RoundToSignificantDigits(5).ToString(CultureInfo.InvariantCulture) },
-                    { "price", price.RoundToSignificantDigits(5).ToString(CultureInfo.InvariantCulture) }
+                    {
+                        "market", market
+                    },
+                    {
+                        "orderType", orderType
+                    },
+                    {
+                        "side", "buy"
+                    },
+                    {
+                        "amount", amount.RoundToSignificantDigits(5).ToString(CultureInfo.InvariantCulture)
+                    },
+                    {
+                        "price", price.RoundToSignificantDigits(5).ToString(CultureInfo.InvariantCulture)
+                    }
                 }
             );
 
@@ -229,9 +268,15 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
             await _bitvavoApi.UpdateOrderAsync(
                 new Dictionary<string, string>
                 {
-                    { "market", market },
-                    { "orderId", id.ToString() },
-                    { "price", price.RoundToSignificantDigits(5).ToString(CultureInfo.InvariantCulture) }
+                    {
+                        "market", market
+                    },
+                    {
+                        "orderId", id.ToString()
+                    },
+                    {
+                        "price", price.RoundToSignificantDigits(5).ToString(CultureInfo.InvariantCulture)
+                    }
                 }
             );
         }
@@ -241,9 +286,15 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
             await _bitvavoApi.UpdateOrderAsync(
                 new Dictionary<string, string>
                 {
-                    { "market", market },
-                    { "orderId", id.ToString() },
-                    { "triggerAmount", price.RoundToSignificantDigits(5).ToString(CultureInfo.InvariantCulture) }
+                    {
+                        "market", market
+                    },
+                    {
+                        "orderId", id.ToString()
+                    },
+                    {
+                        "triggerAmount", price.RoundToSignificantDigits(5).ToString(CultureInfo.InvariantCulture)
+                    }
                 }
             );
         }

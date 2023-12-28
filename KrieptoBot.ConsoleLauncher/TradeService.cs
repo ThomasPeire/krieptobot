@@ -28,14 +28,23 @@ namespace KrieptoBot.ConsoleLauncher
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            await WaitForBeginningOfMinute().WaitAsync(cancellationToken);
+            try
+            {
+                _logger.LogInformation("Running in simulation mode: {Simulation}", _tradingContext.IsSimulation);
             
-            StartTrader(null, null);
+                await WaitForBeginningOfMinute().WaitAsync(cancellationToken);
             
-            var timer = new Timer(TimeSpan.FromMinutes(1).TotalMilliseconds);
-            timer.AutoReset = true;
-            timer.Elapsed += StartTrader;
-            timer.Start();
+                StartTrader(null, null);
+            
+                var timer = new Timer(TimeSpan.FromMinutes(1).TotalMilliseconds);
+                timer.AutoReset = true;
+                timer.Elapsed += StartTrader;
+                timer.Start();
+            }
+            catch (Exception e)
+            {
+                _logger.LogCritical("Error occurred: {Message}", e.Message);
+            }
         }
 
         private async Task WaitForBeginningOfMinute()

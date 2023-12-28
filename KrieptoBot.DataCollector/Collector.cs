@@ -40,6 +40,8 @@ namespace KrieptoBot.DataCollector
                     foreach (var task in tasks) candles.AddRange(await task);
 
                     var json = JsonSerializer.Serialize(candles.OrderBy(x => x.TimeStamp));
+                    
+                    _logger.LogInformation("Writing {Market}-{Interval} file", market, interval);
                     await File.WriteAllTextAsync($@"D:\{market}-{interval}.json", json, ct);
                 }
             }
@@ -51,7 +53,7 @@ namespace KrieptoBot.DataCollector
             var intervalInMinutes = Interval.Of(interval).InMinutes();
 
             var currentStartDateTime = fromDateTime;
-            const int numberOfCandlesInOneCall = 1000;
+            const int numberOfCandlesInOneCall = 100;
 
             while (currentStartDateTime <= toDateTime)
             {
@@ -78,15 +80,16 @@ namespace KrieptoBot.DataCollector
 
         private async Task<IEnumerable<Candle>> CreateTask(int numberOfCandlesInOneCall, string market, string interval, DateTime startTime, DateTime endTime, CancellationToken ct)
         {
-            
             await Semaphore.WaitAsync(ct);
-            
             ct.ThrowIfCancellationRequested();
             try
             {
-                _logger.LogInformation("Downloading {Interval} candles for {Market} from {StartTime} to {EndTime}", market, interval, startTime, endTime);
-                return await _exchangeService.GetCandlesAsync(market, interval, numberOfCandlesInOneCall,
+                _logger.LogInformation("Downloading {Interval} candles for {Market} from {StartTime} to {EndTime}", interval, market, startTime, endTime);
+                var result = await _exchangeService.GetCandlesAsync(market, interval, numberOfCandlesInOneCall,
                     startTime, endTime, ct);
+                _logger.LogInformation("Downloaded {Interval} candles for {Market} from {StartTime} to {EndTime}", interval, market, startTime, endTime);
+
+                return result;
             }
             finally
             {

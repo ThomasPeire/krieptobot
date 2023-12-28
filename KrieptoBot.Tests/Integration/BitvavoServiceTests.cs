@@ -13,6 +13,8 @@ using KrieptoBot.Infrastructure.Bitvavo.Extensions.Helper;
 using KrieptoBot.Infrastructure.Bitvavo.Services;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Moq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
@@ -42,7 +44,7 @@ namespace KrieptoBot.Tests.Integration
         {
             _bitvavoApi = TestServer.Services.GetRequiredService<IBitvavoApi>();
             _memoryCache = TestServer.Services.GetRequiredService<IMemoryCache>();
-            _bitvavoService = new BitvavoService(_bitvavoApi, _memoryCache);
+            _bitvavoService = new BitvavoService(_bitvavoApi, _memoryCache, new Mock<ILogger<BitvavoService>>().Object);
             _wireMockServer = TestServer.Services.GetRequiredService<WireMockServer>();
         }
 

@@ -55,8 +55,7 @@ public class RecommendatorMacd : RecommendatorBase
             "Market {Market} - {Recommendator} CurrentMacd: {MacdValue}, Histogram (previous, current): {PreviousValue}, {CurrentValue}",
             market.Name.Value, Name, currentMacdLineValue.ToString("0.0000000000"), previousVal.ToString("0.0000000000"),
             currentValue.ToString("0.0000000000"));
-
-
+        
         if (MacdGivesSellSignal(lastHistogramValues) && currentMacdLineValue > 0)
         {
             return RecommendationAction.Sell;

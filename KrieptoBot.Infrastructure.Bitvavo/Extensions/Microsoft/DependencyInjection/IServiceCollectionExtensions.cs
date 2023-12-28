@@ -24,6 +24,7 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Extensions.Microsoft.DependencyInjec
                 });
             services.AddScoped<IMemoryCache, MemoryCache>();
             services.AddTransient<BitvavoAuthHeaderHandler>();
+            services.AddTransient<BadRequestLoggingHandler>();
 
             services.AddScoped<IExchangeService, BitvavoService>();
             services.AddRefitClient<IBitvavoApi>(new RefitSettings(new NewtonsoftJsonContentSerializer()))
@@ -40,7 +41,9 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Extensions.Microsoft.DependencyInjec
                     configureClient.DefaultRequestHeaders.Accept.Add(
                         new MediaTypeWithQualityHeaderValue("application/json"));
                 })
-                .AddHttpMessageHandler<BitvavoAuthHeaderHandler>().AddPolicyHandler(GetRetryPolicy());
+                .AddHttpMessageHandler<BitvavoAuthHeaderHandler>()
+                .AddHttpMessageHandler<BadRequestLoggingHandler>()
+                .AddPolicyHandler(GetRetryPolicy());
         }
 
         private static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
