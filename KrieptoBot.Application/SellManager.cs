@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using Microsoft.Extensions.Logging;
 
@@ -22,6 +23,7 @@ namespace KrieptoBot.Application
 
         public async Task Sell(Market market)
         {
+            await CancelOpenOrders(market);
             var availableBaseAssetBalance = await GetSellableBalance(market);
 
             var priceToSellOn = await _exchangeService.GetTickerPrice(market.Name.Value);
@@ -30,7 +32,6 @@ namespace KrieptoBot.Application
 
             if (ShouldPlaceOrder())
             {
-                await CancelOpenOrders(market);
                 await PlaceOrder(market, availableBaseAssetBalance, priceToSellOn);
             }
         }

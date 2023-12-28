@@ -159,11 +159,11 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
 
             _logger.LogInformation(
                 "Posting sell order: Market: {Market} - OrderType: {OrderType} - Side: {Side} - Amount: {Amount} - Price: {Price}",
-                paramDictionary["Market"], 
-                paramDictionary["OrderType"], 
-                paramDictionary["Side"], 
-                paramDictionary["Amount"], 
-                paramDictionary["Price"]);
+                paramDictionary["market"], 
+                paramDictionary["orderType"], 
+                paramDictionary["side"], 
+                paramDictionary["amount"], 
+                paramDictionary["price"]);
 
             var dto = await _bitvavoApi.PostOrderAsync(
                 paramDictionary
