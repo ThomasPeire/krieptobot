@@ -51,8 +51,8 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Extensions.Microsoft.DependencyInjec
             return HttpPolicyExtensions
                 .HandleTransientHttpError()
                 .OrResult(msg => msg.StatusCode == System.Net.HttpStatusCode.NotFound)
-                .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2,
-                    retryAttempt)));
+                .OrResult(msg => msg.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(1 * retryAttempt));
         }
     }
 }

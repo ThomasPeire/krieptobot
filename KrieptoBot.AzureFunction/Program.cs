@@ -7,7 +7,7 @@ namespace KrieptoBot.AzureFunction
     [ExcludeFromCodeCoverage]
     public static class Program
     {
-        public async static Task Main()
+        public static async Task Main()
         {
             await HostBuilderWrapper.BuildHost().RunAsync();
         }
