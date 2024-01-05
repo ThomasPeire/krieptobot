@@ -87,11 +87,11 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
                         new CandleDto
                         {
                             TimeStamp = x.Value<long>(0),
-                            Open = x.Value<decimal>(1),
-                            High = x.Value<decimal>(2),
-                            Low = x.Value<decimal>(3),
-                            Close = x.Value<decimal>(4),
-                            Volume = x.Value<decimal>(5)
+                            Open = decimal.Parse(x.Value<string>(1), NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture),
+                            High = decimal.Parse(x.Value<string>(2), NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture),
+                            Low = decimal.Parse(x.Value<string>(3), NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture),
+                            Close = decimal.Parse(x.Value<string>(4), NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture),
+                            Volume = decimal.Parse(x.Value<string>(5), NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture),
                         }).ConvertToKrieptoBotModel();
                 });
         }
@@ -159,10 +159,10 @@ namespace KrieptoBot.Infrastructure.Bitvavo.Services
 
             _logger.LogInformation(
                 "Posting sell order: Market: {Market} - OrderType: {OrderType} - Side: {Side} - Amount: {Amount} - Price: {Price}",
-                paramDictionary["market"], 
-                paramDictionary["orderType"], 
-                paramDictionary["side"], 
-                paramDictionary["amount"], 
+                paramDictionary["market"],
+                paramDictionary["orderType"],
+                paramDictionary["side"],
+                paramDictionary["amount"],
                 paramDictionary["price"]);
 
             var dto = await _bitvavoApi.PostOrderAsync(
