@@ -49,8 +49,8 @@ public class RecommendatorDownTrend : RecommendatorBase
         _logger.LogDebug(
             "Market {Market} - {Recommendator} Downtrend detected: {DownTrendDetected}",
             market.Name.Value, Name, allPricesBelowEma);
-
-        var balance = await GetAvailableBalanceForAsset(market.Name.BaseSymbol);
+        
+        var balance = await GetTotalBalanceForAsset(market.Name.BaseSymbol);
         var thereIsOpenBalance = market.MinimumBaseAmount <= balance;
 
         _logger.LogDebug(
@@ -117,13 +117,13 @@ public class RecommendatorDownTrend : RecommendatorBase
             RecommendatorSettings.DownTrendRecommendatorInterval,
             end: _tradingContext.CurrentTime);
     }
-
-    private async Task<Amount> GetAvailableBalanceForAsset(Symbol asset)
+    
+    private async Task<Amount> GetTotalBalanceForAsset(Symbol asset)
     {
         var availableBalance = await _exchangeService.GetBalanceAsync(asset);
 
         return availableBalance != null
-            ? new Amount(Math.Max(availableBalance.Available.Value - availableBalance.InOrder.Value, 0))
+            ? availableBalance.Available + availableBalance.InOrder
             : Amount.Zero;
     }
 }
