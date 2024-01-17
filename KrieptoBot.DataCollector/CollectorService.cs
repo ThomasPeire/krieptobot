@@ -18,7 +18,7 @@ namespace KrieptoBot.DataCollector
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            return _collector.CollectCandles([ "BTC-EUR" ], [ Interval.FiveMinutes ],
+            return _collector.CollectCandles([ "XRP-EUR" ], [ Interval.FiveMinutes ],
                 DateTime.Today.AddDays(-30), DateTime.Today, cancellationToken);
         }
 

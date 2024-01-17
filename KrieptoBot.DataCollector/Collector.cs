@@ -7,7 +7,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using KrieptoBot.Application;
 using KrieptoBot.Domain;
-using KrieptoBot.Domain.Trading.Entity;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using Microsoft.Extensions.Logging;
 

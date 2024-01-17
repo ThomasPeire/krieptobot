@@ -48,6 +48,21 @@ namespace KrieptoBot.DataVisualizer.Extensions
                 .WithLayoutGridStyle(XSide: StyleParam.LayoutGridXSide.Bottom, YGap: 0.01).WithXAxisStyle(Title.init());
         }
 
+        public static GenericChart.GenericChart AddSubCharts(this GenericChart.GenericChart chart,
+            IEnumerable<GenericChart.GenericChart> charts)
+        {
+            List<GenericChart.GenericChart> chartList =
+            [
+                chart,
+                ...charts
+            ];
+
+            return Chart
+                .SingleStack<IEnumerable<GenericChart.GenericChart>>(Pattern: StyleParam.LayoutGridPattern.Coupled)
+                .Invoke(chartList)
+                .WithLayoutGridStyle(XSide: StyleParam.LayoutGridXSide.Bottom, YGap: 0.01).WithXAxisStyle(Title.init());
+        }
+
         public static GenericChart.GenericChart AddLineChart(this GenericChart.GenericChart chart,
             IDictionary<DateTime, decimal> values, Color color = default)
         {

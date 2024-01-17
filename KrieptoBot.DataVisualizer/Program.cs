@@ -1,12 +1,8 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
-namespace KrieptoBot.DataCollector
+namespace KrieptoBot.DataVisualizer
 {
     [ExcludeFromCodeCoverage]
     internal static class Program
