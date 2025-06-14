@@ -3,10 +3,10 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <UserSecretsId>a1532697-09d5-4ca3-88ec-f77d075f93fa</UserSecretsId>
-        <LangVersion>12</LangVersion>
+        <LangVersion>14.0</LangVersion>
         <Configurations>Debug;Release;Debug-Non-Windows-Specific</Configurations>
         <Platforms>AnyCPU</Platforms>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
