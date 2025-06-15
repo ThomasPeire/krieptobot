@@ -29,6 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution 
 		global.json = global.json
 		README.md = README.md
 		.github\workflows\build-test-analyze.yml = .github\workflows\build-test-analyze.yml
+		.github\dependabot.yml = .github\dependabot.yml
 	EndProjectSection
 EndProject
 Global
