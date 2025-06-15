@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <LangVersion>14.0</LangVersion>
+        <LangVersion>13.0</LangVersion>
         <TargetFramework>net9.0</TargetFramework>
         <Configurations>Debug;Release;Debug-Non-Windows-Specific</Configurations>
         <Platforms>AnyCPU</Platforms>
@@ -9,7 +9,7 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
-        <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="9.0.6" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
         <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="8.0.0" />
         <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.6" />
