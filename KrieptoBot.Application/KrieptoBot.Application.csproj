@@ -6,7 +6,7 @@
         <UserSecretsId>7d4ac361-7f6d-424e-9aef-57e92d9b44b3</UserSecretsId>
         <ApplicationIcon />
         <StartupObject />
-        <LangVersion>14.0</LangVersion>
+        <LangVersion>13.0</LangVersion>
         <Company>KrieptoBot</Company>
         <Product>KrieptoBot</Product>
         <Configurations>Debug;Release;Debug-Non-Windows-Specific</Configurations>

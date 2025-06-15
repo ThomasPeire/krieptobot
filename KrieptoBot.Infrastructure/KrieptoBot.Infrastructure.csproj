@@ -5,7 +5,7 @@
         <TargetFramework>net9.0</TargetFramework>
         <ApplicationIcon/>
         <StartupObject/>
-        <LangVersion>14.0</LangVersion>
+        <LangVersion>13.0</LangVersion>
         <Configurations>Debug;Release;Debug-Non-Windows-Specific</Configurations>
         <Platforms>AnyCPU</Platforms>
     </PropertyGroup>
