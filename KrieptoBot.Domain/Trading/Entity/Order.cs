@@ -10,8 +10,6 @@ namespace KrieptoBot.Domain.Trading.Entity
             OrderType type, Amount amount, Price price, Price triggerPrice) : base(id)
         {
             ArgumentNullException.ThrowIfNull(marketName);
-            ArgumentNullException.ThrowIfNull(created);
-            ArgumentNullException.ThrowIfNull(updated);
             ArgumentNullException.ThrowIfNull(status);
             ArgumentNullException.ThrowIfNull(side);
             ArgumentNullException.ThrowIfNull(type);

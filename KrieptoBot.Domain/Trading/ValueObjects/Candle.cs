@@ -6,8 +6,6 @@ namespace KrieptoBot.Domain.Trading.ValueObjects
     {
         public Candle(DateTime timeStamp, Price high, Price low, Price open, Price close, decimal volume)
         {
-            ArgumentNullException.ThrowIfNull(timeStamp);
-
             if (volume < 0m)
                 throw new ArgumentException("Volume can not be negative", nameof(volume));
 

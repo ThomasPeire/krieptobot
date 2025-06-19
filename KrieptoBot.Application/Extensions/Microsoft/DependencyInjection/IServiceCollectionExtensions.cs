@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace KrieptoBot.Application.Extensions.Microsoft.DependencyInjection
 {
-    public static class IServiceCollectionExtensions
+    public static class ServiceCollectionExtensions
     {
         public static void AddApplicationServices(this IServiceCollection services)
         {
@@ -42,7 +42,7 @@ namespace KrieptoBot.Application.Extensions.Microsoft.DependencyInjection
                     .SetIsSimulation(tradingSettings.IsSimulation)
                     .SetPollingInterval(tradingSettings.PollingIntervalInMinutes)
                     .SetBuyCoolDownPeriod(tradingSettings.BuyCoolDownPeriodInMinutes);
-                tradingContext.SetCurrentTime();
+                _ = tradingContext.SetCurrentTime();
                 return tradingContext;
             });
         }

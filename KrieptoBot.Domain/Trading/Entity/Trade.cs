@@ -9,7 +9,6 @@ namespace KrieptoBot.Domain.Trading.Entity
             OrderSide side) : base(id)
         {
             ArgumentNullException.ThrowIfNull(marketName);
-            ArgumentNullException.ThrowIfNull(timestamp);
             ArgumentNullException.ThrowIfNull(side);
             ArgumentNullException.ThrowIfNull(amount);
             ArgumentNullException.ThrowIfNull(price);
