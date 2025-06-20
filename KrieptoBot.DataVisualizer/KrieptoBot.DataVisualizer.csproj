@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Plotly.NET" Version="4.2.0" />
+      <PackageReference Include="Plotly.NET" Version="5.1.0" />
     </ItemGroup>
 
     <ItemGroup>
