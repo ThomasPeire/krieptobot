@@ -4,7 +4,7 @@
         <TargetFramework>net9.0</TargetFramework>
         <IsPackable>false</IsPackable>
         <LangVersion>13.0</LangVersion>
-        <Configurations>Debug;Release;Debug-Non-Windows-Specific</Configurations>
+        <Configurations>Debug;Release;</Configurations>
         <Platforms>AnyCPU</Platforms>
         <UserSecretsId>a1532697-09d5-4ca3-88ec-f77d075f93fa</UserSecretsId>
     </PropertyGroup>

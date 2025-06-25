@@ -9,7 +9,7 @@
         <LangVersion>13.0</LangVersion>
         <Company>KrieptoBot</Company>
         <Product>KrieptoBot</Product>
-        <Configurations>Debug;Release;Debug-Non-Windows-Specific</Configurations>
+        <Configurations>Debug;Release;</Configurations>
         <Platforms>AnyCPU</Platforms>
     </PropertyGroup>
 

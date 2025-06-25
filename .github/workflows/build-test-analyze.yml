@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-non_windows_specific_projects:
+  build:
     runs-on: ubuntu-latest
 
     steps:    
@@ -46,35 +46,13 @@ jobs:
       run: dotnet sonarscanner begin /k:"ThomasPeire_krieptobot" /o:"thomaspeire" /d:sonar.login=${{ secrets.SONAR_TOKEN }}  /d:sonar.host.url="https://sonarcloud.io"
     
     - name: Build
-      run: dotnet build -c Debug-Non-Windows-Specific /p:ContinuousIntegrationBuild=true
+      run: dotnet build -c Release /p:ContinuousIntegrationBuild=true
       
     - name: Test
-      run: dotnet test -c Debug-Non-Windows-Specific --no-build --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+      run: dotnet test -c Release --no-build --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
   
     - name: End Sonar scan
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: dotnet sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }} 
-  
-  build-windows-specific-projects:
-    runs-on: windows-latest
-
-    steps:   
-    - name: Setup .NET 8
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
-        
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-    
-    - name: Restore dependencies
-      run: dotnet restore KrieptoBot.ConsoleLauncher
-      
-    - name: Build
-      run: dotnet build KrieptoBot.ConsoleLauncher --no-restore /p:ContinuousIntegrationBuild=true
-      
-    - name: Test
-      run: dotnet test KrieptoBot.ConsoleLauncher --no-build --no-restore --verbosity normal

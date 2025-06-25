@@ -3,7 +3,7 @@
     <PropertyGroup>
         <LangVersion>13.0</LangVersion>
         <TargetFramework>net9.0</TargetFramework>
-        <Configurations>Debug;Release;Debug-Non-Windows-Specific</Configurations>
+        <Configurations>Debug;Release;</Configurations>
         <Platforms>AnyCPU</Platforms>
     </PropertyGroup>
 
