@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net9.0-windows10.0.17763.0</TargetFramework>
+        <UserSecretsId>d2c8acaa-c84c-4067-ab91-110ecbe73431</UserSecretsId>
+        <LangVersion>12</LangVersion>
+        <AssemblyName>KrieptoBot</AssemblyName>
+        <ApplicationIcon>Assets\Icon\64x64.ico</ApplicationIcon>
+        <Configurations>Debug;Release;Debug-Non-Windows-Specific</Configurations>
+        <Platforms>AnyCPU</Platforms>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Remove="appsettings.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="appsettings.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+        </Content>
+        <Content Include="Assets\Icon\64x64.ico" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.3" />
+        <PackageReference Include="Serilog.Extensions.Hosting" Version="8.0.0" />
+        <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.0" />
+        <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
+        <PackageReference Include="Serilog.Sinks.MSSqlServer" Version="6.5.0" />
+        <PackageReference Include="Serilog.Sinks.Postgresql.Alternative" Version="4.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\KrieptoBot.Infrastructure.Bitvavo\KrieptoBot.Infrastructure.Bitvavo.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Files\SQL" />
+        <Folder Include="Properties" />
+    </ItemGroup>
+
+</Project>

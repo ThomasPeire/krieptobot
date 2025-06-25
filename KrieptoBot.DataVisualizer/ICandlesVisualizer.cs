@@ -6,6 +6,6 @@ namespace KrieptoBot.DataVisualizer
 {
     interface ICandlesVisualizer
     {
-        GenericChart.GenericChart Visualize(IEnumerable<Candle> candles);
+        GenericChart Visualize(IEnumerable<Candle> candles);
     }
 }

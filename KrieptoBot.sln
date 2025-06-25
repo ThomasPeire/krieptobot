@@ -32,6 +32,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution 
 		.github\dependabot.yml = .github\dependabot.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KrieptoBot.AppHost", "KrieptoBot.AppHost\KrieptoBot.AppHost.csproj", "{086C71BC-F1D7-4C7C-AD71-8D3DEBA6895A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KrieptoBot.ServiceDefaults", "KrieptoBot.ServiceDefaults\KrieptoBot.ServiceDefaults.csproj", "{A69529A8-0497-459F-84B7-8854FF15E740}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KrieptoBot.CronJob", "KrieptoBot.CronJob\KrieptoBot.CronJob.csproj", "{6B104C14-509A-47E8-A7A1-D68946FE77EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +103,24 @@ Global
 		{79212C03-800D-4317-A763-0F34C64176C8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{79212C03-800D-4317-A763-0F34C64176C8}.Debug-Non-Windows-Specific|Any CPU.ActiveCfg = Debug|Any CPU
 		{79212C03-800D-4317-A763-0F34C64176C8}.Debug-Non-Windows-Specific|Any CPU.Build.0 = Debug|Any CPU
+		{086C71BC-F1D7-4C7C-AD71-8D3DEBA6895A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{086C71BC-F1D7-4C7C-AD71-8D3DEBA6895A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{086C71BC-F1D7-4C7C-AD71-8D3DEBA6895A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{086C71BC-F1D7-4C7C-AD71-8D3DEBA6895A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{086C71BC-F1D7-4C7C-AD71-8D3DEBA6895A}.Debug-Non-Windows-Specific|Any CPU.ActiveCfg = Debug|Any CPU
+		{086C71BC-F1D7-4C7C-AD71-8D3DEBA6895A}.Debug-Non-Windows-Specific|Any CPU.Build.0 = Debug|Any CPU
+		{A69529A8-0497-459F-84B7-8854FF15E740}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A69529A8-0497-459F-84B7-8854FF15E740}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A69529A8-0497-459F-84B7-8854FF15E740}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A69529A8-0497-459F-84B7-8854FF15E740}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A69529A8-0497-459F-84B7-8854FF15E740}.Debug-Non-Windows-Specific|Any CPU.ActiveCfg = Debug|Any CPU
+		{A69529A8-0497-459F-84B7-8854FF15E740}.Debug-Non-Windows-Specific|Any CPU.Build.0 = Debug|Any CPU
+		{6B104C14-509A-47E8-A7A1-D68946FE77EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B104C14-509A-47E8-A7A1-D68946FE77EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B104C14-509A-47E8-A7A1-D68946FE77EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B104C14-509A-47E8-A7A1-D68946FE77EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B104C14-509A-47E8-A7A1-D68946FE77EA}.Debug-Non-Windows-Specific|Any CPU.ActiveCfg = Debug-Non-Windows-Specific|Any CPU
+		{6B104C14-509A-47E8-A7A1-D68946FE77EA}.Debug-Non-Windows-Specific|Any CPU.Build.0 = Debug-Non-Windows-Specific|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
