@@ -5,27 +5,32 @@ using Microsoft.Extensions.Logging;
 
 namespace KrieptoBot.AzureFunction
 {
-    public class TradeFunction
+    public class TradeFunction(ITrader trader, ILogger<TradeFunction> logger, ITradingContext tradingContext)
     {
-        private readonly ITrader _trader;
-        private readonly ILogger<TradeFunction> _logger;
-        private readonly ITradingContext _tradingContext;
         private const string ScheduleExpression = "5 */5 * * * *"; // 12 times an hour - at second 5 of every 5 minutes of every hour of each day
-
-        public TradeFunction(ITrader trader, ILogger<TradeFunction> logger, ITradingContext tradingContext)
-        {
-            _trader = trader;
-            _logger = logger;
-            _tradingContext = tradingContext;
-        }
 
         [Function(nameof(TradeFunction))]
         public async Task Run(
             [TimerTrigger(ScheduleExpression, RunOnStartup = false, UseMonitor = true)] TimerInfo myTimer)
         {
-            _logger.LogDebug("Starting trading service");
-            await _tradingContext.SetCurrentTime();
-            await _trader.Run();
+            logger.LogDebug("Starting trading service");
+            await tradingContext.SetCurrentTime();
+            await trader.Run();
+            var intentionalError = (B)new A();
+            B nulllref = null;
+
+            var c = nulllref.S2;
         }
+    }
+    
+
+    internal class A
+    {
+        public string S { get; set; }
+    }
+    
+    internal class B : A
+    {
+        public string S2 { get; set; }
     }
 }
