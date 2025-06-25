@@ -16,21 +16,6 @@ namespace KrieptoBot.AzureFunction
             logger.LogDebug("Starting trading service");
             await tradingContext.SetCurrentTime();
             await trader.Run();
-            var intentionalError = (B)new A();
-            B nulllref = null;
-
-            var c = nulllref.S2;
         }
-    }
-    
-
-    internal class A
-    {
-        public string S { get; set; }
-    }
-    
-    internal class B : A
-    {
-        public string S2 { get; set; }
     }
 }
