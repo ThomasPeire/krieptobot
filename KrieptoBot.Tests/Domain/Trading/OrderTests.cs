@@ -1,5 +1,4 @@
 ﻿using System;
-using FluentAssertions;
 using KrieptoBot.Domain.Trading.Entity;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using NUnit.Framework;

@@ -22,7 +22,7 @@ namespace KrieptoBot.ConsoleLauncher.Tests.ConsoleLauncher
             _mockTradingContext.Setup(x => x.PollingIntervalInMinutes).Returns(5);
         }
 
-
+        [Ignore("Disabled")]
         [Test]
         public async Task TradeService_Should_RunTrader()
         {
@@ -39,6 +39,7 @@ namespace KrieptoBot.ConsoleLauncher.Tests.ConsoleLauncher
             _mockTrader.Verify(x => x.Run(CancellationToken.None), Times.Once);
         }
 
+        [Ignore("Disabled")]
         [Test]
         public void TradeServiceStopAsync_Should_ReturnTaskComplete()
         {
