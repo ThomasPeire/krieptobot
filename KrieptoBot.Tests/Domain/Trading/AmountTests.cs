@@ -26,6 +26,4 @@ public class AmountTests
         (amount10 + amount5).Should().Be(new Amount(15));
         (amount10 - amount5).Should().Be(new Amount(5));
     }
-
-
 }

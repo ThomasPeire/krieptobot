@@ -16,7 +16,7 @@ public class Interval
     public static Interval EightHours => Of(Hours.Eight);
     public static Interval TwelveHours => Of(Hours.Twelve);
     public static Interval OneDay => Of(Days.One);
-    
+
     public static Interval Of(string interval)
     {
         return new Interval(interval);
@@ -58,7 +58,7 @@ public class Interval
         public const string Fifteen = "15m";
         public const string Thirty = "30m";
     }
-    
+
     static class Hours
     {
         public const string One = "1h";
@@ -68,7 +68,7 @@ public class Interval
         public const string Eight = "8h";
         public const string Twelve = "12h";
     }
-    
+
     static class Days
     {
         public const string One = "1d";

@@ -23,7 +23,7 @@ public class TradeService(
         try
         {
             GroupingGuidEnricher.CurrentGroupingGuid = Guid.NewGuid();
-                
+
             await RunTrader(cancellationToken);
         }
         catch (Exception exception)

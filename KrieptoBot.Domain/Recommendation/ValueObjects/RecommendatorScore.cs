@@ -3,16 +3,10 @@ using KrieptoBot.Domain.BuildingBlocks;
 
 namespace KrieptoBot.Domain.Recommendation.ValueObjects;
 
-public class RecommendatorScore : ValueObject
+public class RecommendatorScore(decimal value, bool includeInAverageScore = true) : ValueObject
 {
-    public RecommendatorScore(decimal value, bool includeInAverageScore = true)
-    {
-        Value = value;
-        IncludeInAverageScore = includeInAverageScore;
-    }
-
-    public bool IncludeInAverageScore { get; }
-    public decimal Value { get; }
+    public bool IncludeInAverageScore { get; } = includeInAverageScore;
+    public decimal Value { get; } = value;
 
     public static implicit operator decimal(RecommendatorScore score)
     {

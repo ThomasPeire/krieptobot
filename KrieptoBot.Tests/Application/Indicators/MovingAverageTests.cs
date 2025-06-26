@@ -8,7 +8,6 @@ using KrieptoBot.DataVisualizer.Extensions;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using KrieptoBot.Infrastructure.Bitvavo.Dtos;
 using KrieptoBot.Infrastructure.Bitvavo.Extensions;
-using Microsoft.FSharp.Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;

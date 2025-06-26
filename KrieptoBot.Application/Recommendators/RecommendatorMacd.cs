@@ -12,26 +12,17 @@ using Microsoft.Extensions.Options;
 
 namespace KrieptoBot.Application.Recommendators;
 
-public class RecommendatorMacd : RecommendatorBase
+public class RecommendatorMacd(
+    IOptions<RecommendatorSettings> recommendatorSettings,
+    ILogger<RecommendatorMacd> logger,
+    IMacd macd,
+    IExchangeService exchangeService,
+    ITradingContext tradingContext,
+    IExponentialMovingAverage ema)
+    : RecommendatorBase(recommendatorSettings.Value, logger)
 {
     protected override string Name => "Macd recommendator";
-    private readonly ILogger<RecommendatorMacd> _logger;
-    private readonly IMacd _macd;
-    private readonly IExchangeService _exchangeService;
-    private readonly ITradingContext _tradingContext;
-    private readonly IExponentialMovingAverage _ema;
-
-    public RecommendatorMacd(IOptions<RecommendatorSettings> recommendatorSettings, ILogger<RecommendatorMacd> logger,
-        IMacd macd,
-        IExchangeService exchangeService, ITradingContext tradingContext, IExponentialMovingAverage ema)
-        : base(recommendatorSettings.Value, logger)
-    {
-        _logger = logger;
-        _macd = macd;
-        _exchangeService = exchangeService;
-        _tradingContext = tradingContext;
-        _ema = ema;
-    }
+    private readonly IExponentialMovingAverage _ema = ema;
 
     protected override async Task<RecommendatorScore> CalculateRecommendation(Market market)
     {
@@ -44,18 +35,19 @@ public class RecommendatorMacd : RecommendatorBase
     {
         var candles = (await GetCandlesAsync(market)).ToList();
 
-        var macdResult = _macd.Calculate(candles);
+        var macdResult = macd.Calculate(candles);
 
         var lastHistogramValues = macdResult.Histogram.OrderByDescending(x => x.Key).Take(3).ToList();
         var currentValue = lastHistogramValues[0].Value;
         var previousVal = lastHistogramValues[1].Value;
         var currentMacdLineValue = macdResult.MacdLine.OrderByDescending(x => x.Key).FirstOrDefault().Value;
 
-        _logger.LogDebug(
+        logger.LogDebug(
             "Market {Market} - {Recommendator} CurrentMacd: {MacdValue}, Histogram (previous, current): {PreviousValue}, {CurrentValue}",
-            market.Name.Value, Name, currentMacdLineValue.ToString("0.0000000000"), previousVal.ToString("0.0000000000"),
+            market.Name.Value, Name, currentMacdLineValue.ToString("0.0000000000"),
+            previousVal.ToString("0.0000000000"),
             currentValue.ToString("0.0000000000"));
-        
+
         if (MacdGivesSellSignal(lastHistogramValues) && currentMacdLineValue > 0)
         {
             return RecommendationAction.Sell;
@@ -93,7 +85,7 @@ public class RecommendatorMacd : RecommendatorBase
 
     private async Task<IEnumerable<Candle>> GetCandlesAsync(Market market)
     {
-        return await _exchangeService.GetCandlesAsync(market.Name, _tradingContext.Interval,
-            end: _tradingContext.CurrentTime);
+        return await exchangeService.GetCandlesAsync(market.Name, tradingContext.Interval,
+            end: tradingContext.CurrentTime);
     }
 }

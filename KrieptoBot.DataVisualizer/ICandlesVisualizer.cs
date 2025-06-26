@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using KrieptoBot.Domain.Trading.ValueObjects;
+﻿using KrieptoBot.Domain.Trading.ValueObjects;
 using Plotly.NET;
 
 namespace KrieptoBot.DataVisualizer;

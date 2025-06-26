@@ -1,6 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using KrieptoBot.Application;
+
 // using Microsoft.Toolkit.Uwp.Notifications;
 
 namespace KrieptoBot.ConsoleLauncher;
@@ -13,7 +13,7 @@ public class NotificationManager : INotificationManager
         //     .AddHeader($"{DateTime.UtcNow:g}", "KrieptoBot!", "")
         //     .AddText(message)
         //     .Show();
-            
+
         await Task.CompletedTask;
     }
 

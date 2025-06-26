@@ -21,6 +21,6 @@ public class TradeFunctionTests
 
         _ = tradeFunction.Run(new TimerInfo());
 
-        mockTrader.Verify(x =>x.Run(CancellationToken.None), Times.Once);
+        mockTrader.Verify(x => x.Run(CancellationToken.None), Times.Once);
     }
 }

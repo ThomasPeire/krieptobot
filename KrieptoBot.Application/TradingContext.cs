@@ -4,15 +4,8 @@ using System.Threading.Tasks;
 
 namespace KrieptoBot.Application;
 
-public class TradingContext : ITradingContext
+public class TradingContext(IDateTimeProvider dateTimeProvider) : ITradingContext
 {
-    private readonly IDateTimeProvider _dateTimeProvider;
-
-    public TradingContext(IDateTimeProvider dateTimeProvider)
-    {
-        _dateTimeProvider = dateTimeProvider;
-    }
-
     public string Interval { get; private set; } = Domain.Interval.FiveMinutes;
     public IEnumerable<string> MarketsToWatch { get; private set; } = new List<string> { "BTC-EUR" };
     public DateTime CurrentTime { get; private set; }
@@ -27,7 +20,7 @@ public class TradingContext : ITradingContext
 
     public async Task<TradingContext> SetCurrentTime()
     {
-        CurrentTime = await _dateTimeProvider.UtcDateTimeNowSyncedWithExchange();
+        CurrentTime = await dateTimeProvider.UtcDateTimeNowSyncedWithExchange();
         return this;
     }
 

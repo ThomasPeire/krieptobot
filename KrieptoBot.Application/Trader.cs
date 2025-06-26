@@ -13,28 +13,17 @@ using Microsoft.Extensions.Options;
 
 namespace KrieptoBot.Application;
 
-public class Trader : ITrader
+public class Trader(
+    ILogger<Trader> logger,
+    ITradingContext tradingContext,
+    IExchangeService exchangeService,
+    IRecommendationCalculator recommendationCalculator,
+    ISellManager sellManager,
+    IBuyManager buyManager,
+    IOptions<TradingSettings> tradingSettings)
+    : ITrader
 {
-    private readonly IBuyManager _buyManager;
-    private readonly TradingSettings _tradingSettings;
-    private readonly IExchangeService _exchangeService;
-    private readonly ILogger<Trader> _logger;
-    private readonly IRecommendationCalculator _recommendationCalculator;
-    private readonly ISellManager _sellManager;
-    private readonly ITradingContext _tradingContext;
-
-    public Trader(ILogger<Trader> logger, ITradingContext tradingContext, IExchangeService exchangeService,
-        IRecommendationCalculator recommendationCalculator, ISellManager sellManager, IBuyManager buyManager,
-        IOptions<TradingSettings> tradingSettings)
-    {
-        _exchangeService = exchangeService;
-        _recommendationCalculator = recommendationCalculator;
-        _sellManager = sellManager;
-        _buyManager = buyManager;
-        _tradingSettings = tradingSettings.Value;
-        _tradingContext = tradingContext;
-        _logger = logger;
-    }
+    private readonly TradingSettings _tradingSettings = tradingSettings.Value;
 
     public async Task Run(CancellationToken cancellation = default)
     {
@@ -59,7 +48,7 @@ public class Trader : ITrader
         {
             //get balances
             var openStopLossOrders = await GetOpenStopLossOrders(market);
-            var balance = await _exchangeService.GetBalanceAsync(market.Name.BaseSymbol.Value);
+            var balance = await exchangeService.GetBalanceAsync(market.Name.BaseSymbol.Value);
             var amountInStopLossOrders = openStopLossOrders.Sum(x => x.Amount.Value);
 
             if (balance.Available.Value + amountInStopLossOrders < market.MinimumBaseAmount)
@@ -67,21 +56,21 @@ public class Trader : ITrader
                 continue;
             }
 
-            var candles = await _exchangeService.GetCandlesAsync(market.Name.Value, _tradingContext.Interval,
-                end: _tradingContext.CurrentTime);
+            var candles = await exchangeService.GetCandlesAsync(market.Name.Value, tradingContext.Interval,
+                end: tradingContext.CurrentTime);
 
             var stopLossPrice = candles.MaxBy(x => x.TimeStamp)!.Close.Value *
                                 (1 - _tradingSettings.StopLossPercentage / 100);
 
             if (balance.Available.Value >= market.MinimumBaseAmount)
             {
-                await _exchangeService.PostStopLossOrderAsync(market.Name.Value, balance.Available.Value,
+                await exchangeService.PostStopLossOrderAsync(market.Name.Value, balance.Available.Value,
                     stopLossPrice);
             }
 
             foreach (var existingStopLoss in openStopLossOrders.Where(x => x.TriggerPrice.Value < stopLossPrice))
             {
-                await _exchangeService.UpdateOrderTriggerAmount(market.Name.Value, existingStopLoss.Id,
+                await exchangeService.UpdateOrderTriggerAmount(market.Name.Value, existingStopLoss.Id,
                     stopLossPrice);
             }
         }
@@ -89,15 +78,15 @@ public class Trader : ITrader
 
     private async Task<List<Order>> GetOpenStopLossOrders(Market market)
     {
-        var openOrders = await _exchangeService.GetOpenOrderAsync(market.Name.Value);
+        var openOrders = await exchangeService.GetOpenOrderAsync(market.Name.Value);
         var openStopLossOrders = openOrders.Where(o => o.Type.Value == OrderType.StopLoss).ToList();
         return openStopLossOrders;
     }
 
     private async Task LogTime()
     {
-        var bitvavoTime = await _exchangeService.GetTime();
-        _logger.LogInformation("Exchange time: {BitvavoTime}, Local time: {Local}",
+        var bitvavoTime = await exchangeService.GetTime();
+        logger.LogInformation("Exchange time: {BitvavoTime}, Local time: {Local}",
             bitvavoTime.ToLocalTime(), DateTime.Now);
     }
 
@@ -118,22 +107,22 @@ public class Trader : ITrader
     {
         foreach (var recommendatorScore in recommendations)
         {
-            _logger.LogInformation("Market {Market}: Final score: {Score}", recommendatorScore.Key.Name.Value,
+            logger.LogInformation("Market {Market}: Final score: {Score}", recommendatorScore.Key.Name.Value,
                 recommendatorScore.Value.Value.ToString("0.00"));
         }
     }
 
     private async Task CancelOpenLimitOrMarketOrders()
     {
-        if (!_tradingContext.IsSimulation)
+        if (!tradingContext.IsSimulation)
         {
             foreach (var market in await GetMarketsToEvaluate())
             {
-                var openMarketOrders = await _exchangeService.GetOpenOrderAsync(market.Name.Value);
+                var openMarketOrders = await exchangeService.GetOpenOrderAsync(market.Name.Value);
                 var openMarketOrdersIdsToCancel = openMarketOrders.Where(x =>
                     x.Type == OrderType.Limit || x.Type == OrderType.Market).ToList();
 
-                openMarketOrdersIdsToCancel.ForEach(x => _exchangeService.CancelOrder(x.MarketName.Value, x.Id));
+                openMarketOrdersIdsToCancel.ForEach(x => exchangeService.CancelOrder(x.MarketName.Value, x.Id));
             }
         }
     }
@@ -169,14 +158,14 @@ public class Trader : ITrader
     {
         var balance = await GetAvailableBalanceForAsset(new Symbol("EUR"));
 
-        _logger.LogInformation("Available budget: {Budget}", balance.Value);
+        logger.LogInformation("Available budget: {Budget}", balance.Value);
 
         return balance;
     }
 
     private async Task<Amount> GetAvailableBalanceForAsset(Symbol asset)
     {
-        var availableBalance = await _exchangeService.GetBalanceAsync(asset);
+        var availableBalance = await exchangeService.GetBalanceAsync(asset);
 
         return availableBalance != null
             ? availableBalance.Available
@@ -185,7 +174,7 @@ public class Trader : ITrader
 
     private async Task<Amount> GetTotalBalanceForAsset(Symbol asset)
     {
-        var availableBalance = await _exchangeService.GetBalanceAsync(asset);
+        var availableBalance = await exchangeService.GetBalanceAsync(asset);
 
         return availableBalance != null
             ? availableBalance.Available + availableBalance.InOrder
@@ -198,18 +187,18 @@ public class Trader : ITrader
         {
             if (await NoTradesInCoolDownPeriod(market))
             {
-                await _buyManager.Buy(market, budget);
+                await buyManager.Buy(market, budget);
             }
         }
     }
 
     private async Task<bool> NoTradesInCoolDownPeriod(Market market)
     {
-        var trades = await _exchangeService.GetTradesAsync(market.Name, 5, end: _tradingContext.CurrentTime);
+        var trades = await exchangeService.GetTradesAsync(market.Name, 5, end: tradingContext.CurrentTime);
 
         var buyTradesInCoolDown = trades.Any(x =>
             x.Side == OrderSide.Buy &&
-            x.Timestamp.AddMinutes(_tradingContext.BuyCoolDownPeriodInMinutes) >= _tradingContext.CurrentTime);
+            x.Timestamp.AddMinutes(tradingContext.BuyCoolDownPeriodInMinutes) >= tradingContext.CurrentTime);
 
         return buyTradesInCoolDown == false;
     }
@@ -217,7 +206,7 @@ public class Trader : ITrader
     private async Task Sell(IEnumerable<Market> marketsToSell)
     {
         foreach (var market in marketsToSell)
-            await _sellManager.Sell(market);
+            await sellManager.Sell(market);
     }
 
     private async Task<Dictionary<Market, Amount>> DetermineMarketsToBuy(
@@ -229,7 +218,7 @@ public class Trader : ITrader
         budgetForMarkets = GetMarketsWhereAvailableBalanceExceedsMinimumQuoteAmount(budgetForMarkets);
 
         foreach (var (market, _) in budgetForMarkets)
-            _logger.LogInformation("Buy recommendation for {Market}, with a score of {Score}", market.Name.Value,
+            logger.LogInformation("Buy recommendation for {Market}, with a score of {Score}", market.Name.Value,
                 marketsToBuy.First(x => x.Key == market).Value.Value.ToString("0.00"));
 
         return budgetForMarkets;
@@ -239,7 +228,7 @@ public class Trader : ITrader
         Dictionary<Market, RecommendatorScore> recommendations)
     {
         return recommendations
-            .Where(x => x.Value >= _tradingContext.BuyMargin)
+            .Where(x => x.Value >= tradingContext.BuyMargin)
             .ToDictionary(x => x.Key, x => x.Value);
     }
 
@@ -251,7 +240,7 @@ public class Trader : ITrader
         marketsToSell = await GetMarketsWhereBalanceExceedsMinimumBaseAmount(marketsToSell);
 
         foreach (var (market, score) in marketsToSell)
-            _logger.LogInformation("Sell recommendation for {Market}, with a score of {Score}", market.Name.Value,
+            logger.LogInformation("Sell recommendation for {Market}, with a score of {Score}", market.Name.Value,
                 score.Value.ToString("0.00"));
 
         return marketsToSell;
@@ -284,7 +273,7 @@ public class Trader : ITrader
         Dictionary<Market, RecommendatorScore> recommendations)
     {
         return recommendations
-            .Where(x => x.Value <= _tradingContext.SellMargin)
+            .Where(x => x.Value <= tradingContext.SellMargin)
             .ToDictionary(x => x.Key, x => x.Value);
     }
 
@@ -296,9 +285,8 @@ public class Trader : ITrader
 
         var marketRecommendations =
             await Task.WhenAll(
-                marketsToEvaluate.Select(
-                    async market => (market,
-                        recommendation: await _recommendationCalculator.CalculateRecommendation(market))));
+                marketsToEvaluate.Select(async market => (market,
+                    recommendation: await recommendationCalculator.CalculateRecommendation(market))));
 
         return marketRecommendations.ToDictionary(x => x.market, x => x.recommendation);
     }
@@ -307,17 +295,17 @@ public class Trader : ITrader
     {
         var marketsToWatch = new List<Market>();
 
-        foreach (var market in _tradingContext.MarketsToWatch)
-            marketsToWatch.Add(await _exchangeService.GetMarketAsync(market));
+        foreach (var market in tradingContext.MarketsToWatch)
+            marketsToWatch.Add(await exchangeService.GetMarketAsync(market));
 
         return marketsToWatch;
     }
 
     private void LogMarketsToEvaluate(List<Market> marketsToWatch)
     {
-        _logger.LogInformation("Markets to evaluate:");
+        logger.LogInformation("Markets to evaluate:");
 
         foreach (var market in marketsToWatch)
-            _logger.LogInformation("{Market}", market.Name.Value);
+            logger.LogInformation("{Market}", market.Name.Value);
     }
 }

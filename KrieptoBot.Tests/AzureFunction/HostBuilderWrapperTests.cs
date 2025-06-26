@@ -1,4 +1,3 @@
-using System;
 using KrieptoBot.Application;
 using KrieptoBot.Application.Settings;
 using KrieptoBot.AzureFunction;
@@ -16,8 +15,10 @@ public class HostBuilderWrapperTests
     {
         var iHost = HostBuilderWrapper.BuildHost();
 
-        Assert.That(iHost.Services.GetRequiredService<IOptions<RecommendatorSettings>>(), Is.InstanceOf<IOptions<RecommendatorSettings>>());
-        Assert.That(iHost.Services.GetRequiredService<IOptions<TradingSettings>>(), Is.InstanceOf<IOptions<TradingSettings>>());
+        Assert.That(iHost.Services.GetRequiredService<IOptions<RecommendatorSettings>>(),
+            Is.InstanceOf<IOptions<RecommendatorSettings>>());
+        Assert.That(iHost.Services.GetRequiredService<IOptions<TradingSettings>>(),
+            Is.InstanceOf<IOptions<TradingSettings>>());
         Assert.That(iHost.Services.GetRequiredService<INotificationManager>(), Is.InstanceOf<INotificationManager>());
         Assert.That(iHost.Services.GetRequiredService<ITrader>(), Is.InstanceOf<ITrader>());
     }

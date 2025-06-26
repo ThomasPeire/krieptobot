@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 using Interval = KrieptoBot.Domain.Interval;
 
 namespace KrieptoBot.Tests.Application.Recommendators;
@@ -44,15 +43,16 @@ public class RecommendatorMacdTests
             }
         });
 
-        _tradingContext = new TradingContext(new DateTimeProvider(_exchangeServiceMock.Object, new Mock<IMemoryCache>().Object))
-            .SetBuyMargin(30)
-            .SetSellMargin(-30)
-            .SetMarketsToWatch(
-                new List<string>
-                {
-                    "BTC-EUR"
-                })
-            .SetInterval(Interval.Minutes.Five);
+        _tradingContext =
+            new TradingContext(new DateTimeProvider(_exchangeServiceMock.Object, new Mock<IMemoryCache>().Object))
+                .SetBuyMargin(30)
+                .SetSellMargin(-30)
+                .SetMarketsToWatch(
+                    new List<string>
+                    {
+                        "BTC-EUR"
+                    })
+                .SetInterval(Interval.Minutes.Five);
     }
 
     [Test]

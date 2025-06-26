@@ -1,11 +1,9 @@
-    SELECT    
-		TimeStamp,
-		CAST(Properties AS xml).query('(/properties/property[@key="CorrelationId"])').value('.', 'nvarchar(max)') as CorrelationId,
-        CAST(Properties AS xml).query('(/properties/property[@key="Market"])').value('.', 'nvarchar(max)') as Market,
-		CASE WHEN CAST(Properties AS xml).query('(/properties/property[@key="Recommendator"])').value('.', 'nvarchar(max)') = '' 
-			THEN 'Final score'
-			ELSE CAST(Properties AS xml).query('(/properties/property[@key="Recommendator"])').value('.', 'nvarchar(max)')
-		END as Recommendator,
+SELECT
+    TimeStamp, CAST (Properties AS xml).query('(/properties/property[@key="CorrelationId"])').value('.', 'nvarchar(max)') as CorrelationId, CAST (Properties AS xml).query('(/properties/property[@key="Market"])').value('.', 'nvarchar(max)') as Market, CASE WHEN CAST (Properties AS xml).query('(/properties/property[@key="Recommendator"])').value('.', 'nvarchar(max)') = ''
+    THEN 'Final score'
+    ELSE CAST (Properties AS xml).query('(/properties/property[@key="Recommendator"])').value('.', 'nvarchar(max)')
+END
+as Recommendator,
         CAST(Properties AS xml).query('(/properties/property[@key="Score"])').value('.', 'nvarchar(max)') as Score,
         CAST(Properties AS xml).query('(/properties/property[@key="MacdValue"])').value('.', 'nvarchar(max)') as MacdValue,
         CAST(Properties AS xml).query('(/properties/property[@key="PreviousValue"])').value('.', 'nvarchar(max)') as PreviousValue,

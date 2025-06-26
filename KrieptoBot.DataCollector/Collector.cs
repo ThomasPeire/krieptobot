@@ -7,23 +7,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using KrieptoBot.Application;
 using KrieptoBot.Domain;
-using KrieptoBot.Domain.Trading.Entity;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using Microsoft.Extensions.Logging;
 
 namespace KrieptoBot.DataCollector;
 
-public class Collector : ICollector
+public class Collector(IExchangeService exchangeService, ILogger<Collector> logger)
+    : ICollector
 {
     private static readonly SemaphoreSlim Semaphore = new(10);
-    private readonly IExchangeService _exchangeService;
-    private readonly ILogger<Collector> _logger;
-        
-    public Collector(IExchangeService exchangeService, ILogger<Collector> logger)
-    {
-        _exchangeService = exchangeService;
-        _logger = logger;
-    }
 
     public async Task CollectCandles(IEnumerable<string> markets, ICollection<string> intervals,
         DateTime fromDateTime, DateTime toDateTime, CancellationToken ct)
@@ -40,14 +32,15 @@ public class Collector : ICollector
                 foreach (var task in tasks) candles.AddRange(await task);
 
                 var json = JsonSerializer.Serialize(candles.OrderBy(x => x.TimeStamp));
-                    
-                _logger.LogInformation("Writing {Market}-{Interval} file", market, interval);
+
+                logger.LogInformation("Writing {Market}-{Interval} file", market, interval);
                 await File.WriteAllTextAsync($@"D:\{market}-{interval}.json", json, ct);
             }
         }
     }
-        
-    private List<Task<IEnumerable<Candle>>> GetDownloadTasks(DateTime fromDateTime, DateTime toDateTime, string interval, string market, CancellationToken ct)
+
+    private List<Task<IEnumerable<Candle>>> GetDownloadTasks(DateTime fromDateTime, DateTime toDateTime,
+        string interval, string market, CancellationToken ct)
     {
         var tasks = new List<Task<IEnumerable<Candle>>>();
         var intervalInMinutes = Interval.Of(interval).InMinutes();
@@ -58,7 +51,8 @@ public class Collector : ICollector
         while (currentStartDateTime <= toDateTime)
         {
             tasks.Add(
-                GetDownloadTask(toDateTime, currentStartDateTime, intervalInMinutes, numberOfCandlesInOneCall, market, interval, ct));
+                GetDownloadTask(toDateTime, currentStartDateTime, intervalInMinutes, numberOfCandlesInOneCall, market,
+                    interval, ct));
 
             currentStartDateTime =
                 currentStartDateTime.AddMinutes(numberOfCandlesInOneCall * intervalInMinutes);
@@ -66,8 +60,9 @@ public class Collector : ICollector
 
         return tasks;
     }
-        
-    private Task<IEnumerable<Candle>> GetDownloadTask(DateTime toDateTime, DateTime currentStartDateTime, int intervalInMinutes, int numberOfCandlesInOneCall, string market, string interval,CancellationToken ct)
+
+    private Task<IEnumerable<Candle>> GetDownloadTask(DateTime toDateTime, DateTime currentStartDateTime,
+        int intervalInMinutes, int numberOfCandlesInOneCall, string market, string interval, CancellationToken ct)
     {
         var startTime = currentStartDateTime;
         var endTime =
@@ -78,16 +73,19 @@ public class Collector : ICollector
         return task;
     }
 
-    private async Task<IEnumerable<Candle>> CreateTask(int numberOfCandlesInOneCall, string market, string interval, DateTime startTime, DateTime endTime, CancellationToken ct)
+    private async Task<IEnumerable<Candle>> CreateTask(int numberOfCandlesInOneCall, string market, string interval,
+        DateTime startTime, DateTime endTime, CancellationToken ct)
     {
         await Semaphore.WaitAsync(ct);
         ct.ThrowIfCancellationRequested();
         try
         {
-            _logger.LogInformation("Downloading {Interval} candles for {Market} from {StartTime} to {EndTime}", interval, market, startTime, endTime);
-            var result = await _exchangeService.GetCandlesAsync(market, interval, numberOfCandlesInOneCall,
+            logger.LogInformation("Downloading {Interval} candles for {Market} from {StartTime} to {EndTime}", interval,
+                market, startTime, endTime);
+            var result = await exchangeService.GetCandlesAsync(market, interval, numberOfCandlesInOneCall,
                 startTime, endTime, ct);
-            _logger.LogInformation("Downloaded {Interval} candles for {Market} from {StartTime} to {EndTime}", interval, market, startTime, endTime);
+            logger.LogInformation("Downloaded {Interval} candles for {Market} from {StartTime} to {EndTime}", interval,
+                market, startTime, endTime);
 
             return result;
         }

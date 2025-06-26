@@ -8,11 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Plotly.NET" Version="5.1.0" />
+        <PackageReference Include="Plotly.NET" Version="5.1.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\KrieptoBot.Domain\KrieptoBot.Domain.csproj" />
+        <ProjectReference Include="..\KrieptoBot.Domain\KrieptoBot.Domain.csproj"/>
     </ItemGroup>
 
 </Project>

@@ -8,16 +8,10 @@ using Microsoft.Extensions.Logging;
 
 namespace KrieptoBot.Application.Recommendators;
 
-public abstract class RecommendatorBase : IRecommendator
+public abstract class RecommendatorBase(RecommendatorSettings recommendatorSettings, ILogger<RecommendatorBase> logger)
+    : IRecommendator
 {
-    private readonly ILogger<RecommendatorBase> _logger;
-    protected readonly RecommendatorSettings RecommendatorSettings;
-
-    protected RecommendatorBase(RecommendatorSettings recommendatorSettings, ILogger<RecommendatorBase> logger)
-    {
-        RecommendatorSettings = recommendatorSettings;
-        _logger = logger;
-    }
+    protected readonly RecommendatorSettings RecommendatorSettings = recommendatorSettings;
 
     private decimal SellRecommendationWeight =>
         RecommendatorSettings.SellRecommendationWeights.GetValueOrDefault(GetType().Name);
@@ -51,8 +45,9 @@ public abstract class RecommendatorBase : IRecommendator
 
     private void LogRecommendatorScore(Market market, RecommendatorScore recommendatorScore)
     {
-        _logger.LogInformation(
+        logger.LogInformation(
             "Market {Market} - {Recommendator} Recommendation score: {Score} - Included in final score {Included}",
-            market.Name.Value, Name, recommendatorScore.Value.ToString("0.00"), recommendatorScore.IncludeInAverageScore);
+            market.Name.Value, Name, recommendatorScore.Value.ToString("0.00"),
+            recommendatorScore.IncludeInAverageScore);
     }
 }

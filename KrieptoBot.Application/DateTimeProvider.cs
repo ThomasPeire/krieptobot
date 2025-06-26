@@ -10,21 +10,14 @@ public interface IDateTimeProvider
     Task<DateTime> UtcDateTimeNowExchange();
 }
 
-public class DateTimeProvider : IDateTimeProvider
+public class DateTimeProvider(
+    IExchangeService exchangeService,
+    IMemoryCache memoryCache)
+    : IDateTimeProvider
 {
-    private readonly IExchangeService _exchangeService;
-    private readonly IMemoryCache _memoryCache;
-
-    public DateTimeProvider(IExchangeService exchangeService,
-        IMemoryCache memoryCache)
-    {
-        _exchangeService = exchangeService;
-        _memoryCache = memoryCache;
-    }
-
     private async Task<double> TimeDifferenceWithExchangeInMilliSeconds()
     {
-        return await _memoryCache.GetOrCreateAsync($"{nameof(TimeDifferenceWithExchangeInMilliSeconds)}",
+        return await memoryCache.GetOrCreateAsync($"{nameof(TimeDifferenceWithExchangeInMilliSeconds)}",
             async cacheEntry =>
             {
                 cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1);
@@ -38,5 +31,5 @@ public class DateTimeProvider : IDateTimeProvider
     public async Task<DateTime> UtcDateTimeNowSyncedWithExchange() =>
         DateTime.UtcNow.AddMilliseconds(await TimeDifferenceWithExchangeInMilliSeconds());
 
-    public async Task<DateTime> UtcDateTimeNowExchange() => await _exchangeService.GetTime();
+    public async Task<DateTime> UtcDateTimeNowExchange() => await exchangeService.GetTime();
 }

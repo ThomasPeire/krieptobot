@@ -115,23 +115,13 @@ public class EntityTests
 }
 
 [ExcludeFromCodeCoverage]
-internal class DummyEntityObject : Entity
+internal class DummyEntityObject(Guid id, string otherProp) : Entity(id)
 {
-    public string OtherProp { get; }
-
-    public DummyEntityObject(Guid id, string otherProp) : base(id)
-    {
-        OtherProp = otherProp;
-    }
+    public string OtherProp { get; } = otherProp;
 }
 
 [ExcludeFromCodeCoverage]
-internal class OtherDummyEntityObject : Entity
+internal class OtherDummyEntityObject(Guid id, string otherProp) : Entity(id)
 {
-    public string OtherProp { get; }
-
-    public OtherDummyEntityObject(Guid id, string otherProp) : base(id)
-    {
-        OtherProp = otherProp;
-    }
+    public string OtherProp { get; } = otherProp;
 }

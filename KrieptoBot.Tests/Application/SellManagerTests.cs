@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using KrieptoBot.Application;
-using KrieptoBot.Application.Recommendators;
-using KrieptoBot.Domain.Recommendation.ValueObjects;
 using KrieptoBot.Domain.Trading.ValueObjects;
-using KrieptoBot.Infrastructure.Bitvavo.Services;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
@@ -41,12 +38,14 @@ public class SellManagerTests
 
         _tradingContextMock.Setup(x => x.IsSimulation).Returns(false);
 
-        _exchangeServiceMock.Setup(x => x.GetTickerPrice(It.IsAny<string>())).ReturnsAsync(new TickerPrice(new MarketName(market), new Price(tickerPrice)));
+        _exchangeServiceMock.Setup(x => x.GetTickerPrice(It.IsAny<string>()))
+            .ReturnsAsync(new TickerPrice(new MarketName(market), new Price(tickerPrice)));
         _exchangeServiceMock.Setup(x => x.GetCandlesAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(),
                 It.IsAny<DateTime?>(), It.IsAny<DateTime?>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(new List<Candle>(new[]
             {
-                new Candle(DateTime.Today, new Price(currentHigh), new Price(currentLow), new Price(currentHigh), new Price(currentLow), 100),
+                new Candle(DateTime.Today, new Price(currentHigh), new Price(currentLow), new Price(currentHigh),
+                    new Price(currentLow), 100),
                 new Candle(DateTime.Today.AddDays(-1), new Price(3), new Price(3), new Price(3), new Price(3), 100),
                 new Candle(DateTime.Today.AddDays(-2), new Price(3), new Price(3), new Price(3), new Price(3), 100),
                 new Candle(DateTime.Today.AddDays(-3), new Price(3), new Price(3), new Price(3), new Price(3), 100)
@@ -78,12 +77,14 @@ public class SellManagerTests
 
         _tradingContextMock.Setup(x => x.IsSimulation).Returns(true);
 
-        _exchangeServiceMock.Setup(x => x.GetTickerPrice(It.IsAny<string>())).ReturnsAsync(new TickerPrice(new MarketName(market), new Price(10000)));
+        _exchangeServiceMock.Setup(x => x.GetTickerPrice(It.IsAny<string>()))
+            .ReturnsAsync(new TickerPrice(new MarketName(market), new Price(10000)));
         _exchangeServiceMock.Setup(x => x.GetCandlesAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(),
                 It.IsAny<DateTime?>(), It.IsAny<DateTime?>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(new List<Candle>(new[]
             {
-                new Candle(DateTime.Today, new Price(currentHigh), new Price(currentLow), new Price(3), new Price(3), 100),
+                new Candle(DateTime.Today, new Price(currentHigh), new Price(currentLow), new Price(3), new Price(3),
+                    100),
                 new Candle(DateTime.Today.AddDays(-1), new Price(3), new Price(3), new Price(3), new Price(3), 100),
                 new Candle(DateTime.Today.AddDays(-2), new Price(3), new Price(3), new Price(3), new Price(3), 100),
                 new Candle(DateTime.Today.AddDays(-3), new Price(3), new Price(3), new Price(3), new Price(3), 100)

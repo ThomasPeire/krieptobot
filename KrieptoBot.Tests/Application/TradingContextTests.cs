@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using KrieptoBot.Application;
-using KrieptoBot.Application.Recommendators;
-using KrieptoBot.Domain.Recommendation.ValueObjects;
-using KrieptoBot.Domain.Trading.ValueObjects;
-using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 
@@ -18,7 +14,8 @@ public class TradingContextTests
     public void TradingContext_Should_SetProperties()
     {
         var mockDateTimeProvider = new Mock<IDateTimeProvider>();
-        mockDateTimeProvider.Setup(x => x.UtcDateTimeNowSyncedWithExchange()).Returns(Task.FromResult(new DateTime(2001, 1, 1)));
+        mockDateTimeProvider.Setup(x => x.UtcDateTimeNowSyncedWithExchange())
+            .Returns(Task.FromResult(new DateTime(2001, 1, 1)));
 
         var tradingContext = new TradingContext(mockDateTimeProvider.Object);
 

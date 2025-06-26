@@ -53,15 +53,16 @@ public class RecommendatorRsiTests
                 { DateTime.Today.AddDays(-4), 40 }
             };
 
-        _tradingContext = new TradingContext(new DateTimeProvider(_exchangeServiceMock.Object,new Mock<IMemoryCache>().Object))
-            .SetBuyMargin(30)
-            .SetSellMargin(-30)
-            .SetMarketsToWatch(
-                new List<string>
-                {
-                    "BTC-EUR"
-                })
-            .SetInterval(Interval.FiveMinutes);
+        _tradingContext =
+            new TradingContext(new DateTimeProvider(_exchangeServiceMock.Object, new Mock<IMemoryCache>().Object))
+                .SetBuyMargin(30)
+                .SetSellMargin(-30)
+                .SetMarketsToWatch(
+                    new List<string>
+                    {
+                        "BTC-EUR"
+                    })
+                .SetInterval(Interval.FiveMinutes);
     }
 
     [Test]

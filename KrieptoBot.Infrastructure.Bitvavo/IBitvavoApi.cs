@@ -54,7 +54,7 @@ public interface IBitvavoApi
 
     [Delete("/v2/orders")]
     Task CancelOrders();
-        
+
     [Delete("/v2/orders")]
     Task CancelOrders(string market);
 

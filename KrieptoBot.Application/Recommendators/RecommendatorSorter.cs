@@ -4,15 +4,8 @@ using System.Linq;
 
 namespace KrieptoBot.Application.Recommendators;
 
-public class RecommendatorSorter : IRecommendatorSorter
+public class RecommendatorSorter(IEnumerable<IRecommendator> recommendators) : IRecommendatorSorter
 {
-    private readonly IEnumerable<IRecommendator> _recommendators;
-
-    public RecommendatorSorter(IEnumerable<IRecommendator> recommendators)
-    {
-        _recommendators = recommendators;
-    }
-
     public IEnumerable<IRecommendator> GetSortRecommendators()
     {
         var sortedRecommendators = new List<IRecommendator>();
@@ -36,7 +29,7 @@ public class RecommendatorSorter : IRecommendatorSorter
         if (ThereAreUnsortedRecommendators(sortedRecommendators))
         {
             throw new Exception(
-                $"Some recommendators have a circular reference {string.Join(", ", _recommendators.Select(x => x.GetType()).Except(sortedRecommendators.Select(y => y.GetType())))}");
+                $"Some recommendators have a circular reference {string.Join(", ", recommendators.Select(x => x.GetType()).Except(sortedRecommendators.Select(y => y.GetType())))}");
         }
 
         return sortedRecommendators;
@@ -44,13 +37,13 @@ public class RecommendatorSorter : IRecommendatorSorter
 
     private bool ThereAreUnsortedRecommendators(List<IRecommendator> sortedRecommendators)
     {
-        return sortedRecommendators.Count != _recommendators.Count();
+        return sortedRecommendators.Count != recommendators.Count();
     }
 
     private void AddRecommendatorsWithOnlyDependenciesThatAreAlreadyAdded(List<IRecommendator> sortedRecommendators)
     {
         var recommendatorsWhereAllDependenciesAreAlreadySorted =
-            _recommendators
+            recommendators
                 .Where(recommendatorToAdd =>
                 {
                     var alreadyAdded = sortedRecommendators.Select(x => x.GetType())
@@ -68,6 +61,6 @@ public class RecommendatorSorter : IRecommendatorSorter
 
     private void AddRecommendatorsWithoutDependency(List<IRecommendator> sortedRecommendators)
     {
-        sortedRecommendators.AddRange(_recommendators.Where(x => !x.DependencyRecommendators.Any()));
+        sortedRecommendators.AddRange(recommendators.Where(x => !x.DependencyRecommendators.Any()));
     }
 }

@@ -5,13 +5,12 @@ using Microsoft.Extensions.Options;
 
 namespace KrieptoBot.Application.Recommendators;
 
-public class RecommendatorRsi14PeriodInterval : RecommendatorRsiBase
-{
-    public RecommendatorRsi14PeriodInterval(IExchangeService exchangeService, IRsi rsiIndicator,
-        ITradingContext tradingContext, ILogger<RecommendatorRsi14PeriodInterval> logger,
-        IOptions<RecommendatorSettings> recommendatorSettings) : base(exchangeService,
+public class RecommendatorRsi14PeriodInterval(
+    IExchangeService exchangeService,
+    IRsi rsiIndicator,
+    ITradingContext tradingContext,
+    ILogger<RecommendatorRsi14PeriodInterval> logger,
+    IOptions<RecommendatorSettings> recommendatorSettings)
+    : RecommendatorRsiBase(exchangeService,
         rsiIndicator, tradingContext, logger,
-        tradingContext.Interval, 14, recommendatorSettings.Value)
-    {
-    }
-}
+        tradingContext.Interval, 14, recommendatorSettings.Value);

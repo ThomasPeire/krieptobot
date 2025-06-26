@@ -3,17 +3,11 @@ using KrieptoBot.Domain.BuildingBlocks;
 
 namespace KrieptoBot.Domain.Trading.ValueObjects;
 
-public class Asset : ValueObject
+public class Asset(Symbol symbol, AssetName name) : ValueObject
 {
-    public Asset(Symbol symbol, AssetName name)
-    {
-        Symbol = symbol;
-        Name = name;
-    }
+    public Symbol Symbol { get; } = symbol;
 
-    public Symbol Symbol { get; }
-
-    public AssetName Name { get; }
+    public AssetName Name { get; } = name;
 
 
     protected override IEnumerable<object> GetEqualityComponents()

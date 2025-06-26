@@ -30,7 +30,7 @@ public static class HostBuilderWrapper
             .AddJsonFile(Path.Combine(context.HostingEnvironment.ContentRootPath, "appsettings.json"),
                 true,
                 false)
-            .AddUserSecrets<TradeFunction>(optional:true)
+            .AddUserSecrets<TradeFunction>(optional: true)
             .AddEnvironmentVariables();
     }
 

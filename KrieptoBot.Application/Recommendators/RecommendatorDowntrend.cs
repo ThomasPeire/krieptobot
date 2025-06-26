@@ -12,31 +12,22 @@ using Microsoft.Extensions.Options;
 
 namespace KrieptoBot.Application.Recommendators;
 
-public class RecommendatorDownTrend : RecommendatorBase
+public class RecommendatorDownTrend(
+    IOptions<RecommendatorSettings> recommendatorSettings,
+    ILogger<RecommendatorDownTrend> logger,
+    IExchangeService exchangeService,
+    ITradingContext tradingContext,
+    IExponentialMovingAverage ema)
+    : RecommendatorBase(recommendatorSettings.Value, logger)
 {
     protected override string Name => "Downtrend recommendator";
-    private readonly ILogger<RecommendatorDownTrend> _logger;
-    private readonly IExchangeService _exchangeService;
-    private readonly ITradingContext _tradingContext;
-    private readonly IExponentialMovingAverage _ema;
-
-    public RecommendatorDownTrend(IOptions<RecommendatorSettings> recommendatorSettings,
-        ILogger<RecommendatorDownTrend> logger,
-        IExchangeService exchangeService, ITradingContext tradingContext, IExponentialMovingAverage ema)
-        : base(recommendatorSettings.Value, logger)
-    {
-        _logger = logger;
-        _exchangeService = exchangeService;
-        _tradingContext = tradingContext;
-        _ema = ema;
-    }
 
     protected override async Task<RecommendatorScore> CalculateRecommendation(Market market)
     {
         var trendCandles = await GetTrendCandles(market);
         var intervalCandles = (await GetIntervalCandles(market)).ToList();
 
-        var ema55 = _ema.Calculate(trendCandles.ToDictionary(c => c.TimeStamp, c => c.Close.Value), 55);
+        var ema55 = ema.Calculate(trendCandles.ToDictionary(c => c.TimeStamp, c => c.Close.Value), 55);
 
         var intervalCandlesDictionary = intervalCandles.ToDictionary(c => c.TimeStamp, c => c.Close.Value);
         var ema55ValuesToCheckInterpolated = CalculateEma55ValuesInterpolated(ema55,
@@ -46,14 +37,14 @@ public class RecommendatorDownTrend : RecommendatorBase
             .Take(RecommendatorSettings.DownTrendRecommendatorNumberOfConsecutiveCandles)
             .All(x => PriceBelowEmaValue(x, ema55ValuesToCheckInterpolated));
 
-        _logger.LogDebug(
+        logger.LogDebug(
             "Market {Market} - {Recommendator} Downtrend detected: {DownTrendDetected}",
             market.Name.Value, Name, allPricesBelowEma);
-        
+
         var balance = await GetTotalBalanceForAsset(market.Name.BaseSymbol);
         var thereIsOpenBalance = market.MinimumBaseAmount <= balance;
 
-        _logger.LogDebug(
+        logger.LogDebug(
             "Market {Market} - {Recommendator} Sufficient open balance: {OpenBalance}, score {IncludeOrNot} included in final score",
             market.Name.Value, Name, thereIsOpenBalance, thereIsOpenBalance ? "won't be" : "will be");
 
@@ -106,21 +97,21 @@ public class RecommendatorDownTrend : RecommendatorBase
 
     private async Task<IEnumerable<Candle>> GetIntervalCandles(Market market)
     {
-        return await _exchangeService.GetCandlesAsync(market.Name,
-            _tradingContext.Interval,
-            end: _tradingContext.CurrentTime);
+        return await exchangeService.GetCandlesAsync(market.Name,
+            tradingContext.Interval,
+            end: tradingContext.CurrentTime);
     }
 
     private async Task<IEnumerable<Candle>> GetTrendCandles(Market market)
     {
-        return await _exchangeService.GetCandlesAsync(market.Name,
+        return await exchangeService.GetCandlesAsync(market.Name,
             RecommendatorSettings.DownTrendRecommendatorInterval,
-            end: _tradingContext.CurrentTime);
+            end: tradingContext.CurrentTime);
     }
-    
+
     private async Task<Amount> GetTotalBalanceForAsset(Symbol asset)
     {
-        var availableBalance = await _exchangeService.GetBalanceAsync(asset);
+        var availableBalance = await exchangeService.GetBalanceAsync(asset);
 
         return availableBalance != null
             ? availableBalance.Available + availableBalance.InOrder

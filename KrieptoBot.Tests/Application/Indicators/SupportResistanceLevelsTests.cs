@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
 using KrieptoBot.Application.Indicators;
 using KrieptoBot.DataVisualizer;
 using KrieptoBot.DataVisualizer.Extensions;
@@ -13,8 +12,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using Plotly.NET;
-using Plotly.NET.LayoutObjects;
-using Plotly.NET.TraceObjects;
 using Snapshooter.NUnit;
 
 namespace KrieptoBot.Tests.Application.Indicators;

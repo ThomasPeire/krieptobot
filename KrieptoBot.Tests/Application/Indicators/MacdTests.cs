@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using AwesomeAssertions;
 using KrieptoBot.Application.Indicators;
 using KrieptoBot.DataVisualizer;
 using KrieptoBot.DataVisualizer.Extensions;
@@ -69,7 +68,8 @@ internal class MacdTests
         var candleVisualizer = new CandlesVisualizer();
         var candleChart = candleVisualizer.Visualize(candlesToWorkWith);
 
-        candleChart = candleChart.AddSubChartLine(macdLine).AddLineChart(signalLine, Color.Chartreuse).AddLineChart(histogram, Color.Gold);
+        candleChart = candleChart.AddSubChartLine(macdLine).AddLineChart(signalLine, Color.Chartreuse)
+            .AddLineChart(histogram, Color.Gold);
         candleChart.WithSize(1920, 1080).WithConfig(Config.init(Responsive: true)).Show();
 #endif
     }

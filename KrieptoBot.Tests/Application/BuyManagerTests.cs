@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using KrieptoBot.Application;
-using KrieptoBot.Application.Recommendators;
-using KrieptoBot.Domain.Recommendation.ValueObjects;
 using KrieptoBot.Domain.Trading.ValueObjects;
-using KrieptoBot.Infrastructure.Bitvavo.Services;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
@@ -39,13 +36,15 @@ public class BuyManagerTests
 
         _tradingContextMock.Setup(x => x.IsSimulation).Returns(false);
 
-        _exchangeServiceMock.Setup(x => x.GetTickerPrice(It.IsAny<string>())).ReturnsAsync(new TickerPrice(new MarketName(market), new Price(10000)));
+        _exchangeServiceMock.Setup(x => x.GetTickerPrice(It.IsAny<string>()))
+            .ReturnsAsync(new TickerPrice(new MarketName(market), new Price(10000)));
 
         _exchangeServiceMock.Setup(x => x.GetCandlesAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(),
                 It.IsAny<DateTime?>(), It.IsAny<DateTime?>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(new List<Candle>(new[]
             {
-                new Candle(DateTime.Today, new Price(currentHigh), new Price(currentLow), new Price(currentHigh), new Price(currentLow), 100),
+                new Candle(DateTime.Today, new Price(currentHigh), new Price(currentLow), new Price(currentHigh),
+                    new Price(currentLow), 100),
                 new Candle(DateTime.Today.AddDays(-1), new Price(3), new Price(3), new Price(3), new Price(3), 100),
                 new Candle(DateTime.Today.AddDays(-2), new Price(3), new Price(3), new Price(3), new Price(3), 100),
                 new Candle(DateTime.Today.AddDays(-3), new Price(3), new Price(3), new Price(3), new Price(3), 100)
@@ -58,9 +57,9 @@ public class BuyManagerTests
 
         _exchangeServiceMock.Verify(x =>
             x.PostBuyOrderAsync(market, It.IsAny<string>(), budget / priceToBuy, priceToBuy));
-        _notificationManagerMock.Verify(x => x.SendNotification(It.IsAny<string>(), It.IsAny<string>()),Times.Once);
+        _notificationManagerMock.Verify(x => x.SendNotification(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
     }
-        
+
     // var lastCandles = await _exchangeService.GetCandlesAsync(market.Name, _tradingContext.Interval,
     //     end: _tradingContext.CurrentTime);
     // var lastCandle = lastCandles.OrderByDescending(x => x.TimeStamp).First();
@@ -79,12 +78,14 @@ public class BuyManagerTests
 
         _tradingContextMock.Setup(x => x.IsSimulation).Returns(true);
 
-        _exchangeServiceMock.Setup(x => x.GetTickerPrice(It.IsAny<string>())).ReturnsAsync(new TickerPrice(new MarketName(market), new Price(10000)));
+        _exchangeServiceMock.Setup(x => x.GetTickerPrice(It.IsAny<string>()))
+            .ReturnsAsync(new TickerPrice(new MarketName(market), new Price(10000)));
         _exchangeServiceMock.Setup(x => x.GetCandlesAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(),
                 It.IsAny<DateTime?>(), It.IsAny<DateTime?>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(new List<Candle>(new[]
             {
-                new Candle(DateTime.Today, new Price(currentHigh), new Price(currentLow), new Price(3), new Price(3), 100),
+                new Candle(DateTime.Today, new Price(currentHigh), new Price(currentLow), new Price(3), new Price(3),
+                    100),
                 new Candle(DateTime.Today.AddDays(-1), new Price(3), new Price(3), new Price(3), new Price(3), 100),
                 new Candle(DateTime.Today.AddDays(-2), new Price(3), new Price(3), new Price(3), new Price(3), 100),
                 new Candle(DateTime.Today.AddDays(-3), new Price(3), new Price(3), new Price(3), new Price(3), 100)
@@ -96,7 +97,8 @@ public class BuyManagerTests
         await buyManager.Buy(new Market(new MarketName(market), Amount.Zero, Amount.Zero), budget);
 
         _exchangeServiceMock.Verify(x =>
-            x.PostBuyOrderAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<decimal>()), Times.Never);
-        _notificationManagerMock.Verify(x => x.SendNotification(It.IsAny<string>(), It.IsAny<string>()),Times.Once);
+                x.PostBuyOrderAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<decimal>()),
+            Times.Never);
+        _notificationManagerMock.Verify(x => x.SendNotification(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
     }
 }

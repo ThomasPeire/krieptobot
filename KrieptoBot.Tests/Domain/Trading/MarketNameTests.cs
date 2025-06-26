@@ -25,6 +25,7 @@ public class MarketNameTests
         Func<MarketName> act = () =>
             new MarketName("incorrect format");
 
-        act.Should().Throw<ArgumentException>().WithMessage("Market name is not correctly formatted (Parameter 'name')");
+        act.Should().Throw<ArgumentException>()
+            .WithMessage("Market name is not correctly formatted (Parameter 'name')");
     }
 }

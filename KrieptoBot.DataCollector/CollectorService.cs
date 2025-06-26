@@ -7,18 +7,11 @@ using Microsoft.Extensions.Hosting;
 
 namespace KrieptoBot.DataCollector;
 
-public class CollectorService : IHostedService
+public class CollectorService(ICollector collector) : IHostedService
 {
-    private readonly ICollector _collector;
-
-    public CollectorService(ICollector collector)
-    {
-        _collector = collector;
-    }
-
     public Task StartAsync(CancellationToken cancellationToken)
     {
-        return _collector.CollectCandles([ "BTC-EUR" ], [ Interval.FiveMinutes ],
+        return collector.CollectCandles(["BTC-EUR"], [Interval.FiveMinutes],
             DateTime.Today.AddDays(-30), DateTime.Today, cancellationToken);
     }
 

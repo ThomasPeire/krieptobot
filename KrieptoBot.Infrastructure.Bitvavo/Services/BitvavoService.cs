@@ -16,25 +16,15 @@ using Microsoft.Extensions.Logging;
 
 namespace KrieptoBot.Infrastructure.Bitvavo.Services;
 
-public class BitvavoService : IExchangeService
+public class BitvavoService(IBitvavoApi bitvavoApi, IMemoryCache cache, ILogger<BitvavoService> logger)
+    : IExchangeService
 {
-    private readonly IBitvavoApi _bitvavoApi;
-    private readonly IMemoryCache _cache;
-    private readonly ILogger<BitvavoService> _logger;
-
-    public BitvavoService(IBitvavoApi bitvavoApi, IMemoryCache cache, ILogger<BitvavoService> logger)
-    {
-        _bitvavoApi = bitvavoApi;
-        _cache = cache;
-        _logger = logger;
-    }
-
     public async Task<Asset> GetAssetAsync(string symbol)
     {
-        return await _cache.GetOrCreateAsync($"{nameof(GetAssetAsync)}-{symbol}", async cacheEntry =>
+        return await cache.GetOrCreateAsync($"{nameof(GetAssetAsync)}-{symbol}", async cacheEntry =>
         {
             cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(1);
-            var dto = await _bitvavoApi.GetAssetAsync(symbol);
+            var dto = await bitvavoApi.GetAssetAsync(symbol);
 
             return dto.ConvertToKrieptoBotModel();
         });
@@ -42,10 +32,10 @@ public class BitvavoService : IExchangeService
 
     public async Task<IEnumerable<Asset>> GetAssetsAsync()
     {
-        return await _cache.GetOrCreateAsync($"{nameof(GetAssetsAsync)}", async cacheEntry =>
+        return await cache.GetOrCreateAsync($"{nameof(GetAssetsAsync)}", async cacheEntry =>
         {
             cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(1);
-            var dtos = await _bitvavoApi.GetAssetsAsync();
+            var dtos = await bitvavoApi.GetAssetsAsync();
 
             return dtos.ConvertToKrieptoBotModel();
         });
@@ -53,14 +43,14 @@ public class BitvavoService : IExchangeService
 
     public async Task<IEnumerable<Balance>> GetBalanceAsync()
     {
-        var dtos = await _bitvavoApi.GetBalanceAsync();
+        var dtos = await bitvavoApi.GetBalanceAsync();
 
         return dtos.ConvertToKrieptoBotModel();
     }
 
     public async Task<Balance> GetBalanceAsync(string symbol)
     {
-        var dto = await _bitvavoApi.GetBalanceAsync(symbol);
+        var dto = await bitvavoApi.GetBalanceAsync(symbol);
         var balance = dto.FirstOrDefault() ??
                       new BalanceDto
                       {
@@ -72,36 +62,42 @@ public class BitvavoService : IExchangeService
         return balance.ConvertToKrieptoBotModel();
     }
 
-    public async Task<IEnumerable<Candle>> GetCandlesAsync(string market, string interval = Interval.Minutes.Five, int limit = 1000,
+    public async Task<IEnumerable<Candle>> GetCandlesAsync(string market, string interval = Interval.Minutes.Five,
+        int limit = 1000,
         DateTime? start = null, DateTime? end = null, CancellationToken ct = default)
     {
-        return await _cache.GetOrCreateAsync($"{nameof(GetCandlesAsync)}-{market}-{interval}-{limit}-{start}-{end}",
+        return await cache.GetOrCreateAsync($"{nameof(GetCandlesAsync)}-{market}-{interval}-{limit}-{start}-{end}",
             async cacheEntry =>
             {
                 cacheEntry.AbsoluteExpirationRelativeToNow =
                     TimeSpan.FromMinutes(Interval.Of(interval).InMinutes() - 1);
-                var candleJArrayList = await _bitvavoApi.GetCandlesAsync(market, interval, limit,
+                var candleJArrayList = await bitvavoApi.GetCandlesAsync(market, interval, limit,
                     start.ToUnixTimeMilliseconds(), end.ToUnixTimeMilliseconds());
 
                 return candleJArrayList?.Select(x =>
                     new CandleDto
                     {
                         TimeStamp = x.Value<long>(0),
-                        Open = decimal.Parse(x.Value<string>(1), NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture),
-                        High = decimal.Parse(x.Value<string>(2), NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture),
-                        Low = decimal.Parse(x.Value<string>(3), NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture),
-                        Close = decimal.Parse(x.Value<string>(4), NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture),
-                        Volume = decimal.Parse(x.Value<string>(5), NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture),
+                        Open = decimal.Parse(x.Value<string>(1),
+                            NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture),
+                        High = decimal.Parse(x.Value<string>(2),
+                            NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture),
+                        Low = decimal.Parse(x.Value<string>(3),
+                            NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture),
+                        Close = decimal.Parse(x.Value<string>(4),
+                            NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture),
+                        Volume = decimal.Parse(x.Value<string>(5),
+                            NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture),
                     }).ConvertToKrieptoBotModel();
             });
     }
 
     public async Task<Market> GetMarketAsync(string market)
     {
-        return await _cache.GetOrCreateAsync($"{nameof(GetMarketAsync)}-{market}", async cacheEntry =>
+        return await cache.GetOrCreateAsync($"{nameof(GetMarketAsync)}-{market}", async cacheEntry =>
         {
             cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(1);
-            var dto = await _bitvavoApi.GetMarketAsync(market);
+            var dto = await bitvavoApi.GetMarketAsync(market);
 
             return dto.ConvertToKrieptoBotModel();
         });
@@ -109,10 +105,10 @@ public class BitvavoService : IExchangeService
 
     public async Task<IEnumerable<Market>> GetMarketsAsync()
     {
-        return await _cache.GetOrCreateAsync($"{nameof(GetMarketsAsync)}", async cacheEntry =>
+        return await cache.GetOrCreateAsync($"{nameof(GetMarketsAsync)}", async cacheEntry =>
         {
             cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(1);
-            var dtos = await _bitvavoApi.GetMarketsAsync();
+            var dtos = await bitvavoApi.GetMarketsAsync();
 
             return dtos.ConvertToKrieptoBotModel();
         });
@@ -120,14 +116,14 @@ public class BitvavoService : IExchangeService
 
     public async Task<IEnumerable<Order>> GetOpenOrderAsync()
     {
-        var dto = await _bitvavoApi.GetOpenOrdersAsync();
+        var dto = await bitvavoApi.GetOpenOrdersAsync();
 
         return dto.ConvertToKrieptoBotModel();
     }
 
     public async Task<IEnumerable<Order>> GetOpenOrderAsync(string market)
     {
-        var dto = await _bitvavoApi.GetOpenOrdersAsync(market);
+        var dto = await bitvavoApi.GetOpenOrdersAsync(market);
 
         return dto.ConvertToKrieptoBotModel();
     }
@@ -157,7 +153,7 @@ public class BitvavoService : IExchangeService
                 .ToString(CultureInfo.InvariantCulture));
         }
 
-        _logger.LogInformation(
+        logger.LogInformation(
             "Posting sell order: Market: {Market} - OrderType: {OrderType} - Side: {Side} - Amount: {Amount} - Price: {Price}",
             paramDictionary["market"],
             paramDictionary["orderType"],
@@ -165,7 +161,7 @@ public class BitvavoService : IExchangeService
             paramDictionary["amount"],
             paramDictionary["price"]);
 
-        var dto = await _bitvavoApi.PostOrderAsync(
+        var dto = await bitvavoApi.PostOrderAsync(
             paramDictionary
         );
 
@@ -174,7 +170,7 @@ public class BitvavoService : IExchangeService
 
     public async Task<Order> PostStopLossOrderAsync(string market, decimal amount, decimal price)
     {
-        var dto = await _bitvavoApi.PostOrderAsync(
+        var dto = await bitvavoApi.PostOrderAsync(
             new Dictionary<string, string>
             {
                 {
@@ -208,7 +204,7 @@ public class BitvavoService : IExchangeService
 
     public async Task<Order> PostBuyOrderAsync(string market, string orderType, decimal amount, decimal price)
     {
-        var dto = await _bitvavoApi.PostOrderAsync(
+        var dto = await bitvavoApi.PostOrderAsync(
             new Dictionary<string, string>
             {
                 {
@@ -234,7 +230,7 @@ public class BitvavoService : IExchangeService
 
     public async Task<TickerPrice> GetTickerPrice(string market)
     {
-        var dto = await _bitvavoApi.GetTickerPrice(market);
+        var dto = await bitvavoApi.GetTickerPrice(market);
 
         return dto.ConvertToKrieptoBotModel();
     }
@@ -243,29 +239,29 @@ public class BitvavoService : IExchangeService
     {
         if (string.IsNullOrEmpty(market))
         {
-            await _bitvavoApi.CancelOrders();
+            await bitvavoApi.CancelOrders();
         }
         else
         {
-            await _bitvavoApi.CancelOrders(market);
+            await bitvavoApi.CancelOrders(market);
         }
     }
 
     public async Task CancelOrder(string market, Guid orderId)
     {
-        await _bitvavoApi.CancelOrder(market, orderId);
+        await bitvavoApi.CancelOrder(market, orderId);
     }
 
     public async Task<DateTime> GetTime()
     {
-        var time = await _bitvavoApi.GetTime();
+        var time = await bitvavoApi.GetTime();
 
         return DateTime.UnixEpoch.AddMilliseconds(time.TimeInMilliseconds);
     }
 
     public async Task UpdateOrderPrice(string market, Guid id, decimal price)
     {
-        await _bitvavoApi.UpdateOrderAsync(
+        await bitvavoApi.UpdateOrderAsync(
             new Dictionary<string, string>
             {
                 {
@@ -283,7 +279,7 @@ public class BitvavoService : IExchangeService
 
     public async Task UpdateOrderTriggerAmount(string market, Guid id, decimal price)
     {
-        await _bitvavoApi.UpdateOrderAsync(
+        await bitvavoApi.UpdateOrderAsync(
             new Dictionary<string, string>
             {
                 {
@@ -301,7 +297,7 @@ public class BitvavoService : IExchangeService
 
     public async Task<Order> GetOrderAsync(string market, Guid orderId)
     {
-        var dto = await _bitvavoApi.GetOrderAsync(market, orderId);
+        var dto = await bitvavoApi.GetOrderAsync(market, orderId);
 
         return dto.ConvertToKrieptoBotModel();
     }
@@ -309,7 +305,7 @@ public class BitvavoService : IExchangeService
     public async Task<IEnumerable<Order>> GetOrdersAsync(string market, int limit = 500, DateTime? start = null,
         DateTime? end = null, Guid? orderIdFrom = null, Guid? orderIdTo = null)
     {
-        var dtos = await _bitvavoApi.GetOrdersAsync(market, limit, start.ToUnixTimeMilliseconds(),
+        var dtos = await bitvavoApi.GetOrdersAsync(market, limit, start.ToUnixTimeMilliseconds(),
             end.ToUnixTimeMilliseconds(), orderIdFrom, orderIdTo);
 
         return dtos.ConvertToKrieptoBotModel();
@@ -318,7 +314,7 @@ public class BitvavoService : IExchangeService
     public async Task<IEnumerable<Trade>> GetTradesAsync(string market, int limit = 500, DateTime? start = null,
         DateTime? end = null, Guid? tradeIdFrom = null, Guid? tradeIdTo = null)
     {
-        var dtos = await _bitvavoApi.GetTradesAsync(market, limit, start.ToUnixTimeMilliseconds(),
+        var dtos = await bitvavoApi.GetTradesAsync(market, limit, start.ToUnixTimeMilliseconds(),
             end.ToUnixTimeMilliseconds(), tradeIdFrom, tradeIdTo);
 
         return dtos.ConvertToKrieptoBotModel();

@@ -15,7 +15,7 @@ public class ValueObjectTests
         var dummy2 = new DummyValueObject("xyz");
 
         var result1 = dummy1.Equals(dummy2);
-        var result2= dummy1 == dummy2;
+        var result2 = dummy1 == dummy2;
 
         result1.Should().BeFalse();
         result2.Should().BeFalse();
@@ -28,7 +28,7 @@ public class ValueObjectTests
         var dummy2 = new DummyValueObject("abc");
 
         var result1 = dummy1.Equals(dummy2);
-        var result2= dummy1 == dummy2;
+        var result2 = dummy1 == dummy2;
 
         result1.Should().BeTrue();
         result2.Should().BeTrue();
@@ -41,7 +41,7 @@ public class ValueObjectTests
         var dummy2 = dummy1;
 
         var result1 = dummy1.Equals(dummy2);
-        var result2= dummy1 == dummy2;
+        var result2 = dummy1 == dummy2;
 
         result1.Should().BeTrue();
         result2.Should().BeTrue();
@@ -54,7 +54,7 @@ public class ValueObjectTests
         DummyValueObject dummy2 = null;
 
         var result1 = dummy1.Equals(dummy2);
-        var result2= dummy1 == dummy2;
+        var result2 = dummy1 == dummy2;
 
         result1.Should().BeFalse();
         result2.Should().BeFalse();
@@ -67,7 +67,7 @@ public class ValueObjectTests
         var dummy2 = new OtherDummyValueObject("abc");
 
         var result1 = dummy1.Equals(dummy2);
-        var result2= dummy1 == dummy2;
+        var result2 = dummy1 == dummy2;
 
         result1.Should().BeFalse();
         result2.Should().BeFalse();
@@ -75,14 +75,10 @@ public class ValueObjectTests
 }
 
 [ExcludeFromCodeCoverage]
-internal class DummyValueObject : ValueObject
+internal class DummyValueObject(string prop1) : ValueObject
 {
-    public string Prop1 { get; }
+    public string Prop1 { get; } = prop1;
 
-    public DummyValueObject(string prop1)
-    {
-        Prop1 = prop1;
-    }
     protected override IEnumerable<object> GetEqualityComponents()
     {
         yield return Prop1;
@@ -90,14 +86,10 @@ internal class DummyValueObject : ValueObject
 }
 
 [ExcludeFromCodeCoverage]
-internal class OtherDummyValueObject : ValueObject
+internal class OtherDummyValueObject(string prop1) : ValueObject
 {
-    public string Prop1 { get; }
+    public string Prop1 { get; } = prop1;
 
-    public OtherDummyValueObject(string prop1)
-    {
-        Prop1 = prop1;
-    }
     protected override IEnumerable<object> GetEqualityComponents()
     {
         yield return Prop1;

@@ -1,9 +1,4 @@
-﻿using System;
-using KrieptoBot.Domain.Trading.Entity;
-using KrieptoBot.Domain.Trading.ValueObjects;
-using NUnit.Framework;
-
-namespace KrieptoBot.Tests.Domain.Trading;
+﻿namespace KrieptoBot.Tests.Domain.Trading;
 
 public class OrderTests
 {

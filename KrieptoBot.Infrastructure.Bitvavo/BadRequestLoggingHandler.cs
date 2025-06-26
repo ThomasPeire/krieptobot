@@ -6,14 +6,8 @@ using Microsoft.Extensions.Logging;
 
 namespace KrieptoBot.Infrastructure.Bitvavo;
 
-public class BadRequestLoggingHandler : DelegatingHandler
+public class BadRequestLoggingHandler(ILogger<BadRequestLoggingHandler> logger) : DelegatingHandler
 {
-    private readonly ILogger<BadRequestLoggingHandler> _logger;
-    public BadRequestLoggingHandler(ILogger<BadRequestLoggingHandler> logger)
-    {
-        _logger = logger;
-    }
-    
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
         CancellationToken cancellationToken)
     {
@@ -22,10 +16,9 @@ public class BadRequestLoggingHandler : DelegatingHandler
         if (response.StatusCode == HttpStatusCode.BadRequest)
         {
             var content = await response.Content.ReadAsStringAsync(cancellationToken);
-            _logger.LogError("Bad request: {Content}", content);
+            logger.LogError("Bad request: {Content}", content);
         }
 
         return response;
     }
-    
 }

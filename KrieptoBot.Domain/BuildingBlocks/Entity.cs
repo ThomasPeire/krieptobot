@@ -2,14 +2,9 @@
 
 namespace KrieptoBot.Domain.BuildingBlocks;
 
-public abstract class Entity
+public abstract class Entity(Guid id)
 {
-    protected Entity(Guid id)
-    {
-        Id = id;
-    }
-
-    public virtual Guid Id { get; }
+    public virtual Guid Id { get; } = id;
 
     public override bool Equals(object obj)
     {

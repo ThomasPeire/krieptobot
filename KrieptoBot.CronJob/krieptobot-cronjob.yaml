@@ -9,17 +9,17 @@ spec:
       template:
         spec:
           containers:
-          - name: krieptobot-cronjob
-            image: <your-docker-repo>/krieptobot-cronjob:latest # Replace with your image repo
-            env:
-            - name: ASPNETCORE_ENVIRONMENT
-              value: "Production"
-            # Add more environment variables or secrets as needed
-            volumeMounts:
-            # Example for mounting config, if needed
-            # - name: config-volume
-            #   mountPath: /app/appsettings.json
-            #   subPath: appsettings.json
+            - name: krieptobot-cronjob
+              image: <your-docker-repo>/krieptobot-cronjob:latest # Replace with your image repo
+              env:
+                - name: ASPNETCORE_ENVIRONMENT
+                  value: "Production"
+              # Add more environment variables or secrets as needed
+              volumeMounts:
+              # Example for mounting config, if needed
+              # - name: config-volume
+              #   mountPath: /app/appsettings.json
+              #   subPath: appsettings.json
           restartPolicy: OnFailure
           # volumes:
           # - name: config-volume

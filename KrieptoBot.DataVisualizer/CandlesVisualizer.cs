@@ -13,6 +13,4 @@ public class CandlesVisualizer : ICandlesVisualizer
             candlesArray.Select(x => x.Low.Value), candlesArray.Select(x => x.Close.Value),
             candlesArray.Select(x => x.TimeStamp));
     }
-
-
 }

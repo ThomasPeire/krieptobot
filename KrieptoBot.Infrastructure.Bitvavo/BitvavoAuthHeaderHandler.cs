@@ -10,14 +10,9 @@ using Microsoft.Extensions.Options;
 
 namespace KrieptoBot.Infrastructure.Bitvavo;
 
-public class BitvavoAuthHeaderHandler : DelegatingHandler
+public class BitvavoAuthHeaderHandler(IOptions<BitvavoConfig> bitvavoConfigOptions) : DelegatingHandler
 {
-    private readonly BitvavoConfig _bitvavoConfig;
-
-    public BitvavoAuthHeaderHandler(IOptions<BitvavoConfig> bitvavoConfigOptions)
-    {
-        _bitvavoConfig = bitvavoConfigOptions.Value;
-    }
+    private readonly BitvavoConfig _bitvavoConfig = bitvavoConfigOptions.Value;
 
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
         CancellationToken cancellationToken)

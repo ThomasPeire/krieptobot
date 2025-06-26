@@ -12,31 +12,22 @@ using Microsoft.Extensions.Options;
 
 namespace KrieptoBot.Application.Recommendators;
 
-public class RecommendatorRsiEma : RecommendatorBase
+public class RecommendatorRsiEma(
+    IExchangeService exchangeService,
+    IRsi rsiIndicator,
+    ITradingContext tradingContext,
+    ILogger<RecommendatorRsiEma> logger,
+    IOptions<RecommendatorSettings> recommendatorSettings)
+    : RecommendatorBase(recommendatorSettings.Value, logger)
 {
-    private readonly IExchangeService _exchangeService;
-    private readonly ILogger<RecommendatorRsiEma> _logger;
-    private readonly IRsi _rsiIndicator;
-    private readonly ITradingContext _tradingContext;
-    private readonly int _rsiEmaRecommendatorEmaPeriod;
-    private readonly int _rsiEmaRecommendatorRsiPeriod;
-    private readonly decimal _rsiEmaRecommendatorSellSignalThreshold;
-    private readonly decimal _rsiEmaRecommendatorBuySignalThreshold;
+    private readonly int _rsiEmaRecommendatorEmaPeriod = recommendatorSettings.Value.RsiEmaRecommendatorEmaPeriod;
+    private readonly int _rsiEmaRecommendatorRsiPeriod = recommendatorSettings.Value.RsiEmaRecommendatorRsiPeriod;
 
-    public RecommendatorRsiEma(IExchangeService exchangeService, IRsi rsiIndicator,
-        ITradingContext tradingContext, ILogger<RecommendatorRsiEma> logger,
-        IOptions<RecommendatorSettings> recommendatorSettings) : base(recommendatorSettings.Value, logger)
-    {
-        _exchangeService = exchangeService;
-        _rsiIndicator = rsiIndicator;
-        _tradingContext = tradingContext;
-        _logger = logger;
-        _rsiEmaRecommendatorEmaPeriod = recommendatorSettings.Value.RsiEmaRecommendatorEmaPeriod;
-        _rsiEmaRecommendatorRsiPeriod = recommendatorSettings.Value.RsiEmaRecommendatorRsiPeriod;
-        _rsiEmaRecommendatorSellSignalThreshold =
-            recommendatorSettings.Value.RsiEmaRecommendatorSellSignalThreshold;
-        _rsiEmaRecommendatorBuySignalThreshold = recommendatorSettings.Value.RsiEmaRecommendatorBuySignalThreshold;
-    }
+    private readonly decimal _rsiEmaRecommendatorSellSignalThreshold =
+        recommendatorSettings.Value.RsiEmaRecommendatorSellSignalThreshold;
+
+    private readonly decimal _rsiEmaRecommendatorBuySignalThreshold =
+        recommendatorSettings.Value.RsiEmaRecommendatorBuySignalThreshold;
 
     protected override string Name =>
         $"RSI{_rsiEmaRecommendatorRsiPeriod} EMA {_rsiEmaRecommendatorEmaPeriod} recommendator";
@@ -45,7 +36,7 @@ public class RecommendatorRsiEma : RecommendatorBase
     {
         var emaValue = await GetLastEmaValue(market);
 
-        _logger.LogDebug("Market {Market} - {Recommendator} EMA: {EmaValue}",
+        logger.LogDebug("Market {Market} - {Recommendator} EMA: {EmaValue}",
             market.Name.Value, Name, emaValue.ToString("0.00"));
 
         var recommendatorScore = EvaluateEmaValue(emaValue);
@@ -65,14 +56,14 @@ public class RecommendatorRsiEma : RecommendatorBase
 
     private Dictionary<DateTime, decimal> GetEmaValues(IEnumerable<Candle> candles)
     {
-        return _rsiIndicator.CalculateWithEma(candles, _rsiEmaRecommendatorRsiPeriod, _rsiEmaRecommendatorEmaPeriod)
+        return rsiIndicator.CalculateWithEma(candles, _rsiEmaRecommendatorRsiPeriod, _rsiEmaRecommendatorEmaPeriod)
             .EmaValues;
     }
 
     private async Task<IEnumerable<Candle>> GetCandlesAsync(Market market)
     {
-        return await _exchangeService.GetCandlesAsync(market.Name, _tradingContext.Interval,
-            end: _tradingContext.CurrentTime);
+        return await exchangeService.GetCandlesAsync(market.Name, tradingContext.Interval,
+            end: tradingContext.CurrentTime);
     }
 
     private RecommendatorScore EvaluateEmaValue(decimal emaValue)

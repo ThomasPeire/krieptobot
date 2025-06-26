@@ -1,27 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using KrieptoBot.Domain.BuildingBlocks;
 using KrieptoBot.Domain.Trading.ValueObjects;
 
 namespace KrieptoBot.Domain.Recommendation.ValueObjects;
 
-public class SupportResistanceLevel : ValueObject
+public class SupportResistanceLevel(Price value, DateTime from) : ValueObject
 {
-    public SupportResistanceLevel(Price value, DateTime from)
+    public SupportResistanceLevel(decimal value, DateTime from) : this(new Price(value), from)
     {
-        Value = value;
-        From = @from;
     }
 
-    public SupportResistanceLevel(decimal value, DateTime from)
-    {
-        Value = new Price(value);
-        From = @from;
-    }
-
-    public Price Value { get; }
-    public DateTime From { get; }
+    public Price Value { get; } = value;
+    public DateTime From { get; } = from;
 
     public static implicit operator decimal(SupportResistanceLevel level)
     {

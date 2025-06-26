@@ -39,15 +39,16 @@ public class TraderTests
             .Setup(x => x.GetMarketAsync("BTC-EUR"))
             .Returns(Task.FromResult(new Market(new MarketName("BTC-EUR"), Amount.Zero, Amount.Zero)));
 
-        _tradingContext = new TradingContext(new DateTimeProvider(_exchangeServiceMock.Object,new Mock<IMemoryCache>().Object))
-            .SetBuyMargin(30)
-            .SetSellMargin(-30)
-            .SetMarketsToWatch(
-                new List<string>
-                {
-                    "BTC-EUR"
-                })
-            .SetInterval(Interval.FiveMinutes);
+        _tradingContext =
+            new TradingContext(new DateTimeProvider(_exchangeServiceMock.Object, new Mock<IMemoryCache>().Object))
+                .SetBuyMargin(30)
+                .SetSellMargin(-30)
+                .SetMarketsToWatch(
+                    new List<string>
+                    {
+                        "BTC-EUR"
+                    })
+                .SetInterval(Interval.FiveMinutes);
 
         _tradingSettings = new TradingSettings { MaxBuyBudgetPerCoin = 100m, MinBuyBudgetPerCoin = 0m };
     }
@@ -91,15 +92,16 @@ public class TraderTests
     public async Task Trader_Should_DivideBudgetWhenBuying()
     {
         var iExchangeServiceMock = new Mock<IExchangeService>();
-        var localTradingContext = new TradingContext(new DateTimeProvider(iExchangeServiceMock.Object, new Mock<IMemoryCache>().Object))
-            .SetBuyMargin(30)
-            .SetSellMargin(-30)
-            .SetMarketsToWatch(
-                new List<string>
-                {
-                    "BTC-EUR", "DOGE-EUR"
-                })
-            .SetInterval(Interval.FiveMinutes);
+        var localTradingContext =
+            new TradingContext(new DateTimeProvider(iExchangeServiceMock.Object, new Mock<IMemoryCache>().Object))
+                .SetBuyMargin(30)
+                .SetSellMargin(-30)
+                .SetMarketsToWatch(
+                    new List<string>
+                    {
+                        "BTC-EUR", "DOGE-EUR"
+                    })
+                .SetInterval(Interval.FiveMinutes);
 
         _recommendationCalculator
             .Setup(x => x.CalculateRecommendation(new Market(new MarketName("BTC-EUR"), Amount.Zero, Amount.Zero)))

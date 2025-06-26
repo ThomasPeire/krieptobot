@@ -1,5 +1,4 @@
-﻿using System;
-using KrieptoBot.Application.Indicators;
+﻿using KrieptoBot.Application.Indicators;
 using KrieptoBot.Application.Recommendators;
 using KrieptoBot.Application.Settings;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,7 +33,7 @@ public static class ServiceCollectionExtensions
         {
             var tradingSettings = x.GetRequiredService<IOptions<TradingSettings>>().Value;
             var dateTimeProvider = x.GetRequiredService<IDateTimeProvider>();
-            var tradingContext= new TradingContext(dateTimeProvider)
+            var tradingContext = new TradingContext(dateTimeProvider)
                 .SetMarketsToWatch(tradingSettings.MarketsToWatch)
                 .SetInterval(tradingSettings.Interval)
                 .SetBuyMargin(tradingSettings.BuyMargin)

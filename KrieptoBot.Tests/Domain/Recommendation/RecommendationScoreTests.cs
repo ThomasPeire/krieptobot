@@ -1,7 +1,5 @@
-﻿using System;
-using AwesomeAssertions;
+﻿using AwesomeAssertions;
 using KrieptoBot.Domain.Recommendation.ValueObjects;
-using KrieptoBot.Domain.Trading.ValueObjects;
 using NUnit.Framework;
 
 namespace KrieptoBot.Tests.Domain.Recommendation;

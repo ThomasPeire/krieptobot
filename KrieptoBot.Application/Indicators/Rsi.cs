@@ -6,15 +6,8 @@ using KrieptoBot.Domain.Trading.ValueObjects;
 
 namespace KrieptoBot.Application.Indicators;
 
-public class Rsi : IRsi
+public class Rsi(IExponentialMovingAverage exponentialMovingAverage) : IRsi
 {
-    private readonly IExponentialMovingAverage _exponentialMovingAverage;
-
-    public Rsi(IExponentialMovingAverage exponentialMovingAverage)
-    {
-        _exponentialMovingAverage = exponentialMovingAverage;
-    }
-
     public RsiResult Calculate(IEnumerable<Candle> candles, int averagePeriod)
     {
         var upsAndDownMoves = CalculateUpAndDownMoves(candles);
@@ -29,7 +22,7 @@ public class Rsi : IRsi
     public RsiResult CalculateWithEma(IEnumerable<Candle> candles, int averagePeriod, int emaPeriod)
     {
         var rsiValues = Calculate(candles, averagePeriod).RsiValues;
-        var emaValues = _exponentialMovingAverage.Calculate(rsiValues, emaPeriod);
+        var emaValues = exponentialMovingAverage.Calculate(rsiValues, emaPeriod);
 
         return new RsiResult() { RsiValues = rsiValues, EmaValues = emaValues };
     }

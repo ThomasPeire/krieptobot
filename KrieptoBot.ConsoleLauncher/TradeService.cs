@@ -10,25 +10,16 @@ using Timer = System.Timers.Timer;
 
 namespace KrieptoBot.ConsoleLauncher;
 
-public class TradeService : IHostedService
+public class TradeService(
+    ILogger<TradeService> logger,
+    ITrader trader,
+    ITradingContext tradingContext,
+    IDateTimeProvider dateTimeProvider)
+    : IHostedService
 {
-    private readonly ILogger<TradeService> _logger;
-    private readonly ITrader _trader;
-    private readonly ITradingContext _tradingContext;
-    private readonly IDateTimeProvider _dateTimeProvider;
-
-    public TradeService(ILogger<TradeService> logger, ITrader trader, ITradingContext tradingContext,
-        IDateTimeProvider dateTimeProvider)
-    {
-        _logger = logger;
-        _trader = trader;
-        _tradingContext = tradingContext;
-        _dateTimeProvider = dateTimeProvider;
-    }
-
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Running in simulation mode: {Simulation}", _tradingContext.IsSimulation);
+        logger.LogInformation("Running in simulation mode: {Simulation}", tradingContext.IsSimulation);
 
         await WaitForBeginningOfMinute().WaitAsync(cancellationToken);
 
@@ -42,9 +33,9 @@ public class TradeService : IHostedService
 
     private async Task WaitForBeginningOfMinute()
     {
-        var exchangeTime = await _dateTimeProvider.UtcDateTimeNowExchange();
-        _logger.LogInformation("Trader will start on +/- second 5 of first minute of interval (Exchange time)");
-        _logger.LogInformation("Exchange time: {ExchangeTime}, Local time: {LocalTime}", exchangeTime.ToLocalTime(),
+        var exchangeTime = await dateTimeProvider.UtcDateTimeNowExchange();
+        logger.LogInformation("Trader will start on +/- second 5 of first minute of interval (Exchange time)");
+        logger.LogInformation("Exchange time: {ExchangeTime}, Local time: {LocalTime}", exchangeTime.ToLocalTime(),
             DateTime.UtcNow.ToLocalTime());
 
         var secondsUntilNewMinute = 60 - (exchangeTime.Second == 0 ? 60 : exchangeTime.Second);
@@ -69,14 +60,14 @@ public class TradeService : IHostedService
         }
         catch (Exception exception)
         {
-            _logger.LogCritical("Error occurred: {Message}", exception.Message);
+            logger.LogCritical("Error occurred: {Message}", exception.Message);
         }
     }
 
     private async Task<bool> TraderCanRun()
     {
-        var dateTimeNow = await _dateTimeProvider.UtcDateTimeNowSyncedWithExchange();
-        return CurrentMinuteIsFirstOfInterval(dateTimeNow, _tradingContext.PollingIntervalInMinutes);
+        var dateTimeNow = await dateTimeProvider.UtcDateTimeNowSyncedWithExchange();
+        return CurrentMinuteIsFirstOfInterval(dateTimeNow, tradingContext.PollingIntervalInMinutes);
     }
 
     private bool CurrentMinuteIsFirstOfInterval(DateTime dateTimeNow, int intervalInMinutes)
@@ -87,7 +78,7 @@ public class TradeService : IHostedService
 
         if (minutesTillRun != intervalInMinutes)
         {
-            _logger.LogInformation("Trader will run in {Minute} minutes", minutesTillRun);
+            logger.LogInformation("Trader will run in {Minute} minutes", minutesTillRun);
         }
 
         return minutesModulo == 0;
@@ -95,8 +86,8 @@ public class TradeService : IHostedService
 
     private async Task RunTrader()
     {
-        _logger.LogDebug("Starting trading service");
-        await _tradingContext.SetCurrentTime();
-        await _trader.Run();
+        logger.LogDebug("Starting trading service");
+        await tradingContext.SetCurrentTime();
+        await trader.Run();
     }
 }

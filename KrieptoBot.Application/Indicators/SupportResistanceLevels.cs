@@ -89,7 +89,7 @@ public class SupportResistanceLevels : ISupportResistanceLevels
         foreach (var candle in candles)
         {
             window.Add(candle);
-            if (window.Count != WindowLength) 
+            if (window.Count != WindowLength)
                 continue;
             yield return window.ToArray();
             window.RemoveAt(0);

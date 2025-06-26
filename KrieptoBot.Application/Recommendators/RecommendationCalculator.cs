@@ -7,21 +7,16 @@ using Microsoft.Extensions.Logging;
 
 namespace KrieptoBot.Application.Recommendators;
 
-public class RecommendationCalculator : IRecommendationCalculator
+public class RecommendationCalculator(
+    ILogger<RecommendationCalculator> logger,
+    IRecommendatorSorter recommendatorSorter)
+    : IRecommendationCalculator
 {
-    private readonly ILogger<RecommendationCalculator> _logger;
-    private readonly IRecommendatorSorter _recommendatorSorter;
-
-    public RecommendationCalculator(ILogger<RecommendationCalculator> logger,
-        IRecommendatorSorter recommendatorSorter)
-    {
-        _logger = logger;
-        _recommendatorSorter = recommendatorSorter;
-    }
+    private readonly ILogger<RecommendationCalculator> _logger = logger;
 
     public async Task<RecommendatorScore> CalculateRecommendation(Market market)
     {
-        var sortedRecommendators = _recommendatorSorter.GetSortRecommendators().ToList();
+        var sortedRecommendators = recommendatorSorter.GetSortRecommendators().ToList();
         List<RecommendatorScore> recommendationScores = new();
 
         foreach (var recommendator in sortedRecommendators)

@@ -1,31 +1,21 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using Microsoft.Extensions.Logging;
 
 namespace KrieptoBot.Application;
 
-public class SellManager : ISellManager
+public class SellManager(
+    ILogger<SellManager> logger,
+    ITradingContext tradingContext,
+    INotificationManager notificationManager,
+    IExchangeService exchangeService)
+    : ISellManager
 {
-    private readonly IExchangeService _exchangeService;
-    private readonly ILogger<SellManager> _logger;
-    private readonly INotificationManager _notificationManager;
-    private readonly ITradingContext _tradingContext;
-
-    public SellManager(ILogger<SellManager> logger, ITradingContext tradingContext,
-        INotificationManager notificationManager, IExchangeService exchangeService)
-    {
-        _logger = logger;
-        _tradingContext = tradingContext;
-        _notificationManager = notificationManager;
-        _exchangeService = exchangeService;
-    }
-
     public async Task Sell(Market market)
     {
         var availableBaseAssetBalance = await GetSellableBalance(market);
 
-        var priceToSellOn = await _exchangeService.GetTickerPrice(market.Name.Value);
+        var priceToSellOn = await exchangeService.GetTickerPrice(market.Name.Value);
         LogSellRecommendation(market, priceToSellOn, availableBaseAssetBalance);
         await SendNotificationWithSellRecommendation(market, priceToSellOn, availableBaseAssetBalance);
 
@@ -38,23 +28,24 @@ public class SellManager : ISellManager
 
     private async Task CancelOpenOrders(Market market)
     {
-        await _exchangeService.CancelOrders(market.Name.Value);
+        await exchangeService.CancelOrders(market.Name.Value);
     }
 
     private async Task PlaceOrder(Market market, decimal availableBaseAssetBalance, TickerPrice priceToSellOn)
     {
-        await _exchangeService.PostSellOrderAsync(market.Name, OrderType.Limit, availableBaseAssetBalance, priceToSellOn.Price);
+        await exchangeService.PostSellOrderAsync(market.Name, OrderType.Limit, availableBaseAssetBalance,
+            priceToSellOn.Price);
     }
 
     private bool ShouldPlaceOrder()
     {
-        return !_tradingContext.IsSimulation;
+        return !tradingContext.IsSimulation;
     }
 
     private async Task SendNotificationWithSellRecommendation(Market market, TickerPrice priceToSellOn,
         decimal availableBaseAssetBalance)
     {
-        await _notificationManager.SendNotification(
+        await notificationManager.SendNotification(
             $"Selling on {market.Name.Value}.",
             $"Price: € {priceToSellOn.Price.Value} - Amount: {availableBaseAssetBalance} - € {availableBaseAssetBalance * priceToSellOn.Price:0.00}");
     }
@@ -62,7 +53,7 @@ public class SellManager : ISellManager
     private void LogSellRecommendation(Market market, TickerPrice priceToSellOn,
         decimal availableBaseAssetBalance)
     {
-        _logger.LogInformation("Selling on {Market}. Price: € {Price}; Amount: {Amount}; € {Euro}",
+        logger.LogInformation("Selling on {Market}. Price: € {Price}; Amount: {Amount}; € {Euro}",
             market.Name.Value,
             priceToSellOn.Price.Value, availableBaseAssetBalance,
             (availableBaseAssetBalance * priceToSellOn.Price).ToString("0.00"));
@@ -81,7 +72,7 @@ public class SellManager : ISellManager
 
     private async Task<Balance> GetBalanceAsync(Market market)
     {
-        return await _exchangeService.GetBalanceAsync(market.Name.BaseSymbol);
+        return await exchangeService.GetBalanceAsync(market.Name.BaseSymbol);
     }
 
     // private async Task<TickerPrice> GetPriceToSellOn(Market market)
