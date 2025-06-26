@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using KrieptoBot.Application.Recommendators;
 using KrieptoBot.Application.Settings;
@@ -35,7 +36,7 @@ namespace KrieptoBot.Application
             _logger = logger;
         }
 
-        public async Task Run()
+        public async Task Run(CancellationToken cancellation = default)
         {
             await LogTime();
             await CancelOpenLimitOrMarketOrders();

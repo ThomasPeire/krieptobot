@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using FluentAssertions;
+using AwesomeAssertions;
 using KrieptoBot.Application.Indicators;
 using KrieptoBot.DataVisualizer;
 using KrieptoBot.DataVisualizer.Extensions;
@@ -63,7 +63,7 @@ namespace KrieptoBot.Tests.Application.Indicators
             var histogram = candlesToWorkWith.ToDictionary(x => x.TimeStamp,
                 x => result.Histogram.TryGetValue(x.TimeStamp, out var value) ? value : 0);
 
-            result.Should().MatchSnapshot();
+            Snapshot.Match(result);
 
 #if DEBUG
             var candleVisualizer = new CandlesVisualizer();

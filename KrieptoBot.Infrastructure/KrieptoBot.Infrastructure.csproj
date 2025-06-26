@@ -6,7 +6,7 @@
         <ApplicationIcon/>
         <StartupObject/>
         <LangVersion>13.0</LangVersion>
-        <Configurations>Debug;Release;Debug-Non-Windows-Specific</Configurations>
+        <Configurations>Debug;Release;</Configurations>
         <Platforms>AnyCPU</Platforms>
     </PropertyGroup>
 

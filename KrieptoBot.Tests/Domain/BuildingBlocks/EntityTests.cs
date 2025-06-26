@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-using FluentAssertions;
+using AwesomeAssertions;
 using KrieptoBot.Domain.BuildingBlocks;
 using NUnit.Framework;
 

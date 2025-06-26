@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 using AutoBogus;
-using FluentAssertions;
+using AwesomeAssertions;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using KrieptoBot.Infrastructure.Bitvavo.Dtos;
 using KrieptoBot.Infrastructure.Bitvavo.Extensions;

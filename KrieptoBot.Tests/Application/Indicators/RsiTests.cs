@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using FluentAssertions;
 using KrieptoBot.Application.Indicators;
 using KrieptoBot.DataVisualizer;
 using KrieptoBot.DataVisualizer.Extensions;
@@ -59,8 +58,7 @@ namespace KrieptoBot.Tests.Application.Indicators
 
             rsiValues = candlesToWorkWith.ToDictionary(x => x.TimeStamp,
                 x => rsiValues.TryGetValue(x.TimeStamp, out var rsiValue) ? rsiValue : 0);
-
-            rsiValues.Should().MatchSnapshot();
+            Snapshot.Match(rsiValues);
 
 #if DEBUG
             var candleVisualizer = new CandlesVisualizer();

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using FluentAssertions;
+
 using KrieptoBot.Application.Indicators;
 using KrieptoBot.DataVisualizer;
 using KrieptoBot.DataVisualizer.Extensions;
@@ -53,10 +53,10 @@ namespace KrieptoBot.Tests.Application.Indicators
 
             var candlesToWorkWith = _candles
                 .Where(x => x.TimeStamp >= datetimeFrom && x.TimeStamp <= dateTimeTo)
-                .OrderBy(x => x.TimeStamp);
+                .OrderBy(x => x.TimeStamp).ToArray();
 
-            var supportLevels = new SupportResistanceLevels().Calculate(candlesToWorkWith);
-            supportLevels.Should().MatchSnapshot();
+            var supportLevels = new SupportResistanceLevels().Calculate(candlesToWorkWith).ToArray();
+            Snapshot.Match(supportLevels);
 
 #if DEBUG
             var candleVisualizer = new CandlesVisualizer();

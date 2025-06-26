@@ -4,7 +4,7 @@
         <OutputType>Exe</OutputType>
         <UserSecretsId>a1532697-09d5-4ca3-88ec-f77d075f93fa</UserSecretsId>
         <LangVersion>13.0</LangVersion>
-        <Configurations>Debug;Release;Debug-Non-Windows-Specific</Configurations>
+        <Configurations>Debug;Release;</Configurations>
         <Platforms>AnyCPU</Platforms>
         <TargetFramework>net9.0</TargetFramework>
     </PropertyGroup>

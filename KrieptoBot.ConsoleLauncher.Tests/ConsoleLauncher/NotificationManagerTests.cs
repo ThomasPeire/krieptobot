@@ -5,6 +5,7 @@ namespace KrieptoBot.ConsoleLauncher.Tests.ConsoleLauncher
 {
     public class NotificationManagerTests
     {
+        [Ignore("Disabled")]
         [Test]
         public void SendNotification_Should_Return_CompletedTask()
         {

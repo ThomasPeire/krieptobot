@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using KrieptoBot.Application;
 using KrieptoBot.Application.Recommendators;
@@ -79,7 +80,7 @@ namespace KrieptoBot.Tests.Application
                 _recommendationCalculator.Object, _sellManagerMock.Object, _buyManagerMock.Object,
                 new OptionsWrapper<TradingSettings>(_tradingSettings));
 
-            await trader.Run();
+            await trader.Run(CancellationToken.None);
 
             _sellManagerMock.Verify(x => x.Sell(It.IsAny<Market>()), Times.Never);
             _buyManagerMock.Verify(x => x.Buy(It.IsAny<Market>(), It.IsAny<decimal>()), Times.Once);
@@ -120,7 +121,7 @@ namespace KrieptoBot.Tests.Application
                 _recommendationCalculator.Object, _sellManagerMock.Object, _buyManagerMock.Object,
                 new OptionsWrapper<TradingSettings>(_tradingSettings));
 
-            await trader.Run();
+            await trader.Run(CancellationToken.None);
 
 
             _buyManagerMock.Verify(
