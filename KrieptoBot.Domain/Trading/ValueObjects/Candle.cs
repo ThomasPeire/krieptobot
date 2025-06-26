@@ -1,32 +1,31 @@
 ﻿using System;
 
-namespace KrieptoBot.Domain.Trading.ValueObjects
+namespace KrieptoBot.Domain.Trading.ValueObjects;
+
+public class Candle
 {
-    public class Candle
+    public Candle(DateTime timeStamp, Price high, Price low, Price open, Price close, decimal volume)
     {
-        public Candle(DateTime timeStamp, Price high, Price low, Price open, Price close, decimal volume)
-        {
-            if (volume < 0m)
-                throw new ArgumentException("Volume can not be negative", nameof(volume));
+        if (volume < 0m)
+            throw new ArgumentException("Volume can not be negative", nameof(volume));
 
-            TimeStamp = timeStamp;
-            High = high;
-            Low = low;
-            Open = open;
-            Close = close;
-            Volume = volume;
-        }
-
-        public DateTime TimeStamp { get; }
-
-        public Price High { get; }
-
-        public Price Low { get; }
-
-        public Price Open { get; }
-
-        public Price Close { get; }
-
-        public decimal Volume { get; }
+        TimeStamp = timeStamp;
+        High = high;
+        Low = low;
+        Open = open;
+        Close = close;
+        Volume = volume;
     }
+
+    public DateTime TimeStamp { get; }
+
+    public Price High { get; }
+
+    public Price Low { get; }
+
+    public Price Open { get; }
+
+    public Price Close { get; }
+
+    public decimal Volume { get; }
 }

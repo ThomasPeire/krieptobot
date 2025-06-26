@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using KrieptoBot.Domain.Trading.ValueObjects;
 
-namespace KrieptoBot.Application.Indicators
+namespace KrieptoBot.Application.Indicators;
+
+public interface IMovingAverage
 {
-    public interface IMovingAverage
-    {
-        Dictionary<DateTime, decimal> Calculate(IEnumerable<Candle> candles, int averagePeriod);
-    }
+    Dictionary<DateTime, decimal> Calculate(IEnumerable<Candle> candles, int averagePeriod);
 }

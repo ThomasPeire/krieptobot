@@ -15,114 +15,113 @@ using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using Interval = KrieptoBot.Domain.Interval;
 
-namespace KrieptoBot.Tests.Application.Recommendators
+namespace KrieptoBot.Tests.Application.Recommendators;
+
+public class RecommendatorMacdTests
 {
-    public class RecommendatorMacdTests
+    private Mock<IExchangeService> _exchangeServiceMock;
+    private Mock<ILogger<RecommendatorMacd>> _logger;
+    private Mock<IOptions<RecommendatorSettings>> _recommendatorSettingOptions;
+    private Mock<IMacd> _macdIndicator;
+    private TradingContext _tradingContext;
+
+    [SetUp]
+    public void Setup()
     {
-        private Mock<IExchangeService> _exchangeServiceMock;
-        private Mock<ILogger<RecommendatorMacd>> _logger;
-        private Mock<IOptions<RecommendatorSettings>> _recommendatorSettingOptions;
-        private Mock<IMacd> _macdIndicator;
-        private TradingContext _tradingContext;
-
-        [SetUp]
-        public void Setup()
+        _exchangeServiceMock = new Mock<IExchangeService>();
+        _macdIndicator = new Mock<IMacd>();
+        _logger = new Mock<ILogger<RecommendatorMacd>>();
+        _recommendatorSettingOptions = new Mock<IOptions<RecommendatorSettings>>();
+        _recommendatorSettingOptions.Setup(x => x.Value).Returns(new RecommendatorSettings
         {
-            _exchangeServiceMock = new Mock<IExchangeService>();
-            _macdIndicator = new Mock<IMacd>();
-            _logger = new Mock<ILogger<RecommendatorMacd>>();
-            _recommendatorSettingOptions = new Mock<IOptions<RecommendatorSettings>>();
-            _recommendatorSettingOptions.Setup(x => x.Value).Returns(new RecommendatorSettings
+            BuyRecommendationWeights = new Dictionary<string, decimal>
             {
-                BuyRecommendationWeights = new Dictionary<string, decimal>
-                {
-                    { nameof(RecommendatorMacd), 1m }
-                },
-                SellRecommendationWeights = new Dictionary<string, decimal>
-                {
-                    { nameof(RecommendatorMacd), 1m }
-                }
-            });
+                { nameof(RecommendatorMacd), 1m }
+            },
+            SellRecommendationWeights = new Dictionary<string, decimal>
+            {
+                { nameof(RecommendatorMacd), 1m }
+            }
+        });
 
-            _tradingContext = new TradingContext(new DateTimeProvider(_exchangeServiceMock.Object, new Mock<IMemoryCache>().Object))
-                .SetBuyMargin(30)
-                .SetSellMargin(-30)
-                .SetMarketsToWatch(
-                    new List<string>
-                    {
-                        "BTC-EUR"
-                    })
-                .SetInterval(Interval.Minutes.Five);
-        }
+        _tradingContext = new TradingContext(new DateTimeProvider(_exchangeServiceMock.Object, new Mock<IMemoryCache>().Object))
+            .SetBuyMargin(30)
+            .SetSellMargin(-30)
+            .SetMarketsToWatch(
+                new List<string>
+                {
+                    "BTC-EUR"
+                })
+            .SetInterval(Interval.Minutes.Five);
+    }
 
-        [Test]
-        public async Task RecommendationMacd_ShouldReturn_NegativeScoreWhenGoesBelowZero()
+    [Test]
+    public async Task RecommendationMacd_ShouldReturn_NegativeScoreWhenGoesBelowZero()
+    {
+        var macdResults = new MacdResult()
         {
-            var macdResults = new MacdResult()
+            Histogram = new Dictionary<DateTime, decimal>
             {
-                Histogram = new Dictionary<DateTime, decimal>
-                {
-                    { DateTime.Today, -10 },
-                    { DateTime.Today.AddDays(-1), 5 },
-                    { DateTime.Today.AddDays(-2), 5 }
-                },
+                { DateTime.Today, -10 },
+                { DateTime.Today.AddDays(-1), 5 },
+                { DateTime.Today.AddDays(-2), 5 }
+            },
 
-                MacdLine = new Dictionary<DateTime, decimal>
-                {
-                    { DateTime.Today, 10 },
-                    { DateTime.Today.AddDays(-1), 5 },
-                    { DateTime.Today.AddDays(-2), 5 }
-                }
-            };
+            MacdLine = new Dictionary<DateTime, decimal>
+            {
+                { DateTime.Today, 10 },
+                { DateTime.Today.AddDays(-1), 5 },
+                { DateTime.Today.AddDays(-2), 5 }
+            }
+        };
 
-            var ema = new Mock<IExponentialMovingAverage>();
-            _macdIndicator
-                .Setup(x => x.Calculate(It.IsAny<IEnumerable<Candle>>()))
-                .Returns(macdResults);
+        var ema = new Mock<IExponentialMovingAverage>();
+        _macdIndicator
+            .Setup(x => x.Calculate(It.IsAny<IEnumerable<Candle>>()))
+            .Returns(macdResults);
 
-            var recommendator = new RecommendatorMacd(_recommendatorSettingOptions.Object, _logger.Object,
-                _macdIndicator.Object, _exchangeServiceMock.Object,
-                _tradingContext, ema.Object);
+        var recommendator = new RecommendatorMacd(_recommendatorSettingOptions.Object, _logger.Object,
+            _macdIndicator.Object, _exchangeServiceMock.Object,
+            _tradingContext, ema.Object);
 
-            var result =
-                await recommendator.GetRecommendation(new Market(new MarketName("BTC-EUR"), Amount.Zero, Amount.Zero));
+        var result =
+            await recommendator.GetRecommendation(new Market(new MarketName("BTC-EUR"), Amount.Zero, Amount.Zero));
 
-            Assert.That(result.Value, Is.LessThan(0));
-        }
+        Assert.That(result.Value, Is.LessThan(0));
+    }
 
-        [Test]
-        public async Task RecommendationMacd_ShouldReturn_PositiveScoreWhenGoesAboveZero()
+    [Test]
+    public async Task RecommendationMacd_ShouldReturn_PositiveScoreWhenGoesAboveZero()
+    {
+        var macdResults = new MacdResult()
         {
-            var macdResults = new MacdResult()
+            Histogram = new Dictionary<DateTime, decimal>
             {
-                Histogram = new Dictionary<DateTime, decimal>
-                {
-                    { DateTime.Today, 10 },
-                    { DateTime.Today.AddDays(-1), -5 },
-                    { DateTime.Today.AddDays(-2), -5 }
-                },
+                { DateTime.Today, 10 },
+                { DateTime.Today.AddDays(-1), -5 },
+                { DateTime.Today.AddDays(-2), -5 }
+            },
 
-                MacdLine = new Dictionary<DateTime, decimal>
-                {
-                    { DateTime.Today, -10 },
-                    { DateTime.Today.AddDays(-1), -5 },
-                    { DateTime.Today.AddDays(-2), -5 }
-                }
-            };
+            MacdLine = new Dictionary<DateTime, decimal>
+            {
+                { DateTime.Today, -10 },
+                { DateTime.Today.AddDays(-1), -5 },
+                { DateTime.Today.AddDays(-2), -5 }
+            }
+        };
 
-            var ema = new Mock<IExponentialMovingAverage>();
-            _macdIndicator
-                .Setup(x => x.Calculate(It.IsAny<IEnumerable<Candle>>()))
-                .Returns(macdResults);
+        var ema = new Mock<IExponentialMovingAverage>();
+        _macdIndicator
+            .Setup(x => x.Calculate(It.IsAny<IEnumerable<Candle>>()))
+            .Returns(macdResults);
 
-            var recommendator = new RecommendatorMacd(_recommendatorSettingOptions.Object, _logger.Object,
-                _macdIndicator.Object, _exchangeServiceMock.Object,
-                _tradingContext, ema.Object);
+        var recommendator = new RecommendatorMacd(_recommendatorSettingOptions.Object, _logger.Object,
+            _macdIndicator.Object, _exchangeServiceMock.Object,
+            _tradingContext, ema.Object);
 
-            var result =
-                await recommendator.GetRecommendation(new Market(new MarketName("BTC-EUR"), Amount.Zero, Amount.Zero));
+        var result =
+            await recommendator.GetRecommendation(new Market(new MarketName("BTC-EUR"), Amount.Zero, Amount.Zero));
 
-            Assert.That(result.Value, Is.GreaterThan(0));
-        }
+        Assert.That(result.Value, Is.GreaterThan(0));
     }
 }

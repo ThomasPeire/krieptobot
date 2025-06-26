@@ -1,10 +1,9 @@
 ﻿using System.Threading.Tasks;
 
-namespace KrieptoBot.Application
+namespace KrieptoBot.Application;
+
+public interface INotificationManager
 {
-    public interface INotificationManager
-    {
-        Task SendNotification(string message);
-        Task SendNotification(string message, string subMessage);
-    }
+    Task SendNotification(string message);
+    Task SendNotification(string message, string subMessage);
 }

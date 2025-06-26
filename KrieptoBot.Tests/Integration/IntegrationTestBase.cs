@@ -9,41 +9,40 @@ using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using WireMock.Server;
 
-namespace KrieptoBot.Tests.Integration
+namespace KrieptoBot.Tests.Integration;
+
+public class IntegrationTestBase
 {
-    public class IntegrationTestBase
+    private TestServerFactory _serverFactory;
+    protected TestServer TestServer { get; private set; }
+
+    [OneTimeSetUp]
+    public void BaseOneTimeSetup()
     {
-        private TestServerFactory _serverFactory;
-        protected TestServer TestServer { get; private set; }
+        _serverFactory = new TestServerFactory();
+        TestServer = CreateTestServer();
+    }
 
-        [OneTimeSetUp]
-        public void BaseOneTimeSetup()
-        {
-            _serverFactory = new TestServerFactory();
-            TestServer = CreateTestServer();
-        }
+    [OneTimeTearDown]
+    public void BaseOneTimeTearDown()
+    {
+        _serverFactory.Dispose();
+    }
 
-        [OneTimeTearDown]
-        public void BaseOneTimeTearDown()
-        {
-            _serverFactory.Dispose();
-        }
+    [TearDown]
+    public void BaseTearDown()
+    {
+        TestServer.Services.GetRequiredService<WireMockServer>().Reset();
+    }
 
-        [TearDown]
-        public void BaseTearDown()
-        {
-            TestServer.Services.GetRequiredService<WireMockServer>().Reset();
-        }
-
-        private TestServer CreateTestServer()
-        {
-            return _serverFactory.Create(
-                services =>
-                {
-                    services.AddApplicationServices();
-                    services.AddBitvavoService();
-                    services.AddScoped<INotificationManager, NotificationManager>();
-                }, _ => { });
-        }
+    private TestServer CreateTestServer()
+    {
+        return _serverFactory.Create(
+            services =>
+            {
+                services.AddApplicationServices();
+                services.AddBitvavoService();
+                services.AddScoped<INotificationManager, NotificationManager>();
+            }, _ => { });
     }
 }

@@ -2,26 +2,25 @@
 using System.Collections.Generic;
 using KrieptoBot.Domain.BuildingBlocks;
 
-namespace KrieptoBot.Domain.Trading.ValueObjects
+namespace KrieptoBot.Domain.Trading.ValueObjects;
+
+public class TickerPrice : ValueObject
 {
-    public class TickerPrice : ValueObject
+    public TickerPrice(MarketName marketName, Price price)
     {
-        public TickerPrice(MarketName marketName, Price price)
-        {
-            ArgumentNullException.ThrowIfNull(marketName);
-            ArgumentNullException.ThrowIfNull(price);
+        ArgumentNullException.ThrowIfNull(marketName);
+        ArgumentNullException.ThrowIfNull(price);
 
-            MarketName = marketName;
-            Price = price;
-        }
+        MarketName = marketName;
+        Price = price;
+    }
 
-        public MarketName MarketName { get; }
-        public Price Price { get; }
+    public MarketName MarketName { get; }
+    public Price Price { get; }
 
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return MarketName;
-            yield return Price;
-        }
+    protected override IEnumerable<object> GetEqualityComponents()
+    {
+        yield return MarketName;
+        yield return Price;
     }
 }

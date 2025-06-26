@@ -2,10 +2,9 @@
 using KrieptoBot.Domain.Trading.ValueObjects;
 using Plotly.NET;
 
-namespace KrieptoBot.DataVisualizer
+namespace KrieptoBot.DataVisualizer;
+
+interface ICandlesVisualizer
 {
-    interface ICandlesVisualizer
-    {
-        GenericChart Visualize(IEnumerable<Candle> candles);
-    }
+    GenericChart Visualize(IEnumerable<Candle> candles);
 }

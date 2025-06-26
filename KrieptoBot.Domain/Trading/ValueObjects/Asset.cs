@@ -1,25 +1,24 @@
 ﻿using System.Collections.Generic;
 using KrieptoBot.Domain.BuildingBlocks;
 
-namespace KrieptoBot.Domain.Trading.ValueObjects
+namespace KrieptoBot.Domain.Trading.ValueObjects;
+
+public class Asset : ValueObject
 {
-    public class Asset : ValueObject
+    public Asset(Symbol symbol, AssetName name)
     {
-        public Asset(Symbol symbol, AssetName name)
-        {
-            Symbol = symbol;
-            Name = name;
-        }
+        Symbol = symbol;
+        Name = name;
+    }
 
-        public Symbol Symbol { get; }
+    public Symbol Symbol { get; }
 
-        public AssetName Name { get; }
+    public AssetName Name { get; }
 
 
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Symbol;
-            yield return Name;
-        }
+    protected override IEnumerable<object> GetEqualityComponents()
+    {
+        yield return Symbol;
+        yield return Name;
     }
 }

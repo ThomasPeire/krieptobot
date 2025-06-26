@@ -7,27 +7,26 @@ using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
 
-namespace KrieptoBot.ConsoleLauncher
+namespace KrieptoBot.ConsoleLauncher;
+
+[ExcludeFromCodeCoverage]
+internal class Program
 {
-    [ExcludeFromCodeCoverage]
-    internal class Program
+    private static async Task Main(string[] args)
     {
-        private static async Task Main(string[] args)
+        try
         {
-            try
-            {
-                var hostBuilder = HostBuilderWrapper.BuildHost();
-                Log.Debug("Starting up");
-                await hostBuilder.RunAsync();
-            }
-            catch (Exception ex)
-            {
-                Log.Fatal(ex, "Application start-up failed");
-            }
-            finally
-            {
-                await Log.CloseAndFlushAsync();
-            }
+            var hostBuilder = HostBuilderWrapper.BuildHost();
+            Log.Debug("Starting up");
+            await hostBuilder.RunAsync();
+        }
+        catch (Exception ex)
+        {
+            Log.Fatal(ex, "Application start-up failed");
+        }
+        finally
+        {
+            await Log.CloseAndFlushAsync();
         }
     }
 }

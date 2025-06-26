@@ -6,27 +6,26 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
-namespace KrieptoBot.DataCollector
+namespace KrieptoBot.DataCollector;
+
+[ExcludeFromCodeCoverage]
+internal static class Program
 {
-    [ExcludeFromCodeCoverage]
-    internal static class Program
+    private static async Task Main()
     {
-        private static async Task Main()
+        try
         {
-            try
-            {
-                var hostBuilder = HostBuilderWrapper.BuildHost();
-                Log.Information("Starting up");
-                await hostBuilder.RunAsync();
-            }
-            catch (Exception ex)
-            {
-                Log.Fatal(ex, "Application start-up failed");
-            }
-            finally
-            {
-                Log.CloseAndFlush();
-            }
+            var hostBuilder = HostBuilderWrapper.BuildHost();
+            Log.Information("Starting up");
+            await hostBuilder.RunAsync();
+        }
+        catch (Exception ex)
+        {
+            Log.Fatal(ex, "Application start-up failed");
+        }
+        finally
+        {
+            Log.CloseAndFlush();
         }
     }
 }

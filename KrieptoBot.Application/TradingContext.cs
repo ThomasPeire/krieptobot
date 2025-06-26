@@ -2,75 +2,74 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace KrieptoBot.Application
+namespace KrieptoBot.Application;
+
+public class TradingContext : ITradingContext
 {
-    public class TradingContext : ITradingContext
+    private readonly IDateTimeProvider _dateTimeProvider;
+
+    public TradingContext(IDateTimeProvider dateTimeProvider)
     {
-        private readonly IDateTimeProvider _dateTimeProvider;
+        _dateTimeProvider = dateTimeProvider;
+    }
 
-        public TradingContext(IDateTimeProvider dateTimeProvider)
-        {
-            _dateTimeProvider = dateTimeProvider;
-        }
+    public string Interval { get; private set; } = Domain.Interval.FiveMinutes;
+    public IEnumerable<string> MarketsToWatch { get; private set; } = new List<string> { "BTC-EUR" };
+    public DateTime CurrentTime { get; private set; }
+    public decimal BuyMargin { get; private set; } = 0.5m;
+    public decimal SellMargin { get; private set; } = -0.5m;
 
-        public string Interval { get; private set; } = Domain.Interval.FiveMinutes;
-        public IEnumerable<string> MarketsToWatch { get; private set; } = new List<string> { "BTC-EUR" };
-        public DateTime CurrentTime { get; private set; }
-        public decimal BuyMargin { get; private set; } = 0.5m;
-        public decimal SellMargin { get; private set; } = -0.5m;
+    public bool IsSimulation { get; private set; } = true;
 
-        public bool IsSimulation { get; private set; } = true;
+    public int PollingIntervalInMinutes { get; private set; } = 5;
 
-        public int PollingIntervalInMinutes { get; private set; } = 5;
+    public int BuyCoolDownPeriodInMinutes { get; private set; } = 5;
 
-        public int BuyCoolDownPeriodInMinutes { get; private set; } = 5;
+    public async Task<TradingContext> SetCurrentTime()
+    {
+        CurrentTime = await _dateTimeProvider.UtcDateTimeNowSyncedWithExchange();
+        return this;
+    }
 
-        public async Task<TradingContext> SetCurrentTime()
-        {
-            CurrentTime = await _dateTimeProvider.UtcDateTimeNowSyncedWithExchange();
-            return this;
-        }
+    public TradingContext SetMarketsToWatch(IEnumerable<string> markets)
+    {
+        MarketsToWatch = markets;
+        return this;
+    }
 
-        public TradingContext SetMarketsToWatch(IEnumerable<string> markets)
-        {
-            MarketsToWatch = markets;
-            return this;
-        }
+    public TradingContext SetInterval(string interval)
+    {
+        Interval = interval;
+        return this;
+    }
 
-        public TradingContext SetInterval(string interval)
-        {
-            Interval = interval;
-            return this;
-        }
+    public TradingContext SetBuyMargin(decimal buyMargin)
+    {
+        BuyMargin = buyMargin;
+        return this;
+    }
 
-        public TradingContext SetBuyMargin(decimal buyMargin)
-        {
-            BuyMargin = buyMargin;
-            return this;
-        }
+    public TradingContext SetSellMargin(decimal sellMargin)
+    {
+        SellMargin = sellMargin;
+        return this;
+    }
 
-        public TradingContext SetSellMargin(decimal sellMargin)
-        {
-            SellMargin = sellMargin;
-            return this;
-        }
+    public TradingContext SetIsSimulation(bool isSimulation)
+    {
+        IsSimulation = isSimulation;
+        return this;
+    }
 
-        public TradingContext SetIsSimulation(bool isSimulation)
-        {
-            IsSimulation = isSimulation;
-            return this;
-        }
+    public TradingContext SetPollingInterval(int pollingIntervalInMinutes)
+    {
+        PollingIntervalInMinutes = pollingIntervalInMinutes;
+        return this;
+    }
 
-        public TradingContext SetPollingInterval(int pollingIntervalInMinutes)
-        {
-            PollingIntervalInMinutes = pollingIntervalInMinutes;
-            return this;
-        }
-
-        public TradingContext SetBuyCoolDownPeriod(int buyCoolDownPeriodInMinutes)
-        {
-            BuyCoolDownPeriodInMinutes = buyCoolDownPeriodInMinutes;
-            return this;
-        }
+    public TradingContext SetBuyCoolDownPeriod(int buyCoolDownPeriodInMinutes)
+    {
+        BuyCoolDownPeriodInMinutes = buyCoolDownPeriodInMinutes;
+        return this;
     }
 }

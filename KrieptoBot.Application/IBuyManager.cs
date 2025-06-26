@@ -1,10 +1,9 @@
 ﻿using System.Threading.Tasks;
 using KrieptoBot.Domain.Trading.ValueObjects;
 
-namespace KrieptoBot.Application
+namespace KrieptoBot.Application;
+
+public interface IBuyManager
 {
-    public interface IBuyManager
-    {
-        Task Buy(Market market, decimal budget);
-    }
+    Task Buy(Market market, decimal budget);
 }

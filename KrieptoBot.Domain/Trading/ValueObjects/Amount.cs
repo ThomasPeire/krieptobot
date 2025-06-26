@@ -2,49 +2,48 @@
 using System.Collections.Generic;
 using KrieptoBot.Domain.BuildingBlocks;
 
-namespace KrieptoBot.Domain.Trading.ValueObjects
+namespace KrieptoBot.Domain.Trading.ValueObjects;
+
+public class Amount : ValueObject
 {
-    public class Amount : ValueObject
+    public Amount(decimal value)
     {
-        public Amount(decimal value)
-        {
-            if (value < 0m)
-                throw new ArgumentException("Amount can not be negative", nameof(value));
+        if (value < 0m)
+            throw new ArgumentException("Amount can not be negative", nameof(value));
 
-            Value = value;
-        }
+        Value = value;
+    }
 
-        public static Amount Zero => new(0);
-        public decimal Value { get; }
+    public static Amount Zero => new(0);
+    public decimal Value { get; }
 
-        public static implicit operator decimal(Amount amount)
-        {
-            return amount.Value;
-        }
+    public static implicit operator decimal(Amount amount)
+    {
+        return amount.Value;
+    }
 
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Value;
-        }
+    protected override IEnumerable<object> GetEqualityComponents()
+    {
+        yield return Value;
+    }
 
-        public static Amount operator *(Amount a, Amount b)
-        {
-            return new Amount(a.Value * b.Value);
-        }
+    public static Amount operator *(Amount a, Amount b)
+    {
+        return new Amount(a.Value * b.Value);
+    }
 
-        public static Amount operator /(Amount a, Amount b)
-        {
-            return new Amount(a.Value / b.Value);
-        }
+    public static Amount operator /(Amount a, Amount b)
+    {
+        return new Amount(a.Value / b.Value);
+    }
 
-        public static Amount operator +(Amount a, Amount b)
-        {
-            return new Amount(a.Value + b.Value);
-        }
+    public static Amount operator +(Amount a, Amount b)
+    {
+        return new Amount(a.Value + b.Value);
+    }
 
-        public static Amount operator -(Amount a, Amount b)
-        {
-            return new Amount(a.Value - b.Value);
-        }
+    public static Amount operator -(Amount a, Amount b)
+    {
+        return new Amount(a.Value - b.Value);
     }
 }

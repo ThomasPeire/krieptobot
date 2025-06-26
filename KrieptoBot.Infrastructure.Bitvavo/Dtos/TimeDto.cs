@@ -1,9 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace KrieptoBot.Infrastructure.Bitvavo.Dtos
+namespace KrieptoBot.Infrastructure.Bitvavo.Dtos;
+
+public class TimeDto
 {
-    public class TimeDto
-    {
-        [JsonProperty("time")] public long TimeInMilliseconds { get; set; }
-    }
+    [JsonProperty("time")] public long TimeInMilliseconds { get; set; }
 }

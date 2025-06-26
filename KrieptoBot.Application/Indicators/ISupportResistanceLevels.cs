@@ -2,10 +2,9 @@
 using KrieptoBot.Domain.Recommendation.ValueObjects;
 using KrieptoBot.Domain.Trading.ValueObjects;
 
-namespace KrieptoBot.Application.Indicators
+namespace KrieptoBot.Application.Indicators;
+
+public interface ISupportResistanceLevels
 {
-    public interface ISupportResistanceLevels
-    {
-        IEnumerable<SupportResistanceLevel> Calculate(IEnumerable<Candle> candles);
-    }
+    IEnumerable<SupportResistanceLevel> Calculate(IEnumerable<Candle> candles);
 }

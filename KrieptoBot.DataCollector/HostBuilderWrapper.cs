@@ -6,44 +6,43 @@ using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
 
-namespace KrieptoBot.DataCollector
+namespace KrieptoBot.DataCollector;
+
+public static class HostBuilderWrapper
 {
-    public static class HostBuilderWrapper
+    public static IHost BuildHost()
     {
-        public static IHost BuildHost()
-        {
-            return CreateHostBuilder().Build();
-        }
+        return CreateHostBuilder().Build();
+    }
 
-        private static IHostBuilder CreateHostBuilder()
-        {
-            return new HostBuilder()
-                .ConfigureAppConfiguration((_, builder) =>
-                    AddAppConfiguration(builder)
-                )
-                .ConfigureServices(AddServices).UseSerilog();
-        }
+    private static IHostBuilder CreateHostBuilder()
+    {
+        return new HostBuilder()
+            .ConfigureAppConfiguration((_, builder) =>
+                AddAppConfiguration(builder)
+            )
+            .ConfigureServices(AddServices).UseSerilog();
+    }
 
-        private static void AddServices(HostBuilderContext hostContext, IServiceCollection services)
-        {
-            Log.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(hostContext.Configuration)
-                .MinimumLevel.Override("System.Net.Http", LogEventLevel.Warning)
-                .Enrich.FromLogContext()
-                .CreateLogger();
+    private static void AddServices(HostBuilderContext hostContext, IServiceCollection services)
+    {
+        Log.Logger = new LoggerConfiguration()
+            .ReadFrom.Configuration(hostContext.Configuration)
+            .MinimumLevel.Override("System.Net.Http", LogEventLevel.Warning)
+            .Enrich.FromLogContext()
+            .CreateLogger();
 
-            services.AddScoped<ICollector, Collector>();
-            services.AddBitvavoService();
+        services.AddScoped<ICollector, Collector>();
+        services.AddBitvavoService();
 
-            services.AddHostedService<CollectorService>();
-        }
+        services.AddHostedService<CollectorService>();
+    }
 
-        private static void AddAppConfiguration(IConfigurationBuilder builder)
-        {
-            builder.SetBasePath(AppContext.BaseDirectory)
-                .AddJsonFile("appsettings.json", false, true)
-                .AddUserSecrets<Collector>(optional: true)
-                .AddEnvironmentVariables();
-        }
+    private static void AddAppConfiguration(IConfigurationBuilder builder)
+    {
+        builder.SetBasePath(AppContext.BaseDirectory)
+            .AddJsonFile("appsettings.json", false, true)
+            .AddUserSecrets<Collector>(optional: true)
+            .AddEnvironmentVariables();
     }
 }

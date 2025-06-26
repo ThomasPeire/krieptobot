@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using KrieptoBot.Domain.Trading.ValueObjects;
 
-namespace KrieptoBot.Application.Indicators
+namespace KrieptoBot.Application.Indicators;
+
+public interface IExponentialMovingAverage
 {
-    public interface IExponentialMovingAverage
-    {
-        Dictionary<DateTime, decimal> Calculate(Dictionary<DateTime, decimal> prices, int averagePeriod);
-    }
+    Dictionary<DateTime, decimal> Calculate(Dictionary<DateTime, decimal> prices, int averagePeriod);
 }

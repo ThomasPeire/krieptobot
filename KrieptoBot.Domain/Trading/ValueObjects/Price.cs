@@ -2,28 +2,27 @@
 using System.Collections.Generic;
 using KrieptoBot.Domain.BuildingBlocks;
 
-namespace KrieptoBot.Domain.Trading.ValueObjects
+namespace KrieptoBot.Domain.Trading.ValueObjects;
+
+public class Price : ValueObject
 {
-    public class Price : ValueObject
+    public Price(decimal value)
     {
-        public Price(decimal value)
-        {
-            if (value < 0m)
-                throw new ArgumentException("Price can not be negative", nameof(value));
+        if (value < 0m)
+            throw new ArgumentException("Price can not be negative", nameof(value));
 
-            Value = value;
-        }
+        Value = value;
+    }
 
-        public decimal Value { get; }
+    public decimal Value { get; }
 
-        public static implicit operator decimal(Price price)
-        {
-            return price.Value;
-        }
+    public static implicit operator decimal(Price price)
+    {
+        return price.Value;
+    }
 
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Value;
-        }
+    protected override IEnumerable<object> GetEqualityComponents()
+    {
+        yield return Value;
     }
 }

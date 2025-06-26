@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace KrieptoBot.Application.Recommendators
+namespace KrieptoBot.Application.Recommendators;
+
+public interface IRecommendatorSorter
 {
-    public interface IRecommendatorSorter
-    {
-        IEnumerable<IRecommendator> GetSortRecommendators();
-    }
+    IEnumerable<IRecommendator> GetSortRecommendators();
 }

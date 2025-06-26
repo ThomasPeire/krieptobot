@@ -2,22 +2,21 @@ using System;
 using System.Collections.Generic;
 using KrieptoBot.Domain.BuildingBlocks;
 
-namespace KrieptoBot.Domain.Trading.ValueObjects
+namespace KrieptoBot.Domain.Trading.ValueObjects;
+
+public class AssetName : ValueObject
 {
-    public class AssetName : ValueObject
+    public AssetName(string value)
     {
-        public AssetName(string value)
-        {
-            if (string.IsNullOrWhiteSpace(value)) throw new ArgumentException("Asset name can not be empty");
+        if (string.IsNullOrWhiteSpace(value)) throw new ArgumentException("Asset name can not be empty");
 
-            Value = value;
-        }
+        Value = value;
+    }
 
-        public string Value { get; }
+    public string Value { get; }
 
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Value;
-        }
+    protected override IEnumerable<object> GetEqualityComponents()
+    {
+        yield return Value;
     }
 }

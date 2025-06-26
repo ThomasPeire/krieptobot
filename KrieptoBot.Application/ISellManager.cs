@@ -1,10 +1,9 @@
 ﻿using System.Threading.Tasks;
 using KrieptoBot.Domain.Trading.ValueObjects;
 
-namespace KrieptoBot.Application
+namespace KrieptoBot.Application;
+
+public interface ISellManager
 {
-    public interface ISellManager
-    {
-        Task Sell(Market market);
-    }
+    Task Sell(Market market);
 }

@@ -6,54 +6,53 @@ using KrieptoBot.Domain.Recommendation.ValueObjects;
 using KrieptoBot.Domain.Trading.ValueObjects;
 using Microsoft.Extensions.Logging;
 
-namespace KrieptoBot.Application.Recommendators
+namespace KrieptoBot.Application.Recommendators;
+
+public abstract class RecommendatorBase : IRecommendator
 {
-    public abstract class RecommendatorBase : IRecommendator
+    private readonly ILogger<RecommendatorBase> _logger;
+    protected readonly RecommendatorSettings RecommendatorSettings;
+
+    protected RecommendatorBase(RecommendatorSettings recommendatorSettings, ILogger<RecommendatorBase> logger)
     {
-        private readonly ILogger<RecommendatorBase> _logger;
-        protected readonly RecommendatorSettings RecommendatorSettings;
+        RecommendatorSettings = recommendatorSettings;
+        _logger = logger;
+    }
 
-        protected RecommendatorBase(RecommendatorSettings recommendatorSettings, ILogger<RecommendatorBase> logger)
+    private decimal SellRecommendationWeight =>
+        RecommendatorSettings.SellRecommendationWeights.GetValueOrDefault(GetType().Name);
+
+    private decimal BuyRecommendationWeight =>
+        RecommendatorSettings.BuyRecommendationWeights.GetValueOrDefault(GetType().Name);
+
+    protected virtual string Name => GetType().Name;
+    public virtual IEnumerable<Type> DependencyRecommendators => new List<Type>();
+
+    public async Task<RecommendatorScore> GetRecommendation(Market market)
+    {
+        if (SellRecommendationWeight == 0m && BuyRecommendationWeight == 0m)
         {
-            RecommendatorSettings = recommendatorSettings;
-            _logger = logger;
+            return new RecommendatorScore(0m, false);
         }
 
-        private decimal SellRecommendationWeight =>
-            RecommendatorSettings.SellRecommendationWeights.GetValueOrDefault(GetType().Name);
+        var recommendation = await CalculateRecommendation(market);
 
-        private decimal BuyRecommendationWeight =>
-            RecommendatorSettings.BuyRecommendationWeights.GetValueOrDefault(GetType().Name);
+        var weightedRecommendation = recommendation > 0
+            ? recommendation * BuyRecommendationWeight
+            : recommendation * SellRecommendationWeight;
 
-        protected virtual string Name => GetType().Name;
-        public virtual IEnumerable<Type> DependencyRecommendators => new List<Type>();
+        LogRecommendatorScore(market, weightedRecommendation);
 
-        public async Task<RecommendatorScore> GetRecommendation(Market market)
-        {
-            if (SellRecommendationWeight == 0m && BuyRecommendationWeight == 0m)
-            {
-                return new RecommendatorScore(0m, false);
-            }
+        return weightedRecommendation;
+    }
 
-            var recommendation = await CalculateRecommendation(market);
-
-            var weightedRecommendation = recommendation > 0
-                ? recommendation * BuyRecommendationWeight
-                : recommendation * SellRecommendationWeight;
-
-            LogRecommendatorScore(market, weightedRecommendation);
-
-            return weightedRecommendation;
-        }
-
-        protected abstract Task<RecommendatorScore> CalculateRecommendation(Market market);
+    protected abstract Task<RecommendatorScore> CalculateRecommendation(Market market);
 
 
-        private void LogRecommendatorScore(Market market, RecommendatorScore recommendatorScore)
-        {
-            _logger.LogInformation(
-                "Market {Market} - {Recommendator} Recommendation score: {Score} - Included in final score {Included}",
-                market.Name.Value, Name, recommendatorScore.Value.ToString("0.00"), recommendatorScore.IncludeInAverageScore);
-        }
+    private void LogRecommendatorScore(Market market, RecommendatorScore recommendatorScore)
+    {
+        _logger.LogInformation(
+            "Market {Market} - {Recommendator} Recommendation score: {Score} - Included in final score {Included}",
+            market.Name.Value, Name, recommendatorScore.Value.ToString("0.00"), recommendatorScore.IncludeInAverageScore);
     }
 }

@@ -1,10 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 
-namespace KrieptoBot.Application
+namespace KrieptoBot.Application;
+
+public interface ITrader
 {
-    public interface ITrader
-    {
-        Task Run(CancellationToken cancellationToken = default);
-    }
+    Task Run(CancellationToken cancellationToken = default);
 }

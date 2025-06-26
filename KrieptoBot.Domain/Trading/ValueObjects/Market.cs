@@ -2,30 +2,29 @@
 using System.Collections.Generic;
 using KrieptoBot.Domain.BuildingBlocks;
 
-namespace KrieptoBot.Domain.Trading.ValueObjects
+namespace KrieptoBot.Domain.Trading.ValueObjects;
+
+public class Market : ValueObject
 {
-    public class Market : ValueObject
+    public Market(MarketName name, Amount minimumBaseAmount, Amount minimumQuoteAmount)
     {
-        public Market(MarketName name, Amount minimumBaseAmount, Amount minimumQuoteAmount)
-        {
-            ArgumentNullException.ThrowIfNull(name);
-            ArgumentNullException.ThrowIfNull(minimumBaseAmount);
-            ArgumentNullException.ThrowIfNull(minimumQuoteAmount);
+        ArgumentNullException.ThrowIfNull(name);
+        ArgumentNullException.ThrowIfNull(minimumBaseAmount);
+        ArgumentNullException.ThrowIfNull(minimumQuoteAmount);
 
-            MinimumBaseAmount = minimumBaseAmount;
-            MinimumQuoteAmount = minimumQuoteAmount;
-            Name = name;
-        }
+        MinimumBaseAmount = minimumBaseAmount;
+        MinimumQuoteAmount = minimumQuoteAmount;
+        Name = name;
+    }
 
-        public MarketName Name { get; }
-        public Amount MinimumBaseAmount { get; }
-        public Amount MinimumQuoteAmount { get; set; }
+    public MarketName Name { get; }
+    public Amount MinimumBaseAmount { get; }
+    public Amount MinimumQuoteAmount { get; set; }
 
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Name;
-            yield return MinimumBaseAmount;
-            yield return MinimumQuoteAmount;
-        }
+    protected override IEnumerable<object> GetEqualityComponents()
+    {
+        yield return Name;
+        yield return MinimumBaseAmount;
+        yield return MinimumQuoteAmount;
     }
 }
