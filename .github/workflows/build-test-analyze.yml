@@ -5,6 +5,9 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+    
+env:
+  SNAPSHOOTER_STRICT_MODE: true
 
 jobs:
   build:
@@ -19,6 +22,11 @@ jobs:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+        
+    # Fix for snapshooter symlink issue on Linux
+    - name: SnapshooterHotfixSymlinkLinux
+      run: sudo ln -s "$GITHUB_WORKSPACE" /_
+      shell: bash
     
     - name: Cache SonarCloud packages
       uses: actions/cache@v4
@@ -50,7 +58,6 @@ jobs:
       
     - name: Test
       run: dotnet test -c Release --no-build --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
-      working-directory: ${{ github.workspace }}
   
     - name: End Sonar scan
       env:
