@@ -4,8 +4,8 @@
         <OutputType>Library</OutputType>
         <TargetFramework>net9.0</TargetFramework>
         <UserSecretsId>7d4ac361-7f6d-424e-9aef-57e92d9b44b3</UserSecretsId>
-        <ApplicationIcon/>
-        <StartupObject/>
+        <ApplicationIcon />
+        <StartupObject />
         <LangVersion>13.0</LangVersion>
         <Company>KrieptoBot</Company>
         <Product>KrieptoBot</Product>
@@ -14,15 +14,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="FSharp.Core" Version="8.0.100"/>
-        <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="8.0.0"/>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.6"/>
-        <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0"/>
-        <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.6"/>
+        <PackageReference Include="FSharp.Core" Version="9.0.300" />
+        <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="9.0.7" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.7" />
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.7" />
+        <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.7" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\KrieptoBot.Domain\KrieptoBot.Domain.csproj"/>
+        <ProjectReference Include="..\KrieptoBot.Domain\KrieptoBot.Domain.csproj" />
     </ItemGroup>
 
 </Project>

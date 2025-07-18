@@ -8,23 +8,23 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2"/>
-        <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="9.0.6"/>
-        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0"/>
-        <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="8.0.0"/>
-        <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.6"/>
-        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0"/>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
-        <PackageReference Include="Polly.Extensions.Http" Version="3.0.0"/>
-        <PackageReference Include="Refit" Version="7.2.22"/>
-        <PackageReference Include="Refit.HttpClientFactory" Version="7.0.0"/>
-        <PackageReference Include="Refit.Newtonsoft.Json" Version="7.0.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.3.0" />
+        <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="9.0.7" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.7" />
+        <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="9.0.7" />
+        <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.7" />
+        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.7" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="Polly.Extensions.Http" Version="3.0.0" />
+        <PackageReference Include="Refit" Version="8.0.0" />
+        <PackageReference Include="Refit.HttpClientFactory" Version="8.0.0" />
+        <PackageReference Include="Refit.Newtonsoft.Json" Version="8.0.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\KrieptoBot.Application\KrieptoBot.Application.csproj"/>
-        <ProjectReference Include="..\KrieptoBot.Infrastructure\KrieptoBot.Infrastructure.csproj"/>
-        <ProjectReference Include="..\KrieptoBot.Domain\KrieptoBot.Domain.csproj"/>
+        <ProjectReference Include="..\KrieptoBot.Application\KrieptoBot.Application.csproj" />
+        <ProjectReference Include="..\KrieptoBot.Infrastructure\KrieptoBot.Infrastructure.csproj" />
+        <ProjectReference Include="..\KrieptoBot.Domain\KrieptoBot.Domain.csproj" />
     </ItemGroup>
 
 </Project>
