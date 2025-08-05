@@ -14,11 +14,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="FSharp.Core" Version="8.0.100"/>
-        <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="8.0.0"/>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.6"/>
-        <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0"/>
-        <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.6"/>
+        <PackageReference Include="FSharp.Core" Version="9.0.303"/>
+        <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="9.0.8"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.8"/>
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.8"/>
+        <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.8"/>
     </ItemGroup>
 
     <ItemGroup>
