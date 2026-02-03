@@ -55,11 +55,13 @@ internal class SupportResistanceLevelsTests
         var supportLevels = new SupportResistanceLevels().Calculate(candlesToWorkWith).ToArray();
         Snapshot.Match(supportLevels);
 
+/*
 #if DEBUG
         var candleVisualizer = new CandlesVisualizer();
         var candleChart = candleVisualizer.Visualize(candlesToWorkWith);
         candleChart = candleChart.AddSupportLevels(supportLevels, datetimeFrom, dateTimeTo);
         candleChart.WithSize(1920, 1080).WithConfig(Config.init(Responsive: true)).Show();
 #endif
+*/
     }
 }
