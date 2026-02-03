@@ -28,30 +28,30 @@ jobs:
         run: sudo ln -s "$GITHUB_WORKSPACE" /_
         shell: bash
 
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v4
-        with:
-          path: ~\sonar\cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
+      # - name: Cache SonarCloud packages
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: ~\sonar\cache
+      #     key: ${{ runner.os }}-sonar
+      #     restore-keys: ${{ runner.os }}-sonar
 
-      - name: Cache SonarCloud scanner
-        id: cache-sonar-scanner
-        uses: actions/cache@v4
-        with:
-          path: .\.sonar\scanner
-          key: ${{ runner.os }}-sonar-scanner
-          restore-keys: ${{ runner.os }}-sonar-scanner
+      # - name: Cache SonarCloud scanner
+      #   id: cache-sonar-scanner
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: .\.sonar\scanner
+      #     key: ${{ runner.os }}-sonar-scanner
+      #     restore-keys: ${{ runner.os }}-sonar-scanner
 
-      - name: Install SonarCloud scanner
-        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
-        run: dotnet tool install --global dotnet-sonarscanner
+      # - name: Install SonarCloud scanner
+      #   if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+      #   run: dotnet tool install --global dotnet-sonarscanner
 
-      - name: Begin Sonar scan
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: dotnet sonarscanner begin /k:"ThomasPeire_krieptobot" /o:"thomaspeire" /d:sonar.login=${{ secrets.SONAR_TOKEN }}  /d:sonar.host.url="https://sonarcloud.io"
+      # - name: Begin Sonar scan
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #   run: dotnet sonarscanner begin /k:"ThomasPeire_krieptobot" /o:"thomaspeire" /d:sonar.login=${{ secrets.SONAR_TOKEN }}  /d:sonar.host.url="https://sonarcloud.io"
 
       - name: Build
         run: dotnet build -c Release /p:ContinuousIntegrationBuild=true
@@ -59,8 +59,8 @@ jobs:
       - name: Test
         run: dotnet test -c Release --no-build --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 
-      - name: End Sonar scan
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: dotnet sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }}
+      # - name: End Sonar scan
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #   run: dotnet sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }}
