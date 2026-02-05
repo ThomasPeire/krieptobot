@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
+        <TargetFramework>net10.0</TargetFramework>
         <AzureFunctionsVersion>v4</AzureFunctionsVersion>
         <UserSecretsId>ece5d799-c787-4d4a-ba37-35a409af4142</UserSecretsId>
         <LangVersion>13.0</LangVersion>
@@ -9,11 +9,11 @@
         <Platforms>AnyCPU</Platforms>
     </PropertyGroup>
     <ItemGroup>
-        <ProjectCapability Include="DynamicDependentFile"/>
-        <ProjectCapability Include="DynamicFileNesting"/>
+        <ProjectCapability Include="DynamicDependentFile" />
+        <ProjectCapability Include="DynamicFileNesting" />
     </ItemGroup>
     <ItemGroup>
-        <None Remove="appsettings.json"/>
+        <None Remove="appsettings.json" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="appsettings.json">
@@ -22,15 +22,15 @@
         </Content>
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="2.0.0"/>
-        <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Timer" Version="4.3.1"/>
-        <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="9.0.0"/>
-        <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.6.0"/>
-        <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.0"/>
-        <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1"/>
+        <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="2.51.0" />
+        <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Timer" Version="4.3.1" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="10.0.2" />
+        <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.6.0" />
+        <PackageReference Include="Serilog.Settings.Configuration" Version="10.0.0" />
+        <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\KrieptoBot.Infrastructure.Bitvavo\KrieptoBot.Infrastructure.Bitvavo.csproj"/>
+        <ProjectReference Include="..\KrieptoBot.Infrastructure.Bitvavo\KrieptoBot.Infrastructure.Bitvavo.csproj" />
     </ItemGroup>
     <ItemGroup>
         <None Update="host.json">
