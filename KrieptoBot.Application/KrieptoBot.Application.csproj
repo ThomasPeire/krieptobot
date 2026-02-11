@@ -15,7 +15,7 @@
 
     <ItemGroup>
         <PackageReference Include="FSharp.Core" Version="10.0.102" />
-        <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="10.0.2" />
+        <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="10.0.3" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.2" />
         <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.2" />
         <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.2" />
